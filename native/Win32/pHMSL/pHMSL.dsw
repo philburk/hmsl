@@ -1,0 +1,62 @@
+Microsoft Developer Studio Workspace File, Format Version 6.00
+# WARNING: DO NOT EDIT OR DELETE THIS WORKSPACE FILE!
+
+###############################################################################
+
+Project: "pHMSL"=.\pHMSL.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name portmidi
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name porttime
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "portmidi"=..\..\portmidi\portmidi.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name porttime
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "porttime"=..\..\portmidi\porttime\porttime.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Global:
+
+Package=<5>
+{{{
+}}}
+
+Package=<3>
+{{{
+}}}
+
+###############################################################################
+
