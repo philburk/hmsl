@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "pHMSL", "pHMSL.vcproj", "{786F4857-D562-4F69-A986-D41C56E3767A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6893C343-64F5-4C13-804A-CAD219F66AE7} = {6893C343-64F5-4C13-804A-CAD219F66AE7}
+		{512004C4-FB23-4703-88F0-65493BF0A97B} = {512004C4-FB23-4703-88F0-65493BF0A97B}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "portmidi", "..\..\portmidi\portmidi.vcproj", "{512004C4-FB23-4703-88F0-65493BF0A97B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6893C343-64F5-4C13-804A-CAD219F66AE7} = {6893C343-64F5-4C13-804A-CAD219F66AE7}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "porttime", "..\..\portmidi\porttime\porttime.vcproj", "{6893C343-64F5-4C13-804A-CAD219F66AE7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{786F4857-D562-4F69-A986-D41C56E3767A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{786F4857-D562-4F69-A986-D41C56E3767A}.Debug|Win32.Build.0 = Debug|Win32
+		{786F4857-D562-4F69-A986-D41C56E3767A}.Release|Win32.ActiveCfg = Release|Win32
+		{786F4857-D562-4F69-A986-D41C56E3767A}.Release|Win32.Build.0 = Release|Win32
+		{512004C4-FB23-4703-88F0-65493BF0A97B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{512004C4-FB23-4703-88F0-65493BF0A97B}.Debug|Win32.Build.0 = Debug|Win32
+		{512004C4-FB23-4703-88F0-65493BF0A97B}.Release|Win32.ActiveCfg = Release|Win32
+		{512004C4-FB23-4703-88F0-65493BF0A97B}.Release|Win32.Build.0 = Release|Win32
+		{6893C343-64F5-4C13-804A-CAD219F66AE7}.Debug|Win32.ActiveCfg = Debug|Win32
+		{6893C343-64F5-4C13-804A-CAD219F66AE7}.Debug|Win32.Build.0 = Debug|Win32
+		{6893C343-64F5-4C13-804A-CAD219F66AE7}.Release|Win32.ActiveCfg = Release|Win32
+		{6893C343-64F5-4C13-804A-CAD219F66AE7}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
