@@ -5,6 +5,7 @@ Forth tools for experimental music from the 1980’s.
 HMSL was originally released for Macintosh and Amiga.
 
 HMSL (C) 1986 Phil Burk, Larry Polansky, David Rosenboom
+
 Port to Windows (C) 1996 Phil Burk and Robert Marsanyi
 
 HMSL is released under the open source Apache License V2.
