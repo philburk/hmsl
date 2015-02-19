@@ -30,3 +30,15 @@ Description of folders:
 
     native/Win32 - port of HMSL to pForth for Windows by Robert Marsanyi and Phil Burk
 
+## OSX: Compilation and installation
+
+* Open xcode project in `hmsl/native/osx`
+* Compile the HMSL-OSX command-line program
+* Download [pFORTH](https://www.github.com/philburk/pforth)
+* Copy HMSL-OSX program to `pforth/fth`
+* Navigate to `pforth/fth` and run `./HMSL-OSX -i system.fth`
+* Copy the newly-created `pforth.dic` and HMSL-OSX to `hmsl/hmsl`
+* In `hmsl/hsml`, run command `./HMSL-OSX fth/make_hmsl.fth`
+* Press `n` to avoid starting HMSL this first time (it won't work anyway)
+* Run `./HMSL-OSX` to start HMSL! (and this time press `y`)
+
