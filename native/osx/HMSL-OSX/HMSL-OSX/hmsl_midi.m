@@ -157,6 +157,6 @@ int hostClock_QueryRate( void ) {
 }
 
 void hostSleep( int msec ) {
-  sleep(msec);
+  usleep(msec * 1000);
 }
 
