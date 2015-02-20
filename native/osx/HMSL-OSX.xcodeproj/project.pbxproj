@@ -108,11 +108,11 @@
 		6985AB9D1A785350003BC422 /* HMSL-OSX */ = {
 			isa = PBXGroup;
 			children = (
-				6985ABA61A7853B5003BC422 /* phmsl */,
+				6985ABA61A7853B5003BC422 /* src */,
 				6985ABA51A7853AB003BC422 /* pforth */,
 			);
-			path = "HMSL-OSX";
-			sourceTree = "<group>";
+			name = "HMSL-OSX";
+			sourceTree = SOURCE_ROOT;
 		};
 		6985ABA51A7853AB003BC422 /* pforth */ = {
 			isa = PBXGroup;
@@ -155,7 +155,7 @@
 			path = "../../../../pforth-xcode/csrc";
 			sourceTree = SOURCE_ROOT;
 		};
-		6985ABA61A7853B5003BC422 /* phmsl */ = {
+		6985ABA61A7853B5003BC422 /* src */ = {
 			isa = PBXGroup;
 			children = (
 				6985ABDA1A785636003BC422 /* hmsl.c */,
@@ -163,7 +163,7 @@
 				6985ABDD1A785731003BC422 /* hmsl_midi.m */,
 				6985ABE01A785941003BC422 /* hmsl_gui.m */,
 			);
-			name = phmsl;
+			path = src;
 			sourceTree = "<group>";
 		};
 		6985ABC71A785472003BC422 /* posix */ = {
