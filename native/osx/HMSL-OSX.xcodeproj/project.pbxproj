@@ -152,7 +152,7 @@
 				6985ABC91A785472003BC422 /* stdio */,
 			);
 			name = pforth;
-			path = "../../../../pforth-xcode/csrc";
+			path = "../../../pforth-xcode/csrc";
 			sourceTree = SOURCE_ROOT;
 		};
 		6985ABA61A7853B5003BC422 /* src */ = {
