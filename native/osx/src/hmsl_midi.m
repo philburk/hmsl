@@ -15,7 +15,7 @@
 #define PACKETLIST_SIZE 65536
 
 MIDIEndpointRef hmslMIDISource;
-MIDIPortRef hmslMIDIInputPort;
+MIDIEndpointRef hmslMIDIDestination;
 MIDIPortRef hmslMIDIOutputPort;
 MIDIClientRef hmslMIDIClient;
 UInt64 hmslStartTime;
@@ -58,14 +58,9 @@ int hostMIDI_Init() {
   MIDIClientCreate(CFSTR("HMSL MIDI"), NULL, NULL, &hmslMIDIClient);
   
   MIDISourceCreate(hmslMIDIClient, CFSTR("HMSL MIDI Source"), &hmslMIDISource);
+  MIDIDestinationCreate(hmslMIDIClient, CFSTR("HMSL MIDI Destination"),
+                        (MIDIReadProc)&midiSourceProc, NULL, &hmslMIDIDestination);
   MIDIOutputPortCreate(hmslMIDIClient, CFSTR("HMSL MIDI Port Output"), &hmslMIDIOutputPort);
-  MIDIInputPortCreate(hmslMIDIClient, CFSTR("HMSL MIDI Port Input"), (MIDIReadProc)&midiSourceProc, NULL, &hmslMIDIInputPort);
-  
-  //  listen on every port
-  ItemCount numSources = MIDIGetNumberOfSources();
-  for (ItemCount source = 0; source < numSources; source++) {
-    MIDIPortConnectSource(hmslMIDIInputPort, MIDIGetSource(source), NULL);
-  }
   
   return 0;
 }
@@ -102,6 +97,7 @@ int hostMIDI_Write( unsigned char *addr, int count, int vtime ) {
   
   if (curPacket == NULL) {
     NSLog(@"Not enough room in the packet.");
+    free(packetList);
     return 1;
   } else {
     // NSLog(@"Packet size: %lu", packetList->numPackets);
@@ -121,22 +117,22 @@ int hostMIDI_Write( unsigned char *addr, int count, int vtime ) {
 }
 
 int hostMIDI_Recv( void ) {
-  if ([hmslMIDIBuffer count] > 0) {
+  if (hmslMIDIBuffer.count > 0) {
     NSData *data = [hmslMIDIBuffer objectAtIndex: 0];
     Byte output;
     [data getBytes: &output length: 1];
     
-    if ([data length] > 1) {
+    if (data.length > 1) {
       NSUInteger newLength = [data length] - 1;
       Byte *buffer = malloc(newLength);
       
       [data getBytes: buffer range: NSMakeRange(1, newLength)];
       [hmslMIDIBuffer replaceObjectAtIndex: 0 withObject: [NSData dataWithBytes:buffer length: newLength]];
-      
       free(buffer);
     } else {
       [hmslMIDIBuffer removeObjectAtIndex: 0];
     }
+    
     return output;
   } else {
     return -1;
