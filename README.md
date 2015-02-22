@@ -7,6 +7,7 @@ HMSL was originally released for Macintosh and Amiga.
 HMSL (C) 1986 Phil Burk, Larry Polansky, David Rosenboom
 
 Port to Windows (C) 1996 Phil Burk and Robert Marsanyi
+
 Port to Macintosh (C) 2015 Andrew C Smith
 
 HMSL is released under the open source Apache License V2.
