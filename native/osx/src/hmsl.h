@@ -9,13 +9,17 @@
 #ifndef HMSL_OSX_hmsl_h
 #define HMSL_OSX_hmsl_h
 
-#include <CoreMIDI/CoreMIDI.h>
+#import <CoreMIDI/CoreMIDI.h>
+
+/*
+ * header stuff
+ */
 
 /*
  * hmsl_gui.m
  */
 
-void hostInit( void );
+int32_t hostInit( void );
 void hostTerm( void );
 uint32_t hostOpenWindow( void );
 void hostCloseWindow( uint32_t window );

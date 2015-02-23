@@ -7,13 +7,39 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6972FAD81A9A65CD0008E2E4 /* HMSLDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6972FAD71A9A65CD0008E2E4 /* HMSLDelegate.m */; };
+		6972FAE01A9A7BDE0008E2E4 /* HMSLWindowDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6972FADF1A9A7BDE0008E2E4 /* HMSLWindowDelegate.m */; };
+		6972FB391A9A98D10008E2E4 /* hmsl_main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6972FB381A9A98D10008E2E4 /* hmsl_main.m */; };
+		6972FB601A9A99970008E2E4 /* HMSLApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 6972FB5F1A9A99970008E2E4 /* HMSLApplication.m */; };
+		6972FB621A9A9BE40008E2E4 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6972FB491A9A996B0008E2E4 /* MainMenu.xib */; };
+		6972FB631A9A9C340008E2E4 /* pf_cglue.c in Sources */ = {isa = PBXBuildFile; fileRef = 6985ABA81A785472003BC422 /* pf_cglue.c */; };
+		6972FB641A9A9C340008E2E4 /* pf_clib.c in Sources */ = {isa = PBXBuildFile; fileRef = 6985ABAA1A785472003BC422 /* pf_clib.c */; };
+		6972FB651A9A9C340008E2E4 /* pf_core.c in Sources */ = {isa = PBXBuildFile; fileRef = 6985ABAC1A785472003BC422 /* pf_core.c */; };
+		6972FB661A9A9C340008E2E4 /* pf_inner.c in Sources */ = {isa = PBXBuildFile; fileRef = 6985ABB21A785472003BC422 /* pf_inner.c */; };
+		6972FB671A9A9C340008E2E4 /* pf_io_none.c in Sources */ = {isa = PBXBuildFile; fileRef = 6985ABB31A785472003BC422 /* pf_io_none.c */; };
+		6972FB681A9A9C340008E2E4 /* pf_io.c in Sources */ = {isa = PBXBuildFile; fileRef = 6985ABB41A785472003BC422 /* pf_io.c */; };
+		6972FB691A9A9C340008E2E4 /* pf_mem.c in Sources */ = {isa = PBXBuildFile; fileRef = 6985ABB71A785472003BC422 /* pf_mem.c */; };
+		6972FB6A1A9A9C340008E2E4 /* pf_save.c in Sources */ = {isa = PBXBuildFile; fileRef = 6985ABB91A785472003BC422 /* pf_save.c */; };
+		6972FB6B1A9A9C340008E2E4 /* pf_text.c in Sources */ = {isa = PBXBuildFile; fileRef = 6985ABBB1A785472003BC422 /* pf_text.c */; };
+		6972FB6C1A9A9C340008E2E4 /* pf_words.c in Sources */ = {isa = PBXBuildFile; fileRef = 6985ABBE1A785472003BC422 /* pf_words.c */; };
+		6972FB6D1A9A9C340008E2E4 /* pfcompil.c in Sources */ = {isa = PBXBuildFile; fileRef = 6985ABC11A785472003BC422 /* pfcompil.c */; };
+		6972FB6E1A9A9C340008E2E4 /* pf_io_posix.c in Sources */ = {isa = PBXBuildFile; fileRef = 6985ABC81A785472003BC422 /* pf_io_posix.c */; };
+		6972FB6F1A9A9C430008E2E4 /* hmsl.c in Sources */ = {isa = PBXBuildFile; fileRef = 6985ABDA1A785636003BC422 /* hmsl.c */; };
+		6972FB701A9A9C430008E2E4 /* hmsl_main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6972FB381A9A98D10008E2E4 /* hmsl_main.m */; };
+		6972FB711A9A9C430008E2E4 /* hmsl_midi.m in Sources */ = {isa = PBXBuildFile; fileRef = 6985ABDD1A785731003BC422 /* hmsl_midi.m */; };
+		6972FB721A9A9C430008E2E4 /* hmsl_gui.m in Sources */ = {isa = PBXBuildFile; fileRef = 6985ABE01A785941003BC422 /* hmsl_gui.m */; };
+		6972FB731A9A9C430008E2E4 /* HMSLApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 6972FB5F1A9A99970008E2E4 /* HMSLApplication.m */; };
+		6972FB741A9A9C430008E2E4 /* HMSLDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6972FAD71A9A65CD0008E2E4 /* HMSLDelegate.m */; };
+		6972FB761A9A9C430008E2E4 /* HMSLWindowDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6972FADF1A9A7BDE0008E2E4 /* HMSLWindowDelegate.m */; };
+		6972FB791A9AAE6B0008E2E4 /* HMSLRunner.m in Sources */ = {isa = PBXBuildFile; fileRef = 6972FB781A9AAE6B0008E2E4 /* HMSLRunner.m */; };
+		6972FB7A1A9AAE800008E2E4 /* HMSLRunner.m in Sources */ = {isa = PBXBuildFile; fileRef = 6972FB781A9AAE6B0008E2E4 /* HMSLRunner.m */; };
+		6972FB7D1A9AE25A0008E2E4 /* HMSLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6972FB7C1A9AE25A0008E2E4 /* HMSLView.m */; };
 		6985ABCB1A785472003BC422 /* pf_cglue.c in Sources */ = {isa = PBXBuildFile; fileRef = 6985ABA81A785472003BC422 /* pf_cglue.c */; };
 		6985ABCC1A785472003BC422 /* pf_clib.c in Sources */ = {isa = PBXBuildFile; fileRef = 6985ABAA1A785472003BC422 /* pf_clib.c */; };
 		6985ABCD1A785472003BC422 /* pf_core.c in Sources */ = {isa = PBXBuildFile; fileRef = 6985ABAC1A785472003BC422 /* pf_core.c */; };
 		6985ABCE1A785472003BC422 /* pf_inner.c in Sources */ = {isa = PBXBuildFile; fileRef = 6985ABB21A785472003BC422 /* pf_inner.c */; };
 		6985ABCF1A785472003BC422 /* pf_io_none.c in Sources */ = {isa = PBXBuildFile; fileRef = 6985ABB31A785472003BC422 /* pf_io_none.c */; };
 		6985ABD01A785472003BC422 /* pf_io.c in Sources */ = {isa = PBXBuildFile; fileRef = 6985ABB41A785472003BC422 /* pf_io.c */; };
-		6985ABD11A785472003BC422 /* pf_main.c in Sources */ = {isa = PBXBuildFile; fileRef = 6985ABB61A785472003BC422 /* pf_main.c */; };
 		6985ABD21A785472003BC422 /* pf_mem.c in Sources */ = {isa = PBXBuildFile; fileRef = 6985ABB71A785472003BC422 /* pf_mem.c */; };
 		6985ABD31A785472003BC422 /* pf_save.c in Sources */ = {isa = PBXBuildFile; fileRef = 6985ABB91A785472003BC422 /* pf_save.c */; };
 		6985ABD41A785472003BC422 /* pf_text.c in Sources */ = {isa = PBXBuildFile; fileRef = 6985ABBB1A785472003BC422 /* pf_text.c */; };
@@ -38,6 +64,20 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6972FAD61A9A65CD0008E2E4 /* HMSLDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMSLDelegate.h; sourceTree = "<group>"; };
+		6972FAD71A9A65CD0008E2E4 /* HMSLDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMSLDelegate.m; sourceTree = "<group>"; };
+		6972FADE1A9A7BDE0008E2E4 /* HMSLWindowDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMSLWindowDelegate.h; sourceTree = "<group>"; };
+		6972FADF1A9A7BDE0008E2E4 /* HMSLWindowDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMSLWindowDelegate.m; sourceTree = "<group>"; };
+		6972FB381A9A98D10008E2E4 /* hmsl_main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = hmsl_main.m; sourceTree = "<group>"; };
+		6972FB3E1A9A996B0008E2E4 /* hmsl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = hmsl.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6972FB411A9A996B0008E2E4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../hmsl/Info.plist; sourceTree = "<group>"; };
+		6972FB4A1A9A996B0008E2E4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		6972FB5E1A9A99970008E2E4 /* HMSLApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMSLApplication.h; sourceTree = "<group>"; };
+		6972FB5F1A9A99970008E2E4 /* HMSLApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMSLApplication.m; sourceTree = "<group>"; };
+		6972FB771A9AAE6B0008E2E4 /* HMSLRunner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMSLRunner.h; sourceTree = "<group>"; };
+		6972FB781A9AAE6B0008E2E4 /* HMSLRunner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMSLRunner.m; sourceTree = "<group>"; };
+		6972FB7B1A9AE25A0008E2E4 /* HMSLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMSLView.h; sourceTree = "<group>"; };
+		6972FB7C1A9AE25A0008E2E4 /* HMSLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMSLView.m; sourceTree = "<group>"; };
 		6985AB9B1A785350003BC422 /* HMSL-OSX */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "HMSL-OSX"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6985ABA71A785472003BC422 /* pf_all.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pf_all.h; sourceTree = "<group>"; };
 		6985ABA81A785472003BC422 /* pf_cglue.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pf_cglue.c; sourceTree = "<group>"; };
@@ -79,6 +119,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		6972FB3B1A9A996B0008E2E4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6985AB981A785350003BC422 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -89,6 +136,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6972FB611A9A9B9A0008E2E4 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6972FB491A9A996B0008E2E4 /* MainMenu.xib */,
+				6972FB411A9A996B0008E2E4 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		6985AB921A785350003BC422 = {
 			isa = PBXGroup;
 			children = (
@@ -101,6 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				6985AB9B1A785350003BC422 /* HMSL-OSX */,
+				6972FB3E1A9A996B0008E2E4 /* hmsl.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -158,10 +215,22 @@
 		6985ABA61A7853B5003BC422 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				6972FB611A9A9B9A0008E2E4 /* Supporting Files */,
 				6985ABDA1A785636003BC422 /* hmsl.c */,
 				6985ABDC1A7856BD003BC422 /* hmsl.h */,
+				6972FB381A9A98D10008E2E4 /* hmsl_main.m */,
 				6985ABDD1A785731003BC422 /* hmsl_midi.m */,
 				6985ABE01A785941003BC422 /* hmsl_gui.m */,
+				6972FB5E1A9A99970008E2E4 /* HMSLApplication.h */,
+				6972FB5F1A9A99970008E2E4 /* HMSLApplication.m */,
+				6972FAD61A9A65CD0008E2E4 /* HMSLDelegate.h */,
+				6972FAD71A9A65CD0008E2E4 /* HMSLDelegate.m */,
+				6972FADE1A9A7BDE0008E2E4 /* HMSLWindowDelegate.h */,
+				6972FADF1A9A7BDE0008E2E4 /* HMSLWindowDelegate.m */,
+				6972FB771A9AAE6B0008E2E4 /* HMSLRunner.h */,
+				6972FB781A9AAE6B0008E2E4 /* HMSLRunner.m */,
+				6972FB7B1A9AE25A0008E2E4 /* HMSLView.h */,
+				6972FB7C1A9AE25A0008E2E4 /* HMSLView.m */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -185,6 +254,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		6972FB3D1A9A996B0008E2E4 /* hmsl */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6972FB581A9A996B0008E2E4 /* Build configuration list for PBXNativeTarget "hmsl" */;
+			buildPhases = (
+				6972FB3A1A9A996B0008E2E4 /* Sources */,
+				6972FB3B1A9A996B0008E2E4 /* Frameworks */,
+				6972FB3C1A9A996B0008E2E4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = hmsl;
+			productName = hmsl;
+			productReference = 6972FB3E1A9A996B0008E2E4 /* hmsl.app */;
+			productType = "com.apple.product-type.application";
+		};
 		6985AB9A1A785350003BC422 /* HMSL-OSX */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6985ABA21A785350003BC422 /* Build configuration list for PBXNativeTarget "HMSL-OSX" */;
@@ -211,6 +297,9 @@
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = 3DO;
 				TargetAttributes = {
+					6972FB3D1A9A996B0008E2E4 = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
 					6985AB9A1A785350003BC422 = {
 						CreatedOnToolsVersion = 6.1.1;
 					};
@@ -222,6 +311,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 6985AB921A785350003BC422;
 			productRefGroup = 6985AB9C1A785350003BC422 /* Products */;
@@ -229,29 +319,73 @@
 			projectRoot = "";
 			targets = (
 				6985AB9A1A785350003BC422 /* HMSL-OSX */,
+				6972FB3D1A9A996B0008E2E4 /* hmsl */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		6972FB3C1A9A996B0008E2E4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6972FB621A9A9BE40008E2E4 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		6972FB3A1A9A996B0008E2E4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6972FB7A1A9AAE800008E2E4 /* HMSLRunner.m in Sources */,
+				6972FB6F1A9A9C430008E2E4 /* hmsl.c in Sources */,
+				6972FB701A9A9C430008E2E4 /* hmsl_main.m in Sources */,
+				6972FB711A9A9C430008E2E4 /* hmsl_midi.m in Sources */,
+				6972FB721A9A9C430008E2E4 /* hmsl_gui.m in Sources */,
+				6972FB731A9A9C430008E2E4 /* HMSLApplication.m in Sources */,
+				6972FB741A9A9C430008E2E4 /* HMSLDelegate.m in Sources */,
+				6972FB761A9A9C430008E2E4 /* HMSLWindowDelegate.m in Sources */,
+				6972FB631A9A9C340008E2E4 /* pf_cglue.c in Sources */,
+				6972FB641A9A9C340008E2E4 /* pf_clib.c in Sources */,
+				6972FB651A9A9C340008E2E4 /* pf_core.c in Sources */,
+				6972FB661A9A9C340008E2E4 /* pf_inner.c in Sources */,
+				6972FB671A9A9C340008E2E4 /* pf_io_none.c in Sources */,
+				6972FB681A9A9C340008E2E4 /* pf_io.c in Sources */,
+				6972FB691A9A9C340008E2E4 /* pf_mem.c in Sources */,
+				6972FB6A1A9A9C340008E2E4 /* pf_save.c in Sources */,
+				6972FB6B1A9A9C340008E2E4 /* pf_text.c in Sources */,
+				6972FB6C1A9A9C340008E2E4 /* pf_words.c in Sources */,
+				6972FB6D1A9A9C340008E2E4 /* pfcompil.c in Sources */,
+				6972FB6E1A9A9C340008E2E4 /* pf_io_posix.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6985AB971A785350003BC422 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				6985ABD31A785472003BC422 /* pf_save.c in Sources */,
 				6985ABD21A785472003BC422 /* pf_mem.c in Sources */,
+				6972FAE01A9A7BDE0008E2E4 /* HMSLWindowDelegate.m in Sources */,
 				6985ABCD1A785472003BC422 /* pf_core.c in Sources */,
+				6972FB391A9A98D10008E2E4 /* hmsl_main.m in Sources */,
 				6985ABDB1A785636003BC422 /* hmsl.c in Sources */,
 				6985ABDE1A785731003BC422 /* hmsl_midi.m in Sources */,
+				6972FAD81A9A65CD0008E2E4 /* HMSLDelegate.m in Sources */,
 				6985ABD81A785472003BC422 /* pf_io_posix.c in Sources */,
+				6972FB791A9AAE6B0008E2E4 /* HMSLRunner.m in Sources */,
 				6985ABD41A785472003BC422 /* pf_text.c in Sources */,
 				6985ABCB1A785472003BC422 /* pf_cglue.c in Sources */,
 				6985ABCF1A785472003BC422 /* pf_io_none.c in Sources */,
-				6985ABD11A785472003BC422 /* pf_main.c in Sources */,
 				6985ABCC1A785472003BC422 /* pf_clib.c in Sources */,
 				6985ABCE1A785472003BC422 /* pf_inner.c in Sources */,
 				6985ABD01A785472003BC422 /* pf_io.c in Sources */,
+				6972FB601A9A99970008E2E4 /* HMSLApplication.m in Sources */,
 				6985ABD61A785472003BC422 /* pfcompil.c in Sources */,
+				6972FB7D1A9AE25A0008E2E4 /* HMSLView.m in Sources */,
 				6985ABE11A785941003BC422 /* hmsl_gui.m in Sources */,
 				6985ABD51A785472003BC422 /* pf_words.c in Sources */,
 			);
@@ -259,7 +393,51 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXVariantGroup section */
+		6972FB491A9A996B0008E2E4 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6972FB4A1A9A996B0008E2E4 /* Base */,
+			);
+			name = MainMenu.xib;
+			path = ../hmsl;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
+		6972FB591A9A996B0008E2E4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = hmsl/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		6972FB5A1A9A996B0008E2E4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = hmsl/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		6985ABA01A785350003BC422 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -357,6 +535,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		6972FB581A9A996B0008E2E4 /* Build configuration list for PBXNativeTarget "hmsl" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6972FB591A9A996B0008E2E4 /* Debug */,
+				6972FB5A1A9A996B0008E2E4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		6985AB961A785350003BC422 /* Build configuration list for PBXProject "HMSL-OSX" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
