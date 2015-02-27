@@ -116,6 +116,7 @@
 		6985ABDC1A7856BD003BC422 /* hmsl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = hmsl.h; sourceTree = "<group>"; };
 		6985ABDD1A785731003BC422 /* hmsl_midi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = hmsl_midi.m; sourceTree = "<group>"; };
 		6985ABE01A785941003BC422 /* hmsl_gui.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = hmsl_gui.m; sourceTree = "<group>"; };
+		69D12C9C1A9FEA1800704524 /* hmsl_gui.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = hmsl_gui.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -221,6 +222,7 @@
 				6972FB381A9A98D10008E2E4 /* hmsl_main.m */,
 				6985ABDD1A785731003BC422 /* hmsl_midi.m */,
 				6985ABE01A785941003BC422 /* hmsl_gui.m */,
+				69D12C9C1A9FEA1800704524 /* hmsl_gui.h */,
 				6972FB5E1A9A99970008E2E4 /* HMSLApplication.h */,
 				6972FB5F1A9A99970008E2E4 /* HMSLApplication.m */,
 				6972FAD61A9A65CD0008E2E4 /* HMSLDelegate.h */,
@@ -542,6 +544,7 @@
 				6972FB5A1A9A996B0008E2E4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6985AB961A785350003BC422 /* Build configuration list for PBXProject "HMSL-OSX" */ = {
 			isa = XCConfigurationList;

@@ -7,6 +7,7 @@
 //
 
 #import "hmsl.h"
+#import "hmsl_gui.h"
 #import "pf_all.h"
 #import "HMSLDelegate.h"
 #import "HMSLWindowDelegate.h"
@@ -44,8 +45,8 @@ void hostTerm( void ) {
   return;
 }
 
-uint32_t hostOpenWindow( void ) {
-  NSRect frame = NSMakeRect(0, 0, 600, 386);
+uint32_t hostOpenWindow( hmslWindow *window ) {
+  NSRect frame = NSMakeRect(window->rect_left, window->rect_bottom, window->rect_right - window->rect_left, window->rect_bottom - window->rect_top);
   HMSLWindowDelegate *windowDelegate = [[HMSLWindowDelegate alloc] init];
   HMSLView *hmslView = [[HMSLView alloc] init];
   

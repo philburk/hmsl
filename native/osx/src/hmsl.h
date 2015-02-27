@@ -11,6 +11,8 @@
 
 #import <CoreMIDI/CoreMIDI.h>
 
+#import "hmsl_gui.h"
+
 /*
  * header stuff
  */
@@ -21,7 +23,7 @@
 
 int32_t hostInit( void );
 void hostTerm( void );
-uint32_t hostOpenWindow( void );
+uint32_t hostOpenWindow( hmslWindow *window );
 void hostCloseWindow( uint32_t window );
 void hostSetCurrentWindow( uint32_t window );
 void hostDrawLineTo( int32_t x, int32_t y );
