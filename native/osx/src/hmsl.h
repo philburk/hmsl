@@ -9,9 +9,7 @@
 #ifndef HMSL_OSX_hmsl_h
 #define HMSL_OSX_hmsl_h
 
-#import <CoreMIDI/CoreMIDI.h>
-
-#import "hmsl_gui.h"
+#include <CoreMIDI/CoreMIDI.h>
 
 /*
  * header stuff
@@ -20,6 +18,25 @@
 /*
  * hmsl_gui.m
  */
+
+typedef struct hmslWindow {
+  short rect_top;
+  short rect_left;
+  short rect_bottom;
+  short rect_right;
+  long title;
+} hmslWindow;
+
+enum HMSLEventID {
+  EV_NULL,
+  EV_MOUSE_DOWN,
+  EV_MOUSE_UP,
+  EV_MOUSE_MOVE,
+  EV_MENU_PICK,
+  EV_CLOSE_WINDOW,
+  EV_REFRESH,
+  EV_KEY
+} anHMSLEventID;
 
 int32_t hostInit( void );
 void hostTerm( void );
