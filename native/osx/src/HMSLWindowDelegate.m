@@ -10,4 +10,8 @@
 
 @implementation HMSLWindowDelegate
 
+-(void)windowWillClose:(NSNotification *)notification {
+  [hmslEventBuffer addObject:[NSNumber numberWithInt:EV_CLOSE_WINDOW]];
+}
+
 @end
