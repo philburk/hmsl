@@ -8,18 +8,15 @@
 
 #import "hmsl.h"
 #import "pf_all.h"
-#import "HMSLDelegate.h"
 #import "HMSLWindow.h"
 #import "HMSLWindowDelegate.h"
 #import "HMSLView.h"
 
+#ifndef HMSL_DEBUG
+#define HMSL_DEBUG 0
+#endif
+
 NSArray *hmslColors;
-
-extern hmslContext *gHMSLContext;
-hmslContext *gHMSLContext;
-
-extern NSMutableArray *hmslEventBuffer;
-NSMutableArray *hmslEventBuffer;
 
 HMSLWindow* getMainWindow( NSMutableArray *windowArray ) {
   int mainWindow = [windowArray indexOfObjectPassingTest:
@@ -36,8 +33,8 @@ HMSLWindow* getMainWindow( NSMutableArray *windowArray ) {
 }
 
 int32_t hostInit( void ) {
-  hmslWindowArray = [NSMutableArray arrayWithCapacity:32];
-  hmslEventBuffer = [NSMutableArray arrayWithCapacity:100];
+  gHMSLWindowArray = [NSMutableArray arrayWithCapacity:32];
+  gHMSLEventBuffer = [NSMutableArray arrayWithCapacity:100];
   
   gHMSLContext = malloc(sizeof(hmslContext));
   gHMSLContext->currentPoint = NSMakePoint(0, 0);
@@ -46,21 +43,21 @@ int32_t hostInit( void ) {
   gHMSLContext->fontAttributes = [NSDictionary dictionaryWithObject:font forKey:NSFontAttributeName];
   
   hmslColors = [[NSArray alloc] initWithObjects:
-                      [NSColor whiteColor],
-                      [NSColor blackColor],
-                      [NSColor redColor],
-                      [NSColor greenColor],
-                      [NSColor blueColor],
-                      [NSColor cyanColor],
-                      [NSColor magentaColor],
-                      [NSColor yellowColor],
+                @[@1.0, @1.0, @1.0, @1.0],
+                @[@0.0, @0.0, @0.0, @1.0],
+                @[@1.0, @0.0, @0.0, @1.0],
+                @[@0.0, @1.0, @0.0, @1.0],
+                @[@0.0, @0.0, @1.0, @1.0],
+                @[@0.0, @1.0, @1.0, @1.0],
+                @[@1.0, @0.0, @1.0, @1.0],
+                @[@1.0, @1.0, @1.0, @1.0], // Modified this color to work properly with the XOR hack
                 nil];
 
   return -1;
 }
 
 void hostTerm( void ) {
-  [hmslWindowArray release];
+  [gHMSLWindowArray release];
   free(gHMSLContext);
   [hmslColors release];
   return;
@@ -76,39 +73,42 @@ uint32_t hostOpenWindow( hmslWindow *window ) {
   HMSLWindowDelegate *windowDelegate = [[HMSLWindowDelegate alloc] init];
   HMSLView *hmslView = [[HMSLView alloc] init];
   
-  id hmslWindow = [[HMSLWindow alloc]
+  HMSLWindow* hmslWindow = [[HMSLWindow alloc]
                     initWithContentRect: frame
                     styleMask: NSMiniaturizableWindowMask | NSTitledWindowMask | NSClosableWindowMask
                     backing: NSBackingStoreRetained
                     defer: YES];
-  [hmslWindow cascadeTopLeftFromPoint:NSMakePoint(20,20)];
+  
+  [hmslWindow cascadeTopLeftFromPoint:NSZeroPoint];
   [hmslWindow setContentView:hmslView];
   
   [hmslWindow setTitle:windowTitle];
   [hmslWindow performSelectorOnMainThread:@selector(makeKeyAndOrderFront:) withObject:nil waitUntilDone:YES];
   [hmslWindow setDelegate:windowDelegate];
   [hmslWindow setHasShadow:YES];
-  [hmslWindowArray addObject:hmslWindow];
+  [gHMSLWindowArray addObject:hmslWindow];
   
   currentContext = [NSGraphicsContext graphicsContextWithWindow:hmslWindow];
-  drawingContext = [currentContext graphicsPort];
+//  currentContext = [NSGraphicsContext currentContext];
   
   if (currentContext != nil) {
     [NSGraphicsContext setCurrentContext:currentContext];
+    drawingContext = [NSGraphicsContext.currentContext CGContext];
   } else {
     NSLog(@"Not able to make context happen");
   }
   
-  return [hmslWindowArray indexOfObject:hmslWindow] + 1;
+  hostSetBackgroundColor(0);
+  return [gHMSLWindowArray indexOfObject:hmslWindow] + 1;
 }
 
 void hostCloseWindow( uint32_t window ) {
-  [[hmslWindowArray objectAtIndex:(window - 1)] performSelectorOnMainThread:@selector(close) withObject:nil waitUntilDone:YES];
+  [[gHMSLWindowArray objectAtIndex:(window - 1)] performSelectorOnMainThread:@selector(close) withObject:nil waitUntilDone:YES];
   return;
 }
 
 void hostSetCurrentWindow( uint32_t window ) {
-  [[hmslWindowArray objectAtIndex:(window - 1)] performSelectorOnMainThread:@selector(makeMainWindow) withObject:nil waitUntilDone:YES];
+  [[gHMSLWindowArray objectAtIndex:(window - 1)] performSelectorOnMainThread:@selector(makeMainWindow) withObject:nil waitUntilDone:YES];
   return;
 }
 
@@ -122,7 +122,7 @@ void hostDrawLineTo( int32_t x, int32_t y ) {
 }
 
 void hostMoveTo( int32_t x, int32_t y ) {
-  HMSLWindow *mainWindow = getMainWindow(hmslWindowArray);
+  HMSLWindow *mainWindow = getMainWindow(gHMSLWindowArray);
   gHMSLContext->currentPoint.x = x;
   // Need to invert the y value
   gHMSLContext->currentPoint.y = mainWindow.frame.size.height - y;
@@ -145,30 +145,49 @@ uint32_t hostGetTextLength( uint32_t address, int32_t count ) {
 }
 
 void hostFillRectangle( int32_t x1, int32_t y1, int32_t x2, int32_t y2 ) {
-  HMSLWindow *mainWindow = getMainWindow(hmslWindowArray);
+  HMSLWindow *mainWindow = getMainWindow(gHMSLWindowArray);
+  if (HMSL_DEBUG) {
+    NSLog(@"Filling rect: %i, %i, %i, %i", x1, y1, x2, y2);
+  }
   CGContextFillRect(drawingContext, CGRectMake(x1, mainWindow.frame.size.height - y2, x2 - x1, y2 - y1));
   return;
 }
 
 void hostSetColor( int32_t color ) {
+  NSArray *newColor = [hmslColors objectAtIndex:color];
+  if (HMSL_DEBUG) {
+    NSLog(@"New Color: %i", color);
+  }
   if (currentContext != nil) {
-    [[hmslColors objectAtIndex:color] set];
+    [[NSColor colorWithRed: [newColor[0] floatValue] green:[newColor[1] floatValue] blue:[newColor[2] floatValue] alpha:[newColor[3] floatValue]] set];
+    CGContextSetRGBFillColor(drawingContext, [newColor[0] floatValue], [newColor[1] floatValue], [newColor[2] floatValue], [newColor[3] floatValue]);
+    CGContextSetRGBStrokeColor(drawingContext, [newColor[0] floatValue], [newColor[1] floatValue], [newColor[2] floatValue], [newColor[3] floatValue]);
   }
   return;
 }
 
 void hostSetBackgroundColor( int32_t color ) {
-  [getMainWindow(hmslWindowArray) setBackgroundColor:[hmslColors objectAtIndex:color]];
+  NSArray *newColor = [hmslColors objectAtIndex:color];
+  if (HMSL_DEBUG) {
+    NSLog(@"New Background color is %@", newColor);
+  }
+  NSColor *bgColor = [NSColor colorWithRed: [newColor[0] floatValue] green:[newColor[1] floatValue] blue:[newColor[2] floatValue] alpha:[newColor[3] floatValue]];
+  [getMainWindow(gHMSLWindowArray) setBackgroundColor:bgColor];
   return;
 }
 
-// There is not a native XOR drawing mode in Quartz
 void hostSetDrawingMode( int32_t mode ) {
   switch (mode) {
     case 0:
+      if (HMSL_DEBUG) {
+        NSLog(@"Set to Normal");
+      }
       CGContextSetBlendMode(drawingContext, kCGBlendModeNormal);
       break;
     case 1:
+      if (HMSL_DEBUG) {
+        NSLog(@"Set to XOR");
+      }
       CGContextSetBlendMode(drawingContext, kCGBlendModeDifference);
       break;
   }
@@ -189,18 +208,18 @@ void hostSetTextSize( int32_t size ) {
 }
 
 void hostGetMouse( uint32_t x, uint32_t y) {
-  HMSLWindow *mainWindow = getMainWindow(hmslWindowArray);
+  HMSLWindow *mainWindow = getMainWindow(gHMSLWindowArray);
   *(int32_t*)x = gHMSLContext->mouseEvent.x;
   *(int32_t*)y = mainWindow.frame.size.height - gHMSLContext->mouseEvent.y;
   return;
 }
 
 int32_t hostGetEvent( int32_t timeout ) {
-  if (hmslEventBuffer.count > 0) {
-    NSNumber *event = [hmslEventBuffer firstObject];
+  if (gHMSLEventBuffer.count > 0) {
+    NSNumber *event = [gHMSLEventBuffer firstObject];
     int val = [event intValue];
-    bool debug = true;
-    if (debug) {
+    
+    if (HMSL_DEBUG) {
       switch (val) {
         case EV_MOUSE_DOWN:
           NSLog(@"EV_MOUSE_DOWN at %f, %f", gHMSLContext->mouseEvent.x, gHMSLContext->mouseEvent.y);
@@ -219,7 +238,8 @@ int32_t hostGetEvent( int32_t timeout ) {
           break;
       }
     }
-    [hmslEventBuffer removeObjectAtIndex:0];
+    
+    [gHMSLEventBuffer removeObjectAtIndex:0];
     return val;
   } else {
     return EV_NULL;
