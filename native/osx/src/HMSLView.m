@@ -10,10 +10,28 @@
 
 @implementation HMSLView
 
+- (void)mouseDown:(NSEvent *)event {
+  gHMSLContext->mouseEvent = event.locationInWindow;
+  [hmslEventBuffer addObject:[NSNumber numberWithInt:EV_MOUSE_DOWN]];
+}
+
+- (void)mouseUp:(NSEvent *)event {
+  gHMSLContext->mouseEvent = event.locationInWindow;
+  [hmslEventBuffer addObject:[NSNumber numberWithInt:EV_MOUSE_UP]];
+}
+
+- (void)mouseDragged:(NSEvent *)event {
+  gHMSLContext->mouseEvent = event.locationInWindow;
+  [hmslEventBuffer addObject:[NSNumber numberWithInt:EV_MOUSE_MOVE]];
+}
+
+- (void)keyDown:(NSEvent *)event {
+  [hmslEventBuffer addObject:[NSNumber numberWithInt:EV_KEY]];
+}
+
 - (void)drawRect:(NSRect)dirtyRect {
-    [super drawRect:dirtyRect];
-    
-    // Drawing code here.
+  [hmslEventBuffer addObject:[NSNumber numberWithInt:EV_REFRESH]];
+  [super drawRect:dirtyRect];
 }
 
 - (BOOL)isFlipped {

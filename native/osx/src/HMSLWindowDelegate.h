@@ -7,8 +7,14 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "hmsl.h"
 
+extern NSMutableArray *hmslWindowArray;
 NSMutableArray *hmslWindowArray;
+
+extern NSMutableArray *hmslEventBuffer;
+NSMutableArray *hmslEventBuffer;
+
 NSBezierPath *currentPoint;
 NSGraphicsContext *currentContext;
 CGContextRef drawingContext;
