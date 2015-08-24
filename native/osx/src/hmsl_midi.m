@@ -68,6 +68,8 @@ int hostMIDI_Init() {
 // Called by HMSL to terminate the MIDI connection
 void hostMIDI_Term( void ) {
   free(hmslCurrentMIDIData);
+  // This automatically disposes of the ports as well
+  MIDIClientDispose(hmslMIDIClient);
   return;
 }
 

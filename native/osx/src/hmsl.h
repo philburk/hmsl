@@ -10,14 +10,106 @@
 #define HMSL_OSX_hmsl_h
 
 #include <CoreMIDI/CoreMIDI.h>
+#include <CoreGraphics/CGContext.h>
+
+#ifndef PF_DEFAULT_DICTIONARY
+#define PF_DEFAULT_DICTIONARY "pforth.dic"
+#endif
+
+#ifndef HMSL_COLORS
+#define HMSL_COLORS
+
+static const double hmslWhite[4] = {1.0, 1.0, 1.0, 1.0};
+static const double hmslBlack[4] = {0.0, 0.0, 0.0, 1.0};
+static const double hmslRed[4] = {1.0, 0.0, 0.0, 1.0};
+static const double hmslGreen[4] = {0.0, 1.0, 0.0, 1.0};
+static const double hmslBlue[4] = {0.0, 0.0, 1.0, 1.0};
+static const double hmslCyan[4] = {0.0, 1.0, 1.0, 1.0};
+static const double hmslMagenta[4] = {1.0, 0.0, 1.0, 1.0};
+static const double hmslYellow[4] = {1.0, 1.0, 1.0, 1.0}; // now black so that xor works
+
+static const double* hmslColors[8] = {
+  hmslWhite, hmslBlack, hmslRed, hmslGreen, hmslBlue, hmslCyan, hmslMagenta, hmslYellow
+};
+
+#endif
+
+#define EVENT_BUFFER_SIZE 256
+#define EVENT_BUFFER_MASK 11111111
+
+/*
+ * Global structs
+ */
+
+typedef struct HMSLPoint {
+  int32_t x;
+  int32_t y;
+} HMSLPoint;
+
+typedef struct HMSLSize {
+  int32_t w;
+  int32_t h;
+} HMSLSize;
+
+typedef struct HMSLRect {
+  HMSLPoint origin;
+  HMSLSize size;
+} HMSLRect;
+
+enum HMSLColor {
+  WHITE,
+  BLACK,
+  RED,
+  GREEN,
+  BLUE,
+  CYAN,
+  MAGENTA,
+  YELLOW
+};
+
+typedef struct HMSLContext {
+  HMSLPoint currentPoint;
+  HMSLPoint mouseEvent;
+  enum HMSLColor color;
+  enum HMSLEventID *events;
+  uint32_t events_read_loc;
+  uint32_t events_write_loc;
+} hmslContext;
+
+typedef struct HMSLWindow {
+  short rect_top;
+  short rect_left;
+  short rect_bottom;
+  short rect_right;
+  long title;
+} hmslWindow;
+
+enum HMSLEventID {
+  EV_NULL,
+  EV_MOUSE_DOWN,
+  EV_MOUSE_UP,
+  EV_MOUSE_MOVE,
+  EV_MENU_PICK,
+  EV_CLOSE_WINDOW,
+  EV_REFRESH,
+  EV_KEY
+} anHMSLEventID;
+
+/*
+ * global variables
+ */
+
+
+hmslContext gHMSLContext;
+CGContextRef drawingContext;
 
 /*
  * hmsl_gui.m
  */
 
-void hostInit( void );
+int32_t hostInit( void );
 void hostTerm( void );
-uint32_t hostOpenWindow( void );
+uint32_t hostOpenWindow( hmslWindow *window );
 void hostCloseWindow( uint32_t window );
 void hostSetCurrentWindow( uint32_t window );
 void hostDrawLineTo( int32_t x, int32_t y );
@@ -33,6 +125,25 @@ void hostSetTextSize( int32_t size );
 void hostGetMouse( uint32_t x, uint32_t y);
 int32_t hostGetEvent( int32_t timeout );
 
+/*
+ * communication with the obj-c layer
+ */
+
+void hmslAddEvent( enum HMSLEventID );
+enum HMSLEventID hmslGetEvent( void );
+char* nullTermString( const char*, int32_t );
+void hmslDrawLine( HMSLPoint start, HMSLPoint end );
+
+void hmslSetCurrentWindow( uint32_t );
+void hmslCloseWindow( uint32_t );
+uint32_t hmslOpenWindow( const char* title, short x, short y, short w, short h );
+void hmslFillRectangle( HMSLRect rect );
+void hmslDrawText( const char*, int32_t );
+uint32_t hmslGetTextLength( const char*, int32_t );
+void hmslSetDrawingColor( CGContextRef, int32_t );
+void hmslSetBackgroundColor( const double* );
+void hmslSetTextSize( int32_t );
+
 /* 
  * hmsl_midi.m
  */
@@ -45,5 +156,7 @@ int hostMIDI_Recv( void );
 int hostClock_QueryTime( void );
 int hostClock_QueryRate( void );
 void hostSleep( int msec );
+
+int getMainScreenRefreshRate( void );
 
 #endif
