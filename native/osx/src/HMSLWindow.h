@@ -9,9 +9,22 @@
 #import <Cocoa/Cocoa.h>
 #import "hmsl.h"
 
-extern NSMutableArray *hmslEventBuffer;
-NSMutableArray *hmslEventBuffer;
+@interface HMSLWindow : NSWindow {
+  NSFont *_font;
+  NSDictionary *_fontAttributes;
+  NSGraphicsContext *_graphicsContext;
+}
 
-@interface HMSLWindow : NSWindow
+@property (retain) NSFont *font;
+@property (retain) NSDictionary *fontAttributes;
+@property (retain) NSGraphicsContext* graphicsContext;
+
++ (NSMutableDictionary*)windowDictionary;
++ (HMSLWindow*)hmslWindowWithTitle: (NSString*) title frame: (NSRect) frame;
+
+- (void) drawRectangle: (HMSLRect) rect;
+- (void) drawLineFrom: (HMSLPoint) start to: (HMSLPoint) end;
+- (void) flushCurrentContext;
+- (void) hmslBackgroundColor: (const double*) color;
 
 @end

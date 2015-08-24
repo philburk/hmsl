@@ -20,10 +20,7 @@
   HMSLRunner *hmslRunner = [[HMSLRunner alloc] init];
   NSThread *hmsl = [[NSThread alloc] initWithTarget:hmslRunner selector:@selector(goForth) object:nil];
   [hmsl start];
-}
-
-- (void)applicationWillTerminate:(NSNotification *)notification {
-  
+  [NSTimer scheduledTimerWithTimeInterval:0.04 target:NSApp selector:@selector(flushAllWindowDrawing) userInfo:nil repeats:YES];
 }
 
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)theApplication {

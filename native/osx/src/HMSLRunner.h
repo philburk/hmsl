@@ -8,8 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-@interface HMSLRunner : NSObject
+@interface HMSLRunner : NSObject {
+  BOOL isRunning;
+}
 
 -(void)goForth;
+
+@property BOOL isRunning;
 
 @end

@@ -7,10 +7,13 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "HMSLWindow.h"
 
 @interface HMSLApplication : NSApplication {
   int result;
 }
+
+-(void)flushAllWindowDrawing;
 
 @property int result;
 

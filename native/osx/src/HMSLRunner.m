@@ -6,12 +6,9 @@
 //  Copyright (c) 2015 3DO. All rights reserved.
 //
 
-#include <stdio.h>
-#include "pforth.h"
-
-#ifndef PF_DEFAULT_DICTIONARY
-#define PF_DEFAULT_DICTIONARY "pforth.dic"
-#endif
+#import <stdio.h>
+#import "pforth.h"
+#import "hmsl.h"
 
 #import "HMSLRunner.h"
 #import "HMSLApplication.h"
@@ -24,8 +21,11 @@
   char IfInit = FALSE;
   int Result;
   Result = pfDoForth( DicName, SourceName, IfInit);
-  [[HMSLApplication sharedApplication] setResult:Result];
+  ((HMSLApplication*)NSApp).result = Result;
   [NSApp terminate:self];
+  [NSThread exit];
 }
+
+@synthesize isRunning;
 
 @end

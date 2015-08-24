@@ -7,11 +7,13 @@
 //
 
 #import "HMSLWindowDelegate.h"
+#import "hmsl.h"
 
 @implementation HMSLWindowDelegate
 
 -(void)windowWillClose:(NSNotification *)notification {
-  [hmslEventBuffer addObject:[NSNumber numberWithInt:EV_CLOSE_WINDOW]];
+  gHMSLContext.events[gHMSLContext.events_write_loc] = EV_CLOSE_WINDOW;
+  gHMSLContext.events_write_loc += 1;
 }
 
 @end

@@ -11,31 +11,38 @@
 @implementation HMSLView
 
 - (void)mouseDown:(NSEvent *)event {
-  gHMSLContext->mouseEvent = event.locationInWindow;
-  [hmslEventBuffer addObject:[NSNumber numberWithInt:EV_MOUSE_DOWN]];
+  gHMSLContext.mouseEvent = [self flipEventCoordinates:event];
+  hmslAddEvent(EV_MOUSE_DOWN);
 }
 
 - (void)mouseUp:(NSEvent *)event {
-  gHMSLContext->mouseEvent = event.locationInWindow;
-  [hmslEventBuffer addObject:[NSNumber numberWithInt:EV_MOUSE_UP]];
+  gHMSLContext.mouseEvent = [self flipEventCoordinates:event];
+  hmslAddEvent(EV_MOUSE_UP);
 }
 
 - (void)mouseDragged:(NSEvent *)event {
-  gHMSLContext->mouseEvent = event.locationInWindow;
-  [hmslEventBuffer addObject:[NSNumber numberWithInt:EV_MOUSE_MOVE]];
+  gHMSLContext.mouseEvent = [self flipEventCoordinates:event];
+  hmslAddEvent(EV_MOUSE_MOVE);
 }
 
 - (void)keyDown:(NSEvent *)event {
-  [hmslEventBuffer addObject:[NSNumber numberWithInt:EV_KEY]];
+  hmslAddEvent(EV_KEY);
 }
 
 - (void)drawRect:(NSRect)dirtyRect {
-  [hmslEventBuffer addObject:[NSNumber numberWithInt:EV_REFRESH]];
+  hmslAddEvent(EV_REFRESH);
   [super drawRect:dirtyRect];
 }
 
 - (BOOL)isFlipped {
   return YES;
+}
+
+- (HMSLPoint)flipEventCoordinates:(NSEvent *)event {
+  HMSLPoint loc;
+  loc.x = event.locationInWindow.x;
+  loc.y = self.window.frame.size.height - event.locationInWindow.y;
+  return loc;
 }
 
 @end

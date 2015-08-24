@@ -10,6 +10,11 @@
 
 @implementation HMSLApplication
 
+-(void)flushAllWindowDrawing {
+  [self makeWindowsPerform:@selector(flushCurrentContext)
+                   inOrder:YES];
+}
+
 @synthesize result;
 
 @end
