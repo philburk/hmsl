@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 #import "HMSLWindow.h"
+#import "HMSLView.h"
 #import "hmsl.h"
 #import "pf_all.h"
 
@@ -35,14 +36,16 @@ void hmslCloseWindow( uint32_t window ) {
 
 void hmslDrawLine( HMSLPoint start, HMSLPoint end ) {
   // Flip the y-values (Quartz drawing is from bottom-left)
-  start.y = mainWindow.frame.size.height - start.y;
-  end.y = mainWindow.frame.size.height - end.y;
+  HMSLView *view = (HMSLView*)mainWindow.contentView;
+  start.y = view.frame.size.height - start.y;
+  end.y = view.frame.size.height - end.y;
   [mainWindow drawLineFrom:start to:end];
 }
 
 void hmslFillRectangle( HMSLRect rect ) {
   // Flip the y-value of the origin
-  rect.origin.y = mainWindow.frame.size.height - rect.origin.y - rect.size.h;
+  HMSLView *view = (HMSLView*)mainWindow.contentView;
+  rect.origin.y = view.frame.size.height - rect.origin.y - rect.size.h;
   [mainWindow drawRectangle:rect];
 }
 
@@ -106,7 +109,8 @@ void hmslDrawText( const char* string, int32_t size ) {
     NSString *text = [NSString stringWithCString: nullTerm encoding:NSASCIIStringEncoding];
     NSPoint point;
     point.x = gHMSLContext.currentPoint.x;
-    point.y = mainWindow.frame.size.height - gHMSLContext.currentPoint.y;
+    HMSLView *view = (HMSLView*)mainWindow.contentView;
+    point.y = view.frame.size.height - gHMSLContext.currentPoint.y;
     [text drawAtPoint:point withAttributes:mainWindow.fontAttributes];
     free(nullTerm);
   }

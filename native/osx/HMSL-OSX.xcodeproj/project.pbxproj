@@ -31,7 +31,6 @@
 		6985ABDE1A785731003BC422 /* hmsl_midi.m in Sources */ = {isa = PBXBuildFile; fileRef = 6985ABDD1A785731003BC422 /* hmsl_midi.m */; };
 		6985ABE11A785941003BC422 /* hmsl_gui.c in Sources */ = {isa = PBXBuildFile; fileRef = 6985ABE01A785941003BC422 /* hmsl_gui.c */; };
 		698C07F51B8BAECA00C26E91 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6972FB491A9A996B0008E2E4 /* MainMenu.xib */; };
-		698C07F61B8BB18A00C26E91 /* pforth.dic in Copy Files */ = {isa = PBXBuildFile; fileRef = 698C07EB1B8BA1BB00C26E91 /* pforth.dic */; };
 		698C07FA1B8BB26800C26E91 /* hmsl.c in Sources */ = {isa = PBXBuildFile; fileRef = 6985ABDA1A785636003BC422 /* hmsl.c */; };
 		698C07FB1B8BB26800C26E91 /* hmsl_gui.c in Sources */ = {isa = PBXBuildFile; fileRef = 6985ABE01A785941003BC422 /* hmsl_gui.c */; };
 		698C07FD1B8BB26800C26E91 /* hmsl_midi.m in Sources */ = {isa = PBXBuildFile; fileRef = 6985ABDD1A785731003BC422 /* hmsl_midi.m */; };
@@ -64,7 +63,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 6;
 			files = (
-				698C07F61B8BB18A00C26E91 /* pforth.dic in Copy Files */,
 			);
 			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -127,8 +125,6 @@
 		6985ABDC1A7856BD003BC422 /* hmsl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = hmsl.h; sourceTree = "<group>"; };
 		6985ABDD1A785731003BC422 /* hmsl_midi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = hmsl_midi.m; sourceTree = "<group>"; };
 		6985ABE01A785941003BC422 /* hmsl_gui.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hmsl_gui.c; sourceTree = "<group>"; };
-		698C07EB1B8BA1BB00C26E91 /* pforth.dic */ = {isa = PBXFileReference; lastKnownFileType = file; name = pforth.dic; path = hmsl/pforth.dic; sourceTree = "<group>"; };
-		698C07EE1B8BA74F00C26E91 /* run.command */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = run.command; path = scripts/run.command; sourceTree = "<group>"; };
 		698C08171B8BB3B900C26E91 /* hmsl_bundle_main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = hmsl_bundle_main.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -162,7 +158,6 @@
 		6985AB921A785350003BC422 = {
 			isa = PBXGroup;
 			children = (
-				698C07EB1B8BA1BB00C26E91 /* pforth.dic */,
 				6985AB9D1A785350003BC422 /* HMSL-OSX */,
 				6985AB9C1A785350003BC422 /* Products */,
 			);
@@ -182,7 +177,6 @@
 			children = (
 				6985ABA61A7853B5003BC422 /* src */,
 				6985ABA51A7853AB003BC422 /* pforth */,
-				698C07EE1B8BA74F00C26E91 /* run.command */,
 			);
 			name = "HMSL-OSX";
 			sourceTree = SOURCE_ROOT;
