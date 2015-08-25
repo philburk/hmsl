@@ -54,6 +54,9 @@
 		698C08151B8BB2F400C26E91 /* pfcompil.c in Sources */ = {isa = PBXBuildFile; fileRef = 6985ABC11A785472003BC422 /* pfcompil.c */; };
 		698C08161B8BB2FE00C26E91 /* pf_words.c in Sources */ = {isa = PBXBuildFile; fileRef = 6985ABBE1A785472003BC422 /* pf_words.c */; };
 		698C08181B8BB3B900C26E91 /* hmsl_bundle_main.m in Sources */ = {isa = PBXBuildFile; fileRef = 698C08171B8BB3B900C26E91 /* hmsl_bundle_main.m */; };
+		698C084C1B8CE01E00C26E91 /* pforth.dic in Copy Files */ = {isa = PBXBuildFile; fileRef = 698C08461B8CE00E00C26E91 /* pforth.dic */; };
+		698C084D1B8CE01E00C26E91 /* start_hmsl.sh in Copy Files */ = {isa = PBXBuildFile; fileRef = 698C08471B8CE00E00C26E91 /* start_hmsl.sh */; };
+		698C084E1B8CE01E00C26E91 /* runner.sh in Copy Files */ = {isa = PBXBuildFile; fileRef = 698C08481B8CE00E00C26E91 /* runner.sh */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -63,6 +66,9 @@
 			dstPath = "";
 			dstSubfolderSpec = 6;
 			files = (
+				698C084C1B8CE01E00C26E91 /* pforth.dic in Copy Files */,
+				698C084D1B8CE01E00C26E91 /* start_hmsl.sh in Copy Files */,
+				698C084E1B8CE01E00C26E91 /* runner.sh in Copy Files */,
 			);
 			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -126,6 +132,9 @@
 		6985ABDD1A785731003BC422 /* hmsl_midi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = hmsl_midi.m; sourceTree = "<group>"; };
 		6985ABE01A785941003BC422 /* hmsl_gui.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hmsl_gui.c; sourceTree = "<group>"; };
 		698C08171B8BB3B900C26E91 /* hmsl_bundle_main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = hmsl_bundle_main.m; sourceTree = "<group>"; };
+		698C08461B8CE00E00C26E91 /* pforth.dic */ = {isa = PBXFileReference; lastKnownFileType = file; path = pforth.dic; sourceTree = "<group>"; };
+		698C08471B8CE00E00C26E91 /* start_hmsl.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = start_hmsl.sh; sourceTree = "<group>"; };
+		698C08481B8CE00E00C26E91 /* runner.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = runner.sh; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +158,9 @@
 		6972FB611A9A9B9A0008E2E4 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				698C08461B8CE00E00C26E91 /* pforth.dic */,
+				698C08471B8CE00E00C26E91 /* start_hmsl.sh */,
+				698C08481B8CE00E00C26E91 /* runner.sh */,
 				6972FB491A9A996B0008E2E4 /* MainMenu.xib */,
 				6972FB411A9A996B0008E2E4 /* Info.plist */,
 			);
@@ -308,7 +320,7 @@
 		6985AB931A785350003BC422 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0610;
+				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = 3DO;
 				TargetAttributes = {
 					6972FB3D1A9A996B0008E2E4 = {
@@ -428,7 +440,6 @@
 		6972FB591A9A996B0008E2E4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_ARC = NO;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -439,6 +450,7 @@
 				INFOPLIST_FILE = hmsl/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = NO;
 				PF_DEFAULT_DICTIONARY = "\"hmsl.dic\"";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALID_ARCHS = "i386 x86_64";
@@ -448,7 +460,6 @@
 		6972FB5A1A9A996B0008E2E4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_ARC = NO;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -465,6 +476,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -505,6 +517,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
