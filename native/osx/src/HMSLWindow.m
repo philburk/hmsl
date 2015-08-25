@@ -57,14 +57,14 @@
   drawRect.origin.x = rect.origin.x; drawRect.origin.y = rect.origin.y;
   drawRect.size.height = rect.size.h; drawRect.size.width = rect.size.w;
   
-  CGContextRef drawingContext = [self.graphicsContext CGContext];
+  CGContextRef drawingContext = self.graphicsContext.graphicsPort;
   CGContextFillRect(drawingContext, drawRect);
   CGContextSynchronize(drawingContext);
   return;
 }
 
 - (void)drawLineFrom:(HMSLPoint)start to:(HMSLPoint)end {
-  CGContextRef drawingContext = [self.graphicsContext CGContext];
+  CGContextRef drawingContext = self.graphicsContext.graphicsPort;
   CGContextBeginPath(drawingContext);
   CGContextMoveToPoint(drawingContext, start.x, start.y);
   CGContextAddLineToPoint(drawingContext, end.x, end.y);

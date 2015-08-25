@@ -41,7 +41,7 @@
 - (HMSLPoint)flipEventCoordinates:(NSEvent *)event {
   HMSLPoint loc;
   loc.x = event.locationInWindow.x;
-  loc.y = self.window.frame.size.height - event.locationInWindow.y;
+  loc.y = self.frame.size.height - event.locationInWindow.y;
   return loc;
 }
 

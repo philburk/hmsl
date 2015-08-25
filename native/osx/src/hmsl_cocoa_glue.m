@@ -57,11 +57,12 @@ uint32_t hmslOpenWindow(const char* title, short x, short y, short w, short h) {
   mainWindow = hmslWindow;
   
   NSGraphicsContext *currentContext = [NSGraphicsContext graphicsContextWithWindow:hmslWindow];
+  currentContext.shouldAntialias = NO;
   
   if (currentContext != nil) {
     NSGraphicsContext.currentContext = currentContext;
     hmslWindow.graphicsContext = currentContext;
-    drawingContext = [NSGraphicsContext.currentContext CGContext];
+    drawingContext = currentContext.graphicsPort;
   } else {
     NSLog(@"Unable to initialize context");
   }
