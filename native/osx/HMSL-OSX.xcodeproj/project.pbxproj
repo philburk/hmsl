@@ -57,6 +57,7 @@
 		698C084C1B8CE01E00C26E91 /* pforth.dic in Copy Files */ = {isa = PBXBuildFile; fileRef = 698C08461B8CE00E00C26E91 /* pforth.dic */; };
 		698C084D1B8CE01E00C26E91 /* start_hmsl.sh in Copy Files */ = {isa = PBXBuildFile; fileRef = 698C08471B8CE00E00C26E91 /* start_hmsl.sh */; };
 		698C084E1B8CE01E00C26E91 /* runner.sh in Copy Files */ = {isa = PBXBuildFile; fileRef = 698C08481B8CE00E00C26E91 /* runner.sh */; };
+		698C08521B8CE65A00C26E91 /* ChicagoFLF.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 698C084F1B8CE54600C26E91 /* ChicagoFLF.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -71,6 +72,16 @@
 				698C084E1B8CE01E00C26E91 /* runner.sh in Copy Files */,
 			);
 			name = "Copy Files";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		698C08511B8CE64900C26E91 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Fonts;
+			dstSubfolderSpec = 7;
+			files = (
+				698C08521B8CE65A00C26E91 /* ChicagoFLF.ttf in CopyFiles */,
+			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -135,6 +146,7 @@
 		698C08461B8CE00E00C26E91 /* pforth.dic */ = {isa = PBXFileReference; lastKnownFileType = file; path = pforth.dic; sourceTree = "<group>"; };
 		698C08471B8CE00E00C26E91 /* start_hmsl.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = start_hmsl.sh; sourceTree = "<group>"; };
 		698C08481B8CE00E00C26E91 /* runner.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = runner.sh; sourceTree = "<group>"; };
+		698C084F1B8CE54600C26E91 /* ChicagoFLF.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ChicagoFLF.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +170,7 @@
 		6972FB611A9A9B9A0008E2E4 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				698C084F1B8CE54600C26E91 /* ChicagoFLF.ttf */,
 				698C08461B8CE00E00C26E91 /* pforth.dic */,
 				698C08471B8CE00E00C26E91 /* start_hmsl.sh */,
 				698C08481B8CE00E00C26E91 /* runner.sh */,
@@ -288,6 +301,7 @@
 				6972FB3B1A9A996B0008E2E4 /* Frameworks */,
 				6972FB3C1A9A996B0008E2E4 /* Resources */,
 				698C07F01B8BA7A400C26E91 /* Copy Files */,
+				698C08511B8CE64900C26E91 /* CopyFiles */,
 			);
 			buildRules = (
 			);
