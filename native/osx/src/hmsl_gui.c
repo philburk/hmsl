@@ -60,7 +60,8 @@ void hostMoveTo( int32_t x, int32_t y ) {
  * count - number of bytes to read
  */
 void hostDrawText( uint32_t address, int32_t count ) {
-  hmslDrawText( (char*)address, count );
+  hmslDrawText( (char*)address, count, gHMSLContext.currentPoint );
+  gHMSLContext.currentPoint.x += hmslGetTextLength( (char*)address, count);
   CGContextSynchronize(drawingContext);
   return;
 }
@@ -88,6 +89,7 @@ void hostFillRectangle( int32_t x1, int32_t y1, int32_t x2, int32_t y2 ) {
   rect.origin.x = x1; rect.origin.y = y1;
   rect.size.w = x2 - x1; rect.size.h = y2 - y1;
   hmslFillRectangle( rect );
+  gHMSLContext.currentPoint = rect.origin;
   return;
 }
 
@@ -125,7 +127,7 @@ void hostSetDrawingMode( int32_t mode ) {
       CGContextSetBlendMode(drawingContext, kCGBlendModeNormal);
       break;
     case 1:
-      CGContextSetBlendMode(drawingContext, kCGBlendModeDifference);
+      CGContextSetBlendMode(drawingContext, kCGBlendModeExclusion);
       break;
   }
   return;

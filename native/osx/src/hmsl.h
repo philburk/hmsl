@@ -133,12 +133,11 @@ void hmslAddEvent( enum HMSLEventID );
 enum HMSLEventID hmslGetEvent( void );
 char* nullTermString( const char*, int32_t );
 void hmslDrawLine( HMSLPoint start, HMSLPoint end );
-
 void hmslSetCurrentWindow( uint32_t );
 void hmslCloseWindow( uint32_t );
 uint32_t hmslOpenWindow( const char* title, short x, short y, short w, short h );
 void hmslFillRectangle( HMSLRect rect );
-void hmslDrawText( const char*, int32_t );
+void hmslDrawText( const char*, int32_t, HMSLPoint );
 uint32_t hmslGetTextLength( const char*, int32_t );
 void hmslSetDrawingColor( CGContextRef, int32_t );
 void hmslSetBackgroundColor( const double* );

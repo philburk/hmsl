@@ -46,6 +46,7 @@ void hmslFillRectangle( HMSLRect rect ) {
   // Flip the y-value of the origin
   HMSLView *view = (HMSLView*)mainWindow.contentView;
   rect.origin.y = view.frame.size.height - rect.origin.y - rect.size.h;
+  rect.size.h++; rect.size.w++;
   [mainWindow drawRectangle:rect];
 }
 
@@ -73,9 +74,11 @@ uint32_t hmslOpenWindow(const char* title, short x, short y, short w, short h) {
 void hmslSetDrawingColor( CGContextRef context, int32_t color ) {
   const double *rgba = hmslColors[color];
 
-  [[NSColor colorWithRed:rgba[0] green:rgba[1] blue:rgba[2] alpha:rgba[3]] set];
-  CGContextSetRGBFillColor(context, rgba[0], rgba[1], rgba[2], rgba[3]);
-  CGContextSetRGBStrokeColor(context, rgba[0], rgba[1], rgba[2], rgba[3]);
+  @autoreleasepool {
+    [[NSColor colorWithRed:rgba[0] green:rgba[1] blue:rgba[2] alpha:rgba[3]] set];
+    CGContextSetRGBFillColor(context, rgba[0], rgba[1], rgba[2], rgba[3]);
+    CGContextSetRGBStrokeColor(context, rgba[0], rgba[1], rgba[2], rgba[3]);
+  }
   
   return;
 }
@@ -84,7 +87,7 @@ void hmslSetTextSize( int32_t size ) {
   
   @autoreleasepool {
     NSFont *currentFont = [mainWindow.fontAttributes objectForKey:NSFontAttributeName];
-    NSFont *resizedFont = [NSFont fontWithName:currentFont.fontName size:(CGFloat)size];
+    NSFont *resizedFont = [NSFont fontWithName:currentFont.fontName size:((CGFloat)size) * 1.0];
     mainWindow.fontAttributes = [NSDictionary dictionaryWithObject:resizedFont forKey:NSFontAttributeName];
   }
   
@@ -103,15 +106,16 @@ uint32_t hmslGetTextLength( const char* string, int32_t size ) {
   return textLength;
 }
 
-void hmslDrawText( const char* string, int32_t size ) {
+void hmslDrawText( const char* string, int32_t size, HMSLPoint loc ) {
   
   @autoreleasepool {
     char* nullTerm = nullTermString(string, size);
     NSString *text = [NSString stringWithCString: nullTerm encoding:NSASCIIStringEncoding];
+    
     NSPoint point;
-    point.x = gHMSLContext.currentPoint.x;
-    HMSLView *view = (HMSLView*)mainWindow.contentView;
-    point.y = view.frame.size.height - gHMSLContext.currentPoint.y;
+    point.x = loc.x;
+    point.y = ((HMSLView*)mainWindow.contentView).frame.size.height - loc.y;
+    
     [text drawAtPoint:point withAttributes:mainWindow.fontAttributes];
     free(nullTerm);
   }

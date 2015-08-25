@@ -34,10 +34,6 @@
   [super drawRect:dirtyRect];
 }
 
-- (BOOL)isFlipped {
-  return YES;
-}
-
 - (HMSLPoint)flipEventCoordinates:(NSEvent *)event {
   HMSLPoint loc;
   loc.x = event.locationInWindow.x;
