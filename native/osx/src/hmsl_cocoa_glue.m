@@ -87,7 +87,7 @@ void hmslSetTextSize( int32_t size ) {
   
   @autoreleasepool {
     NSFont *currentFont = [mainWindow.fontAttributes objectForKey:NSFontAttributeName];
-    NSFont *resizedFont = [NSFont fontWithName:currentFont.fontName size:((CGFloat)size) * 1.0];
+    NSFont *resizedFont = [NSFont fontWithName:currentFont.fontName size:((CGFloat)size) * 1];
     mainWindow.fontAttributes = [NSDictionary dictionaryWithObject:resizedFont forKey:NSFontAttributeName];
   }
   
@@ -114,7 +114,7 @@ void hmslDrawText( const char* string, int32_t size, HMSLPoint loc ) {
     
     NSPoint point;
     point.x = loc.x;
-    point.y = ((HMSLView*)mainWindow.contentView).frame.size.height - loc.y;
+    point.y = ((HMSLView*)mainWindow.contentView).frame.size.height - loc.y - 3;
     
     [text drawAtPoint:point withAttributes:mainWindow.fontAttributes];
     free(nullTerm);
