@@ -36,10 +36,13 @@
   hmslWindow.delegate = [[HMSLWindowDelegate alloc] init];
   [hmslWindow cascadeTopLeftFromPoint:NSZeroPoint];
   [hmslWindow makeKeyAndOrderFront:self];
-  
+
   // Initialize the font-related instance variables
   hmslWindow.font = [NSFont fontWithName:@"ChicagoFLF" size:(CGFloat)30.0];
-  hmslWindow.fontAttributes = [NSDictionary dictionaryWithObject:hmslWindow.font forKey:NSFontAttributeName];
+  hmslWindow.fontAttributes = [NSMutableDictionary
+                               dictionaryWithObjects:@[hmslWindow.font, [NSColor whiteColor]]
+                               forKeys:@[NSFontAttributeName, NSBackgroundColorAttributeName]];
+
   [[HMSLWindow windowDictionary] setObject:hmslWindow forKey:[NSNumber numberWithInteger:hmslWindow.windowNumber]];
   
   return hmslWindow;

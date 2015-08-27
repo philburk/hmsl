@@ -16,7 +16,13 @@
 HMSLWindow *mainWindow;
 
 void hmslSetBackgroundColor( const double* color ) {
-  [mainWindow hmslBackgroundColor:color];
+  if (mainWindow != NULL) {
+    [mainWindow hmslBackgroundColor:color];
+    @autoreleasepool {
+      NSColor *bgcolor = [NSColor colorWithRed:color[0] green:color[1] blue:color[2] alpha:color[3]];
+      [mainWindow.fontAttributes setValue:[bgcolor retain] forKey:NSBackgroundColorAttributeName];
+    }
+  }
 }
 
 void hmslSetCurrentWindow( uint32_t window ) {
