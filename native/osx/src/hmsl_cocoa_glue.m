@@ -90,13 +90,15 @@ void hmslSetDrawingColor( CGContextRef context, int32_t color ) {
 }
 
 void hmslSetTextSize( int32_t size ) {
-  
-  @autoreleasepool {
-    NSFont *currentFont = [mainWindow.fontAttributes objectForKey:NSFontAttributeName];
-    NSFont *resizedFont = [NSFont fontWithName:currentFont.fontName size:((CGFloat)size) * 1];
-    mainWindow.fontAttributes = [NSDictionary dictionaryWithObject:resizedFont forKey:NSFontAttributeName];
+  if (mainWindow != NULL) {
+    
+    @autoreleasepool {
+      NSFont *currentFont = [mainWindow.fontAttributes objectForKey:NSFontAttributeName];
+      NSFont *resizedFont = [NSFont fontWithName:currentFont.fontName size:((CGFloat)size)];
+      [mainWindow.fontAttributes setValue:resizedFont forKey:NSFontAttributeName];
+    }
+    
   }
-  
 }
 
 uint32_t hmslGetTextLength( const char* string, int32_t size ) {
