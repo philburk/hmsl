@@ -138,13 +138,13 @@ char* nullTermString( const char* string, int32_t size ) {
 
 
 void hmslAddEvent( enum HMSLEventID event_type ) {
-  gHMSLContext.events[gHMSLContext.events_write_loc] = event_type;
+  gHMSLContext.events[gHMSLContext.events_write_loc & EVENT_BUFFER_SIZE] = event_type;
   gHMSLContext.events_write_loc += 1;
   return;
 }
 
 enum HMSLEventID hmslGetEvent( void ) {
-  enum HMSLEventID val = gHMSLContext.events[gHMSLContext.events_read_loc];
+  enum HMSLEventID val = gHMSLContext.events[gHMSLContext.events_read_loc & EVENT_BUFFER_SIZE];
   gHMSLContext.events_read_loc += 1;
   return val;
 }

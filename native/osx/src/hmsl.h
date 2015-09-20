@@ -38,7 +38,7 @@ static const double* hmslColors[HMSL_COLORS_SIZE] = {
 #endif
 
 #define EVENT_BUFFER_SIZE 256
-#define EVENT_BUFFER_MASK 11111111
+#define EVENT_BUFFER_MASK 0b11111111
 
 /*
  * Global structs
