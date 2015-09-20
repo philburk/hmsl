@@ -100,7 +100,7 @@ void hostFillRectangle( int32_t x1, int32_t y1, int32_t x2, int32_t y2 ) {
  */
 void hostSetColor( int32_t color ) {
   if (drawingContext != nil) {
-      hmslSetDrawingColor(drawingContext, color);
+      hmslSetDrawingColor(drawingContext, hmslColors[color & HMSL_COLORS_MASK]);
   }
   return;
 }
@@ -111,7 +111,7 @@ void hostSetColor( int32_t color ) {
  * color - index of color to use, defined as constants in hmsl.h
  */
 void hostSetBackgroundColor( int32_t color ) {
-  hmslSetBackgroundColor(hmslColors[color]);
+  hmslSetBackgroundColor(hmslColors[color & HMSL_COLORS_MASK]);
   CGContextSynchronize(drawingContext);
   return;
 }

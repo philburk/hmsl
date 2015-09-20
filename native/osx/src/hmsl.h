@@ -19,6 +19,9 @@
 #ifndef HMSL_COLORS
 #define HMSL_COLORS
 
+#define HMSL_COLORS_SIZE 8
+#define HMSL_COLORS_MASK 0b00000111
+
 static const double hmslWhite[4] = {1.0, 1.0, 1.0, 1.0};
 static const double hmslBlack[4] = {0.0, 0.0, 0.0, 1.0};
 static const double hmslRed[4] = {1.0, 0.0, 0.0, 1.0};
@@ -28,7 +31,7 @@ static const double hmslCyan[4] = {0.0, 1.0, 1.0, 1.0};
 static const double hmslMagenta[4] = {1.0, 0.0, 1.0, 1.0};
 static const double hmslYellow[4] = {1.0, 1.0, 1.0, 1.0}; // now black so that xor works
 
-static const double* hmslColors[8] = {
+static const double* hmslColors[HMSL_COLORS_SIZE] = {
   hmslWhite, hmslBlack, hmslRed, hmslGreen, hmslBlue, hmslCyan, hmslMagenta, hmslYellow
 };
 
@@ -139,7 +142,7 @@ uint32_t hmslOpenWindow( const char* title, short x, short y, short w, short h )
 void hmslFillRectangle( HMSLRect rect );
 void hmslDrawText( const char*, int32_t, HMSLPoint );
 uint32_t hmslGetTextLength( const char*, int32_t );
-void hmslSetDrawingColor( CGContextRef, int32_t );
+void hmslSetDrawingColor( CGContextRef, const double* );
 void hmslSetBackgroundColor( const double* );
 void hmslSetTextSize( int32_t );
 

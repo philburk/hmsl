@@ -77,9 +77,7 @@ uint32_t hmslOpenWindow(const char* title, short x, short y, short w, short h) {
   return (uint32_t)hmslWindow.windowNumber;
 }
 
-void hmslSetDrawingColor( CGContextRef context, int32_t color ) {
-  const double *rgba = hmslColors[color];
-
+void hmslSetDrawingColor( CGContextRef context, const double* rgba ) {
   @autoreleasepool {
     [[NSColor colorWithRed:rgba[0] green:rgba[1] blue:rgba[2] alpha:rgba[3]] set];
     CGContextSetRGBFillColor(context, rgba[0], rgba[1], rgba[2], rgba[3]);
