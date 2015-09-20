@@ -20,7 +20,7 @@ void hmslSetBackgroundColor( const double* color ) {
     [mainWindow hmslBackgroundColor:color];
     @autoreleasepool {
       NSColor *bgcolor = [NSColor colorWithRed:color[0] green:color[1] blue:color[2] alpha:color[3]];
-      [mainWindow.fontAttributes setValue:[bgcolor retain] forKey:NSBackgroundColorAttributeName];
+      [mainWindow.fontAttributes setObject:bgcolor forKey:NSBackgroundColorAttributeName];
     }
   }
 }
@@ -78,10 +78,11 @@ uint32_t hmslOpenWindow(const char* title, short x, short y, short w, short h) {
 }
 
 void hmslSetDrawingColor( CGContextRef context, const double* rgba ) {
+
   @autoreleasepool {
     NSColor *newColor = [NSColor colorWithRed:rgba[0] green:rgba[1] blue:rgba[2] alpha:rgba[3]];
     [newColor set];
-    [mainWindow.fontAttributes setValue:[newColor retain] forKey:NSForegroundColorAttributeName];
+    [mainWindow.fontAttributes setObject:newColor forKey:NSForegroundColorAttributeName];
     CGContextSetRGBFillColor(context, rgba[0], rgba[1], rgba[2], rgba[3]);
     CGContextSetRGBStrokeColor(context, rgba[0], rgba[1], rgba[2], rgba[3]);
   }
@@ -95,7 +96,7 @@ void hmslSetTextSize( int32_t size ) {
     @autoreleasepool {
       NSFont *currentFont = [mainWindow.fontAttributes objectForKey:NSFontAttributeName];
       NSFont *resizedFont = [NSFont fontWithName:currentFont.fontName size:((CGFloat)size)];
-      [mainWindow.fontAttributes setValue:resizedFont forKey:NSFontAttributeName];
+      [mainWindow.fontAttributes setObject:resizedFont forKey:NSFontAttributeName];
     }
     
   }
@@ -107,7 +108,8 @@ uint32_t hmslGetTextLength( const char* string, int32_t size ) {
   @autoreleasepool {
     char* nullTerm = nullTermString(string, size);
     NSString *text = [NSString stringWithCString: nullTerm encoding:NSASCIIStringEncoding];
-    textLength = (uint32_t)[text sizeWithAttributes:mainWindow.fontAttributes].width;
+    NSSize textSize = [text sizeWithAttributes:mainWindow.fontAttributes];
+    textLength = (uint32_t)textSize.width;
     free(nullTerm);
   }
   
