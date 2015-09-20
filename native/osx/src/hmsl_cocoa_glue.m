@@ -79,7 +79,9 @@ uint32_t hmslOpenWindow(const char* title, short x, short y, short w, short h) {
 
 void hmslSetDrawingColor( CGContextRef context, const double* rgba ) {
   @autoreleasepool {
-    [[NSColor colorWithRed:rgba[0] green:rgba[1] blue:rgba[2] alpha:rgba[3]] set];
+    NSColor *newColor = [NSColor colorWithRed:rgba[0] green:rgba[1] blue:rgba[2] alpha:rgba[3]];
+    [newColor set];
+    [mainWindow.fontAttributes setValue:[newColor retain] forKey:NSForegroundColorAttributeName];
     CGContextSetRGBFillColor(context, rgba[0], rgba[1], rgba[2], rgba[3]);
     CGContextSetRGBStrokeColor(context, rgba[0], rgba[1], rgba[2], rgba[3]);
   }
@@ -122,7 +124,8 @@ void hmslDrawText( const char* string, int32_t size, HMSLPoint loc ) {
     point.x = loc.x;
     point.y = ((HMSLView*)mainWindow.contentView).frame.size.height - loc.y - 3;
     
-    [text drawAtPoint:point withAttributes:mainWindow.fontAttributes];
+    [mainWindow drawText:text atPoint:point];
+    
     free(nullTerm);
   }
   

@@ -40,8 +40,8 @@
   // Initialize the font-related instance variables
   hmslWindow.font = [NSFont fontWithName:@"ChicagoFLF" size:(CGFloat)30.0];
   hmslWindow.fontAttributes = [NSMutableDictionary
-                               dictionaryWithObjects:@[hmslWindow.font, [NSColor whiteColor]]
-                               forKeys:@[NSFontAttributeName, NSBackgroundColorAttributeName]];
+                               dictionaryWithObjects:@[hmslWindow.font, [NSColor whiteColor], [NSColor blackColor]]
+                               forKeys:@[NSFontAttributeName, NSBackgroundColorAttributeName, NSForegroundColorAttributeName]];
 
   [[HMSLWindow windowDictionary] setObject:hmslWindow forKey:[NSNumber numberWithInteger:hmslWindow.windowNumber]];
   
@@ -74,6 +74,10 @@
   CGContextStrokePath(drawingContext);
   CGContextSynchronize(drawingContext);
   return;
+}
+
+- (void) drawText: (NSString*) text atPoint: (NSPoint) point {
+  [text drawAtPoint:point withAttributes:self.fontAttributes];
 }
 
 - (void)keyDown:(NSEvent *)event {

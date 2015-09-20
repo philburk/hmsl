@@ -11,12 +11,12 @@
 
 @interface HMSLWindow : NSWindow {
   NSFont *_font;
-  NSDictionary *_fontAttributes;
+  NSMutableDictionary *_fontAttributes;
   NSGraphicsContext *_graphicsContext;
 }
 
 @property (retain) NSFont *font;
-@property (retain) NSDictionary *fontAttributes;
+@property (retain) NSMutableDictionary *fontAttributes;
 @property (retain) NSGraphicsContext* graphicsContext;
 
 + (NSMutableDictionary*)windowDictionary;
@@ -24,6 +24,7 @@
 
 - (void) drawRectangle: (HMSLRect) rect;
 - (void) drawLineFrom: (HMSLPoint) start to: (HMSLPoint) end;
+- (void) drawText: (NSString*) text atPoint: (NSPoint) point;
 - (void) flushCurrentContext;
 - (void) hmslBackgroundColor: (const double*) color;
 
