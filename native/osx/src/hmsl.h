@@ -19,20 +19,32 @@
 #ifndef HMSL_COLORS
 #define HMSL_COLORS
 
-#define HMSL_COLORS_SIZE 8
-#define HMSL_COLORS_MASK 0b00000111
+#define HMSL_COLORS_SIZE 16
+#define HMSL_COLORS_MASK 0b00001111
 
+// Colors taken from the Macintosh II color palette, System 4.1
+// https://en.wikipedia.org/wiki/List_of_software_palettes#Apple_Macintosh_default_16-color_palette
 static const double hmslWhite[4] = {1.0, 1.0, 1.0, 1.0};
 static const double hmslBlack[4] = {0.0, 0.0, 0.0, 1.0};
-static const double hmslRed[4] = {1.0, 0.0, 0.0, 1.0};
-static const double hmslGreen[4] = {0.0, 1.0, 0.0, 1.0};
-static const double hmslBlue[4] = {0.0, 0.0, 1.0, 1.0};
-static const double hmslCyan[4] = {0.0, 1.0, 1.0, 1.0};
-static const double hmslMagenta[4] = {1.0, 0.0, 1.0, 1.0};
-static const double hmslYellow[4] = {1.0, 1.0, 1.0, 1.0}; // now black so that xor works
+static const double hmslRed[4] = {0.867, 0.0, 0.0, 1.0};
+static const double hmslBlue[4] = {0.0, 0.0, 0.8, 1.0};
+static const double hmslCyan[4] = {0.0, 0.6, 1.0, 1.0};
+static const double hmslMagenta[4] = {1.0, 0.0, 0.6, 1.0};
+static const double hmslYellow[4] = {1.0, 1.0, 0.0, 1.0};
+static const double hmslOrange[4] = {1.0, 0.4, 0.0, 1.0};
+static const double hmslPurple[4] = {0.2, 0.0, 0.6, 1.0};
+static const double hmslGreen[4] = {0.0, 0.667, 0.0, 1.0};
+static const double hmslDarkGreen[4] = {0.0, 0.4, 0.0, 1.0};
+static const double hmslBrown[4] = {0.4, 0.2, 0.0, 1.0};
+static const double hmslTan[4] = {0.6, 0.4, 0.2, 1.0};
+static const double hmslLightGrey[4] = {0.733, 0.733, 0.733, 1.0};
+static const double hmslMediumGrey[4] = {0.533, 0.533, 0.533, 1.0};
+static const double hmslDarkGrey[4] = {0.267, 0.267, 0.267, 1.0};
 
 static const double* hmslColors[HMSL_COLORS_SIZE] = {
-  hmslWhite, hmslBlack, hmslRed, hmslGreen, hmslBlue, hmslCyan, hmslMagenta, hmslYellow
+  hmslWhite, hmslBlack, hmslOrange, hmslRed, hmslMagenta, hmslPurple,
+  hmslBlue, hmslCyan, hmslGreen, hmslDarkGreen, hmslBrown, hmslTan,
+  hmslLightGrey, hmslMediumGrey, hmslDarkGrey, hmslBlack
 };
 
 #endif
