@@ -29,10 +29,10 @@ static const double hmslGreen[4] = {0.0, 1.0, 0.0, 1.0};
 static const double hmslBlue[4] = {0.0, 0.0, 1.0, 1.0};
 static const double hmslCyan[4] = {0.0, 1.0, 1.0, 1.0};
 static const double hmslMagenta[4] = {1.0, 0.0, 1.0, 1.0};
-static const double hmslYellow[4] = {1.0, 1.0, 1.0, 1.0}; // now black so that xor works
+static const double hmslYellow[4] = {1.0, 1.0, 0.0, 1.0};
 
 static const double* hmslColors[HMSL_COLORS_SIZE] = {
-  hmslWhite, hmslBlack, hmslRed, hmslGreen, hmslBlue, hmslCyan, hmslMagenta, hmslYellow
+  hmslWhite, hmslBlack, hmslRed, hmslGreen, hmslBlue, hmslCyan, hmslMagenta, hmslWhite
 };
 
 #endif
