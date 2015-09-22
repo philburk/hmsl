@@ -12,8 +12,7 @@
 @implementation HMSLWindowDelegate
 
 -(void)windowWillClose:(NSNotification *)notification {
-  gHMSLContext.events[gHMSLContext.events_write_loc] = EV_CLOSE_WINDOW;
-  gHMSLContext.events_write_loc += 1;
+  hmslAddEvent(EV_CLOSE_WINDOW);
 }
 
 @end
