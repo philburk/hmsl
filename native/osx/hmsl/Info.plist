@@ -33,6 +33,6 @@
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
-	<string>HMSLAppliction</string>
+	<string>HMSLApplication</string>
 </dict>
 </plist>
