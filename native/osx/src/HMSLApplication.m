@@ -7,8 +7,12 @@
 //
 
 #import "HMSLApplication.h"
+#import "HMSLWindow.h"
 
 @implementation HMSLApplication
+
+@synthesize font = _font;
+@synthesize fontAttributes = _fontAttributes;
 
 -(void)flushAllWindowDrawing {
   [self makeWindowsPerform:@selector(flushCurrentContext)

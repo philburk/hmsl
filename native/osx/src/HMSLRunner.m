@@ -21,7 +21,7 @@
   char IfInit = FALSE;
   int Result;
   Result = pfDoForth( DicName, SourceName, IfInit);
-  ((HMSLApplication*)NSApp).result = Result;
+  APP.result = Result;
   [NSApp terminate:self];
   [NSThread exit];
 }

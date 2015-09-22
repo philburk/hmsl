@@ -9,11 +9,10 @@
 #import "HMSLWindow.h"
 #import "HMSLView.h"
 #import "HMSLWindowDelegate.h"
+#import "HMSLApplication.h"
 
 @implementation HMSLWindow
 
-@synthesize font = _font;
-@synthesize fontAttributes = _fontAttributes;
 @synthesize graphicsContext = _graphicsContext;
 
 + (NSMutableDictionary*)windowDictionary {
@@ -36,12 +35,6 @@
   hmslWindow.delegate = [[HMSLWindowDelegate alloc] init];
   [hmslWindow cascadeTopLeftFromPoint:NSZeroPoint];
   [hmslWindow makeKeyAndOrderFront:self];
-
-  // Initialize the font-related instance variables
-  hmslWindow.font = [NSFont fontWithName:@"ChicagoFLF" size:(CGFloat)30.0];
-  hmslWindow.fontAttributes = [NSMutableDictionary
-                               dictionaryWithObjects:@[hmslWindow.font, [NSColor whiteColor], [NSColor blackColor]]
-                               forKeys:@[NSFontAttributeName, NSBackgroundColorAttributeName, NSForegroundColorAttributeName]];
 
   [[HMSLWindow windowDictionary] setObject:hmslWindow forKey:[NSNumber numberWithInteger:hmslWindow.windowNumber]];
   
@@ -77,7 +70,7 @@
 }
 
 - (void) drawText: (NSString*) text atPoint: (NSPoint) point {
-  [text drawAtPoint:point withAttributes:self.fontAttributes];
+  [text drawAtPoint:point withAttributes:APP.fontAttributes];
 }
 
 - (void)keyDown:(NSEvent *)event {

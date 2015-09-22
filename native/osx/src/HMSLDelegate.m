@@ -21,6 +21,12 @@
   NSThread *hmsl = [[NSThread alloc] initWithTarget:hmslRunner selector:@selector(goForth) object:nil];
   [hmsl start];
   [NSTimer scheduledTimerWithTimeInterval:0.04 target:NSApp selector:@selector(flushAllWindowDrawing) userInfo:nil repeats:YES];
+  
+  // Initialize the font-related instance variables
+  APP.font = [NSFont fontWithName:@"ChicagoFLF" size:(CGFloat)30.0];
+  APP.fontAttributes = [NSMutableDictionary
+                        dictionaryWithObjects:@[APP.font, [NSColor whiteColor], [NSColor blackColor]]
+                        forKeys:@[NSFontAttributeName, NSBackgroundColorAttributeName, NSForegroundColorAttributeName]];
 }
 
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)theApplication {
