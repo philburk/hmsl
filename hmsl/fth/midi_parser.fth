@@ -33,6 +33,7 @@
 \ MOD: PLB 10/6/90 Add timeout to MP.EAT.SYSEX
 \ MOD: PLB 10/22/91 Add MIDI.PARSE.CURRENT, check for stack errors
 \ 00001 PLB 2/16/92 Remove annoying message from MP.EAT.SYSEX
+\ 00002 PLB 10/5/2015 Fix endian issue in MP-#BYTES
 
 decimal
 
@@ -49,12 +50,14 @@ ANEW TASK-MIDI_PARSER.FTH
 \ 8 regular, 16 for system, 1 for special ON-VECTOR
 CREATE MP-VECTORS 8 16 + 1+ MIDI_NUM_PORTS * cells allot
 
-HEX    ( set # data bytes per message type )
+( set # data bytes per message type )
 CREATE MP-#BYTES
-    02020202 , 01010200 ,  ( for channel mesages )
-    01010201 , 00000000 ,  ( System Common F0 -> F7 )
-    00000000 , 00000000 ,  ( System Real Time F8 -> FF )
-DECIMAL
+    2 c, 2 c, 2 c, 2 c,  ( for channel mesages )
+    1 c, 1 c, 2 c, 0 c,
+    1 c, 1 c, 2 c, 1 c,
+    0 c, 0 c, 0 c, 0 c,  ( System Common F0 -> F7 )
+    0 c, 0 c, 0 c, 0 c,
+    0 c, 0 c, 0 c, 0 c,  ( System Real Time F8 -> FF )
     
 \ Names for vectors
 midi_num_ports 1 > [IF]  \ fancy version for multiple ports.
