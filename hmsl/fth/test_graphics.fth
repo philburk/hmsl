@@ -29,14 +29,16 @@ if.forgotten tgr.term
 
 : random.rects
 	1000 0 DO
-		NUM_COLORS choose gr.color!
+		NUM_COLORS choose dup . cr gr.color!
 		4 0 DO 100 choose LOOP
+        .s cr
 		gr.rect
 	LOOP
 ;
 
 : TGR.SHOW.COLORS { x0 y0 numColors -- }
-    numColors 0 do 
+    numColors 0 do
+        i . cr
         i gr.color!
         i 10 * x0 +
         y0
