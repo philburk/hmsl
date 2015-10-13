@@ -31,10 +31,6 @@
 ANEW TASK-FILE_XFER
 decimal
 
-.NEED IF-DEBUG
-variable IF-DEBUG
-.THEN
-
 128 constant MFX_BLOCK_SIZE
 
 create MFX-BUFFER  mfx_block_size 4 + allot
@@ -280,7 +276,7 @@ variable MFX-DELAY-MS
 
 : MFX.RECV.NOTE  ( note velocity -- )
 	if-debug @
-	IF ." * " 2dup swap .hex .hex cr?
+	IF ." NOTE* " 2dup swap .hex .hex cr?
 	THEN
     mfx-size @ 0=
 	IF \ we are waiting for a size
@@ -338,4 +334,4 @@ variable MFX-DELAY-MS
 
 : MRFS ( -- , receive multiple files )
     recv.files
-;
+;
