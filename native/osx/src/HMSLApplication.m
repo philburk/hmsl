@@ -13,10 +13,18 @@
 
 @synthesize font = _font;
 @synthesize fontAttributes = _fontAttributes;
+@synthesize windowDictionary = _windowDictionary;
 
 -(void)flushAllWindowDrawing {
   [self makeWindowsPerform:@selector(flushCurrentContext)
                    inOrder:YES];
+}
+
+-(void)dealloc {
+  [_font release];
+  [_fontAttributes release];
+  [_windowDictionary release];
+  [super dealloc];
 }
 
 @synthesize result;

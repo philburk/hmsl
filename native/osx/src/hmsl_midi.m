@@ -16,7 +16,7 @@
 
 MIDIEndpointRef hmslMIDISource;
 MIDIEndpointRef hmslMIDIDestination;
-MIDIPortRef hmslMIDIOutputPort;
+MIDIPortRef hmslMIDIOutputPort, hmslMIDIInputPort;
 MIDIClientRef hmslMIDIClient;
 UInt64 hmslStartTime;
 UInt64 hmslCurrentTime;
@@ -25,6 +25,17 @@ MIDIPacket *hmslLastPacket;
 
 // Holds the list of MIDI commands that have yet to be executed
 NSMutableArray *hmslMIDIBuffer;
+
+
+NSString *getMIDIName(MIDIObjectRef object)
+{
+  // Returns the name of a given MIDIObjectRef as an NSString
+  CFStringRef name = nil;
+  if (noErr != MIDIObjectGetStringProperty(object, kMIDIPropertyDisplayName, &name))
+    return nil;
+  return (NSString *)name;
+}
+
 
 // Callback function for the HMSL input port. +midiSourceProc+ is called
 // whenever HMSL receives MIDI data from an outside source.
@@ -50,7 +61,7 @@ int hostMIDI_Init() {
   hmslMIDIBuffer = [NSMutableArray arrayWithCapacity:PACKETLIST_SIZE];
   
   hmslStartTime = mach_absolute_time();
-  hmslCurrentMIDIData = (MIDIPacketList*)calloc(PACKETLIST_SIZE, sizeof(Byte));
+  hmslCurrentMIDIData = (MIDIPacketList*)malloc(PACKETLIST_SIZE);
   hmslLastPacket = MIDIPacketListInit(hmslCurrentMIDIData);
   
   //  NSLog(@"HMSL MIDI Init at %llu", hmslStartTime);
@@ -60,7 +71,27 @@ int hostMIDI_Init() {
   MIDISourceCreate(hmslMIDIClient, CFSTR("HMSL MIDI Source"), &hmslMIDISource);
   MIDIDestinationCreate(hmslMIDIClient, CFSTR("HMSL MIDI Destination"),
                         (MIDIReadProc)&midiSourceProc, NULL, &hmslMIDIDestination);
+  
+  MIDIInputPortCreate(hmslMIDIClient, CFSTR("HMSL MIDI Port Input"),
+                      (MIDIReadProc)&midiSourceProc, NULL, &hmslMIDIInputPort);
+  
+  ItemCount numSources = MIDIGetNumberOfSources();
+  for (ItemCount i = 0; i < numSources; i++) {
+    MIDIEndpointRef systemSource = MIDIGetSource(i);
+    NSLog(@" Source: %@", getMIDIName((MIDIObjectRef)systemSource));
+    MIDIPortConnectSource(hmslMIDIInputPort, systemSource, NULL);
+  }
+  /*
   MIDIOutputPortCreate(hmslMIDIClient, CFSTR("HMSL MIDI Port Output"), &hmslMIDIOutputPort);
+
+  ItemCount numSources = MIDIGetNumberOfSources();
+  NSLog(@"Found %lu sources", numSources);
+  NSLog(@"Found %lu destinations", MIDIGetNumberOfDestinations());
+  for (ItemCount i = 0; i < numSources; i++) {
+    MIDIEndpointRef systemSource = MIDIGetSource(i);
+    MIDIPortConnectSource(hmslMIDIInputPort, systemSource, NULL);
+  } 
+  */
   
   return 0;
 }

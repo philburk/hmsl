@@ -13,15 +13,11 @@
 
 @implementation HMSLWindow
 
-@synthesize graphicsContext = _graphicsContext;
-
 + (NSMutableDictionary*)windowDictionary {
-  static NSMutableDictionary *_windowDictionary = nil;
-  if (_windowDictionary == nil) {
-    _windowDictionary = [NSMutableDictionary dictionaryWithCapacity:32];
-  }
-  return _windowDictionary;
+  return APP.windowDictionary;
 }
+
+@synthesize graphicsContext = _graphicsContext;
 
 + (HMSLWindow*)hmslWindowWithTitle:(NSString *)title frame:(NSRect)frame {
   HMSLWindow* hmslWindow = [[HMSLWindow alloc]
@@ -31,7 +27,12 @@
                             defer: YES];
   
   hmslWindow.title = [title retain];
-  hmslWindow.contentView = [[HMSLView alloc] init];
+  
+  NSRect viewFrame = frame;
+  viewFrame.origin.y += 30;
+//  [hmslWindow.contentView addSubview:[[HMSLView alloc] initWithFrame:viewFrame]];
+//  [hmslWindow.contentView addSubview:[[HMSLView alloc] initWithFrame:frame] positioned:NSWindowAbove relativeTo:];
+  [hmslWindow setContentView:[[HMSLView alloc] initWithFrame:frame]];
   hmslWindow.delegate = [[HMSLWindowDelegate alloc] init];
   [hmslWindow cascadeTopLeftFromPoint:NSZeroPoint];
   [hmslWindow makeKeyAndOrderFront:self];
@@ -44,6 +45,9 @@
 - (void)close {
   [[HMSLWindow windowDictionary]
    removeObjectForKey:[NSNumber numberWithInteger:self.windowNumber]];
+  [self.contentView autorelease];
+  [self.delegate autorelease];
+  [self.title autorelease];
   [super close];
 }
 
@@ -84,6 +88,11 @@
 - (void)hmslBackgroundColor:(const double*)rgba {
   NSColor *bgColor = [NSColor colorWithRed: rgba[0] green:rgba[1] blue:rgba[2] alpha:rgba[3]];
   [self setBackgroundColor:bgColor];
+}
+
+- (void)dealloc {
+  [_graphicsContext release];
+  [super dealloc];
 }
 
 @end

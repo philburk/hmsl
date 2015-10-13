@@ -22,7 +22,7 @@ void hostTerm( void ) {
 }
 
 uint32_t hostOpenWindow( hmslWindow *window ) {
-  char *title = malloc(80);
+  char title[80];
   ForthStringToC(title, (const char*)window->title, 80);
   uint32_t windowIndex = hmslOpenWindow(title, window->rect_left, window->rect_bottom, window->rect_right - window->rect_left, window->rect_bottom - window->rect_top);
   return windowIndex;
@@ -175,6 +175,7 @@ void hostGetMouse( uint32_t x, uint32_t y) {
  */
 int32_t hostGetEvent( int32_t timeout ) {
   if (gHMSLContext.events_read_loc < gHMSLContext.events_write_loc) {
+    // Case statement should set global variables for mouseEvent, keyPress, etc.
     return hmslGetEvent();
   } else {
     return EV_NULL;

@@ -117,6 +117,7 @@ uint32_t hmslGetTextLength( const char* string, int32_t size ) {
   return textLength;
 }
 
+// string parameter is not a Forth string
 void hmslDrawText( const char* string, int32_t size, HMSLPoint loc ) {
   
   @autoreleasepool {
@@ -138,19 +139,20 @@ void hmslDrawText( const char* string, int32_t size, HMSLPoint loc ) {
 // Borrows the input string
 char* nullTermString( const char* string, int32_t size ) {
   char *out = malloc(size+1);
-  ForthStringToC(out, string-1, size+1);
+  memcpy(out, string, size);
+  out[size] = '\0';
   return out;
 }
 
 
 void hmslAddEvent( enum HMSLEventID event_type ) {
-  gHMSLContext.events[gHMSLContext.events_write_loc & EVENT_BUFFER_SIZE] = event_type;
+  gHMSLContext.events[gHMSLContext.events_write_loc & EVENT_BUFFER_MASK] = event_type;
   gHMSLContext.events_write_loc += 1;
   return;
 }
 
 enum HMSLEventID hmslGetEvent( void ) {
-  enum HMSLEventID val = gHMSLContext.events[gHMSLContext.events_read_loc & EVENT_BUFFER_SIZE];
+  enum HMSLEventID val = gHMSLContext.events[gHMSLContext.events_read_loc & EVENT_BUFFER_MASK];
   gHMSLContext.events_read_loc += 1;
   return val;
 }

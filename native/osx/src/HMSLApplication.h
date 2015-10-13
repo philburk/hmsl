@@ -14,6 +14,7 @@
   int result;
   NSFont *_font;
   NSMutableDictionary *_fontAttributes;
+  NSMutableDictionary *_windowDictionary;
 }
 
 -(void)flushAllWindowDrawing;
@@ -21,5 +22,6 @@
 @property int result;
 @property (retain) NSFont *font;
 @property (retain) NSMutableDictionary *fontAttributes;
+@property (retain) NSMutableDictionary *windowDictionary;
 
 @end

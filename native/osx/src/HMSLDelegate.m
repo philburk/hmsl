@@ -27,6 +27,7 @@
   APP.fontAttributes = [NSMutableDictionary
                         dictionaryWithObjects:@[APP.font, [NSColor whiteColor], [NSColor blackColor]]
                         forKeys:@[NSFontAttributeName, NSBackgroundColorAttributeName, NSForegroundColorAttributeName]];
+  APP.windowDictionary = [NSMutableDictionary dictionaryWithCapacity:32];
 }
 
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)theApplication {
