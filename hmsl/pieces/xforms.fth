@@ -31,13 +31,15 @@ OB.PRODUCTION PRODUCTION-5
 
 13 constant PRESET_TRACK_1  \ bass or tuned drum
 74 constant PRESET_TRACK_2  \ flute
+
 \ 41 constant PRESET_TRACK_3  \ violin
+\ 43 constant PRESET_TRACK_3  \ cello
 25 constant PRESET_TRACK_3  \ guitar
 
 \ Play theme on drum or bass. ---------------------------------
 VARIABLE XF-MEASURE   ( length of a measure )
 
-320 ticks/beat !
+rtc.rate@ 3 * 5 / ticks/beat !
 ticks/beat @ 2/ constant DUR_BASIC
 
 : XF.BUILD.THEME   ( -- theme in sh-theme )
@@ -292,4 +294,4 @@ ticks/beat @ 2/ constant DUR_BASIC
 	rand-seed !
 	xforms
 ;
-cr ." Enter:  XFORMS     or    seed XF.RAND" cr
+cr ." Enter:  XFORMS     or    seed XF.RAND" cr

@@ -15,8 +15,13 @@
 
 ANEW TASK-SPLORP
 
-CREATE SPLORP-PRESETS
-    1 c, 41 c, 57 c, 13 c, 66 c, 31 c,
+CREATE SPLORP-PRESETS \ General MIDI
+    1 c, \ piano
+   41 c, \ violin
+   57 c, \ trumpet
+   13 c, \ marimba
+   66 c, \ alto sax
+   31 c, \ distortion guitar
     
 \ Define allowable intervals in order of
 \ increasing dissonance -->
@@ -383,4 +388,4 @@ OB.CHECK.GRID  SP-CHECK
 
 if.forgotten splorp.term
 ." Enter:  SPLORP" CR
-
+

@@ -1143,10 +1143,12 @@ OB.COUNTER SE-SHSELCG
     build.escr
 \
     32 3 new: shape-1
-    100 10 choose 10 + 100 add: shape-1
-    100 10 choose 10 +  90 add: shape-1
-    100 10 choose 10 +  90 add: shape-1
-    100 10 choose 10 +  90 add: shape-1
+    rtc.rate@ 3 /    \ duration
+    dup 10 choose 10 + 100 add: shape-1
+    dup 10 choose 10 +  90 add: shape-1
+    dup 10 choose 10 +  90 add: shape-1
+    dup 10 choose 10 +  90 add: shape-1
+    drop
     shape-1 se.set.shape
 \
     se-screen default-screen !
