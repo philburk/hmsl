@@ -4,7 +4,7 @@
 \ Author: Phil Burk
 \ Copyright 1986 -  Phil Burk, Larry Polansky, David Rosenboom.
 \
-anew task-load_hmsl.fth
+\ anew task-load_hmsl.fth
 
 : '  ( <name> -- cfa , warn me if used the wrong way )
 	state @
@@ -77,17 +77,17 @@ include? task-memalloc.fth      fth/memalloc.fth
 
 
 include? task-global_data.fth	fth/global_data.fth
-include? task-service_tasks.fth fth/service_tasks.fth
+include? task-service_tasks fth/service_tasks.fth
 
 \ MIDI and Time support-------------------------------
 if-load-midi @ [IF]
-  include? task-midi_globals	fth/midi_globals.fth
-  include? task-time.fth	    fth/time.fth
-  include? task-midi.fth		fth/midi.fth
+  include? task-midi_globals.fth fth/midi_globals.fth
+  include? task-time	        fth/time.fth
+  include? task-midi		    fth/midi.fth
   include? task-midi_parser.fth	fth/midi_parser.fth
-  include? task-midi_text.fth	fth/midi_text.fth
+  include? task-midi_text	    fth/midi_text.fth
 [ELSE]
-  include? task-midi_stubs.fth	fth/midi_stubs.fth
+  include? task-midi_stubs      fth/midi_stubs.fth
 [THEN]
 
 \
