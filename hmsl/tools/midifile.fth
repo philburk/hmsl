@@ -250,15 +250,6 @@ variable MF-DIVISION \ packed division
     $mf.open (mf.dofile)
 ;
 
-: FILEWORD  ( -- addr , parse name with quote delimiters)
-    bl lword
-    dup 1+ c@ ascii " =  ( is first char a " )
-    IF ( -- addr , reset >in and reparse )
-        c@ negate >in +!
-        ascii " lword
-    THEN
-;
-
 : MF.DOFILE ( <filename> -- )
     fileword $mf.dofile
 ;
