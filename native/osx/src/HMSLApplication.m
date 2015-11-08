@@ -16,8 +16,11 @@
 @synthesize windowDictionary = _windowDictionary;
 
 -(void)flushAllWindowDrawing {
-  [self makeWindowsPerform:@selector(flushCurrentContext)
-                   inOrder:YES];
+  NSEnumerator *windows = [self.windowDictionary objectEnumerator];
+  HMSLWindow *window;
+  while ((window = [windows nextObject])) {
+    [window flushCurrentContext];
+  }
 }
 
 -(void)dealloc {
