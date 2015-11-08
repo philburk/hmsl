@@ -34,6 +34,8 @@ Description of folders:
 
 ## OSX: Compilation and installation
 
+### Compiling the pforth dictionary
+
 * Clone [pforth-xcode](https://www.github.com/kristopherjohnson/pforth-xcode)
     into the same directory into which you cloned hmsl.
 * Open xcode project in `hmsl/native/osx`
@@ -46,4 +48,10 @@ Description of folders:
 * In `hmsl/hsml`, run command `./HMSL-OSX fth/make_hmsl.fth`
 * Press `n` to avoid starting HMSL this first time (it won't work anyway)
 * Run `./HMSL-OSX` to start HMSL! (and this time press `y`)
+
+### Packaging as a .app package
+
+* Open xcode project in `hmsl/native/osx`.
+* Select target `hmsl` from the target selection menu.
+* Select Product > Build from the menu bar.
 
