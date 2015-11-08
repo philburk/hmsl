@@ -12,7 +12,7 @@
   BOOL isRunning;
 }
 
--(void)goForth;
+-(void)goForth:(NSArray*)arguments;
 
 @property BOOL isRunning;
 

@@ -18,8 +18,7 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)notification {
   HMSLRunner *hmslRunner = [[HMSLRunner alloc] init];
-  NSThread *hmsl = [[NSThread alloc] initWithTarget:hmslRunner selector:@selector(goForth) object:nil];
-  [hmsl start];
+  [NSThread detachNewThreadSelector:@selector(goForth:) toTarget:hmslRunner withObject:[[NSProcessInfo processInfo] arguments]];
   [NSTimer scheduledTimerWithTimeInterval:0.04 target:NSApp selector:@selector(flushAllWindowDrawing) userInfo:nil repeats:YES];
   
   // Initialize the font-related instance variables
