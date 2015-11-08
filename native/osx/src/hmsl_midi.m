@@ -78,7 +78,7 @@ int hostMIDI_Init() {
   ItemCount numSources = MIDIGetNumberOfSources();
   for (ItemCount i = 0; i < numSources; i++) {
     MIDIEndpointRef systemSource = MIDIGetSource(i);
-    NSLog(@" Source: %@", getMIDIName((MIDIObjectRef)systemSource));
+    // NSLog(@" Source: %@", getMIDIName((MIDIObjectRef)systemSource));
     MIDIPortConnectSource(hmslMIDIInputPort, systemSource, NULL);
   }
   /*
