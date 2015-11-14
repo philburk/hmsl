@@ -9,32 +9,13 @@ anew task-stubs.fth
 variable host-debug
 host-debug on
 
-\ Unimplemented Host specific words
-: hostSetClockRate() ( ticks/second -- )
-	host-debug @ IF ." hostSetClockRate()" cr THEN
-	DROP
-;
-: hostAdvanceTime() ( ticks -- )
-	host-debug @ IF ." hostAdvanceTime()" cr THEN
-	DROP
-;
-
 : hostStartClock() ( -- )
-	host-debug @ IF ." hostStartClock()" cr THEN
+	host-debug @ IF ." hostStartClock() is a noop" cr THEN
 ;
 : hostStopClock() ( -- )
-	host-debug @ IF ." hostStopClock()" cr THEN
+	host-debug @ IF ." hostStopClock() is a noop" cr THEN
 ;
-: hostClockInit() ( -- )
-	host-debug @ IF ." hostClockInit()" cr THEN
-;
-: hostClockTerm() ( -- )
-	host-debug @ IF ." hostClockTerm()" cr THEN
-;
-: hostSetTime() ( ticks -- )
-	host-debug @ IF ." hostSetTime()" cr THEN
-	DROP
-;
+
 
 \ init and term chain starts here -----------------------
 
