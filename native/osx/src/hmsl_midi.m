@@ -18,13 +18,72 @@ MIDIEndpointRef hmslMIDISource;
 MIDIEndpointRef hmslMIDIDestination;
 MIDIPortRef hmslMIDIOutputPort, hmslMIDIInputPort;
 MIDIClientRef hmslMIDIClient;
-UInt64 hmslStartTime;
-UInt64 hmslCurrentTime;
 MIDIPacketList *hmslCurrentMIDIData;
 MIDIPacket *hmslLastPacket;
 
 // Holds the list of MIDI commands that have yet to be executed
 NSMutableArray *hmslMIDIBuffer;
+
+#define NANOS_PER_SECOND 1000000000
+static UInt64 sHmslStartTime;
+static UInt32 sHmslTickOffset;
+static UInt32 sHmslTicksPerSecond;
+
+
+void hostClock_Init( void ) {
+    hostClock_SetTime(0);
+    sHmslTicksPerSecond = 60;
+}
+
+void hostClock_Term( void ) {
+}
+
+static UInt64 hostClock_GetNanoseconds(void) {
+    UInt64        absolute = mach_absolute_time();
+    // Have to do some pointer fun because AbsoluteToNanoseconds
+    // works in terms of UnsignedWide, which is a structure rather
+    // than a proper 64-bit integer.
+    Nanoseconds     nanoseconds = AbsoluteToNanoseconds( *(AbsoluteTime *) &absolute );
+    return * (UInt64 *) &nanoseconds;
+}
+
+static int hostClock_NanosecondsToTicks( UInt64 nanoseconds ) {
+    //  Convert from nanos for HMSL clock ticks
+    UInt32 elapsed = (UInt32) (sHmslTicksPerSecond * (nanoseconds - sHmslStartTime) / NANOS_PER_SECOND);
+    //  NSLog(@"Elapsed time: %u ms", elapsed);
+    return elapsed + sHmslTickOffset;
+}
+
+
+static UInt64 hostClock_TicksToNanoseconds( int ticks ) {
+    UInt32 elapsed = ticks - sHmslTickOffset;
+    UInt64 elapsedNanos = (elapsed * (UInt64) NANOS_PER_SECOND) / sHmslTicksPerSecond;
+    return elapsedNanos + sHmslStartTime;
+}
+
+int hostClock_QueryTime( void ) {
+    UInt64 currentTime = hostClock_GetNanoseconds();
+    return hostClock_NanosecondsToTicks(currentTime);
+}
+
+void hostClock_SetTime( int time ) {
+    sHmslStartTime = hostClock_GetNanoseconds();
+    sHmslTickOffset = time;
+}
+
+void hostClock_AdvanceTime( int delta ) {
+    sHmslTickOffset += delta;
+}
+
+int hostClock_QueryRate( void ) {
+    return sHmslTicksPerSecond;
+}
+
+void hostClock_SetRate( int rate ) {
+    int currentTicks = hostClock_QueryTime();
+    sHmslTicksPerSecond = rate;
+    hostClock_SetTime(currentTicks);
+}
 
 
 NSString *getMIDIName(MIDIObjectRef object)
@@ -58,9 +117,10 @@ void midiSourceProc(MIDIPacketList *pktlist, void *readProcRefCon, void *srcConn
 //
 // Returns error code (0 for no error)
 int hostMIDI_Init() {
+  hostClock_Init();
+
   hmslMIDIBuffer = [NSMutableArray arrayWithCapacity:PACKETLIST_SIZE];
   
-  hmslStartTime = mach_absolute_time();
   hmslCurrentMIDIData = (MIDIPacketList*)malloc(PACKETLIST_SIZE);
   hmslLastPacket = MIDIPacketListInit(hmslCurrentMIDIData);
   
@@ -120,7 +180,11 @@ int hostMIDI_Write( unsigned char *addr, int count, int vtime ) {
   ByteCount message_count = (ByteCount)count;
   Byte *data = (Byte*)addr;
   
-  timestamp = hmslStartTime + AudioConvertNanosToHostTime((UInt64)((UInt64)(vtime) * 1000000));
+    // MIDITimeStamps are based on from mach_absolute_time()
+    UInt64 nanoseconds64 = hostClock_TicksToNanoseconds(vtime);
+    Nanoseconds nanoseconds = * (Nanoseconds *) &nanoseconds64;
+    AbsoluteTime absolute = NanosecondsToAbsolute( nanoseconds );
+    timestamp = * (MIDITimeStamp *) &absolute;
   
   MIDIPacketList *packetList = (MIDIPacketList*)calloc(PACKETLIST_SIZE, 1);
   MIDIPacket *first_packet = MIDIPacketListInit(packetList);
@@ -170,19 +234,6 @@ int hostMIDI_Recv( void ) {
   } else {
     return -1;
   }
-}
-
-int hostClock_QueryTime( void ) {
-  int elapsed;
-  hmslCurrentTime = mach_absolute_time();
-  //  Convert from nanos to millis for HMSL
-  elapsed = (int)(AudioConvertHostTimeToNanos(hmslCurrentTime - hmslStartTime) / 1000000);
-  //  NSLog(@"Elapsed time: %u ms", elapsed);
-  return elapsed;
-}
-
-int hostClock_QueryRate( void ) {
-  return 1000;
 }
 
 void hostSleep( int msec ) {

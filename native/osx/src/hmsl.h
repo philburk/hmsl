@@ -150,13 +150,19 @@ void hmslSetTextSize( int32_t );
  * hmsl_midi.m
  */
 
+void hostClock_Init( void );
+void hostClock_Term( void );
+int hostClock_QueryTime( void );
+void hostClock_SetTime( int time );
+void hostClock_AdvanceTime( int delta );
+int hostClock_QueryRate( void );
+void hostClock_SetRate( int rate );
+
 void midiSourceProc(MIDIPacketList *pktlist, void *readProcRefCon, void *srcConnRefCon);
 int hostMIDI_Init();
 void hostMIDI_Term( void );
 int hostMIDI_Write( unsigned char *addr, int count, int vtime );
 int hostMIDI_Recv( void );
-int hostClock_QueryTime( void );
-int hostClock_QueryRate( void );
 void hostSleep( int msec );
 
 int getMainScreenRefreshRate( void );

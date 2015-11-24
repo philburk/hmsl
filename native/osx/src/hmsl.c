@@ -41,6 +41,8 @@
  ** Step 2: Fill out this table of function pointers.
  **     Do not change the name of this table! It is used by the
  **     PForth kernel.
+ **     Order in CustomFunctionTable must match order in
+ **     CompileCustomFunctions.
  ****************************************************************/
 void * CustomFunctionTable[] =
 {
@@ -61,14 +63,18 @@ void * CustomFunctionTable[] =
   (void *) hostSetTextSize,
   (void *) hostGetMouse,
   (void *) hostGetEvent,
-  
   (void *) hostMIDI_Init,
   (void *) hostMIDI_Term,
   (void *) hostMIDI_Write,
   (void *) hostMIDI_Recv,
-  (void *) hostClock_QueryTime,
-  (void *) hostClock_QueryRate,
-  (void *) hostSleep
+    (void *) hostSleep,
+    (void *) hostClock_Init,
+    (void *) hostClock_Term,
+    (void *) hostClock_QueryTime,
+    (void *) hostClock_SetTime,
+    (void *) hostClock_AdvanceTime,
+    (void *) hostClock_QueryRate,
+    (void *) hostClock_SetRate,
 };
 
 /****************************************************************
@@ -105,12 +111,17 @@ Err CompileCustomFunctions( void )
   CreateGlueToC( "HOSTMIDI_TERM()", i++, C_RETURNS_VOID, 0 );
   CreateGlueToC( "HOSTMIDI_WRITE()", i++, C_RETURNS_VOID, 3 );
   CreateGlueToC( "HOSTMIDI_RECV()", i++, C_RETURNS_VALUE, 0 );
-  CreateGlueToC( "HOSTQUERYTIME()", i++, C_RETURNS_VALUE, 0 );
-  CreateGlueToC( "HOSTQUERYCLOCKRATE()", i++, C_RETURNS_VALUE, 0 );
-  CreateGlueToC( "HOSTSLEEP()", i++, C_RETURNS_VOID, 1 );
-  
+    CreateGlueToC( "HOSTSLEEP()", i++, C_RETURNS_VOID, 1 );
+    CreateGlueToC( "HOSTCLOCKINIT()", i++, C_RETURNS_VOID, 0 );
+    CreateGlueToC( "HOSTCLOCKTERM()", i++, C_RETURNS_VOID, 0 );
+    CreateGlueToC( "HOSTQUERYTIME()", i++, C_RETURNS_VALUE, 0 );
+    CreateGlueToC( "HOSTSETTIME()", i++, C_RETURNS_VOID, 1 );
+    CreateGlueToC( "HOSTADVANCETIME()", i++, C_RETURNS_VOID, 1 );
+    CreateGlueToC( "HOSTQUERYCLOCKRATE()", i++, C_RETURNS_VALUE, 0 );
+    CreateGlueToC( "HOSTSETCLOCKRATE()", i++, C_RETURNS_VOID, 1 );
+
   TOUCH(i);
-  
+
   return 0;
 }
 #else
