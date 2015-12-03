@@ -190,4 +190,5 @@ variable THIS-SHAPE
 	chord.term
 ;
 
-." Enter:  DEMO.CHORDS    to hear piece!" cr
+
+." Enter:  DEMO.CHORDS    to hear piece!" cr
