@@ -16,21 +16,21 @@
 ANEW TASK-ERRORMSG.FTH
 
 : $. ( $string -- , print it )
-	count type
+    count type
 ;
 
 : UNRAVEL  ( -- , show names on stack )
-	>newline ." Calling sequence:"
+    >newline ." Calling sequence:"
 \    r0 @ rp@ - cell/ 2+
-\	50 min 0
-	20 0
-	DO  4 spaces
-		rp@ i 2+ cell* + @
-		dup code> >name ?dup
-		IF id. drop
-		ELSE .hex
-		THEN cr?
-	LOOP cr
+\   50 min 0
+    20 0
+    DO  4 spaces
+        rp@ i 2+ cell* + @
+        dup code> >name ?dup
+        IF id. drop
+        ELSE .hex
+        THEN cr?
+    LOOP cr
 ;
 
 0 CONSTANT ER_WARNING    ( Declare levels. )
@@ -40,39 +40,39 @@ ANEW TASK-ERRORMSG.FTH
 CREATE ER-TRACEBACK? FALSE ,  ( should we trace back if bombed)
 
 : ER.TRACEBACK
-	er-traceback? @
-	IF ." Calling Sequence: "
-		unravel cr ." Hit any key to continue!" key drop cr
-	THEN
+    er-traceback? @
+    IF ." Calling Sequence: "
+        unravel cr ." Hit any key to continue!" key drop cr
+    THEN
 ;
 
 ( Report location of error and cause, abort if FATAL )
 : ER.SHOW ( $PLACE $MESSAGE $LEVEL -- , SHOW ERROR )
-	cr ." !!! " $. ."  in " swap $.
-	."  - " $. ." !" bell cr
+    cr ." !!! " $. ."  in " swap $.
+    ."  - " $. ." !" bell cr
 ;
 
 : (ER.REPORT) ( $PLACE $MESSAGE LEVEL -- , reports error )
 \     cr ." TIB = " tib.dump cr
 \     ." Hit key to continue." cr key drop
-	>newline
-	CASE
-		ER_WARNING OF " WARNING" er.show
-		ENDOF
-		ER_RETURN OF er.traceback " ERROR" er.show
-		ENDOF
-		ER_FATAL OF er.traceback " ERROR-STOP"
-			er.show abort
-		ENDOF
-		." Unrecognized Error LEVEL = " . CR
-		er.traceback " UNKNOWN" er.show abort
-	ENDCASE
+    >newline
+    CASE
+        ER_WARNING OF " WARNING" er.show
+        ENDOF
+        ER_RETURN OF er.traceback " ERROR" er.show
+        ENDOF
+        ER_FATAL OF er.traceback " ERROR-STOP"
+            er.show abort
+        ENDOF
+        ." Unrecognized Error LEVEL = " . CR
+        er.traceback " UNKNOWN" er.show abort
+    ENDCASE
 ;
 
 defer ER.REPORT
 'c (er.report) is er.report
 
 : TEST.ERROR  " TEST.ERROR" " Something Terrible Happened!"
-	ER_RETURN   ER.REPORT
+    ER_RETURN   ER.REPORT
 ;
 

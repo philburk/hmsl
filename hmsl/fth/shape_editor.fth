@@ -525,8 +525,8 @@ METHOD NOW.PLAYING:     METHOD STOP.PLAYING:
 ;
 
 : SE.GET.VAL.ELM  ( x y -- value elmnt , clipped )
-	se.xy>val.elm
-	se.clip.elm
+    se.xy>val.elm
+    se.clip.elm
 ;
 
 :M EXEC.DOWN: ( -- , perform current edit mode on morph)
@@ -539,37 +539,37 @@ METHOD NOW.PLAYING:     METHOD STOP.PLAYING:
 ;M
 
 :M MOUSE.MOVE: ( x y -- , perform current edit mode on morph)
-	se-mode @ SE_SELECT =
+    se-mode @ SE_SELECT =
     IF
-    	se.xy>val.elm 2dup
+        se.xy>val.elm 2dup
 \ same as before?
         dup iv-edit-last-elm =
         2 pick iv-edit-last-val = AND not
         IF  
-    		se_edit_tnr scg.selnt
-    		se.draw.select
-    		iv-edit-first-elm 2sort
-    		put.select: self
-    		se.draw.select
-    		drop \ don't need value
+            se_edit_tnr scg.selnt
+            se.draw.select
+            iv-edit-first-elm 2sort
+            put.select: self
+            se.draw.select
+            drop \ don't need value
         ELSE 2drop
         THEN
         iv=> iv-edit-last-elm iv=> iv-edit-last-val
         0 scg.selnt
     ELSE
-    	2dup ?hit: self
-    	IF  se.get.val.elm 2dup
+        2dup ?hit: self
+        IF  se.get.val.elm 2dup
 \ same as before?
-        	dup iv-edit-last-elm =
-        	2 pick iv-edit-last-val = AND not
-        	IF  se.exec.move
-        	ELSE 2drop
-        	THEN
-        	iv=> iv-edit-last-elm iv=> iv-edit-last-val
-        	0 scg.selnt
-    	ELSE 2drop
-    	THEN
-	THEN
+            dup iv-edit-last-elm =
+            2 pick iv-edit-last-val = AND not
+            IF  se.exec.move
+            ELSE 2drop
+            THEN
+            iv=> iv-edit-last-elm iv=> iv-edit-last-val
+            0 scg.selnt
+        ELSE 2drop
+        THEN
+    THEN
 ;M
 
 :M MOUSE.UP: ( x y -- , perform current edit mode on morph)
@@ -1044,8 +1044,8 @@ VARIABLE SE-OPER-PAGE   ( contains page of operators )
 ;
 
 : SE.EDIT.SHAPE ( shape -- )
-	se.set.shape
-	draw: se-screen
+    se.set.shape
+    draw: se-screen
 ;
 
 \ Setup -------------------------------------------------------
@@ -1075,15 +1075,15 @@ VARIABLE SE-OPER-PAGE   ( contains page of operators )
 \ Selector -----------------------------------------
 OB.COUNTER SE-SHSELCG
 : SE.CHOOSESH    ( index part -- , Make selected shape current.)
-	swap  ( get index )
-	dup many: shape-holder <
-	IF  get: shape-holder   se.setup
-	ELSE drop
-	THEN
+    swap  ( get index )
+    dup many: shape-holder <
+    IF  get: shape-holder   se.setup
+    ELSE drop
+    THEN
 \
 \ redraw entire screen if hit in middle
     dup 1 = swap 2 = or
-    IF 	se.draw.screen
+    IF  se.draw.screen
     THEN
 ;
 
@@ -1130,7 +1130,7 @@ OB.COUNTER SE-SHSELCG
     " SE.INIT" debug.type
     false se-if-zoomed !
 \ Fix up the default player for shape editor
-	free: se-player
+    free: se-player
     init: se-player   ( to ensure proper CFAs on Mac )
     4 new: se-player
 \

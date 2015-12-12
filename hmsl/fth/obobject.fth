@@ -47,24 +47,24 @@ ANEW TASK-OBOBJECT.FTH
 variable DYNOBJ-COUNT
 
 : <###> ( 0-999 -- addr count , make string with leading zeros )
-	s->d <# # # # #>
+    s->d <# # # # #>
 ;
 
 \ Support the dynamic allocation of an object.
 32 constant OBJ_NAME_SIZE
 :STRUCT  OBJ_DYN_HEADER  \ Dynamic Header for Object
-	Struct DoubleList odh_node
-	OBJ_NAME_SIZE bytes odh_name
-	4 bytes odh_object
+    Struct DoubleList odh_node
+    OBJ_NAME_SIZE bytes odh_name
+    4 bytes odh_object
 ;STRUCT
 
 DoubleList OBJ-DYN-LIST  \ list of dynamically alloced objs
 
 : OBJ.OBJ>DH  ( dynamic_object -- dynamic_header )
-	odh_object -
+    odh_object -
 ;
 : OBJ.DH>OBJ  ( dynamic_header -- dynamic_object)
-	odh_object +
+    odh_object +
 ;
 
 : ODH.INIT obj-dyn-list dll.newlist ;
@@ -83,191 +83,191 @@ METHOD GET.NAME:
 METHOD .CLASS:
 
 :CLASS OBJECT   ( root class )
-	IV.RPTR IV-NAME  ( This must always be the first IVAR )
+    IV.RPTR IV-NAME  ( This must always be the first IVAR )
 
 :M INIT:  ( -- , setup object )
-	0 iv=> iv-name
+    0 iv=> iv-name
 ;M
 
 :M TERM: ( -- ) \ 00002
 ;M
 
 :M ADDRESS:  ( -- addr , leave address of object )
-	os.copy
+    os.copy
 ;M
 
 :M SPACE: ( -- NBYTES , size of ivariable space )
-	os.copy  ob.obj->class ( point to base of class )
-	@
+    os.copy  ob.obj->class ( point to base of class )
+    @
 ;M
 
 :M DUMP: ( -- , hex dump ivars )
-	os.copy space: self  dump
+    os.copy space: self  dump
 ;M
 
 :M GET.NAME: ( -- $name , put name of object on pad as string )
-	iv-name ?dup 0=
-	IF address: self pfa->nfa nfa->$
-	ELSE dup c@ 31 >
-		IF nfa->$
-		THEN
-	THEN
+    iv-name ?dup 0=
+    IF address: self pfa->nfa nfa->$
+    ELSE dup c@ 31 >
+        IF nfa->$
+        THEN
+    THEN
 ;M
 
 :M NAME: ( -- , print name of object )
-	get.name: self $.
+    get.name: self $.
 ;M
 
 \ Object Error Reporting -----------------------------------
 : OS.DUMP ( -- , Show objects on OBJECT-STACK )
-	>newline ." Object Stack --------" cr
-	os.depth 0
-	?DO  os.depth i - 1- os.pick
+    >newline ." Object Stack --------" cr
+    os.depth 0
+    ?DO  os.depth i - 1- os.pick
 \ use->rel \ 00004
-		4 spaces name: [] cr
-	LOOP
+        4 spaces name: [] cr
+    LOOP
 ;
 
 : OB.REPORT.ERROR  ( $word $message level -- , report error in object )
-	os.dump
-	dup er_fatal =    IF os.sp! THEN
-	er.report
+    os.dump
+    dup er_fatal =    IF os.sp! THEN
+    er.report
 ;
 
 :M PUT.NAME: ( $name -- , put name of object in object )
-	self in.dict? not  \ is this dynamically instantiated?
-	IF
-		dup c@ OBJ_NAME_SIZE <
-		IF
-			self obj.obj>dh .. odh_name
-			tuck $move  \ set dynamic name
-		THEN
-	THEN
-	iv=> iv-name
+    self in.dict? not  \ is this dynamically instantiated?
+    IF
+        dup c@ OBJ_NAME_SIZE <
+        IF
+            self obj.obj>dh .. odh_name
+            tuck $move  \ set dynamic name
+        THEN
+    THEN
+    iv=> iv-name
 ;M
 
 :M .CLASS: ( -- , print class of object )
-	address: self ob.obj->class
-	pfa->nfa id.
+    address: self ob.obj->class
+    pfa->nfa id.
 ;M
 
 ;CLASS
 
 : OBJ.FIND.DYN  { $name | rel_obj tempobj -- rel_obj true | false }
-	0 -> rel_obj
-	obj-dyn-list dll.first
-	BEGIN
-		dup dll.end? not
-		IF
-			dup obj.dh>obj
+    0 -> rel_obj
+    obj-dyn-list dll.first
+    BEGIN
+        dup dll.end? not
+        IF
+            dup obj.dh>obj
 \ use->rel \ 00004
-			-> tempobj
-			get.name: tempobj $name
-			$equal
-			IF
-				tempobj -> rel_obj true
-			ELSE
-				dll.next false
-			THEN
-		ELSE true
-		THEN
-	UNTIL drop
-	rel_obj ?dup 0= 0=
+            -> tempobj
+            get.name: tempobj $name
+            $equal
+            IF
+                tempobj -> rel_obj true
+            ELSE
+                dll.next false
+            THEN
+        ELSE true
+        THEN
+    UNTIL drop
+    rel_obj ?dup 0= 0=
 ;
 
 : 'O ( <name> -- rel_obj , return relative object )
-	bl word
-	obj.find.dyn 0= abort" Couldn't find dynamic object!"
+    bl word
+    obj.find.dyn 0= abort" Couldn't find dynamic object!"
 ;
 
 : OBJ.LIST.DYN  ( -- )
-	>newline
-	obj-dyn-list dll.first
-	BEGIN
-		dup dll.end? not
-	WHILE
-		dup .. odh_name 4 spaces $type cr?
-		dll.next
-	REPEAT
-	drop
+    >newline
+    obj-dyn-list dll.first
+    BEGIN
+        dup dll.end? not
+    WHILE
+        dup .. odh_name 4 spaces $type cr?
+        dll.next
+    REPEAT
+    drop
 ;
 
 : <?INSTANTIATE> ( pfa_class --  rel_addr_object | 0 , instantiate class )
-	dup ob.check.class
-	dup >r @ ( -- size )
-	odh_object + ( make room for fake name and node)
-	mm.zalloc? ?dup
-	IF
-		dup obj-dyn-list dll.add.head
-		r> ( -- dynheader class )
-		over >r
-		swap .. odh_object swap  \ convert to object address
-		ob.setup ( use return stack to allow passing to INIT: )
+    dup ob.check.class
+    dup >r @ ( -- size )
+    odh_object + ( make room for fake name and node)
+    mm.zalloc? ?dup
+    IF
+        dup obj-dyn-list dll.add.head
+        r> ( -- dynheader class )
+        over >r
+        swap .. odh_object swap  \ convert to object address
+        ob.setup ( use return stack to allow passing to INIT: )
 \
 \ Store unique name in OBJ_NAME_SIZE bytes before object.
-		" DYN" r@ .. odh_name $move
-		dynobj-count @ 1+ dup dynobj-count ! <###>  ( addr count )
-		r@ .. odh_name $append
-		r@ .. odh_name
-		r> obj.dh>obj
+        " DYN" r@ .. odh_name $move
+        dynobj-count @ 1+ dup dynobj-count ! <###>  ( addr count )
+        r@ .. odh_name $append
+        r@ .. odh_name
+        r> obj.dh>obj
 \ use->rel \ 00004
-		tuck put.name: []
-	ELSE
-		rdrop 0
-	THEN
+        tuck put.name: []
+    ELSE
+        rdrop 0
+    THEN
 ;
 
 : <INSTANTIATE> (  pfa_class --  rel_addr_object | ABORT )
-	<?instantiate>
-	dup 0= abort" <INSTANTIATE> - insufficient memory!"
+    <?instantiate>
+    dup 0= abort" <INSTANTIATE> - insufficient memory!"
 ;
 
 : INSTANTIATE ( <class> -- addr_object | abort , instantiate class )
-	bl word find
-	IF ( -- cfa )
-		>body
-		state @
-		IF [compile] aliteral compile <instantiate>
-		ELSE <instantiate>
-		THEN
-	ELSE ( -- name )
-		>newline $type cr
-		" INSTANTIATE" " Class could not be found!"
-		er_fatal er.report
-	THEN
+    bl word find
+    IF ( -- cfa )
+        >body
+        state @
+        IF [compile] aliteral compile <instantiate>
+        ELSE <instantiate>
+        THEN
+    ELSE ( -- name )
+        >newline $type cr
+        " INSTANTIATE" " Class could not be found!"
+        er_fatal er.report
+    THEN
 ; IMMEDIATE
 
 : ?INSTANTIATE ( <class> -- addr_object | 0 , instantiate class )
-	bl word find
-	IF ( -- cfa )
-		>body
-		state @
-		IF [compile] aliteral compile <?instantiate>
-		ELSE <?instantiate>
-		THEN
-	ELSE ( -- name )
-		>newline $type cr
-		" ?INSTANTIATE" " Class could not be found!"
-		er_fatal er.report
-	THEN
+    bl word find
+    IF ( -- cfa )
+        >body
+        state @
+        IF [compile] aliteral compile <?instantiate>
+        ELSE <?instantiate>
+        THEN
+    ELSE ( -- name )
+        >newline $type cr
+        " ?INSTANTIATE" " Class could not be found!"
+        er_fatal er.report
+    THEN
 ; IMMEDIATE
 
 : DEINSTANTIATE ( object -- , Deallocate an object )
-\	rel->use \ 00004
-	dup in.dict?
-	IF
-		drop \ in dictionary, not allocated
-	ELSE
-		dup ob.valid?
-		IF
-			dup term: []  \ give object an opportunity to clean up 00002
-			0 over !  ( clear class pointer to disable object )
-			0 over cell+ ! ( clear object validation key  00003 )
-			obj.obj>dh dup dll.remove mm.free
-		ELSE
-			drop \ maybe already deinstantiated
-		THEN
-	THEN
+\   rel->use \ 00004
+    dup in.dict?
+    IF
+        drop \ in dictionary, not allocated
+    ELSE
+        dup ob.valid?
+        IF
+            dup term: []  \ give object an opportunity to clean up 00002
+            0 over !  ( clear class pointer to disable object )
+            0 over cell+ ! ( clear object validation key  00003 )
+            obj.obj>dh dup dll.remove mm.free
+        ELSE
+            drop \ maybe already deinstantiated
+        THEN
+    THEN
 ;
 
 \ define OB.INT class --------------------------------------
@@ -278,30 +278,30 @@ METHOD PRINT:
 METHOD +:
 
 :CLASS OB.INT <SUPER OBJECT
-	IV.LONG IV-INT-DATA
+    IV.LONG IV-INT-DATA
 
 :M CLEAR: ( -- , set to zero )
-	0 iv=> iv-int-data
+    0 iv=> iv-int-data
 ;M
 
 :M INIT:  ( -- , setup )
-	clear: self
+    clear: self
 ;M
 
 :M GET:  ( -- value , fetch )
-	iv-int-data
+    iv-int-data
 ;M
 
 :M PUT: ( value -- , store )
-	iv=> iv-int-data
+    iv=> iv-int-data
 ;M
 
 :M PRINT: ( -- , show data )
-	cr get: self . cr
+    cr get: self . cr
 ;M
 
 :M +: ( value -- , add to contents )
-	iv+> iv-int-data
+    iv+> iv-int-data
 ;M
 ;CLASS
 

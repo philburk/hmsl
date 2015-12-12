@@ -34,7 +34,7 @@
 \ MOD: PLB 5/21/91 Add MIDI.NORMALIZE
 \ MOD: PLB 8/8/91 Moved Running Status Optimization to lowest level
 \               so that it will work with event buffering.
-\				Make MIDI.LASTOFF use 0 OFF to allow optimization.
+\               Make MIDI.LASTOFF use 0 OFF to allow optimization.
 
 include? msec ju:msec
 include? choose ju:random
@@ -235,13 +235,13 @@ CREATE MIDI-LAST-BENDS 24 ALLOT  ( word wide )
 
 
 : MIDI.START.SYSEX ( -- , send start SYSEX byte )
-	midi.flush
+    midi.flush
     F0 midi.xmit
 ;
 
 : MIDI.END.SYSEX ( -- , stop SYSEX )
     F7 midi.xmit
-	midi.flush
+    midi.flush
 ;
 
 \ System Common Messages - Sent to All Channels.
@@ -291,10 +291,10 @@ CREATE MIDI-LAST-BENDS 24 ALLOT  ( word wide )
 
 \ Unclog Event Buffer by setting time to a high value.
 : MIDI.UNCLOG  ( -- , send all pending messages )
-	rtc.time@
-	-1 -1 shift 5000 - rtc.time!
-	1000 msec
-	rtc.time!
+    rtc.time@
+    -1 -1 shift 5000 - rtc.time!
+    1000 msec
+    rtc.time!
 ;
 
 : MIDI.NOTEON.AT  ( note vel time -- )
@@ -355,7 +355,7 @@ DECIMAL
 ;
 
 : MIDI.PANIC  ( -- , send allof to all 16 channels )
-	midi-channel @
+    midi-channel @
     17 1
     DO i midi.channel! midi.alloff
     LOOP
@@ -363,18 +363,18 @@ DECIMAL
 ;
 
 : MIDI.NORMALIZE  ( -- , reset controllers on all channels )
-	midi-channel @
-	17 1
-	DO
-		i midi.channel!
-		0 midi.pitch.bend  \ zero out pitch bend
-		7 127 midi.control  \ full volume
-		1 0 midi.control  \ modulation wheel off
-		5 0 midi.control  \ portamento time
-		64 0 midi.control \ sustain pedal off
-		65 0 midi.control \ portamento off
-		0 midi.pressure
-	LOOP
+    midi-channel @
+    17 1
+    DO
+        i midi.channel!
+        0 midi.pitch.bend  \ zero out pitch bend
+        7 127 midi.control  \ full volume
+        1 0 midi.control  \ modulation wheel off
+        5 0 midi.control  \ portamento time
+        64 0 midi.control \ sustain pedal off
+        65 0 midi.control \ portamento off
+        0 midi.pressure
+    LOOP
     midi.channel!
 ;
 : MIDI.KILL ( -- , Kill all notes on current channel )
@@ -531,11 +531,11 @@ DECIMAL
 ;
 
 : MIDI.TEST  ( -- , simple test to see if MIDI is alive )
-	>newline ." Sending Middle C on channel 1" cr
-	." Hit <RETURN> to stop." cr
-	rnow
-	1 midi.channel!
-	60 midi.blast
+    >newline ." Sending Middle C on channel 1" cr
+    ." Hit <RETURN> to stop." cr
+    rnow
+    1 midi.channel!
+    60 midi.blast
 ;
 
 ( Simple MIDI piece )

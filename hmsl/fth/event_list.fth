@@ -13,7 +13,7 @@
 \ 00001 PLB 11/20/91 Use EXIT instead of RETURN
 \ 00002 PLB 2/18/92 Add SYS.TASK and SYS.CLEANUP
 \ 00003 PLB 3/12/92 Removed NEXT-EVENT-TIME, used DO LOOP
-\		in DO.NEXT.EVENT to prevent race condition, c/index/indx/
+\       in DO.NEXT.EVENT to prevent race condition, c/index/indx/
 
 ANEW TASK-EVENT_LIST.FTH
 
@@ -22,20 +22,20 @@ OB.SHAPE EVENT-SHAPE
 : DO.NEXT.EVENT  ( -- , execute next event )
     many: event-shape 0
     ?DO \ 00003
-    	0 at: event-shape ( equivalent to 0 0 ed.at: but faster )
-    	doitnow?
-		IF
-        	first: event-shape
+        0 at: event-shape ( equivalent to 0 0 ed.at: but faster )
+        doitnow?
+        IF
+            first: event-shape
 \ remove before EXECUTE in case EXECUTE causes insert
             0 remove: event-shape
-        	-2 exec.stack?
-        	drop \ time
+            -2 exec.stack?
+            drop \ time
             many: event-shape 0=
             IF LEAVE
             THEN
-		ELSE
-			LEAVE
-		THEN
+        ELSE
+            LEAVE
+        THEN
     LOOP
 ;
 
@@ -54,9 +54,9 @@ OB.SHAPE EVENT-SHAPE
 \ insert before next later time
     many: event-shape 0=
     IF
-    	add: event-shape
+        add: event-shape
     ELSE
-    	3 pick  ( get time )
+        3 pick  ( get time )
         evl.search.back
         insert: event-shape
     THEN

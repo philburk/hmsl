@@ -70,13 +70,13 @@ variable SCR-STRETCH-Y
     scr-cg-hit @ get.wh: [] -> h -> w
     scr-stretch-x @
     IF w   scr-last-x2 @ scr-last-x1 @ - *
-    	old_dx 2/ + ( round up )
-    	old_dx  / -> w
+        old_dx 2/ + ( round up )
+        old_dx  / -> w
     THEN
     scr-stretch-y @
     IF h  dup . scr-last-y2 @ scr-last-y1 @ - dup . * dup .
-    	old_dy 2/ +  dup . ( round up )
-    	old_dy  / dup . cr -> h
+        old_dy 2/ +  dup . ( round up )
+        old_dy  / dup . cr -> h
     THEN
     w h scr-cg-hit @ put.wh: []
 ;
@@ -153,7 +153,7 @@ variable SCR-STRETCH-Y
          EV_MOUSE_UP OF scr.mouse.up
              ENDOF
 
-	     EV_MOUSE_MOVE OF scr.mouse.move
+         EV_MOUSE_MOVE OF scr.mouse.move
              ENDOF
 
          EV_CLOSE_WINDOW OF drop true
@@ -177,4 +177,4 @@ variable SCR-STRETCH-Y
     hmsl.close
     dump.source: []
 ;
-
+

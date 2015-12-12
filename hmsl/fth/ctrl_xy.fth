@@ -9,7 +9,7 @@
 \ The UP, DOWN and MOVE functions are passed:
 \    ( x-value y-value -- )
 \ instead of
-\	( value part# -- )
+\   ( value part# -- )
 \
 \ Use PUT.ENABLE: to disable horizontal or vertical motion
 \ to make this into a 1D fader.
@@ -31,13 +31,13 @@ METHOD Y>VALUE:   METHOD VALUE>Y:
 1 constant XY_VERTICAL_PART
 
 :CLASS OB.XY.CONTROLLER <SUPER OB.NUMERIC.GRID
-    iv.short IV-CG-XY-XOFF  		\ offset within knob of click
+    iv.short IV-CG-XY-XOFF          \ offset within knob of click
     iv.short IV-CG-XY-YOFF
-    iv.short IV-CG-XY-KNOB-XSIZE	\ in device coordinates
+    iv.short IV-CG-XY-KNOB-XSIZE    \ in device coordinates
     iv.short IV-CG-XY-KNOB-YSIZE
-    iv.short IV-CG-XY-KNOB-X		\ current X position
-    iv.short IV-CG-XY-KNOB-Y		\ current Y position
-    iv.byte  IV-CG-XY-IN-KNOB?		\ did mouse click in knob?
+    iv.short IV-CG-XY-KNOB-X        \ current X position
+    iv.short IV-CG-XY-KNOB-Y        \ current Y position
+    iv.byte  IV-CG-XY-IN-KNOB?      \ did mouse click in knob?
 
 :M INIT:
     init: super
@@ -60,13 +60,13 @@ METHOD Y>VALUE:   METHOD VALUE>Y:
     ELSE  ( non-zero )
         over 0>  ( world coordinates ? )
         IF
-        	IF  0 swap scg.delta.wc->dc
+            IF  0 swap scg.delta.wc->dc
                iv=> iv-cg-xy-knob-ysize drop
             ELSE 0 scg.delta.wc->dc
                drop iv=> iv-cg-xy-knob-xsize
             THEN
         ELSE
-        	IF  abs iv=> iv-cg-xy-knob-ysize
+            IF  abs iv=> iv-cg-xy-knob-ysize
             ELSE abs iv=> iv-cg-xy-knob-xsize
             THEN
         THEN
@@ -136,9 +136,9 @@ METHOD Y>VALUE:   METHOD VALUE>Y:
 : CG.UNDRAW.KNOB ( -- , undraw from current position )
     iv-cg-xy-knob-xsize
     IF
-		gr.color@
-		0 gr.color!
-    	iv-cg-xy-knob-x
+        gr.color@
+        0 gr.color!
+        iv-cg-xy-knob-x
         iv-cg-xy-knob-y
         over iv-cg-xy-knob-xsize +
         over iv-cg-xy-knob-ysize +
@@ -150,10 +150,10 @@ METHOD Y>VALUE:   METHOD VALUE>Y:
 : CG.DRAW.KNOB  ( -- , draw knob of xy controller )
     iv-cg-xy-knob-xsize
     IF
-    	xy_horizontal_part get.value: self cg.xy.v>x ( x position of knob )
-    	dup iv=> iv-cg-xy-knob-x
+        xy_horizontal_part get.value: self cg.xy.v>x ( x position of knob )
+        dup iv=> iv-cg-xy-knob-x
         xy_vertical_part get.value: self cg.xy.v>y ( y position of knob )
-    	dup iv=> iv-cg-xy-knob-y
+        dup iv=> iv-cg-xy-knob-y
         over iv-cg-xy-knob-xsize +
         over iv-cg-xy-knob-ysize +
         gr.rect
@@ -171,54 +171,54 @@ METHOD Y>VALUE:   METHOD VALUE>Y:
 ;M
 
 :M ?HIT:  { mx my -- true_if_hit }
-	false iv=> iv-cg-xy-in-knob?
+    false iv=> iv-cg-xy-in-knob?
     my iv-cg-topy dup iv-cg-height + 1- within?
     IF mx iv-cg-leftx dup iv-cg-width + 1- within?
-    	( -- true_if_hit )
-    	dup
-    	IF  \ is it IN knob?
-    		mx
-    		iv-cg-xy-knob-x
-    		dup iv-cg-xy-knob-xsize + within?
-    		IF
-    			my
-    			iv-cg-xy-knob-y
-    			dup iv-cg-xy-knob-ysize + within?
-    			iv=> iv-cg-xy-in-knob?
-    		THEN
-    	THEN
+        ( -- true_if_hit )
+        dup
+        IF  \ is it IN knob?
+            mx
+            iv-cg-xy-knob-x
+            dup iv-cg-xy-knob-xsize + within?
+            IF
+                my
+                iv-cg-xy-knob-y
+                dup iv-cg-xy-knob-ysize + within?
+                iv=> iv-cg-xy-in-knob?
+            THEN
+        THEN
     ELSE false
     THEN
 ;M
 
 : CG.UPDATE.KNOB ( -- )
-	cg.undraw.knob
-	cg.draw.knob
+    cg.undraw.knob
+    cg.draw.knob
 ;
 
 : CG.XY.SETVALS  ( x y --  changed?)
-	xy_vertical_part get.enable: self \ is Y enabled
-	IF
-    	iv-cg-xy-yoff - cg.xy.y>v
-    	xy_vertical_part get.value: self over =
-    	IF drop false
-    	ELSE xy_vertical_part put.value: self true
-    	THEN  ( -- ychanged? )
-	ELSE
-		drop false  ( -- x y-not-changed )
-	THEN
+    xy_vertical_part get.enable: self \ is Y enabled
+    IF
+        iv-cg-xy-yoff - cg.xy.y>v
+        xy_vertical_part get.value: self over =
+        IF drop false
+        ELSE xy_vertical_part put.value: self true
+        THEN  ( -- ychanged? )
+    ELSE
+        drop false  ( -- x y-not-changed )
+    THEN
 \
     swap
-	xy_horizontal_part get.enable: self
-	IF
-    	iv-cg-xy-xoff - cg.xy.x>v
-		xy_horizontal_part get.value: self over =
-    	IF drop false
-    	ELSE xy_horizontal_part put.value: self true
-    	THEN  ( -- ychanged? xchanged? )
-	ELSE
-		drop false  ( -- x y-not-changed )
-	THEN
+    xy_horizontal_part get.enable: self
+    IF
+        iv-cg-xy-xoff - cg.xy.x>v
+        xy_horizontal_part get.value: self over =
+        IF drop false
+        ELSE xy_horizontal_part put.value: self true
+        THEN  ( -- ychanged? xchanged? )
+    ELSE
+        drop false  ( -- x y-not-changed )
+    THEN
 \
     OR  ( if either one changed )
 ;
@@ -229,13 +229,13 @@ METHOD Y>VALUE:   METHOD VALUE>Y:
 \ set offsets for knob
     iv-cg-xy-in-knob?
     IF ( -- x y , track knob )
-    	dup xy_vertical_part get.value: self cg.xy.v>y -
+        dup xy_vertical_part get.value: self cg.xy.v>y -
         iv=> iv-cg-xy-yoff
         over xy_horizontal_part get.value: self cg.xy.v>x -
         iv=> iv-cg-xy-xoff 
     ELSE
-    	iv-cg-xy-knob-xsize 2/ iv=> iv-cg-xy-xoff
-    	iv-cg-xy-knob-ysize 2/ iv=> iv-cg-xy-yoff
+        iv-cg-xy-knob-xsize 2/ iv=> iv-cg-xy-xoff
+        iv-cg-xy-knob-ysize 2/ iv=> iv-cg-xy-yoff
     THEN
 \
 \ update values
@@ -260,8 +260,8 @@ METHOD Y>VALUE:   METHOD VALUE>Y:
 :M EXECUTE: ( cfa | 0 -- , pass x & y values )
     ?dup
     IF
-    	>r xy_horizontal_part get.value: self
-    	xy_vertical_part get.value: self
+        >r xy_horizontal_part get.value: self
+        xy_vertical_part get.value: self
         r> execute
     THEN
 ;M
@@ -286,16 +286,16 @@ METHOD Y>VALUE:   METHOD VALUE>Y:
 
 \ Utility functions to make an XY controller only vertical or horizontal
 : XY.ONLY.HORIZONTAL ( cg-xy -- )
-	>r  0 xy_vertical_part r@ put.enable: [] \ disable vertical part
-	r@ get.wh.dc: []  \ ( -- width height )
-	NIP 2- negate \ subtract borders from HEIGHT
-	xy_vertical_part r> put.knob.size: []
+    >r  0 xy_vertical_part r@ put.enable: [] \ disable vertical part
+    r@ get.wh.dc: []  \ ( -- width height )
+    NIP 2- negate \ subtract borders from HEIGHT
+    xy_vertical_part r> put.knob.size: []
 ;
 
 : XY.ONLY.VERTICAL ( cg-xy -- )
-	>r  0 xy_horizontal_part r@ put.enable: [] \ disable horizontal part
-	r@ get.wh.dc: []  \ ( -- width height )
-	DROP 2- negate \ subtract borders from WIDTH
-	xy_horizontal_part r> put.knob.size: []
+    >r  0 xy_horizontal_part r@ put.enable: [] \ disable horizontal part
+    r@ get.wh.dc: []  \ ( -- width height )
+    DROP 2- negate \ subtract borders from WIDTH
+    xy_horizontal_part r> put.knob.size: []
 ;
 

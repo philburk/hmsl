@@ -39,15 +39,15 @@ METHOD GET.TRANSLATE.FUNCTION:
 
 [NEED] FL/MOD
 : FL/MOD  ( n d -- rem quo )
-	dup>r /mod over 0<
-	IF 1- swap r@ + swap
-	THEN
-	rdrop
+    dup>r /mod over 0<
+    IF 1- swap r@ + swap
+    THEN
+    rdrop
 ;
 [THEN]
 [NEED] FL/
 : FL/ ( n d -- quo )
-	fl/mod nip
+    fl/mod nip
 ;
 [THEN]
 

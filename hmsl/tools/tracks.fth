@@ -17,7 +17,7 @@ ANEW TASK-TRACKS
 OB.COLLECTION ALL-TRACKS   \ Hold all tracks
 
 : TRACK.PLAYER ( track# -- player , get player from )
-	dup 1 < abort" TRACK.PLAYER - numberring starts at 1 !!"
+    dup 1 < abort" TRACK.PLAYER - numberring starts at 1 !!"
     1- get: all-tracks
 ;
 : TRACK.SHAPE ( track# -- shape , get shape from )
@@ -42,8 +42,8 @@ OB.COLLECTION ALL-TRACKS   \ Hold all tracks
 : RECORD.TRACK.STOP ( -- )
     rtc.time@ record.stop
     rc-instr @ ?dup
-    IF	close: []
-    	rc-instr off
+    IF  close: []
+        rc-instr off
     THEN
 ;
 
@@ -256,7 +256,7 @@ if.forgotten tracks.term
 ;
 
 : LOAD.TRACK  ( size track# -- )
-	1 mf-sequence# +! \ 00001
+    1 mf-sequence# +! \ 00001
     mf.load.track
     mf-sequence# @ 1 rc_max_tracks within?
     IF mf-sequence# @ track.shape clone: mf-shape
@@ -301,4 +301,4 @@ variable TRACK-CUR
     2dup put.repeat.delay: []
     put.stop.delay: []
 ;
-
+

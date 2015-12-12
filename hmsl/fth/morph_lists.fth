@@ -99,11 +99,11 @@ CREATE ML-IF-RECORD 0 ,
 ;
 
 : [FORGET]  ( -- , clean forgotten objects out of lists )
-	[forget]
-	'c task-morph_lists here <  \ are lists still loaded?
-	IF
-		ml.validate
-	THEN
+    [forget]
+    'c task-morph_lists here <  \ are lists still loaded?
+    IF
+        ml.validate
+    THEN
 ;
 
 

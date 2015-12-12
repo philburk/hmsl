@@ -31,16 +31,16 @@ val_2    int1 get: []  - abort" int1 get: [] doesn't return proper value"
 
 \ check compile time late binding
 : tode1
-	val_1 put: int1
-	val_1    int1 get: []
-	- abort" compiled get: int1 doesn't return proper value"
+    val_1 put: int1
+    val_1    int1 get: []
+    - abort" compiled get: int1 doesn't return proper value"
 ;
 tode1
 \ check compile time late binding
 : tode2
-	val_2 put: int1
-	val_2    int1 get: []
-	- abort" compiled int1 get: [] doesn't return proper value"
+    val_2 put: int1
+    val_2    int1 get: []
+    - abort" compiled int1 get: [] doesn't return proper value"
 ;
 tode2
 

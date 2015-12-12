@@ -96,19 +96,19 @@ METHOD USE.ABSOLUTE.TIME:
 METHOD ?DONE:
 
 : (DEFAULT.PLAY.FUNCTION) { elmnt# seqobj -- }
-	get.channel: seqobj midi.channel!  \ set channel
-	elmnt# 1 ed.at: seqobj ?dup  \ note 
-	IF
-		get.offset: seqobj +     \ transpose
-		dimension: seqobj 2 >
-		IF
-			elmnt# 2 ed.at: seqobj   \ velocity
-		ELSE
-			64
-		THEN
-		on.time                  \ on time
-		midi.noteon.for
-	THEN
+    get.channel: seqobj midi.channel!  \ set channel
+    elmnt# 1 ed.at: seqobj ?dup  \ note 
+    IF
+        get.offset: seqobj +     \ transpose
+        dimension: seqobj 2 >
+        IF
+            elmnt# 2 ed.at: seqobj   \ velocity
+        ELSE
+            64
+        THEN
+        on.time                  \ on time
+        midi.noteon.for
+    THEN
 ;
 
 defer DEFAULT.PLAY.FUNCTION
@@ -131,16 +131,16 @@ defer DEFAULT.PLAY.FUNCTION
 :CLASS OB.SHAPE  <SUPER OB.MORPH
     OB.ELMNTS IV-SH-ATTRIBUTES
     IV.LONG  IV-SH-START-TIME   ( time player started )
-	IV.LONG  IV-SH-DURATION   ( use this if >0 )
-	IV.LONG  IV-SH-DUR-FUNCTION   ( use this if !0 )
-	IV.LONG  IV-SH-OFFSET     ( transpose by this much )
+    IV.LONG  IV-SH-DURATION   ( use this if >0 )
+    IV.LONG  IV-SH-DUR-FUNCTION   ( use this if !0 )
+    IV.LONG  IV-SH-OFFSET     ( transpose by this much )
     IV.LONG  IV-SH-CHANNEL    ( MIDI or other channel type )
     IV.LONG  IV-SH-PLAY-CFA
     IV.BYTE  IV-SH-IF-ABSOLUTE  ( true if use absolute time )
     IV.SHORT IV-SH-MUTE         ( if true, play function not executed )
 
 :M DEFAULT:
-	default: super
+    default: super
     1 iv=> iv-sh-channel
     -1 iv=> iv-sh-duration
     0 iv=> iv-sh-dur-function
@@ -400,12 +400,12 @@ V: ZZZZDIM#  ( storage for dim to prevent stack dancing.)
 :M DIFFERENTIATE: { sum dim -- sum , convert from abs to delta }
     many: self ?dup
     IF  1- 0
-    	?DO i 1+ dim ed.at: self
-			i dim ed.at: self  - ( -- v[i+1] v[i]  )
-			sum over - -> sum   ( track sum )
-			i dim ed.to: self
-    	LOOP
-		sum  0 max many: self 1- dim ed.to: self
+        ?DO i 1+ dim ed.at: self
+            i dim ed.at: self  - ( -- v[i+1] v[i]  )
+            sum over - -> sum   ( track sum )
+            i dim ed.to: self
+        LOOP
+        sum  0 max many: self 1- dim ed.to: self
     THEN
 ;M
 
@@ -473,10 +473,10 @@ V: ZZZZDIM#  ( storage for dim to prevent stack dancing.)
 \ For shape execution ---------------------------------
 
 :M PUT.DURATION: ( dur -- )
-	iv=> iv-sh-duration
+    iv=> iv-sh-duration
 ;M
 :M GET.DURATION: ( -- dur )
-	iv-sh-duration
+    iv-sh-duration
 ;M
 
 :M PUT.DUR.FUNCTION: ( cfa -- , set duration function )
@@ -523,26 +523,26 @@ V: ZZZZDIM#  ( storage for dim to prevent stack dancing.)
 ;M
 
 :M CUSTOM.EXEC: ( -- time true | false , set start time )
-	reset: self
-	iv-repcount 0>
-	many: self 0> AND
-	IF
-		false iv=> iv-col-done?
-		iv-sh-if-absolute
-		IF
-			iv-time-next 0 at.self + iv=> iv-sh-start-time
-		THEN
-    	self ao.post false
-	ELSE
-		iv-time-next true   ( let's not bother )
-	THEN
+    reset: self
+    iv-repcount 0>
+    many: self 0> AND
+    IF
+        false iv=> iv-col-done?
+        iv-sh-if-absolute
+        IF
+            iv-time-next 0 at.self + iv=> iv-sh-start-time
+        THEN
+        self ao.post false
+    ELSE
+        iv-time-next true   ( let's not bother )
+    THEN
 ;M
 
 :M TERMINATE: ( time -- )
     iv-if-active
     IF
-		self ao.unpost
-		morph.stop
+        self ao.unpost
+        morph.stop
     ELSE drop
     THEN
     self pl.stop.playing
@@ -555,7 +555,7 @@ V: ZZZZDIM#  ( storage for dim to prevent stack dancing.)
     ELSE
        reset: self
        iv-time-next
-		iv=> iv-sh-start-time \ for absolute time
+        iv=> iv-sh-start-time \ for absolute time
     THEN
 ;M
 
@@ -563,113 +563,113 @@ V: ZZZZDIM#  ( storage for dim to prevent stack dancing.)
 \ Is there a DUR.FUNCTION ?
     iv-sh-dur-function ?dup
     IF >r iv-current self r>
-    	-1 exec.stack?  \ should ( e# sh -- dur )
+        -1 exec.stack?  \ should ( e# sh -- dur )
     ELSE
-		iv-sh-duration dup 0<
-		IF
-			drop
-			iv-current 0 ed.at: self
-		THEN
+        iv-sh-duration dup 0<
+        IF
+            drop
+            iv-current 0 ed.at: self
+        THEN
     THEN
 ;
 
 : SEQ.NEXT.ELMNT  ( -- , play next element )
 \ set IV-NEXT-TIME and ON.TIME
-	iv-sh-if-absolute
-	IF
-		iv-current 1+ many: self <
-		IF
-			iv-current 1+ 0 ed.at: self
-			iv-sh-start-time +
-			dup iv-time-next - -> on.time
-			iv=> iv-time-next
-		THEN
-	ELSE
-		seq.get.duration
-		dup -> on.time
-		iv+> iv-time-next
-	THEN
+    iv-sh-if-absolute
+    IF
+        iv-current 1+ many: self <
+        IF
+            iv-current 1+ 0 ed.at: self
+            iv-sh-start-time +
+            dup iv-time-next - -> on.time
+            iv=> iv-time-next
+        THEN
+    ELSE
+        seq.get.duration
+        dup -> on.time
+        iv+> iv-time-next
+    THEN
 \
-	iv-current self
-	iv-sh-mute not
-	IF
-		2dup
-		iv-sh-play-cfa ?dup
-		IF 
-			-2 exec.stack?
-		ELSE
-			default.play.function
-		THEN
-	THEN
-	pl.now.playing   \ track in shape editor %Q, remove from player
+    iv-current self
+    iv-sh-mute not
+    IF
+        2dup
+        iv-sh-play-cfa ?dup
+        IF 
+            -2 exec.stack?
+        ELSE
+            default.play.function
+        THEN
+    THEN
+    pl.now.playing   \ track in shape editor %Q, remove from player
 \
-	1 iv+> iv-current
+    1 iv+> iv-current
 ;
 
 :M TASK: ( -- , play the next element )
     iv-time-next doitnow?
     IF
-    	iv-current many: self <
-    	IF seq.next.elmnt
-    	ELSE
-    		?done: self
+        iv-current many: self <
+        IF seq.next.elmnt
+        ELSE
+            ?done: self
         THEN
     THEN
 ;M
 
 :M CLASS.NAME: ( -- $name )
-	" OB.SHAPE"
+    " OB.SHAPE"
 ;M
 
 defer EDIT.SHAPE
 ' drop is edit.shape
 
 :M EDIT: ( -- , edit using current editor ) \ 00001
-	self edit.shape
+    self edit.shape
 ;M
 
 :M DUMP.SOURCE.BODY:
-	dump.morph.body
+    dump.morph.body
 \
-	iv-pntr 
-	IF
-		tab max.elements: self . dimension: self .
-		."  new: " name: self cr
+    iv-pntr 
+    IF
+        tab max.elements: self . dimension: self .
+        ."  new: " name: self cr
 \
-		many: self 0
-		?DO
-			i self dump.element: []
-		LOOP
-	THEN
-	
-	cr
-	tab iv-sh-channel . ." put.channel: " name: self cr
-	iv-sh-duration 0>
-	IF
-		tab iv-sh-duration . ." put.duration: " name: self cr
-	THEN
+        many: self 0
+        ?DO
+            i self dump.element: []
+        LOOP
+    THEN
+    
+    cr
+    tab iv-sh-channel . ." put.channel: " name: self cr
+    iv-sh-duration 0>
+    IF
+        tab iv-sh-duration . ." put.duration: " name: self cr
+    THEN
 \
-	iv-sh-dur-function
-	IF
-		tab ." 'c " iv-sh-dur-function cfa.
-		." put.dur.function: " name: self cr
-	THEN
+    iv-sh-dur-function
+    IF
+        tab ." 'c " iv-sh-dur-function cfa.
+        ." put.dur.function: " name: self cr
+    THEN
 \
-	iv-sh-play-cfa
-	IF
-		tab ." 'c " iv-sh-play-cfa cfa.
-		." put.play.function: " name: self cr
-	THEN
+    iv-sh-play-cfa
+    IF
+        tab ." 'c " iv-sh-play-cfa cfa.
+        ." put.play.function: " name: self cr
+    THEN
 \
-	iv-sh-offset 0>
-	IF
-		tab iv-sh-offset . ." put.offset: " name: self cr
-	THEN
+    iv-sh-offset 0>
+    IF
+        tab iv-sh-offset . ." put.offset: " name: self cr
+    THEN
 \
-	iv-sh-if-absolute
-	IF
-		tab ." use.absolute.time: " name: self cr
-	THEN
+    iv-sh-if-absolute
+    IF
+        tab ." use.absolute.time: " name: self cr
+    THEN
 ;M
 
 ;CLASS
@@ -695,75 +695,75 @@ OB.SHAPE SH1
 OB.SHAPE  SEQ1
 
 : TSEQ.INIT
-	32 3 new: seq1
-	stuff{
-		10 60 90
-		10 67 60
-		20 72 60
-		10 64 60
-		30  0 60
-	}stuff: seq1
-	1000 put.repeat: seq1
-	clear: shape-holder
-	seq1 add: shape-holder
+    32 3 new: seq1
+    stuff{
+        10 60 90
+        10 67 60
+        20 72 60
+        10 64 60
+        30  0 60
+    }stuff: seq1
+    1000 put.repeat: seq1
+    clear: shape-holder
+    seq1 add: shape-holder
 ;
 
 : TSEQ.INIT.ABS
-	4 3 new: seq1
-	stuff{
-		 0 60 90
-		20 67 60
-		40 72 60
-		60 76 60
-	}stuff: seq1
-	use.absolute.time: seq1
-	1000 put.repeat: seq1
-	20 put.repeat.delay: seq1
-	clear: shape-holder
-	seq1 add: shape-holder
+    4 3 new: seq1
+    stuff{
+         0 60 90
+        20 67 60
+        40 72 60
+        60 76 60
+    }stuff: seq1
+    use.absolute.time: seq1
+    1000 put.repeat: seq1
+    20 put.repeat.delay: seq1
+    clear: shape-holder
+    seq1 add: shape-holder
 ;
 
 : TSEQ.PLAY { elmnt# seqobj -- }
-	get.channel: seqobj midi.channel!  \ set channel
-	elmnt# 1 ed.at: seqobj ?dup  \ note 
-	IF
-		get.offset: seqobj +     \ transpose
-		elmnt# 2 ed.at: seqobj   \ velocity
-		elmnt# 3 ed.at: seqobj   \ on time
-		midi.noteon.for
-	THEN
+    get.channel: seqobj midi.channel!  \ set channel
+    elmnt# 1 ed.at: seqobj ?dup  \ note 
+    IF
+        get.offset: seqobj +     \ transpose
+        elmnt# 2 ed.at: seqobj   \ velocity
+        elmnt# 3 ed.at: seqobj   \ on time
+        midi.noteon.for
+    THEN
 ;
 
 : TSEQ.INIT.ON
-	32 4 new: seq1
-	stuff{
-		 0 60 90 10
-		20 67 60 3
-		40 72 60 15
-		60 76 60 20
-		80 62 90 10
-		80 69 60 10
-		80 74 60 10
-		100 80 60 30
-	}stuff: seq1
-	use.absolute.time: seq1
-	1000 put.repeat: seq1
-	20 put.repeat.delay: seq1
-	'c tseq.play put.play.function: seq1
-	clear: shape-holder
-	seq1 add: shape-holder
+    32 4 new: seq1
+    stuff{
+         0 60 90 10
+        20 67 60 3
+        40 72 60 15
+        60 76 60 20
+        80 62 90 10
+        80 69 60 10
+        80 74 60 10
+        100 80 60 30
+    }stuff: seq1
+    use.absolute.time: seq1
+    1000 put.repeat: seq1
+    20 put.repeat.delay: seq1
+    'c tseq.play put.play.function: seq1
+    clear: shape-holder
+    seq1 add: shape-holder
 ;
 
 : TSEQ.TERM
-	free: seq1
+    free: seq1
 ;
 
 if.forgotten tseq.term
 
 : TSEQ
-	tseq.init
-	seq1 ao.exec
-	start: seq1
+    tseq.init
+    seq1 ao.exec
+    start: seq1
 ;
 [THEN]
 

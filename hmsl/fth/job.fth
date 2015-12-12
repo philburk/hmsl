@@ -109,16 +109,16 @@ METHOD PUT.TOO.LATE:        METHOD GET.TOO.LATE:
 ;
 
 :M CUSTOM.EXEC: ( -- false )
-	many: self 0>
-	IF
-    	false iv=> iv-col-done?
-    	iv-jb-instrument ?dup
-    	IF open: []
-    	THEN
-    	self ao.post false
-	ELSE
-		vtime@ true
-	THEN
+    many: self 0>
+    IF
+        false iv=> iv-col-done?
+        iv-jb-instrument ?dup
+        IF open: []
+        THEN
+        self ao.post false
+    ELSE
+        vtime@ true
+    THEN
 ;M
 
 : JOB.STOP  ( -- , stop job , don't send DONE )
@@ -132,26 +132,26 @@ METHOD PUT.TOO.LATE:        METHOD GET.TOO.LATE:
 :M TERMINATE: ( time -- , stop tasking )
     iv-if-active
     IF  job.stop
-    	morph.stop
+        morph.stop
     ELSE drop
     THEN
 ;M
 
 : JOB.EXEC.STUFF ( -- , execute job's functions )
-	jb.in.time?  ( is it too late? )
-	IF  ( -- done? default_dur self )
-		depth >r
-		reset: self
-		BEGIN manyleft: self
-		WHILE self next: self execute
-		REPEAT
-		depth r> = not
-		IF
-			" TASK:" " Stack error in job function"
-				er_fatal ob.report.error
-		THEN
-	THEN
-	iv-jb-duration jb.set.delay
+    jb.in.time?  ( is it too late? )
+    IF  ( -- done? default_dur self )
+        depth >r
+        reset: self
+        BEGIN manyleft: self
+        WHILE self next: self execute
+        REPEAT
+        depth r> = not
+        IF
+            " TASK:" " Stack error in job function"
+                er_fatal ob.report.error
+        THEN
+    THEN
+    iv-jb-duration jb.set.delay
 ;
 
 :M TASK: ( -- , perform jobs if time )
@@ -161,21 +161,21 @@ METHOD PUT.TOO.LATE:        METHOD GET.TOO.LATE:
 \
     iv-time-next doitnow?
     IF
-    	iv-col-done?
-    	IF
-    		col.do.repeat iv-repcount 0=
-        	IF
-        		iv-time-next self terminate: []
-        	ELSE
-        		false iv=> iv-col-done?
-    			iv-time-next doitnow?   \ in case of repeat delay
-    			IF
-    				job.exec.stuff
-    			THEN
-        	THEN
-    	ELSE
-    		job.exec.stuff
-    	THEN
+        iv-col-done?
+        IF
+            col.do.repeat iv-repcount 0=
+            IF
+                iv-time-next self terminate: []
+            ELSE
+                false iv=> iv-col-done?
+                iv-time-next doitnow?   \ in case of repeat delay
+                IF
+                    job.exec.stuff
+                THEN
+            THEN
+        ELSE
+            job.exec.stuff
+        THEN
     THEN
 ;M
 

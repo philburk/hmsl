@@ -70,9 +70,9 @@
 \ 00002 PLB 2/6/92 Remove stack checks and cuz of EXEC.STACK?
 \          Add stack check to COL.EXEC.BEHAV
 \ 00003 PLB 3/31/92 Ripped out all generic stuff and moved
-\			it to OB.MORPH
+\           it to OB.MORPH
 \ 00004 PLB 5/21/92 Fix stack check in COL.EXEC.BEHAV
-\			Put OB.STRUCTURE in a separate file.
+\           Put OB.STRUCTURE in a separate file.
 \ 00005 PLB 5/21/92 Add EDIT: method.
 \ 00006 PLB 8/3/92 Mac objects now absolute addresses.
 
@@ -86,7 +86,7 @@ METHOD PUT.BEHAVIOR:     METHOD GET.BEHAVIOR:
 \ -----------------------------------------------------------
 :CLASS OB.COLLECTION <SUPER OB.MORPH
     IV.LONG IV-COL-MODE
-    IV.LONG IV-PENDING  	( used for counting unfinished )
+    IV.LONG IV-PENDING      ( used for counting unfinished )
     IV.LONG IV-BEHAVE-CFA   ( CFA of behavior word )
 
 0 constant PARALLEL_MODE
@@ -103,11 +103,11 @@ METHOD PUT.BEHAVIOR:     METHOD GET.BEHAVIOR:
 ;M
 
 :M ?NEW:  ( Max_elements -- addr | 0 )
-	1 ?NEW: SUPER   ( declare as one dimensional )
+    1 ?NEW: SUPER   ( declare as one dimensional )
 ;M
 
 :M NEW: ( max_elements -- , abort if error )
-	?new: self <new:error>
+    ?new: self <new:error>
 ;M
 
 \ Since this is a one-dimensional list, let's inherit a bunch
@@ -120,16 +120,16 @@ inherit.method deinstantiate: ob.objlist
 inherit.method ?instantiate: ob.objlist
 
 :M DEINSTANTIATE.HIERARCHY:
-	self ?hierarchical: []
-	IF
-		many: self 0
-		?DO
-			i get: self deinstantiate.hierarchy: []
-		LOOP
-		deinstantiate: self
-	ELSE
-		free: self
-	THEN
+    self ?hierarchical: []
+    IF
+        many: self 0
+        ?DO
+            i get: self deinstantiate.hierarchy: []
+        LOOP
+        deinstantiate: self
+    ELSE
+        free: self
+    THEN
 ;M
 
 :M ACT.SEQUENTIAL: ( -- , behave sequentially )
@@ -188,12 +188,12 @@ inherit.method ?instantiate: ob.objlist
 ;
 
 : COL.EXEC.BEHAV ( -- v0 v1 .. vn N | 0 ) \ 00002
-	depth >r
+    depth >r
     self iv-behave-cfa execute
     depth 1- over - r> -    \ 00004 was OVER +
     IF
-    	.s " COL.EXEC.BEHAV" " Stack error in behavior!"
-    	er_fatal ob.report.error
+        .s " COL.EXEC.BEHAV" " Stack error in behavior!"
+        er_fatal ob.report.error
     THEN
 ;
 
@@ -247,8 +247,8 @@ inherit.method ?instantiate: ob.objlist
 :M TERMINATE:  ( time -- , stop all children )
     iv-if-active
     IF  
-    	dup col.stop.children
-    	morph.stop
+        dup col.stop.children
+        morph.stop
     ELSE drop
     THEN
 
@@ -262,7 +262,7 @@ inherit.method ?instantiate: ob.objlist
     iv-pending  1-  dup iv=> iv-pending 0=
     IF
 \ are there any repetitions left?
-		iv-repcount
+        iv-repcount
         IF  col.exec.loop  ( give it a chance to finish )
         THEN
 \
@@ -274,9 +274,9 @@ inherit.method ?instantiate: ob.objlist
 ;M
 
 :M CUSTOM.EXEC: ( -- time true | false )
-	many: self 0>
+    many: self 0>
     IF
-    	col.exec.loop
+        col.exec.loop
     THEN
     iv-pending
     IF false
@@ -304,18 +304,18 @@ inherit.method ?instantiate: ob.objlist
 ;M
 
 :M CLASS.NAME: ( -- $NAME )
-	" OB.COLLECTION"
+    " OB.COLLECTION"
 ;M
 
 defer EDIT.COLLECTION
 ' drop is edit.collection
 
 :M EDIT: ( -- , edit using current editor ) \ 00005
-	self edit.collection
+    self edit.collection
 ;M
 
 :M DUMP.SOURCE.BODY:
-	dump.morph.body
+    dump.morph.body
 \
      >newline tab
      iv-col-mode
@@ -328,28 +328,28 @@ defer EDIT.COLLECTION
      ENDCASE
      name: self cr
 \
-	iv-pntr 
-	IF
-		tab max.elements: self . ."  new: " name: self cr
+    iv-pntr 
+    IF
+        tab max.elements: self . ."  new: " name: self cr
 \
-		many: self 0>
-		IF
-			tab ." stuff{" cr
-			tab tab 
-			many: self 0
-			?DO
-				i get: self name: []
-				out @ 60 >
-				IF
-					cr tab tab
-				ELSE
-					space
-				THEN
-			LOOP
-			cr
-			tab ." }stuff: " name: self cr
-		THEN
-	THEN
+        many: self 0>
+        IF
+            tab ." stuff{" cr
+            tab tab 
+            many: self 0
+            ?DO
+                i get: self name: []
+                out @ 60 >
+                IF
+                    cr tab tab
+                ELSE
+                    space
+                THEN
+            LOOP
+            cr
+            tab ." }stuff: " name: self cr
+        THEN
+    THEN
 ;M
 
 ;CLASS
@@ -364,7 +364,7 @@ defer EDIT.COLLECTION
     ob.collection
     latest name> >body
 \ use->rel \ 00006
-	act.sequential: []
+    act.sequential: []
 ;
 
 : BH.RANDOM ( struct --  next-id 1 | 0, choose randomly)

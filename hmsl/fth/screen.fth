@@ -57,14 +57,14 @@ ascii A 1- scr-last-key !
     REPEAT
 \ Make sure DEFAULT screen is still in dictionary.
     default-screen @ ?dup
-    IF	ob.in.dict? 0=
+    IF  ob.in.dict? 0=
         IF  default-screen off
             >newline ." DEFAULT-SCREEN set to 0" cr
         THEN
     THEN
 \ Make sure CURRENT screen is still in dictionary.
     cg-current-screen @ ?dup
-    IF	ob.in.dict? 0=
+    IF  ob.in.dict? 0=
         IF  cg-current-screen off
             >newline ." CG-CURRENT-SCREEN set to 0" cr
         THEN
@@ -75,18 +75,18 @@ ascii A 1- scr-last-key !
 METHOD PUT.KEY:  METHOD GET.KEY:
 
 :CLASS OB.SCREEN <SUPER OB.ELMNTS
-	IV.LONG IV-SC-TITLE  ( pointer to title string )
-	IV.LONG IV-SC-CTRL-HIT
-	IV.LONG IV-SC-DRAW-CFA
-	IV.LONG IV-SC-UNDRAW-CFA
+    IV.LONG IV-SC-TITLE  ( pointer to title string )
+    IV.LONG IV-SC-CTRL-HIT
+    IV.LONG IV-SC-DRAW-CFA
+    IV.LONG IV-SC-UNDRAW-CFA
 \
 \ provide functions for screen hits
-	IV.LONG IV-SC-DOWN-CFA
-	IV.LONG IV-SC-MOVE-CFA
-	IV.LONG IV-SC-UP-CFA
-	
-	IV.BYTE IV-SC-KEY        ( character to use for Menu )
-	IV.BYTE IV-SC-DRAWN
+    IV.LONG IV-SC-DOWN-CFA
+    IV.LONG IV-SC-MOVE-CFA
+    IV.LONG IV-SC-UP-CFA
+    
+    IV.BYTE IV-SC-KEY        ( character to use for Menu )
+    IV.BYTE IV-SC-DRAWN
     IV.SHORT IV-SCR-LEFTX
     IV.SHORT IV-SCR-TOPY
 
@@ -139,13 +139,13 @@ METHOD PUT.KEY:  METHOD GET.KEY:
 ;M
 
 :M DELETE: { control -- , to make it easy to delete controls }
-	many: self 0
-	?DO
-		i 0 ed.at: self control =
-		IF
-			i remove: self LEAVE
-		THEN
-	LOOP
+    many: self 0
+    ?DO
+        i 0 ed.at: self control =
+        IF
+            i remove: self LEAVE
+        THEN
+    LOOP
 ;M
 
 :M PUT.KEY:  ( character -- , set char for menu )
@@ -157,13 +157,13 @@ METHOD PUT.KEY:  METHOD GET.KEY:
 ;M
 
 :M PUT.TITLE:  ( string-address -- , SET screen title )
-	iv=> iv-sc-title
+    iv=> iv-sc-title
 ;M
 :M GET.TITLE:  ( -- string-address, GET screen title )
-	iv-sc-title dup 0=
-	IF
-		drop " Untitled_Screen"   \ 00010
-	THEN
+    iv-sc-title dup 0=
+    IF
+        drop " Untitled_Screen"   \ 00010
+    THEN
 ;M
 
 :M PUT.DRAW.FUNCTION: ( cfa -- , called before draw )
@@ -221,15 +221,15 @@ METHOD PUT.KEY:  METHOD GET.KEY:
     0 scg.selnt   ( set normalization transform for CGs )
     iv-sc-draw-cfa ?dup
     IF
-    	0 exec.stack?
+        0 exec.stack?
     THEN
     service.tasks
 \
     gr.height@
     gr_big_text gr.height!
     0 200 scg.move
-	get.title: self gr.text
-	gr.height!
+    get.title: self gr.text
+    gr.height!
 \
     many: self ?dup
     IF 0 DO
@@ -259,20 +259,20 @@ METHOD PUT.KEY:  METHOD GET.KEY:
 
 :M UNDRAW: ( -- , undraw controls and then do undraw.function )
 \ deactivate any active control 00002
-	iv-sc-ctrl-hit ?dup
-	IF
-		0 swap put.active: []
-    	0 iv=> iv-sc-ctrl-hit
-	THEN
+    iv-sc-ctrl-hit ?dup
+    IF
+        0 swap put.active: []
+        0 iv=> iv-sc-ctrl-hit
+    THEN
 \
     gr-curwindow @
     IF  many: self 0
         ?DO
-        	i 0 ed.at: self undraw: []
+            i 0 ed.at: self undraw: []
         LOOP
         iv-sc-undraw-cfa ?dup
         IF
-        	0 exec.stack?
+            0 exec.stack?
         THEN
         false iv=> iv-sc-drawn
     THEN
@@ -299,43 +299,43 @@ METHOD PUT.KEY:  METHOD GET.KEY:
 ;M
 
 :M PUT.ACTIVE: ( active? -- , stub for embedded screens 00003 )
-	drop
+    drop
 ;M
 :M GET.ACTIVE: (  -- active? , stub for embedded screens )
-	FALSE
+    FALSE
 ;M
 
 :M MOUSE.DOWN:   { x y | flag -- flag, process mouse down event, scan controls }
     false -> flag  \ default to no hit 00004
-	hmsl.set.window
-	rnow
+    hmsl.set.window
+    rnow
     many: self  0
     ?DO   ( Check for hits )
         x y i 0 ed.at: self mouse.down: []   ( mouse event trapped? )
         IF
-			true -> flag  \ yes we hit one
-			i 0 ed.at: self
+            true -> flag  \ yes we hit one
+            i 0 ed.at: self
 \ change activation if ctrl changes
-			dup iv-sc-ctrl-hit = not
-			IF	iv-sc-ctrl-hit ?dup
-				IF
-					FALSE swap put.active: []
-				THEN
+            dup iv-sc-ctrl-hit = not
+            IF  iv-sc-ctrl-hit ?dup
+                IF
+                    FALSE swap put.active: []
+                THEN
 \ activate new control
-				TRUE over put.active: []
-			THEN
-			iv=> iv-sc-ctrl-hit         ( save for up )
-			leave 
+                TRUE over put.active: []
+            THEN
+            iv=> iv-sc-ctrl-hit         ( save for up )
+            leave 
         THEN
     LOOP
-	flag dup not
-	IF
-		0 iv=> iv-sc-ctrl-hit
+    flag dup not
+    IF
+        0 iv=> iv-sc-ctrl-hit
         iv-sc-down-cfa ?dup
         IF
-        	>r x y r> -2 exec.stack?
+            >r x y r> -2 exec.stack?
         THEN
-	THEN
+    THEN
 ;M
 
 :M MOUSE.UP:     ( x y -- , process mouse up event )
@@ -345,9 +345,9 @@ METHOD PUT.KEY:  METHOD GET.KEY:
     ELSE
         iv-sc-up-cfa ?dup
         IF
-        	-2 exec.stack?
+            -2 exec.stack?
         ELSE
-        	2drop
+            2drop
         THEN
     THEN
 ;M
@@ -359,9 +359,9 @@ METHOD PUT.KEY:  METHOD GET.KEY:
     ELSE
         iv-sc-move-cfa ?dup
         IF
-        	-2 exec.stack?
+            -2 exec.stack?
         ELSE
-        	2drop
+            2drop
         THEN
     THEN
 ;M
@@ -404,29 +404,29 @@ METHOD PUT.KEY:  METHOD GET.KEY:
     false         ( default done flag )
     ev.get.event  ( get one event )
     CASE
-		EV_NULL OF ENDOF
+        EV_NULL OF ENDOF
 
-		EV_MOUSE_DOWN OF cg-current-screen @ ?dup
+        EV_MOUSE_DOWN OF cg-current-screen @ ?dup
                  IF ev.getxy rot mouse.down: [] drop THEN
              ENDOF
 
-		EV_MOUSE_UP OF cg-current-screen @ ?dup 
+        EV_MOUSE_UP OF cg-current-screen @ ?dup 
                  IF ev.getxy rot mouse.up: [] THEN
              ENDOF
 
-		EV_MOUSE_MOVE OF cg-current-screen @ ?dup 
+        EV_MOUSE_MOVE OF cg-current-screen @ ?dup 
                  IF ev.getxy rot mouse.move: [] THEN
              ENDOF
 
          EV_KEY OF ev.get.key ?dup \ 00001
                  IF cg-current-screen @ ?dup
-                 	IF key: []
-                 	ELSE drop
-                 	THEN
+                    IF key: []
+                    ELSE drop
+                    THEN
                  THEN
              ENDOF
              
-		EV_CLOSE_WINDOW OF drop true .s
+        EV_CLOSE_WINDOW OF drop true .s
              ENDOF
     ENDCASE
 ;

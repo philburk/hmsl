@@ -26,15 +26,15 @@ include? within?            p4thbase.fth
 include? toupper            charmacr.fth
 include? task-utils.fth         utils.fth
 
-include? task-errormsg.fth		errormsg.fth
+include? task-errormsg.fth      errormsg.fth
 include? task-memalloc.fth      memalloc.fth
 
 
-include? task-global_data.fth	h:global_data.fth
+include? task-global_data.fth   h:global_data.fth
 
 \ MIDI and Time support-------------------------------
 if-load-midi @ .IF
-	include? task-midi_globals	h:midi_globals
+    include? task-midi_globals  h:midi_globals
 .THEN
 
 \

@@ -71,16 +71,16 @@ $ FC constant CANCEL_CODE    \ MIDI Stop
 ;
 
 : MFX.SEND.SHAKE ( code -- , send handshake code)
-	midi.xmit midi.flush
-	mfx-show @
+    midi.xmit midi.flush
+    mfx-show @
     IF ." |" flushemit cr?
-	THEN
+    THEN
 ;
 
 : MFX.ABORT ( -- )
     ." MFX aborting!" cr
     mfx.close.file
-	cancel_code mfx.send.shake
+    cancel_code mfx.send.shake
     abort
 ;
 
@@ -123,28 +123,28 @@ variable MFX-DELAY-MS
 \ ----------------------------------------------
 
 : MFX.XMIT.START  ( packet_type -- , 126 or 127 )
-	$ CF mfx.xmit
-	mfx.xmit
+    $ CF mfx.xmit
+    mfx.xmit
 ;
 
 : MFX.XMIT.DATUM  ( byte -- )
-	dup $ 7F >
-	IF ." Warning - byte in file greater then $7F clipped!" cr
-		$ 7F and
-	THEN
-	mfx.xmit
+    dup $ 7F >
+    IF ." Warning - byte in file greater then $7F clipped!" cr
+        $ 7F and
+    THEN
+    mfx.xmit
 ;
 
 : MFX.XMIT.STRING  ( addr count -- , send raw data )
-	$ 9F mfx.xmit
+    $ 9F mfx.xmit
     dup 14->7lo7hi swap mfx.xmit mfx.xmit
     BEGIN dup 0>
     WHILE 2dup 2 min >r
         dup c@ mfx.xmit.datum
-		1+ c@ mfx.xmit.datum
+        1+ c@ mfx.xmit.datum
         ( -- addr count)
         r@ - swap
-		r> + swap
+        r> + swap
     REPEAT 2drop
 ;
 
@@ -163,23 +163,23 @@ variable MFX-DELAY-MS
 ;
 
 : MFX.WAIT.SHAKE ( -- , for handshake from receiver )
-	BEGIN  mfx.key
-		dup cancel_code =
-		IF ." Cancel received!" mfx.abort
-		THEN
-		ack_code =
-	UNTIL
-	mfx-show @
+    BEGIN  mfx.key
+        dup cancel_code =
+        IF ." Cancel received!" mfx.abort
+        THEN
+        ack_code =
+    UNTIL
+    mfx-show @
     IF ." |" flushemit cr?
-	THEN
+    THEN
 ;
 
 : MFX.XMIT.DATA.PACKET  ( addr count -- )
     data_packet mfx.xmit.start
     mfx.xmit.string
-	mfx-show @
+    mfx-show @
     IF ." =" flushemit cr?
-	THEN
+    THEN
 ;
 
 : MFX.XMIT.BODY  ( -- )
@@ -204,7 +204,7 @@ variable MFX-DELAY-MS
 ;
 
 : MFX.XMIT.ENDF ( -- )
-	end_packet mfx.xmit.start
+    end_packet mfx.xmit.start
 ;
 
 : (MFX.XMIT.FILE)  ( $name -- error?)
@@ -232,10 +232,10 @@ variable MFX-DELAY-MS
 : MFX.WRITE.BODY  ( -- )
     mfx-size @ 0>
     IF  convert-eol @
-    	IF mfx-size @ mfx.convert->eol
-    	THEN
+        IF mfx-size @ mfx.convert->eol
+        THEN
 \
-		if-debug @
+        if-debug @
         IF ." Line = " mfx-buffer mfx-size @ type
         THEN
 \
@@ -251,66 +251,66 @@ variable MFX-DELAY-MS
 ;
     
 : MFX.GET.NAME  ( -- $filename )
-	mfx-buffer mfx-size @
+    mfx-buffer mfx-size @
     dup pad c!
     pad 1+ swap cmove
     pad
 ;
 
 : MFX.RECV.PRESET  ( preset -- , code for packet type )
-	if-debug @
-	IF dup ." Packet = " .hex cr?
-	THEN
+    if-debug @
+    IF dup ." Packet = " .hex cr?
+    THEN
     dup mfx-mode !
-	end_packet =
-	IF	mfx.close.file >newline ." File Received!" cr
-		mfx-done on 
-	THEN
-	0 mfx-size !
+    end_packet =
+    IF  mfx.close.file >newline ." File Received!" cr
+        mfx-done on 
+    THEN
+    0 mfx-size !
 ;
 
 : MFX.ADD.BUFFER  ( char -- add to buffer )
     mfx-buffer mfx-count @ + c!
-	1 mfx-count +!
+    1 mfx-count +!
 ;
 
 : MFX.RECV.NOTE  ( note velocity -- )
-	if-debug @
-	IF ." NOTE* " 2dup swap .hex .hex cr?
-	THEN
+    if-debug @
+    IF ." NOTE* " 2dup swap .hex .hex cr?
+    THEN
     mfx-size @ 0=
-	IF \ we are waiting for a size
-		7lo7hi->14 dup mfx-size !
+    IF \ we are waiting for a size
+        7lo7hi->14 dup mfx-size !
         mfx_block_size > abort" Packet too large!"
-		0 mfx-count !
-	ELSE   ( byten byten+1 -- , add text to buffer )
-		swap mfx.add.buffer mfx.add.buffer
-	THEN
-	mfx-count @ mfx-size @ >= \ At end of packet?
-	IF mfx-mode @
-		CASE
-		filename_packet OF ." File = " mfx.get.name dup count type cr
-    			new mfx.open.file   abort" MFX.RECV.NOTE"
-				ack_code mfx.send.shake
-			ENDOF
-		data_packet OF mfx.write.body
-			ENDOF
-		ENDCASE
-		mfx-count off
-		mfx-size off
-	THEN
+        0 mfx-count !
+    ELSE   ( byten byten+1 -- , add text to buffer )
+        swap mfx.add.buffer mfx.add.buffer
+    THEN
+    mfx-count @ mfx-size @ >= \ At end of packet?
+    IF mfx-mode @
+        CASE
+        filename_packet OF ." File = " mfx.get.name dup count type cr
+                new mfx.open.file   abort" MFX.RECV.NOTE"
+                ack_code mfx.send.shake
+            ENDOF
+        data_packet OF mfx.write.body
+            ENDOF
+        ENDCASE
+        mfx-count off
+        mfx-size off
+    THEN
 ;
 
 : <MIDI.RECV.FILE> ( -- )
     mfx-done off
-	mp.reset
-	'c mfx.recv.preset mp-program-vector !
-	'c mfx.recv.note   mp-on-vector !
-	'c mfx.recv.note   mp-off-vector !  ( in case vel=0 )
-	BEGIN midi.parse
-	    mfx-done @ ?terminal or
-	UNTIL
-	mfx.close.file  ( just in case aborted )
+    mp.reset
+    'c mfx.recv.preset mp-program-vector !
+    'c mfx.recv.note   mp-on-vector !
+    'c mfx.recv.note   mp-off-vector !  ( in case vel=0 )
+    BEGIN midi.parse
+        mfx-done @ ?terminal or
+    UNTIL
+    mfx.close.file  ( just in case aborted )
 ;
 
 : RECV.FILE ( -- )
@@ -322,7 +322,7 @@ variable MFX-DELAY-MS
 : RECV.FILES
     >newline ." Transmit files from other machine." cr
     BEGIN <midi.recv.file>
-		?terminal
+        ?terminal
     UNTIL
 ;
     

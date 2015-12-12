@@ -6,7 +6,7 @@
 \
 \ MOD: PLB 6/14/90  Moved Fader numeric display down 2 pixels
 \ MOD: PLB 1/28/91  Shrank Fader range for better updating,
-\			PUT.VALUE: now updates display if drawn.
+\           PUT.VALUE: now updates display if drawn.
 \ MOD: PLB 6/5/91 Fixed knob updating, with Darren Gibbs
 
 ANEW TASK-CTRL_FADER
@@ -18,7 +18,7 @@ METHOD IF.SHOW.VALUE:
 :CLASS OB.FADER <SUPER OB.CONTROL
     iv.short IV-CG-YOFF
     iv.short IV-CG-KNOB-SIZE
-	iv.short IV-CG-KNOB-Y
+    iv.short IV-CG-KNOB-Y
     iv.short IV-CG-SHOWV?
 
 :M INIT:
@@ -56,7 +56,7 @@ METHOD IF.SHOW.VALUE:
 ;
 
 : CG.KNOB.AT.Y  ( y -- , draws the knob at Y )
-	dup iv=> iv-cg-knob-y
+    dup iv=> iv-cg-knob-y
     iv-cg-leftx 2+ swap
     iv-cg-leftx iv-cg-width + 2- over iv-cg-knob-size +
     gr.rect
@@ -64,7 +64,7 @@ METHOD IF.SHOW.VALUE:
 
 : CG.FADER.KNOB  ( -- , draw knob of fader )
     iv-cg-value cg.fader.val>y ( y position of knob )
-	cg.knob.at.y
+    cg.knob.at.y
 ;
 
 : CG.FADER.VALUE ( -- , display value of fader )
@@ -84,19 +84,19 @@ METHOD IF.SHOW.VALUE:
 ;M
 
 :M PUT.VALUE: ( value part -- , set value , update display )
-	?drawn: self
-	IF	0 gr.color!
-		iv-cg-knob-y cg.knob.at.y
-    	cg.fader.value
-	THEN
+    ?drawn: self
+    IF  0 gr.color!
+        iv-cg-knob-y cg.knob.at.y
+        cg.fader.value
+    THEN
 \
-	put.value: super
+    put.value: super
 \
-	?drawn: self
-	IF	1 gr.color!
-		cg.fader.knob
-    	cg.fader.value
-	THEN
+    ?drawn: self
+    IF  1 gr.color!
+        cg.fader.knob
+        cg.fader.value
+    THEN
 ;M
 
 :M ?HIT:  ( mx my -- true_if_hit )

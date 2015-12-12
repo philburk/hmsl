@@ -8,14 +8,14 @@
 \ MOD: PLB 3/13/90 Removed use of VOCABULARIES 
 \ MOD: JHC 9/11/90 1numeric codes, flats added
 \ MOD: PLB 4/21/91 Merged J.Chalmers mods with mine
-\			Changed NTET to NS-NOTES/OCT
-\			Added <<< for more controllable CRESCENDI
+\           Changed NTET to NS-NOTES/OCT
+\           Added <<< for more controllable CRESCENDI
 \ MOD: PLB 5/?/91 Added SYNC.TO and other synchronization tools.
 \ MOD: PLB 7/21/91 Fixed long last note in SHAPEI{
 \ 00001 PLB 9/11/91 Fixed roundoff error accumulator, use ratios.
 \ 00002 PLB 9/13/91 Add floating point acceleration.
 \ 00003 PLB 9/25/91 Check for acceleration too close to 1.0, ln=0
-\			Moved RATIO+ and REDUCE.FRACTION to H:MISC_TOOLS
+\           Moved RATIO+ and REDUCE.FRACTION to H:MISC_TOOLS
 
 exists? play{
 [IF] only forth definitions
@@ -199,28 +199,28 @@ defer NS.ADD.CUSTOM
 
 : NS.RECALC.TPW ( tpw -- , recalculate error, etc )
 \ rescale error by current whole note
-	dup ns-err-numer @ ns-whole-note @ */ ns-err-numer !
+    dup ns-err-numer @ ns-whole-note @ */ ns-err-numer !
     ns-whole-note !
     ns-dur-numer @ ns-dur-denom @ ns.set.length
 ;
 
 \ Synchronization
 : ZERO.SYNC  ( -- , zero reference for sync )
-	vtime@ ns-sync-ref !
+    vtime@ ns-sync-ref !
 ;
 
 : SET.SYNC  ( n -- , record a sync point )
-	vtime@ ns-sync-ref @ - over ns-sync-etime !
-	ns-whole-note @ over ns-sync-whole !
-	ns-err-numer @ over ns-sync-err-num !
-	ns-err-denom @ swap ns-sync-err-den !
+    vtime@ ns-sync-ref @ - over ns-sync-etime !
+    ns-whole-note @ over ns-sync-whole !
+    ns-err-numer @ over ns-sync-err-num !
+    ns-err-denom @ swap ns-sync-err-den !
 ;
 
 : SYNC.TO  ( n -- , synchronize to point N )
-	dup ns-sync-etime @ ns-sync-ref @ + vtime!
-	dup ns-sync-whole @ ns-whole-note !
-	dup ns-sync-err-num @ ns-err-numer !
-	    ns-sync-err-den @ ns-err-denom !
+    dup ns-sync-etime @ ns-sync-ref @ + vtime!
+    dup ns-sync-whole @ ns-whole-note !
+    dup ns-sync-err-num @ ns-err-numer !
+        ns-sync-err-den @ ns-err-denom !
 ;
 
 exists? S>F
@@ -229,26 +229,26 @@ defer STIME>ATIME ( score_time -- accelerated_time )
 
 : NS.ST>AT ( score_time -- accelerated_time )
 \ dup .
-	s>f
+    s>f
 \ fdup f.
-	ns-faccel-bigt f@ f/
-	ns-faccel-scale f@
-	fswap f**
+    ns-faccel-bigt f@ f/
+    ns-faccel-scale f@
+    fswap f**
 \ fdup f.
-	1.0 f-
-	ns-faccel-t/lna f@ f*
+    1.0 f-
+    ns-faccel-t/lna f@ f*
 \ fdup f. cr
-	f>s
+    f>s
 ;
 
 ' ns.st>at is stime>atime
 
 : NS.ACCELERATE.FP { dur | dur' -- dur' }
-	ns-accel-time @ dur + stime>atime
-	ns-accel-time @ stime>atime
-	- -> dur'
-	dur ns-accel-time +!
-	dur'
+    ns-accel-time @ dur + stime>atime
+    ns-accel-time @ stime>atime
+    - -> dur'
+    dur ns-accel-time +!
+    dur'
 ;
 [ELSE]
 : NS.ACCELERATE.FP ( dur -- dur' , stub! )
@@ -263,15 +263,15 @@ defer STIME>ATIME ( score_time -- accelerated_time )
 ;
 
 : NS.ACCELERATE ( dur -- dur' )
-	ns-if-faccel @
-	IF
-		ns.accelerate.fp
-	ELSE
-		ns-if-accel @
-		IF
-			ns.accelerate.int
-		THEN
-	THEN
+    ns-if-faccel @
+    IF
+        ns.accelerate.fp
+    ELSE
+        ns-if-accel @
+        IF
+            ns.accelerate.int
+        THEN
+    THEN
 ;
 
 : (NS.FIX.DUR)  ( dur -- dur' , account for roundoff error )
@@ -279,12 +279,12 @@ defer STIME>ATIME ( score_time -- accelerated_time )
 \ length is not exact.
     ns-dur-remains @
     IF
-    	ns-dur-remains @ ns-dur-denom @
-    	ns-err-numer @ ns-err-denom @
-    	ratio+
-    	reduce.fraction
-    	30000 clip.fraction
-    	ns-err-denom ! ns-err-numer !
+        ns-dur-remains @ ns-dur-denom @
+        ns-err-numer @ ns-err-denom @
+        ratio+
+        reduce.fraction
+        30000 clip.fraction
+        ns-err-denom ! ns-err-numer !
     THEN
 \
 \ Check to see if we have accumulated enough to add one tick
@@ -367,14 +367,14 @@ variable HUMANIZE-OFFSET
 
 
 : NS.CRESC.OFF  ( -- )
-	ns-crescendo? off
-	ns-cresc-break? off
+    ns-crescendo? off
+    ns-cresc-break? off
 ;
 
 
 : (NS.CALC.CRESC) ( -- , apply crescendo )
-	( linear interpolate )
-	vtime@ ns-cresc-t0 @ -  ( dt )
+    ( linear interpolate )
+    vtime@ ns-cresc-t0 @ -  ( dt )
     ns-cresc-dv @ * ( dv*dt )
     ns-cresc-dt @ / ( dv*dt/tt )
     ns-cresc-v0 @ +
@@ -384,27 +384,27 @@ variable HUMANIZE-OFFSET
 : NS.CALC.CRESC ( -- , apply crescendo if active)
     ns-crescendo? @
     IF
-    	ns-cresc-break? @
-    	IF
-    		vtime@
-    		ns-cresc-t0 @ ns-cresc-dt @ + >
-    		IF
-    			ns.cresc.off
-    			ns-cresc-v0 @ ns-cresc-dv @ +
-    			1 127 clipto
-    			ns-cur-velocity !
-    		ELSE
-    			(ns.calc.cresc)  ( still in it )
-    		THEN
-    	ELSE
-    		(ns.calc.cresc)  ( just keep going )
-    	THEN
+        ns-cresc-break? @
+        IF
+            vtime@
+            ns-cresc-t0 @ ns-cresc-dt @ + >
+            IF
+                ns.cresc.off
+                ns-cresc-v0 @ ns-cresc-dv @ +
+                1 127 clipto
+                ns-cur-velocity !
+            ELSE
+                (ns.calc.cresc)  ( still in it )
+            THEN
+        ELSE
+            (ns.calc.cresc)  ( just keep going )
+        THEN
     THEN
 ;
 
 
 : NS.GET.VELOCITY ( -- velocity , +/- crescendo, humanize, accent )
-	ns.calc.cresc
+    ns.calc.cresc
     ns-cur-velocity @
 \
     ns.humanize
@@ -559,14 +559,14 @@ score{
 ;
 
 : }SHAPEI ( -- )
-\	ns-cur-shape @ print: []
+\   ns-cur-shape @ print: []
     ns.elapsed
 \ This next line is to correct problems with long last notes
 \ caused by VTIME getting advanced after SHAPEI{
 \ Subtract the start time for the first note.
-	0 0 ns-cur-shape @ ed.at: [] -  ( account for delayed starts )
+    0 0 ns-cur-shape @ ed.at: [] -  ( account for delayed starts )
 \
-	0 ns-cur-shape @ differentiate: []
+    0 ns-cur-shape @ differentiate: []
     }instr
 ;
 
@@ -595,23 +595,23 @@ score{
 ;
 
 : PAR.PUSH ( vtime-start vtime-end accel-time tpw -- )
-	vtime.push vtime.push vtime.push vtime.push
+    vtime.push vtime.push vtime.push vtime.push
 ;
 
 : PAR.POP ( -- vtime-start vtime-end accel-time tpw )
-	vtime.pop vtime.pop vtime.pop vtime.pop
+    vtime.pop vtime.pop vtime.pop vtime.pop
 ;
 
 : PAR{  ( -- )
-	vtime@
-	dup
+    vtime@
+    dup
     ns-accel-time @
     tpw@
     par.push
 ;
 
 : }PAR{ ( -- )
-	par.pop  ( -- vtime-start vtime-end accel-time tpw )
+    par.pop  ( -- vtime-start vtime-end accel-time tpw )
     dup tpw@ -  ( reset tpw if changed )
     IF dup tpw!
     THEN
@@ -623,10 +623,10 @@ score{
 ;
 
 : }PAR ( -- )
-	par.pop
-	drop drop
-	vtime@ max vtime!
-	drop
+    par.pop
+    drop drop
+    vtime@ max vtime!
+    drop
 ;
 
 \ define NS-NOTES/OCT - 1 notes  
@@ -845,79 +845,79 @@ exists? s>f
 : FACCEL{  ( factor  numer denom -- )
 \
 \ calculate ticks to accelerate by factor
-	>r tpw@ * s>f  \ numer
-	r> s>f \ denom
-	f/ ns-faccel-bigT f!
+    >r tpw@ * s>f  \ numer
+    r> s>f \ denom
+    f/ ns-faccel-bigT f!
 \
-	1.0 fswap f/  ( invert for more intuitive interface )
-	fdup ns-faccel-scale f!
+    1.0 fswap f/  ( invert for more intuitive interface )
+    fdup ns-faccel-scale f!
 \
 \ calculate constant for accelaration
-	fln \ check to see if LOG is too close to zero 00003
-	fdup fabs 0.00000001 f<
-	IF
-		>newline
-		f. ." = fln(acceleration_factor) , factor too close to 1.0" cr
-		false ns-if-faccel !
-	ELSE
-		ns-faccel-bigT f@
-		fswap f/ ns-faccel-T/lnA f!
+    fln \ check to see if LOG is too close to zero 00003
+    fdup fabs 0.00000001 f<
+    IF
+        >newline
+        f. ." = fln(acceleration_factor) , factor too close to 1.0" cr
+        false ns-if-faccel !
+    ELSE
+        ns-faccel-bigT f@
+        fswap f/ ns-faccel-T/lnA f!
 \
-		0 ns-accel-time !
-		true ns-if-faccel !
-	THEN
+        0 ns-accel-time !
+        true ns-if-faccel !
+    THEN
 ;
 
 : }FACCEL ( -- , stop acceleration, calc new TPW )
-	ns-faccel-scale f@
-	ns-accel-time @ s>f
-	ns-faccel-bigt f@ f/
-	f**
-	tpw@ s>f f*
-	f>s tpw!
-	false ns-if-faccel !
+    ns-faccel-scale f@
+    ns-accel-time @ s>f
+    ns-faccel-bigt f@ f/
+    f**
+    tpw@ s>f f*
+    f>s tpw!
+    false ns-if-faccel !
 ;
 [THEN]
 
 : ACCEL{ ( N/128 -- , set acceleration in n/128 per note )
     ns-whole-note @ ns-duration @ */
     negate ns-accelerate !
-	0 ns-accel-time !
-	true ns-if-accel !
+    0 ns-accel-time !
+    true ns-if-accel !
 ;
 : }ACCEL ( -- )
     0 ns-accelerate !
-	false ns-if-accel !
+    false ns-if-accel !
     
 ;
 
 : SET.CRESCENDO  ( dvel dticks break? -- )
-	ns-cresc-break? !
-	ns-cresc-dt !
-	ns-cresc-dv !
-	vtime@ ns-cresc-t0 !
-	ns-cur-velocity @ ns-cresc-v0 !
-	ns-crescendo? on
+    ns-cresc-break? !
+    ns-cresc-dt !
+    ns-cresc-dv !
+    vtime@ ns-cresc-t0 !
+    ns-cur-velocity @ ns-cresc-v0 !
+    ns-crescendo? on
 ;
 
 : <<< ( dvel  durnumer durdenom -- , set crescendo )
-	>r tpw@ * r> /
-	true
-	set.crescendo
+    >r tpw@ * r> /
+    true
+    set.crescendo
 ;
 
 : >>> ( dvel durnumer durdenom -- , set DEcrescendo )
-	>r >r negate r> r>
-	<<<
+    >r >r negate r> r>
+    <<<
 ;
 
 : // ( dvel -- , start crescendo )
-	?dup
-	IF
-    	ns-duration @ false set.crescendo
-	ELSE
-		ns.cresc.off
-	THEN
+    ?dup
+    IF
+        ns-duration @ false set.crescendo
+    ELSE
+        ns.cresc.off
+    THEN
 ;
 : \\ ( value -- , start decrescendo )
     negate //
@@ -960,4 +960,4 @@ exists? s>f
 SES_USE_VOCAB [IF]
 previous definitions
 [THEN]
-
+

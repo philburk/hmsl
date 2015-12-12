@@ -88,16 +88,16 @@ ANEW TASK-OB_MAIN.FTH
 
 \ Error Detection and reporting. ================================
 : OB.BAD.METHOD ( use_obj_base -- , Give error for undefined meth.)
-	pfa->nfa id.
-	" OB.BAD.METHODS" " Illegal method for object!"
-	ER_FATAL  ER.REPORT
+    pfa->nfa id.
+    " OB.BAD.METHODS" " Illegal method for object!"
+    ER_FATAL  ER.REPORT
 ;
 
 : OB.PRELOAD.CFAS ( use_cfa_base N -- , Load N methods into table. )
-	0 ?DO ( FOR EACH METHOD )
-		dup i cell* +
-		'c ob.bad.method use->rel swap !
-	LOOP drop
+    0 ?DO ( FOR EACH METHOD )
+        dup i cell* +
+        'c ob.bad.method use->rel swap !
+    LOOP drop
 ;
 
 \ Method index counter ========================================
@@ -114,25 +114,25 @@ U: OB-INSIDE-:M   ( flag for pairs checking )
 
 \ Structures of Class and Instance Object Definition.
 :STRUCT OB.CLASS
-	LONG OB_SIZE
-	LONG OB_#METHODS
-	LONG OB_VALID_KEY
-	RPTR OB_SUPER
-	RPTR OB_LAST_IVAR    ( relative address of last ivar )
-	LONG OB_CFAS
+    LONG OB_SIZE
+    LONG OB_#METHODS
+    LONG OB_VALID_KEY
+    RPTR OB_SUPER
+    RPTR OB_LAST_IVAR    ( relative address of last ivar )
+    LONG OB_CFAS
 ;STRUCT
 
 :STRUCT OB.INSTANCE.OBJECT
-	LONG OBI_OFFSET
-	LONG OBI_SIZE
-	RPTR OBI_PREVIOUS    ( relative )
-	RPTR OBI_REL_CLASS
+    LONG OBI_OFFSET
+    LONG OBI_SIZE
+    RPTR OBI_PREVIOUS    ( relative )
+    RPTR OBI_REL_CLASS
 ;STRUCT
 
 :STRUCT OB.OBJECT
-	RPTR  OBJ_CLASS_CFAS
-	LONG  OBJ_KEY
-	RPTR  OBJ_NAME
+    RPTR  OBJ_CLASS_CFAS
+    LONG  OBJ_KEY
+    RPTR  OBJ_NAME
 ;STRUCT
 
 \ An unlikely number, used for recognizing valid classes.
@@ -149,11 +149,11 @@ V: OB-SELF-CFAS ( use_cfa_base, for current class, fake instance )
 : OB.SET.NAME ( addr_inst_obj_def addr_object -- , set IV-NAME )
 \ This is a rather nasty thing to do - SO DON'T DO IT - TOO SLOW ON MAC!
 \    swap pfa->nfa swap cell+ !   \  PFA->NFA is very slow! 00001
-	>r drop " INSTOBJ" r> ..! obj_name
+    >r drop " INSTOBJ" r> ..! obj_name
 ;
 [ELSE]
 : OB.SET.NAME ( addr_inst_obj_def addr_object -- , set IV-NAME )
-	>r pfa->nfa r> ..! obj_name
+    >r pfa->nfa r> ..! obj_name
 ;
 [THEN]
 
@@ -162,100 +162,100 @@ dbug" ob.setup"
 { use_object use_class_base | obi_def use_obi use_cfas -- }
 \
 \ Recursively setup instance objects.
-	use_class_base ..@ ob_last_ivar -> obi_def
-	BEGIN obi_def ( is it zero )
+    use_class_base ..@ ob_last_ivar -> obi_def
+    BEGIN obi_def ( is it zero )
 dbug" ob.setup - recurse through instance objects."
-	WHILE
-		obi_def ..@ obi_offset ( get offset )
-		use_object + -> use_obi ( calc address of instance object )
+    WHILE
+        obi_def ..@ obi_offset ( get offset )
+        use_object + -> use_obi ( calc address of instance object )
 \
 \ recursively call
-		use_obi
-		obi_def ..@ obi_rel_class   ( class of instance object )
-		RECURSE
+        use_obi
+        obi_def ..@ obi_rel_class   ( class of instance object )
+        RECURSE
 
-		obi_def use_obi ob.set.name
-		obi_def ..@ obi_previous -> obi_def
-	REPEAT
+        obi_def use_obi ob.set.name
+        obi_def ..@ obi_previous -> obi_def
+    REPEAT
 dbug" ob.setup - finish recursion."
 \
 \ Compile rel_cfa_base at obj_base.
-	( -- obj_base class_base )
-	use_class_base .. ob_cfas -> use_cfas
-	use_cfas use_object ..! obj_class_cfas ( set methods pointer in object)
+    ( -- obj_base class_base )
+    use_class_base .. ob_cfas -> use_cfas
+    use_cfas use_object ..! obj_class_cfas ( set methods pointer in object)
 \
 dbug" ob.setup - store validation flag in object"
-	ob_valid_object use_object ..! obj_key
+    ob_valid_object use_object ..! obj_key
 \
 dbug" ob.setup - execute INIT: method"
 \ use_object  use_cfas  abort
-	use_object os.push           ( push object address for method )
-	\ Don't do rel->use for pForth cuz EXECUTE takes a relocatable token.
-	use_cfas @ ( rel->use ) execute     ( execute INIT: method )
-	os.drop
+    use_object os.push           ( push object address for method )
+    \ Don't do rel->use for pForth cuz EXECUTE takes a relocatable token.
+    use_cfas @ ( rel->use ) execute     ( execute INIT: method )
+    os.drop
 dbug" ob.setup - done"
 ;
 
 #HOST_AMIGA_JFORTH [IF]
 : MAKE.OBJECT ( abs_class_base -- , Instantiate an object. )
-	CREATE  ( make object header )
+    CREATE  ( make object header )
 \
 \ Mark as CLASS definition for CLONE...
 \
-	latest name> cell-   dup @ CLASS_BIT or  swap !
+    latest name> cell-   dup @ CLASS_BIT or  swap !
 \
 \
-		here swap                ( addr_object abs_class_base )
-		dup ..@ ob_size allot    ( make room for ivars )
-		2dup ..@ ob_size erase   ( zero out ivar space )
-		ob.setup
-		IMMEDIATE
-	DOES> ( addr )
-		[compile] aliteral
+        here swap                ( addr_object abs_class_base )
+        dup ..@ ob_size allot    ( make room for ivars )
+        2dup ..@ ob_size erase   ( zero out ivar space )
+        ob.setup
+        IMMEDIATE
+    DOES> ( addr )
+        [compile] aliteral
 ;
 [ELSE]
 : MAKE.OBJECT ( abs_class_base -- , Instantiate an object. )
-	CREATE  ( make object header )
-		here swap         ( addr_object abs_class_base )
-		dup @ allot       ( make room for ivars )
-		2dup @
-		dbug" MAKE.OBJECT - zero out ivar space"
-		erase      ( zero out ivar space )
-		ob.setup
-\	DOES> 00005
-\		use->rel    ( run time action of object 00005 )
+    CREATE  ( make object header )
+        here swap         ( addr_object abs_class_base )
+        dup @ allot       ( make room for ivars )
+        2dup @
+        dbug" MAKE.OBJECT - zero out ivar space"
+        erase      ( zero out ivar space )
+        ob.setup
+\   DOES> 00005
+\       use->rel    ( run time action of object 00005 )
 ;
 [THEN]
 
 : MAKE.INSTANCE.OBJECT  ( abs_class_base -- , Template for embedded object )
-	CREATE here >r
-		dup @ ob.make.member
+    CREATE here >r
+        dup @ ob.make.member
 \ Link new instance object to previous instance object.
-		ob-current-class @ ..@ ob_last_ivar
-		if.use->rel , ( relocatable )
+        ob-current-class @ ..@ ob_last_ivar
+        if.use->rel , ( relocatable )
 \
 \ Update ob_last_ivar field in current class.
-		r> ( -- abs_class_base inst_ivar )
-		ob-current-class @ ..! ob_last_ivar
+        r> ( -- abs_class_base inst_ivar )
+        ob-current-class @ ..! ob_last_ivar
 \ Save pointer to class, OB_REL_CLASS .
-		use->rel ,
-	DOES>
-		@ ( get offset )
-		os+
+        use->rel ,
+    DOES>
+        @ ( get offset )
+        os+
 \ use->rel  ( -- rel_instance_object 00005 )
 ;
 
 : :CLASS (  -- , Create a class with N methods )
 \ Check pairs
-	ob-state @
-	IF " :CLASS" " Previous :STRUCT or :CLASS unterminated!"
-		er_warning er.report
-	THEN
-	ob_def_class ob-state !     ( set pair flags )
-	false ob-inside-:m !
+    ob-state @
+    IF " :CLASS" " Previous :STRUCT or :CLASS unterminated!"
+        er_warning er.report
+    THEN
+    ob_def_class ob-state !     ( set pair flags )
+    false ob-inside-:m !
 \
 \ Create new class defining word.
-	CREATE
+    CREATE
 \
 \
 \ Added mdh...
@@ -263,25 +263,25 @@ dbug" ob.setup - done"
 \
 \ Mark as :CLASS definition for CLONE...
 \
-		latest name> cell-   dup @ :CLASS_BIT or  swap !
+        latest name> cell-   dup @ :CLASS_BIT or  swap !
 [ [THEN] ]
 \
 \
-		here dup ob-current-class !  ( set current )
-		.. ob_cfas ob-self-cfas !       ( for self binding )
+        here dup ob-current-class !  ( set current )
+        .. ob_cfas ob-self-cfas !       ( for self binding )
 \ Fill fields in CLASS, must match order as defined !
-		obj_name ,               ( OB_IVAR_SPACE , initial ivar offset 00002 )
-		mi-next @ dup ,         ( OB_#METHODS , # methods allowed )
-		ob_valid_class ,        ( OB_VALID_KEY , key for validation )
-		0 ,                     ( OB_SUPER , space for superclass pointer )
-		0 ,                     ( OB_LAST_IVAR , space for pointer to last )
-		here over cell* allot   ( OB_CFAS , make room for CFAS )
-		swap ob.preload.cfas     ( put error method in for safety)
-	DOES>
-		ob-state @ ob_def_class =
-		IF make.instance.object
-		ELSE make.object
-		THEN
+        obj_name ,               ( OB_IVAR_SPACE , initial ivar offset 00002 )
+        mi-next @ dup ,         ( OB_#METHODS , # methods allowed )
+        ob_valid_class ,        ( OB_VALID_KEY , key for validation )
+        0 ,                     ( OB_SUPER , space for superclass pointer )
+        0 ,                     ( OB_LAST_IVAR , space for pointer to last )
+        here over cell* allot   ( OB_CFAS , make room for CFAS )
+        swap ob.preload.cfas     ( put error method in for safety)
+    DOES>
+        ob-state @ ob_def_class =
+        IF make.instance.object
+        ELSE make.object
+        THEN
 ;
 
 \ INHERITANCE =============================================
@@ -290,87 +290,87 @@ V: OB-SUPER-CFAS   ( abs_cfa_base of SUPER CLASS )
 V: OB-DOOPER-CFAS  ( abs_cfa_base of SUPER's SUPER CLASS )
 
 : OB.SET.DOOPER    ( -- , set dooper cfas based on super )
-	ob-super-cfas @       ( base of cfas )
-	ob_cfas - ..@ ob_super ( superclass of superclass )
-	ob_cfas + ob-dooper-cfas !
+    ob-super-cfas @       ( base of cfas )
+    ob_cfas - ..@ ob_super ( superclass of superclass )
+    ob_cfas + ob-dooper-cfas !
 ;
 
 : <SUPER ( <WORD> ---- , COPY METHODS )
-	ho.find.pfa NOT
-	IF " <SUPER" " CLASS NOT FOUND"
-		ER_FATAL ER.REPORT
-	THEN ( -- super-pfa )
-	ob-current-class @ ( -- super-pfa class-pfa )
+    ho.find.pfa NOT
+    IF " <SUPER" " CLASS NOT FOUND"
+        ER_FATAL ER.REPORT
+    THEN ( -- super-pfa )
+    ob-current-class @ ( -- super-pfa class-pfa )
 
 \ Save superclass pointer in class.
-	2dup ..! ob_super
+    2dup ..! ob_super
 \
 \ Save pointer to last linked ivar object.
-	over ..@ ob_last_ivar
-	over ..! ob_last_ivar
+    over ..@ ob_last_ivar
+    over ..! ob_last_ivar
 \
 \ Increment IVAR offset to include superclass' ivars
-	2dup
-	swap ..@ ob_size ( -- sp cp cp s# , space for super's ivars )
-	over ..@ ob_size cell- + ( -- sp cp cp c#, 1 cell for class*)
-	swap ..! ob_size
+    2dup
+    swap ..@ ob_size ( -- sp cp cp s# , space for super's ivars )
+    over ..@ ob_size cell- + ( -- sp cp cp c#, 1 cell for class*)
+    swap ..! ob_size
 
 \ Copy method cfas from superclass
-	over ..@ ob_#methods      ( sp cp #-inherited-methods )
-	cell*                     ( sp cp #bytes , calc bytes to copy )
-	rot  .. ob_cfas           ( cp #bytes super_cfas )
+    over ..@ ob_#methods      ( sp cp #-inherited-methods )
+    cell*                     ( sp cp #bytes , calc bytes to copy )
+    rot  .. ob_cfas           ( cp #bytes super_cfas )
 \
 \ Save super_cfas for later binding.
-	dup ob-super-cfas !
-	rot .. ob_cfas            ( #bytes super_cfas class_cfas )
-	rot cmove                 ( copy methods )
-	ob.set.dooper
+    dup ob-super-cfas !
+    rot .. ob_cfas            ( #bytes super_cfas class_cfas )
+    rot cmove                 ( copy methods )
+    ob.set.dooper
 ;
 
 : ;CLASS ( -- , terminate class )
-	ob-state @ ob_def_class = NOT
-	IF " ;CLASS" " Missing :CLASS above" er_fatal er.report
-	THEN
-	0 ob-state !
+    ob-state @ ob_def_class = NOT
+    IF " ;CLASS" " Missing :CLASS above" er_fatal er.report
+    THEN
+    0 ob-state !
 ;
 
 : INHERITANCE.OF ( <class> -- , list superclasses of class )
-	ho.find.pfa
-	IF  cr
-		BEGIN  ..@ ob_super dup
-		WHILE  dup pfa->nfa id. space space cr? ?pause
-		REPEAT drop
-	THEN cr
+    ho.find.pfa
+    IF  cr
+        BEGIN  ..@ ob_super dup
+        WHILE  dup pfa->nfa id. space space cr? ?pause
+        REPEAT drop
+    THEN cr
 ;
 
 : OB.IS.INSTANCE? { pfa_object_def class_base | prev result -- flag }
 \ Scans list of instance variables in class for match.
-	0 -> result   ( default answer = false )
-	class_base ..@ ob_last_ivar -> prev
-	BEGIN  prev
-	WHILE
-		pfa_object_def prev =
-		IF
-			true -> result
-			0 -> prev
-		ELSE
-			prev ..@ obi_previous -> prev
-		THEN
-	REPEAT
-	result
+    0 -> result   ( default answer = false )
+    class_base ..@ ob_last_ivar -> prev
+    BEGIN  prev
+    WHILE
+        pfa_object_def prev =
+        IF
+            true -> result
+            0 -> prev
+        ELSE
+            prev ..@ obi_previous -> prev
+        THEN
+    REPEAT
+    result
 ;
 
 
 \ Tools for debugging ODE
 : 'P ( <created_data_structure> -- pfa )
-	[compile] 'c cfa->pfa
+    [compile] 'c cfa->pfa
 ;
 
 : METHOD@ ( method_index pfa_class -- abs_method_cfa )
-	.. ob_cfas
-	swap cell* + @ rel->use
+    .. ob_cfas
+    swap cell* + @ rel->use
 ;
 
 : GET.METHOD ( method_index <class> -- method_cfa )
-	'p method@
+    'p method@
 ;

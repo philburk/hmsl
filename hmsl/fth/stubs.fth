@@ -10,10 +10,10 @@ variable host-debug
 host-debug on
 
 : hostStartClock() ( -- )
-	host-debug @ IF ." hostStartClock() is a noop" cr THEN
+    host-debug @ IF ." hostStartClock() is a noop" cr THEN
 ;
 : hostStopClock() ( -- )
-	host-debug @ IF ." hostStopClock() is a noop" cr THEN
+    host-debug @ IF ." hostStopClock() is a noop" cr THEN
 ;
 
 

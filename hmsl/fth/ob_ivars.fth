@@ -27,136 +27,136 @@ max-inline @ 20 max-inline !
 
 false [IF]
 : IV@  ( offset -- value , fetch from LONG instance variable )
-	os+ @
+    os+ @
 ;
 : IVW@ ( offset -- value , fetch from SHORT instance variable )
-	os+ w@
+    os+ w@
 ;
 : IVC@ ( offset -- value , fetch from SHORT instance variable )
-	os+ c@
+    os+ c@
 ;
 
 : IV!  ( value offset -- , store into LONG instance variable )
-	os+ !
+    os+ !
 ;
 : IVW!  ( value offset -- , store into SHORT instance variable )
-	os+ w!
+    os+ w!
 ;
 : IVC!  ( value offset -- , store into BYTE instance variable )
-	os+ c!
+    os+ c!
 ;
 [THEN]
 
 : IV+!  ( value offset -- , store into LONG instance variable )
-	os+ +!
+    os+ +!
 ;
 
 #host_amiga_jforth [IF]
-	max-inline !
+    max-inline !
 [THEN]
 
 : CREATE.IVAR ( size <name> -- )
-	CREATE ob.make.member   immediate
-	DOES>  ( -- address-ivar )
-		?comp compile os.copy
-		ob.stats compile+@bytes
+    CREATE ob.make.member   immediate
+    DOES>  ( -- address-ivar )
+        ?comp compile os.copy
+        ob.stats compile+@bytes
 ;
 
 \ These words are for declaring instance variables.
 \ Some of this code appears redundant but is needed because they
 \ are CREATE-DOES> words.
 : IV.LONG  ( <name> --IN-- , declare a cell wide instance variable )
-	4 create.ivar
+    4 create.ivar
 ;
 
 : IV.RPTR  ( <name> --IN-- , declare a relocatable pointer instance variable )
-	-4 create.ivar
+    -4 create.ivar
 ;
 
 : IV.SHORT  ( <name> --IN-- , declare a 16 bit wide instance variable )
-	-2 create.ivar
+    -2 create.ivar
 ;
 
 : IV.USHORT  ( <name> --IN-- , declare a 16 bit wide instance variable )
-	2 create.ivar
+    2 create.ivar
 ;
 
 : IV.BYTE  ( <name> --IN-- , declare a byte wide instance variable )
-	-1 create.ivar
+    -1 create.ivar
 ;
 
 : IV.UBYTE  ( <name> --IN-- , declare a byte wide instance variable )
-	1 create.ivar
+    1 create.ivar
 ;
 
 : IV=>  ( value <ivar> -- , store into ivar )
-	?COMP
-	compile os.copy
-	ob.stats? compile+!bytes
+    ?COMP
+    compile os.copy
+    ob.stats? compile+!bytes
 ; immediate
 
 : IV+>  ( value <ivar> -- , add value to ivar )
-	?COMP
-	ob.stats? cell =
-	IF [compile] literal compile iv+!
-	ELSE " IV+>" " only works on IV.LONG !!"
-		er_fatal er.report
-	THEN
+    ?COMP
+    ob.stats? cell =
+    IF [compile] literal compile iv+!
+    ELSE " IV+>" " only works on IV.LONG !!"
+        er_fatal er.report
+    THEN
 ; immediate
 
 : IV&   ( offset -- address_ivar )
-	os+
+    os+
 ;
 
 : IV&>  ( <ivar> --IN-- address_ivar , calculate address of ivar )
-	?COMP
-	ob.findit ob.offset@ [compile] literal compile os+
+    ?COMP
+    ob.findit ob.offset@ [compile] literal compile os+
 ; immediate
 
 \ This is for declaring a field of bytes in an object.
 : IV.BYTES ( n <name> -- , declare a field of bytes )
-	CREATE ob.make.member immediate
-	DOES> ?comp @ [compile] literal compile os+
+    CREATE ob.make.member immediate
+    DOES> ?comp @ [compile] literal compile os+
 ;
 
 : IV.STRUCT ( <structure> <name> -- ) ( -- addr )
-	[compile] sizeof() iv.bytes
+    [compile] sizeof() iv.bytes
 ;
 
 
 \ Fast internal arrays 00001
 : (IV.ARRAY) ( index offset -- addr )
-	os+
-	swap cell* +
+    os+
+    swap cell* +
 ;
 
 : IV.ARRAY  ( size <name> -- )
-	CREATE cells ob.make.member immediate
-	DOES> ( index addr-ivar )
-		?comp ob.offset@ [compile] literal
-		compile (iv.array)
+    CREATE cells ob.make.member immediate
+    DOES> ( index addr-ivar )
+        ?comp ob.offset@ [compile] literal
+        compile (iv.array)
 ;
 
 : (IV.WARRAY) ( index offset -- addr )
-	os+
-	swap 2* +
+    os+
+    swap 2* +
 ;
 
 : IV.WARRAY  ( size <name> -- )
-	CREATE 2* ob.make.member immediate
-	DOES> ( index addr-ivar )
-		?comp ob.offset@ [compile] literal
-		compile (iv.warray)
+    CREATE 2* ob.make.member immediate
+    DOES> ( index addr-ivar )
+        ?comp ob.offset@ [compile] literal
+        compile (iv.warray)
 ;
 
 : (IV.BARRAY) ( index offset -- addr )
-	os.copy + +
+    os.copy + +
 ;
 
 : IV.BARRAY  ( size <name> -- )
-	CREATE ob.make.member immediate
-	DOES> ( index addr-ivar )
-		?comp ob.offset@ [compile] literal
-		compile (iv.barray)
+    CREATE ob.make.member immediate
+    DOES> ( index addr-ivar )
+        ?comp ob.offset@ [compile] literal
+        compile (iv.barray)
 ;
 

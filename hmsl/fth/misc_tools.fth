@@ -148,52 +148,52 @@ here 2 , 3 , 5 , 7 , 11 , 13 , 17 , 19 , 23 , 29 , 31 , 37 ,
 here swap - cell/ constant NUM_PRIMES
 
 : REDUCE.FRACTION  { top bot | prime -- top' bot' }
-	num_primes 0
-	DO
-		i cell* primes + @ -> prime
-		prime top >
-		prime bot > OR
-		IF leave
-		THEN
+    num_primes 0
+    DO
+        i cell* primes + @ -> prime
+        prime top >
+        prime bot > OR
+        IF leave
+        THEN
 \
-		BEGIN
-			top prime /mod  ( rem quo )
-			swap 0=
-			IF ( tquo )
-				bot prime /mod
-				swap 0=
-				IF ( -- tquo bquo )
-					-> bot
-					-> top false
-				ELSE 2drop true \ try next prime
-				THEN
-			ELSE
-				drop true
-			THEN
-		UNTIL
-	LOOP
-	top bot
+        BEGIN
+            top prime /mod  ( rem quo )
+            swap 0=
+            IF ( tquo )
+                bot prime /mod
+                swap 0=
+                IF ( -- tquo bquo )
+                    -> bot
+                    -> top false
+                ELSE 2drop true \ try next prime
+                THEN
+            ELSE
+                drop true
+            THEN
+        UNTIL
+    LOOP
+    top bot
 ;
 
 : CLIP.FRACTION { numer denom maxden -- numer denom }
 \ force to below max denominator
-	denom maxden >
-	IF
-		numer maxden denom */
-		maxden
-		reduce.fraction -> denom -> numer
-	THEN
-	numer denom
+    denom maxden >
+    IF
+        numer maxden denom */
+        maxden
+        reduce.fraction -> denom -> numer
+    THEN
+    numer denom
 ;
 
 : RATIO+  { n1 d1 n2 d2 -- n3 d3 }
-	d1 d2 =
-	IF
-		n1 n2 + d1
-	ELSE
-    	n1 d2 *  n2 d1 * +
-    	d1 d2 *
-	THEN
+    d1 d2 =
+    IF
+        n1 n2 + d1
+    ELSE
+        n1 d2 *  n2 d1 * +
+        d1 d2 *
+    THEN
 ;
 
 defer DEFERRED.EXECUTE
@@ -206,14 +206,14 @@ defer DEFERRED.EXECUTE
 ;
 
 : EXEC.STACK? { usercfa depthchange | saved -- , execute if non zero }
-	depth depthchange + -> saved
+    depth depthchange + -> saved
 \
     usercfa deferred.execute
 \
-	depth saved -
+    depth saved -
     IF
-    	>newline
-    	." Stack error in user function: " usercfa >name id.
-    	abort
+        >newline
+        ." Stack error in user function: " usercfa >name id.
+        abort
     THEN
 ;

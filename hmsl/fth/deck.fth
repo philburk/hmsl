@@ -18,21 +18,21 @@ METHOD SHUFFLE:
 :CLASS OB.DECK <SUPER OB.LIST
 
 :M DEAL:  ( -- index )
-	many: self ?dup
-	IF  choose
-		dup at: self
-		swap remove: self  ( repack deck )
-	ELSE
-		" DEAL: OB.DECK" " No More Cards Left!"
-		er_fatal ob.report.error
-	THEN
+    many: self ?dup
+    IF  choose
+        dup at: self
+        swap remove: self  ( repack deck )
+    ELSE
+        " DEAL: OB.DECK" " No More Cards Left!"
+        er_fatal ob.report.error
+    THEN
 ;M
 
 :M SHUFFLE: ( -- )
-	clear: self
-	limit: self 0
-	?DO i add: self
-	LOOP
+    clear: self
+    limit: self 0
+    ?DO i add: self
+    LOOP
 ;M
 
 ;CLASS

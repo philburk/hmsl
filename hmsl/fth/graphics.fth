@@ -58,26 +58,26 @@ V: GR-HEIGHT
 drop
 
 :STRUCT  RECT
-	short	rect_top
-	short	rect_left
-	short	rect_bottom
-	short	rect_right
+    short   rect_top
+    short   rect_left
+    short   rect_bottom
+    short   rect_right
 ;STRUCT
 
 :STRUCT WindowTemplate  \ Structure used to describe a new window
-\	long	wt_wStorage
-	struct	rect	wt_rect
-	long	wt_title
-\	short	wt_visible
-\	short	wt_procID
-\	long	wt_behind
-\	short	wt_goAwayFlag
-\	long	wt_refcon
+\   long    wt_wStorage
+    struct  rect    wt_rect
+    long    wt_title
+\   short   wt_visible
+\   short   wt_procID
+\   long    wt_behind
+\   short   wt_goAwayFlag
+\   long    wt_refcon
 ;STRUCT
 
 decimal
 : GR.OPENWINDOW ( new_window -- window , open a new window )
-	hostOpenWindow()
+    hostOpenWindow()
 ;
 
 : GR.CLOSEWINDOW ( window -- , close the window )
@@ -165,7 +165,7 @@ variable GR-MODE
 
 variable GR-FONT
 : GR.FONT!  ( font -- )
-	dup gr-font !
+    dup gr-font !
     gr.setport
     hostSetFont()
 ;
@@ -198,10 +198,10 @@ variable GR-FONT
 ;
 
 : GR.HIGHLIGHT ( X1 Y1 X2 Y2 -- , HIGHLIGHT region )
-	gr.mode@ >r
-	gr.color@ >r
-	GR_XOR_MODE gr.mode!
-	GR_YELLOW gr.color!
+    gr.mode@ >r
+    gr.color@ >r
+    GR_XOR_MODE gr.mode!
+    GR_YELLOW gr.color!
     gr.rect
     r> gr.color!
     r> gr.mode!
@@ -255,16 +255,16 @@ VARIABLE EV-LAST-MOUSEY
 ;
 
 : EV.GET.EVENT ( -- event_code , usage is host independant )
-	1000 60 / ( timeout = about 1 tick )
-	hostGetEvent()
-	\ do not return move events if tracking turned off
-	dup EV_MOUSE_MOVE =
-	IF
-	    ev-if-track-mouse @ 0=
-	    IF
-	        drop EV_NULL
-	    THEN
-	THEN
+    1000 60 / ( timeout = about 1 tick )
+    hostGetEvent()
+    \ do not return move events if tracking turned off
+    dup EV_MOUSE_MOVE =
+    IF
+        ev-if-track-mouse @ 0=
+        IF
+            drop EV_NULL
+        THEN
+    THEN
 ;
 
 : GR.GETXY ( -- x y )
@@ -272,7 +272,7 @@ VARIABLE EV-LAST-MOUSEY
 ;
 
 : ?CLOSEBOX ( -- flag , was the closebox hit )
-	ev.get.event EV_CLOSE_WINDOW =
+    ev.get.event EV_CLOSE_WINDOW =
 ;
 
 \ These next two routines are obsolete, but may be used for testing.
@@ -309,32 +309,32 @@ defer  HMSL.TITLE  ( -- $string )
 'c null is hmsl.title
 
 : Window.Defaults  ( WIndowTemplate -- , set reasonable defaults )
-	>r
-	80 r@ .. wt_rect ..! rect_top
-	10 r@ .. wt_rect ..! rect_left
-	320 r@ .. wt_rect ..! rect_bottom
-	400 r@ .. wt_rect ..! rect_right
-	" HMSL" r@ ..! wt_title
-	rdrop
+    >r
+    80 r@ .. wt_rect ..! rect_top
+    10 r@ .. wt_rect ..! rect_left
+    320 r@ .. wt_rect ..! rect_bottom
+    400 r@ .. wt_rect ..! rect_right
+    " HMSL" r@ ..! wt_title
+    rdrop
 ;
 
 \ Just open message window.
 : GR.OPENHMSL ( -- , Open HMSL window for tests. )
     HMSL-NewWindow window.defaults
-	hmsl.title ?dup
-	IF HMSL-NewWindow ..! wt_title
-	THEN
+    hmsl.title ?dup
+    IF HMSL-NewWindow ..! wt_title
+    THEN
 \
 \ use adjustable values 00001
-	gr_window_top hmsl-newwindow .. wt_rect ..! rect_top
-	gr_window_left hmsl-newwindow .. wt_rect ..! rect_left
-	gr_window_top gr_window_height + hmsl-newwindow .. wt_rect ..! rect_bottom
-	gr_window_left gr_window_width + hmsl-newwindow .. wt_rect ..! rect_right
+    gr_window_top hmsl-newwindow .. wt_rect ..! rect_top
+    gr_window_left hmsl-newwindow .. wt_rect ..! rect_left
+    gr_window_top gr_window_height + hmsl-newwindow .. wt_rect ..! rect_bottom
+    gr_window_left gr_window_width + hmsl-newwindow .. wt_rect ..! rect_right
 \
-	HMSL-NewWindow gr.openwindow dup hmsl-window ! ?dup
-	IF	gr.set.curwindow
-	ELSE ." Could not open HMSL window!" cr abort
-	THEN
+    HMSL-NewWindow gr.openwindow dup hmsl-window ! ?dup
+    IF  gr.set.curwindow
+    ELSE ." Could not open HMSL window!" cr abort
+    THEN
 ;
 
 : GR.CLOSEHMSL  ( -- , close HMSL window )
@@ -344,14 +344,14 @@ defer  HMSL.TITLE  ( -- $string )
 
 : HMSL.SET.WINDOW  ( -- )
     hmsl-window @ ?dup
-	IF gr.set.curwindow
-	ELSE ." HMSL.SET.WINDOW - not open!" abort
-	THEN
+    IF gr.set.curwindow
+    ELSE ." HMSL.SET.WINDOW - not open!" abort
+    THEN
 ;
 
 
 : EV.GET.KEY  ( -- char , get key data saved by EV.GET.CLASS )
-	[char] X
+    [char] X
 ;
 
 : EV.POLL.XY ( -- x y , get current x y from window )
@@ -373,9 +373,9 @@ defer  HMSL.TITLE  ( -- $string )
 ;
 
 : EV.FLUSH  ( -- , flush events from queue )
-	BEGIN
-		ev.get.event
-	EV_NULL = UNTIL
+    BEGIN
+        ev.get.event
+    EV_NULL = UNTIL
 ;
 
 
@@ -383,9 +383,9 @@ VARIABLE EV-LAST-TICKS    \ Saved for detecting double clicks.
 VARIABLE EV-PREV-TICKS    \ Time before for detecting double clicks.
 
 : EV.2CLICK? ( -- flag , true if last was double click )
-	ev-last-ticks @
-	ev-prev-ticks @ -
-	5 <
+    ev-last-ticks @
+    ev-prev-ticks @ -
+    5 <
 ;
 
 \ -----------------------------------------------------

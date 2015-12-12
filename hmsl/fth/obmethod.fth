@@ -21,8 +21,8 @@
 ANEW TASK-OBMETHOD.FTH
 
 : MI++  ( -- index , allocate new method index )
-	mi-next @  ( current )
-	dup 1+ mi-next !   ( increment )
+    mi-next @  ( current )
+    dup 1+ mi-next !   ( increment )
 ;
 
 \ Method contents:
@@ -33,45 +33,45 @@ ANEW TASK-OBMETHOD.FTH
 CREATE METHOD-LAST 0 ,
 
 : (METHOD)  ( <name:> -- , declare method for later definition )
-	CREATE
-		here  ( for linking )
-		mi++ ,  ( cell1: set index )
-		method-last @ , ( cell2: back pointer )
-		use->rel method-last !   ( point to PFA of this method. )
-		immediate  ( make it immediate )
-	DOES>   @  ob.bind  ( bind message to object )
+    CREATE
+        here  ( for linking )
+        mi++ ,  ( cell1: set index )
+        method-last @ , ( cell2: back pointer )
+        use->rel method-last !   ( point to PFA of this method. )
+        immediate  ( make it immediate )
+    DOES>   @  ob.bind  ( bind message to object )
 ;
 
 : METHOD  ( <name:>  -- , declare method if new )
-	>in @ >r \ save input pointer
-	ho.find.pfa
-	r> >in !  \ restore input pointer
-	IF
-		@ mi-next <
-		IF bl word count type ."  - method already declared." cr
-		ELSE   (method)
-		THEN
-	ELSE (method)
-	THEN
+    >in @ >r \ save input pointer
+    ho.find.pfa
+    r> >in !  \ restore input pointer
+    IF
+        @ mi-next <
+        IF bl word count type ."  - method already declared." cr
+        ELSE   (method)
+        THEN
+    ELSE (method)
+    THEN
 ;
 
 : OB.MIND@ ( <WORD> -- INDEX , return index )
-	ho.find.pfa NOT
-	IF
-		" OB.MIND@" " Method not declared!"
-		ER_FATAL  ER.REPORT
-	ELSE  ( save NFA of method for debugger )
-		dup pfa->nfa current-method !  @
-	THEN
+    ho.find.pfa NOT
+    IF
+        " OB.MIND@" " Method not declared!"
+        ER_FATAL  ER.REPORT
+    ELSE  ( save NFA of method for debugger )
+        dup pfa->nfa current-method !  @
+    THEN
 ;
 
 \ Pairs checking for Method definitions.
 : OB.CHECK:M  ( flag -- , report pairing error if flag different )
-	dup ob-inside-:m @ =
-	IF  not ob-inside-:m !
-	ELSE drop " OB.CHECK:M" " Missing :M or ;M in class definition!"
-		er_fatal er.report
-	THEN
+    dup ob-inside-:m @ =
+    IF  not ob-inside-:m !
+    ELSE drop " OB.CHECK:M" " Missing :M or ;M in class definition!"
+        er_fatal er.report
+    THEN
 ;
 
 \ :M is one of the most complicated words in the system.
@@ -81,77 +81,77 @@ CREATE METHOD-LAST 0 ,
 \ differences in the compilers.
 
 : :M ( <method> -- , COMPILE A METHOD FOR A CLASS )
-	false ob.check:m
-	ob.mind@  dup ob-current-mind !
-	:noname ( -- mi exectoken , save exectoken )
+    false ob.check:m
+    ob.mind@  dup ob-current-mind !
+    :noname ( -- mi exectoken , save exectoken )
 \
 \ Calculate offset into cfa table for this method.
-	swap cell*                ( -- cfa moffset )
+    swap cell*                ( -- cfa moffset )
 \ Store CFA in methods table.
-	ob-current-class @    ob_cfas +   ( -- base_cfas ) + !
+    ob-current-class @    ob_cfas +   ( -- base_cfas ) + !
 ;
 
 defer ;M immediate
 
 : <;M> ( -- , Terminate method definition )
-	true ob.check:m
-	current-method off
-	-1 ob-current-mind !
-	[compile] ;     ( Go back to interpretation mode , checks stack )
+    true ob.check:m
+    current-method off
+    -1 ob-current-mind !
+    [compile] ;     ( Go back to interpretation mode , checks stack )
 ;  immediate
 \ Use deferred ;M for Locals and Debugger.
-	' <;M> is ;M
-	
+    ' <;M> is ;M
+    
 
 0 MI-NEXT !  ( reset method counter )
 METHOD INIT:  ( INIT: MUST have method index = 0 !!! )
 
 \ This is handy for inside Forth words called from a method.
 : CURRENT.OBJECT ( -- object )
-	os.copy
+    os.copy
 \ use->rel \ 00001
 ;
 
 create MRESET-WARN true ,
 
 : MRESET ( <method> -- )
-	32 word
-	mreset-warn @
-	IF  ." MRESET "  $type
-		."  is no longer needed!" cr
-	ELSE drop
-	THEN
+    32 word
+    mreset-warn @
+    IF  ." MRESET "  $type
+        ."  is no longer needed!" cr
+    ELSE drop
+    THEN
 ;
 
 : [FORGET] ( -- , reset method index )
-	[forget]
-	method-last @ rel->use  ( get last method )
-	BEGIN dup here > ( is it forgotten )
-	WHILE ( -- method_pfa )
-		cell+ @ if.rel->use
-	REPEAT
-	dup if.use->rel method-last !  ( set pointer to last )
-	@ 1+ mi-next !    ( reset index so CFA tables don't grow)
-	0 ob-state !   ( reset state to avoid :CLASS warnings )
+    [forget]
+    method-last @ rel->use  ( get last method )
+    BEGIN dup here > ( is it forgotten )
+    WHILE ( -- method_pfa )
+        cell+ @ if.rel->use
+    REPEAT
+    dup if.use->rel method-last !  ( set pointer to last )
+    @ 1+ mi-next !    ( reset index so CFA tables don't grow)
+    0 ob-state !   ( reset state to avoid :CLASS warnings )
 ;
 
 : METHOD.LINK ( method_PFA -- index previous_pfa )
-	dup @ swap cell+ @ ?dup
-	IF rel->use
-	ELSE 0  ( for the Mac )
-	THEN
+    dup @ swap cell+ @ ?dup
+    IF rel->use
+    ELSE 0  ( for the Mac )
+    THEN
 ;
 
 : (.METHOD)  ( method_pfa method_index -- , print it )
-	4 .r space pfa->nfa id.
+    4 .r space pfa->nfa id.
 ;
 
 : ALL.METHODS ( -- list all methods )
-	cr method-last @ rel->use
-	BEGIN dup
-	WHILE dup method.link -rot
-		(.method) cr ?pause
-	REPEAT drop
+    cr method-last @ rel->use
+    BEGIN dup
+    WHILE dup method.link -rot
+        (.method) cr ?pause
+    REPEAT drop
 ;
 
 variable OB-SCRATCH
@@ -160,113 +160,113 @@ variable OB-SCRATCH
 \ Scan backwards in Class list to find first occurrence of method.
 \ Do this by checking superclass for bad method, index overrange,
 \   or 0 pointer.
-	2dup method@ >r  ( cfa to match with )
+    2dup method@ >r  ( cfa to match with )
 \ Give up if 0 super link.
-	BEGIN dup ..@ ob_super dup ob-scratch ! ( non-zero? )
-		IF  ( super class = 0 for object class )
+    BEGIN dup ..@ ob_super dup ob-scratch ! ( non-zero? )
+        IF  ( super class = 0 for object class )
 \ Give up if method count of superclass too low.
-			ob-scratch @ ..@ ob_#methods 2 pick >
+            ob-scratch @ ..@ ob_#methods 2 pick >
 \ Give up if method CFA doesn't match
-			IF  over ob-scratch @ method@ r@ =
-				IF drop ob-scratch @ ( use super ) false
-				ELSE true
-				THEN
-			ELSE true
-			THEN
-		ELSE true
-		THEN
-	UNTIL rdrop nip
+            IF  over ob-scratch @ method@ r@ =
+                IF drop ob-scratch @ ( use super ) false
+                ELSE true
+                THEN
+            ELSE true
+            THEN
+        ELSE true
+        THEN
+    UNTIL rdrop nip
 ;
 
 : METHODS.OF ( <class> -- , list valid methods for class )
-	cr ho.find.pfa
-	IF  dup ob.check.class
-		>r
+    cr ho.find.pfa
+    IF  dup ob.check.class
+        >r
 \ Start with last method defined, scan all methods,
 \ print it if its method cfa is not the OB.BAD.METHOD cfa.
-		method-last @ rel->use
-		BEGIN dup  ?pause
+        method-last @ rel->use
+        BEGIN dup  ?pause
 \ Link to next method header in dictionary.
-		WHILE dup method.link -rot ( -- prev pfa i )
+        WHILE dup method.link -rot ( -- prev pfa i )
 \ Check to see if class method table is big enough.
-			dup r@ ..@ ob_#methods <  ( -- prev pfa i f )
-			IF  ( prev pfa index )
+            dup r@ ..@ ob_#methods <  ( -- prev pfa i f )
+            IF  ( prev pfa index )
 \ Compare CFA of method.
-				dup r@ method@ 'c ob.bad.method -
-				IF  tuck (.method) 4 spaces
-					r@ ?defining.class pfa->nfa
-					BL 20 emit-to-column id. cr
-				ELSE 2drop
-				THEN
-			ELSE 2drop
-			THEN
-		REPEAT drop
-		rdrop
-	ELSE " METHODS.OF" " Not a class!"
-		er_fatal er.report
-	THEN
+                dup r@ method@ 'c ob.bad.method -
+                IF  tuck (.method) 4 spaces
+                    r@ ?defining.class pfa->nfa
+                    BL 20 emit-to-column id. cr
+                ELSE 2drop
+                THEN
+            ELSE 2drop
+            THEN
+        REPEAT drop
+        rdrop
+    ELSE " METHODS.OF" " Not a class!"
+        er_fatal er.report
+    THEN
 ;
 
 : IS.SUPER? { pfa_class1 pfa_class2 | flag -- flag , is class2 a superclass of class1 }
-	false -> flag
-	pfa_class1
-	BEGIN
-		..@ ob_super ?dup
-	WHILE
-		dup pfa_class2 =
-		IF
-			true -> flag
-		THEN
-	REPEAT
-	flag
+    false -> flag
+    pfa_class1
+    BEGIN
+        ..@ ob_super ?dup
+    WHILE
+        dup pfa_class2 =
+        IF
+            true -> flag
+        THEN
+    REPEAT
+    flag
 ;
 
 : INHERIT.METHOD  ( <method> <class> -- )
-	ob-state @ 0=
-	abort" INHERIT.METHOD only valid between :CLASS and ;CLASS"
+    ob-state @ 0=
+    abort" INHERIT.METHOD only valid between :CLASS and ;CLASS"
 \
 \ get method index of method given
-	ho.find.pfa NOT
-	IF " INHERIT.METHOD" " METHOD not found"
-		ER_FATAL ER.REPORT
-	THEN ( -- method-pfa )
-	@ >r \ get method index
+    ho.find.pfa NOT
+    IF " INHERIT.METHOD" " METHOD not found"
+        ER_FATAL ER.REPORT
+    THEN ( -- method-pfa )
+    @ >r \ get method index
 \
 \ get class
-	ho.find.pfa NOT
-	IF " INHERIT.METHOD" " CLASS not found"
-		ER_FATAL ER.REPORT
-	THEN ( -- class-pfa )
-	dup ob.check.class
+    ho.find.pfa NOT
+    IF " INHERIT.METHOD" " CLASS not found"
+        ER_FATAL ER.REPORT
+    THEN ( -- class-pfa )
+    dup ob.check.class
 \
 \ warn if not superclass of current class
-	ob-current-class @ over is.super? not
-	IF
-		." Warning from INHERIT.METHOD. "
-		dup pfa->nfa id.
-		."  not a SUPER-class of "
-		ob-current-class @ pfa->nfa id. cr
-	THEN
+    ob-current-class @ over is.super? not
+    IF
+        ." Warning from INHERIT.METHOD. "
+        dup pfa->nfa id.
+        ."  not a SUPER-class of "
+        ob-current-class @ pfa->nfa id. cr
+    THEN
 \
 \ get cfa for that method
-	.. ob_cfas
-	r@ cells + @  ( method cfa )
+    .. ob_cfas
+    r@ cells + @  ( method cfa )
 \
 \ save in current class
-	ob-current-class @  ( -- pfa-class )
-	.. ob_cfas
-	r> cells + !
+    ob-current-class @  ( -- pfa-class )
+    .. ob_cfas
+    r> cells + !
 ;
 
 \ Required Initialization
 : OB.INIT ( -- )
-	os.sp!   ( set object stack pointers )
-	0 ob-state !
-	0 ob-current-class !
-	0 ob-self-cfas !
-	0 ob-super-cfas !
-	0 ob-dooper-cfas !
-	true ob-if-check-bind !
+    os.sp!   ( set object stack pointers )
+    0 ob-state !
+    0 ob-current-class !
+    0 ob-self-cfas !
+    0 ob-super-cfas !
+    0 ob-dooper-cfas !
+    true ob-if-check-bind !
 ;
 : OB.TERM ( -- )
 ;
