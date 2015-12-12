@@ -711,7 +711,7 @@ CREATE MF-COUNT-CAPS 16 allot
 : $MIDIFILE{ $midifile0{ ;
 : }MIDIFILE }midifile0 ;
 
-if.forgotten }midifile0
+if.forgotten }midifile0
 
 : tmf
     " testzz5.mid" $midifile0{
