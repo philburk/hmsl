@@ -41,9 +41,9 @@ ANEW TASK-CTRL_COUNT
     1 gr.color!
     cg-3d @
     IF
-    	-1 0 cg.draw.part.bevel
+        -1 0 cg.draw.part.bevel
     ELSE
-    	-1 get.rect: self ug.box
+        -1 get.rect: self ug.box
     THEN
 ;
 
@@ -66,9 +66,9 @@ ANEW TASK-CTRL_COUNT
     THEN
     dup 256 u>
     IF
-    	" CG.DRAW.VALUE" " Text too long"
-    	er_return ob.report.error
-    	2drop
+        " CG.DRAW.VALUE" " Text too long"
+        er_return ob.report.error
+        2drop
     ELSE gr.type
     THEN
 ;

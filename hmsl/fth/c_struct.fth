@@ -41,8 +41,8 @@ decimal
         @ even-up here swap dup ( -- here # # )
         allot  ( make room for ivars )
         0 fill  ( initialize to zero )
-\		immediate \ 00001
-\	DOES> [compile] aliteral \ 00001
+\       immediate \ 00001
+\   DOES> [compile] aliteral \ 00001
 ;
 
 \ Contents of a structure definition.
@@ -95,24 +95,24 @@ decimal
 : (S+REL!)  ( ptr addr offset -- )  + >r if.use->rel r> ! ;
 
 : compile+!bytes ( offset size -- )
-\	." compile+!bytes ( " over . dup . ." )" cr
-	swap [compile] literal   \ compile offset into word
-	CASE
-	cell OF compile (s+!)  ENDOF
-	2 OF compile (s+w!)      ENDOF
-	1 OF compile (s+c!)      ENDOF
-	-4 OF compile (s+rel!)   ENDOF \ 00002
-	-2 OF compile (s+w!)     ENDOF
-	-1 OF compile (s+c!)     ENDOF
-	true abort" s! - illegal size!"
-	ENDCASE
+\   ." compile+!bytes ( " over . dup . ." )" cr
+    swap [compile] literal   \ compile offset into word
+    CASE
+    cell OF compile (s+!)  ENDOF
+    2 OF compile (s+w!)      ENDOF
+    1 OF compile (s+c!)      ENDOF
+    -4 OF compile (s+rel!)   ENDOF \ 00002
+    -2 OF compile (s+w!)     ENDOF
+    -1 OF compile (s+c!)     ENDOF
+    true abort" s! - illegal size!"
+    ENDCASE
 ;
 
 : !BYTES ( value address size -- )
     CASE
     cell OF ! ENDOF
-	-4 OF ( aptr addr )  swap if.use->rel swap ! ENDOF \ 00002
-	ABS
+    -4 OF ( aptr addr )  swap if.use->rel swap ! ENDOF \ 00002
+    ABS
        2 OF w! ENDOF
        1 OF c! ENDOF
        true abort" s! - illegal size!"
@@ -122,7 +122,7 @@ decimal
 \ These provide ways of setting and reading members values
 \ without knowing their size in bytes.
 : (S!) ( offset size -- , compile proper fetch )
-	state @
+    state @
     IF  compile+!bytes 
     ELSE ( -- value addr off size )
         >r + r> !bytes
@@ -130,7 +130,7 @@ decimal
 ;
 : S! ( value object <member> -- , store value in member )
     ob.stats?
-	(s!)
+    (s!)
 ; immediate
 
 : @BYTES ( addr +/-size -- value )
@@ -153,29 +153,29 @@ decimal
 : (S+W@)  ( addr offset -- val )  + w@ w->s ;
 
 : compile+@bytes ( offset size -- )
-\	." compile+@bytes ( " over . dup . ." )" cr
-	swap [compile] literal   \ compile offset into word
-	CASE
-	cell OF compile (s+@)  ENDOF
-	2 OF compile (s+uw@)      ENDOF
-	1 OF compile (s+uc@)      ENDOF
-	-4 OF compile (s+rel@)      ENDOF \ 00002
-	-2 OF compile (s+w@)     ENDOF
-	-1 OF compile (s+c@)     ENDOF
-	true abort" s@ - illegal size!"
-	ENDCASE
+\   ." compile+@bytes ( " over . dup . ." )" cr
+    swap [compile] literal   \ compile offset into word
+    CASE
+    cell OF compile (s+@)  ENDOF
+    2 OF compile (s+uw@)      ENDOF
+    1 OF compile (s+uc@)      ENDOF
+    -4 OF compile (s+rel@)      ENDOF \ 00002
+    -2 OF compile (s+w@)     ENDOF
+    -1 OF compile (s+c@)     ENDOF
+    true abort" s@ - illegal size!"
+    ENDCASE
 ;
 
 : (S@) ( offset size -- , compile proper fetch )
-	state @
-	IF compile+@bytes
-	ELSE >r + r> @bytes
-	THEN
+    state @
+    IF compile+@bytes
+    ELSE >r + r> @bytes
+    THEN
 ;
 
 : S@ ( object <member> -- value , fetch value from member )
     ob.stats?
-	(s@)
+    (s@)
 ; immediate
 
 exists? F* [IF]
@@ -188,22 +188,22 @@ exists? F* [IF]
 : FS! ( value object <member> -- , fetch value from member )
     ob.stats?
     1 floats <> abort" FS@ with non-float!"
-	state @
-	IF
-		[compile] literal
-		compile (s+f!)
-	ELSE (s+f!)
-	THEN
+    state @
+    IF
+        [compile] literal
+        compile (s+f!)
+    ELSE (s+f!)
+    THEN
 ; immediate
 : FS@ ( object <member> -- value , fetch value from member )
     ob.stats?
     1 floats <> abort" FS@ with non-float!"
-	state @
-	IF
-		[compile] literal
-		compile (s+f@)
-	ELSE (s+f@)
-	THEN
+    state @
+    IF
+        [compile] literal
+        compile (s+f@)
+    ELSE (s+f@)
+    THEN
 ; immediate
 [THEN]
 
@@ -222,18 +222,18 @@ exists? F* [IF]
 mapper map1
 
 : TT
-	-500 map1 s! map_s1
-	map1 s@ map_s1 -500 - abort" map_s1 failed!"
-	-500 map1 s! map_s2
-	map1 s@ map_s2 -500 $ FFFF and - abort" map_s2 failed!"
-	-89 map1 s! map_b1
-	map1 s@ map_b1 -89 - abort" map_s1 failed!"
-	here map1 s! map_r1
-	map1 s@ map_r1 here - abort" map_r1 failed!"
-	-89 map1 s! map_b2
-	map1 s@ map_b2 -89 $ FF and - abort" map_s2 failed!"
-	23.45 map1 fs! map_f1
-	map1 fs@ map_f1 f. ." =?= 23.45" cr
+    -500 map1 s! map_s1
+    map1 s@ map_s1 -500 - abort" map_s1 failed!"
+    -500 map1 s! map_s2
+    map1 s@ map_s2 -500 $ FFFF and - abort" map_s2 failed!"
+    -89 map1 s! map_b1
+    map1 s@ map_b1 -89 - abort" map_s1 failed!"
+    here map1 s! map_r1
+    map1 s@ map_r1 here - abort" map_r1 failed!"
+    -89 map1 s! map_b2
+    map1 s@ map_b2 -89 $ FF and - abort" map_s2 failed!"
+    23.45 map1 fs! map_f1
+    map1 fs@ map_f1 f. ." =?= 23.45" cr
 ;
 ." Testing c_struct.fth" cr
 TT

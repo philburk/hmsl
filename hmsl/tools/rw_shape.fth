@@ -2,7 +2,7 @@
 anew task-rw_shape
 
 : old
-	mode_oldfile filemode !
+    mode_oldfile filemode !
 ;
 
 v: fileid
@@ -59,12 +59,12 @@ v: temp-num
 
 : $write.shape ( shape $filename -- , write shape data )
        new 
-		$fopen ?dup 
-		IF
+        $fopen ?dup 
+        IF
                 fileid !
                 dup write.header
                 write.data
-				fileid @ fflush
+                fileid @ fflush
                 fileid @ fclose
         ELSE
                 abort" !!! Can't open file !!!"
@@ -72,8 +72,8 @@ v: temp-num
 ;
 
 : $read.shape ( shape $filename -- , read shape data )
-      	old 
-		$fopen ?dup IF
+        old 
+        $fopen ?dup IF
                 fileid !
                 dup read.header
                 read.data
@@ -90,4 +90,4 @@ v: temp-num
 : read.shape ( shape <filename> -- )
         fileword $read.shape
 ;
-
+

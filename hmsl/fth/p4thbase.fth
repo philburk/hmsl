@@ -19,21 +19,21 @@ decimal
 \ why isn't this in members.fth???
 : RPTR    ( <name> -- ) -4 bytes ; \ relative relocatable pointer 00001
 : ..!
-	state @
-	IF
-		postpone s!
-	ELSE
-		[compile] s!
-	THEN
+    state @
+    IF
+        postpone s!
+    ELSE
+        [compile] s!
+    THEN
 ; immediate
 
 : ..@
-	state @
-	IF
-		postpone s@
-	ELSE
-		[compile] s@
-	THEN
+    state @
+    IF
+        postpone s@
+    ELSE
+        [compile] s@
+    THEN
 ; immediate
 
 :  N>TEXT ( number -- addr count , convert number to text )
@@ -70,12 +70,12 @@ decimal
 HEX
     
 : CFA->PFA  ( cfa -- pfa )
-	>body
+    >body
 ;
 DECIMAL
 
 : CFA->NFA  ( cfa -- nfa )
-	>name
+    >name
 ;
 
 0 [if]
@@ -132,12 +132,12 @@ HO_MAX_INT 1+ CONSTANT HO_MIN_INT
 
 \ Used for debugging.
 : TIB.DUMP ( -- , Dump current line )
-	source type
+    source type
 ;
 
 \ ======= ====== ARITHMETIC GOODIES ======== ========
 : | ( n m -- n|m , for easy AMIGA calls )
-	OR
+    OR
 ;
 
 \ ======= ====== Memory Access ==== ======== =========
@@ -176,7 +176,7 @@ HO_MAX_INT 1+ CONSTANT HO_MIN_INT
 
 ." Declaring fake user variable!" cr
 : U: ( <name> -- , Make a variable )
-	V:
+    V:
 ;
 
 : XDUP ( x1 x2 x3 .. xN N -- x1 x2 .. x1 x2  , duplicate N items )
@@ -191,7 +191,7 @@ HO_MAX_INT 1+ CONSTANT HO_MIN_INT
 ;
 
 : IN.DICT?  ( address -- flag , inside dictionary? )
-	codebase here within?
+    codebase here within?
 ;
 
 
@@ -199,8 +199,8 @@ HO_MAX_INT 1+ CONSTANT HO_MIN_INT
 : BOTH ;   IMMEDIATE
 
 : DUP>R ( -- , must be inline , 00001 )
-	postpone dup
-	postpone >r
+    postpone dup
+    postpone >r
 ; immediate
 
 \ Benchmark Forth words.
@@ -227,7 +227,7 @@ V: MAX-INLINE   ( stub for JForth compatibility )
 : VALLOT ALLOT ;
 
 : RO.EXECUTE  ( rel_cfa -- )
-	rel->use execute
+    rel->use execute
 ;
 
 \ Support to allow the debugger to work with ODE.
@@ -243,9 +243,9 @@ variable CURRENT-METHOD
 
 : S->D  ( s -- d  )
     dup 0<
-	IF -1
-	ELSE 0
-	THEN
+    IF -1
+    ELSE 0
+    THEN
 ;
 
 : 2**N  ( n -- 2**n )
@@ -255,15 +255,15 @@ variable CURRENT-METHOD
 HEX
 0 [if]
 : ODD@  ( addr -- val , fetch from an odd address )
-	[	5896 w,   \   addq.l  #4,(a6)
-		205e w,   \   move.l  (a6)+,a0
-		1d20 w,	  \   move.l  -(a0),-(a6)
-		1d20 w, 1d20 w, 1d20 w,
-	]
+    [   5896 w,   \   addq.l  #4,(a6)
+        205e w,   \   move.l  (a6)+,a0
+        1d20 w,   \   move.l  -(a0),-(a6)
+        1d20 w, 1d20 w, 1d20 w,
+    ]
 ;
 ." Fix RETURN so that it works with DO LOOPs" cr bell
 : RETURN ( -- )
-	compile exit
+    compile exit
 ; immediate
 
 [then]
@@ -272,10 +272,10 @@ HEX
 : CELL/  2 arshift ;
 
 : EMIT-TO-COLUMN  ( char col -- )
-	out @ -
-	0 max 80 min  0
-	?DO dup emit
-	LOOP drop
+    out @ -
+    0 max 80 min  0
+    ?DO dup emit
+    LOOP drop
 ;
 
 \ Debug help
@@ -286,44 +286,44 @@ if-compile-debug off
 if-print-debug on
 
 : DBUG.TYPE ( addr cnt -- )
-	if-print-debug @
-	IF
-		type cr .s
-	ELSE
-		2drop
-	THEN
+    if-print-debug @
+    IF
+        type cr .s
+    ELSE
+        2drop
+    THEN
 ;
 
 : (DBUG")  ( -- , type following string )
-	r> count 2dup + aligned >r
-	dbug.type
+    r> count 2dup + aligned >r
+    dbug.type
 ;
 
 : DBUG"  ( string" -- )
-	if-compile-debug @
-	IF
-		state @
-		IF	compile (dbug")  ,"
-		ELSE ascii " parse dbug.type
-		THEN
-	ELSE
-		ascii " parse 2drop
-	THEN
+    if-compile-debug @
+    IF
+        state @
+        IF  compile (dbug")  ,"
+        ELSE ascii " parse dbug.type
+        THEN
+    ELSE
+        ascii " parse 2drop
+    THEN
 ; immediate
 
 ." WARNING: DO redefined as ?DO" cr
 : DO  ( l s -- , should we use ?DO )
-	postpone ?DO
+    postpone ?DO
 ; immediate
 
 : ASHIFT  ( n shifter -- , shift left if positive, right if negative )
-	dup 0>
-	IF
-		lshift
-	ELSE
-		negate
-		arshift
-	THEN
+    dup 0>
+    IF
+        lshift
+    ELSE
+        negate
+        arshift
+    THEN
 ;
 
 variable time-current
@@ -336,7 +336,7 @@ variable time-current
 : ?STOP ( -- false ) false ;
 
 : ? ( addr - , print contents of variable )
-	@ .
+    @ .
 ;
 
 $ 1D constant RIGHT_ARROW

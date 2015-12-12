@@ -49,12 +49,12 @@ VARIABLE STACK-HOLD
 
 
 : $EQUAL  ( $string1 $string2 -- true_if_= , case insens. )
-	>r count
-	r> count 2 pick =
-	IF text=?
-	ELSE
-		2drop drop false
-	THEN
+    >r count
+    r> count 2 pick =
+    IF text=?
+    ELSE
+        2drop drop false
+    THEN
 ;
 
 
@@ -136,21 +136,21 @@ V: ?term-count
 ;
 
 : Y/N  ( -- , ask for key )
-	BEGIN
-		." (y/n) " key dup emit tolower
-		dup [char] y = over [char] n = or 0=
-	WHILE drop cr
-	REPEAT [char] y =
+    BEGIN
+        ." (y/n) " key dup emit tolower
+        dup [char] y = over [char] n = or 0=
+    WHILE drop cr
+    REPEAT [char] y =
 ;
 
 : Y/N/Q  ( -- true_if_y , ask for key , abort on 'Q')
-	BEGIN
-		." (y/n/q) " key dup emit tolower
-		dup [char] q =
-		IF cr abort
-		THEN
-		dup [char] y = over [char] n = or 0=
-	WHILE drop cr
-	REPEAT [char] y =
+    BEGIN
+        ." (y/n/q) " key dup emit tolower
+        dup [char] q =
+        IF cr abort
+        THEN
+        dup [char] y = over [char] n = or 0=
+    WHILE drop cr
+    REPEAT [char] y =
 ;
 

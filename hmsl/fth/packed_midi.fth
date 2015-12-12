@@ -45,11 +45,11 @@ echo-capture on
     THEN
     captured-midi ensure.room ( -- a c )
     midi.pack
-	capture-time @ 0=
-	IF
-		vtime@ capture-time !  \ first time?
-	THEN
-	vtime@ rtc.time@ max capture-time @ -
+    capture-time @ 0=
+    IF
+        vtime@ capture-time !  \ first time?
+    THEN
+    vtime@ rtc.time@ max capture-time @ -
     tuck 0 search.back: captured-midi ( - a c i )
     insert: captured-midi
 ;

@@ -117,15 +117,15 @@ drop
 ;STRUCT
 
 : MP.DUMP ( state -- )
-	dup ..@ mp_needed ." #data = " . cr
-	." Message = "
-	4 0
-	DO
-		dup .. mp_byte0 i + c@ .hex
-	LOOP cr
-	drop
+    dup ..@ mp_needed ." #data = " . cr
+    ." Message = "
+    4 0
+    DO
+        dup .. mp_byte0 i + c@ .hex
+    LOOP cr
+    drop
 ;
-	
+    
 \ Declare structures for each port.
 
 midi_num_ports 1 =
@@ -168,15 +168,15 @@ CREATE MP-STATE-BASE sizeof() mp.state midi_num_ports * allot
 ;
 
 : MP.EXECUTE ( ????? -- , execute user parser )
-	rnow
-	mp-state ..@ mp_cvm_index mp.&cfa @ execute
+    rnow
+    mp-state ..@ mp_cvm_index mp.&cfa @ execute
 ;
 
 : MP.PUSH.DATA  ( n -- , push n data bytes)
-	mp-state .. mp_byte1 ( n addr )
-	dup>r + r> ( -- addr+n addr )
-	?DO i c@
-	LOOP
+    mp-state .. mp_byte1 ( n addr )
+    dup>r + r> ( -- addr+n addr )
+    ?DO i c@
+    LOOP
 ;
 
 : MP.GET.ADDR#  ( -- addr count , message as received )
@@ -185,25 +185,25 @@ CREATE MP-STATE-BASE sizeof() mp.state midi_num_ports * allot
 ;
 
 : MP.CHECK.STACK ( depth1 depth2 -- )
-	-
-	IF
-		mp-state mp.dump .s cr
-		." MIDI PARSER - User function stack error in: "
-		mp-state ..@ mp_cvm_index mp.&cfa @ >name id.
-		abort
-	THEN
+    -
+    IF
+        mp-state mp.dump .s cr
+        ." MIDI PARSER - User function stack error in: "
+        mp-state ..@ mp_cvm_index mp.&cfa @ >name id.
+        abort
+    THEN
 ;
 
 : MP.FLUSH  ( -- , execute currently accumulated command )
-	depth >r
+    depth >r
     mp-state ..@ mp_needed ?dup
     IF
-    	mp.push.data
+        mp.push.data
     THEN
     mp.execute
-	depth r> mp.check.stack
+    depth r> mp.check.stack
     0 mp-state ..! mp_count
-	1 mp-state .. mp_msg_count +!
+    1 mp-state .. mp_msg_count +!
 ;
 
 : MP.COMMAND>INDEX  ( cvm-byte -- index )
@@ -227,11 +227,11 @@ CREATE MP-STATE-BASE sizeof() mp.state midi_num_ports * allot
     mp-#bytes + c@ dup
     mp-state ..! mp_needed 0= ( date bytes needed for msg )
     IF ( complete, do it now )
-    	depth >r
-    	mp.execute
-    	depth r> mp.check.stack
-    	0 mp-state ..! mp_count
-		1 mp-state .. mp_msg_count +!
+        depth >r
+        mp.execute
+        depth r> mp.check.stack
+        0 mp-state ..! mp_count
+        1 mp-state .. mp_msg_count +!
     THEN
 ;
 
@@ -265,10 +265,10 @@ variable MP-LAST-TIME
     BEGIN
         midi.recv
         IF midi.rtc.time@ mp-last-time !
-        	$ F7 =
+            $ F7 =
         ELSE rtc.time@ mp-last-time @ - rtc.rate@ / 10 >
-        	abort" MP.EAT.SYSEX - timed out!"
-        	false
+            abort" MP.EAT.SYSEX - timed out!"
+            false
         THEN
     UNTIL
 ;
@@ -322,51 +322,51 @@ VARIABLE MIDI-PARSE-MAX
 \ these versions are different for speed reasons
 midi_num_ports 1 = [IF]
 : MIDI.PARSE.MANY ( -- , parse currently set port )
-	0 mp-state ..! mp_msg_count
-	BEGIN
-		midi.recv
-		IF  midi.parse.byte false
-		ELSE true
-		THEN
-		mp-state ..@ mp_msg_count midi-parse-max @ > OR
-	UNTIL
+    0 mp-state ..! mp_msg_count
+    BEGIN
+        midi.recv
+        IF  midi.parse.byte false
+        ELSE true
+        THEN
+        mp-state ..@ mp_msg_count midi-parse-max @ > OR
+    UNTIL
 ;
 : MIDI.PARSE.CURRENT ( -- , parse bytes recvd until now )
-	rtc.time@ 1+
-	BEGIN
-		midi.recv
-		IF
-			midi.parse.byte
+    rtc.time@ 1+
+    BEGIN
+        midi.recv
+        IF
+            midi.parse.byte
   \ quit if we are getting leter bytes
-			dup midi.rtc.time@ time<
-		ELSE true
-		THEN
-	UNTIL
-	drop
+            dup midi.rtc.time@ time<
+        ELSE true
+        THEN
+    UNTIL
+    drop
 ;
 [ELSE]
 : (MIDI.PARSE.MANY) ( -- , parse currently set port )
-	0 mp-state ..! mp_msg_count
-	BEGIN
-		midi.recv
-		IF  midi.parse.byte false
-		ELSE true
-		THEN
-		mp-state ..@ mp_msg_count midi-parse-max @ > OR
-	UNTIL
+    0 mp-state ..! mp_msg_count
+    BEGIN
+        midi.recv
+        IF  midi.parse.byte false
+        ELSE true
+        THEN
+        mp-state ..@ mp_msg_count midi-parse-max @ > OR
+    UNTIL
 ;
 : (MIDI.PARSE.CURRENT) ( -- , parse bytes recvd until now )
-	rtc.time@ 1+
-	BEGIN
-		midi.recv
-		IF
-			midi.parse.byte
+    rtc.time@ 1+
+    BEGIN
+        midi.recv
+        IF
+            midi.parse.byte
   \ quit if we are getting leter bytes
-			dup midi.rtc.time@ time<
-		ELSE true
-		THEN
-	UNTIL
-	drop
+            dup midi.rtc.time@ time<
+        ELSE true
+        THEN
+    UNTIL
+    drop
 ;
 [THEN]
 
@@ -394,7 +394,7 @@ midi_num_ports 1 > [IF] \ for multi port systems
     midi-port @
     midi_num_ports 0
     DO  i midi-port !
-    	(midi.parse.many)
+        (midi.parse.many)
     LOOP
     midi-port !
 ;
@@ -402,7 +402,7 @@ midi_num_ports 1 > [IF] \ for multi port systems
     midi-port @
     midi_num_ports 0
     DO  i midi-port !
-    	(midi.parse.current)
+        (midi.parse.current)
     LOOP
     midi-port !
 ;

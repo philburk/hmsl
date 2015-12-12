@@ -25,23 +25,23 @@ it in OMNI mode.
 
 To run these demos, you will need to run HMSL :
 
-	EXECUTE HMSL:ASSIGNS
-	RUN HMSL:HMSL4TH
+    EXECUTE HMSL:ASSIGNS
+    RUN HMSL:HMSL4TH
 
 Say 'Y' when asked whether to initialize.
 Now enter in the JForth window.
 
-	CD HP:
+    CD HP:
 
 This will place you in the directory containing the demos.
 
-	INCLUDE filename  ( eg. INCLUDE DEMO_PLAYER )
+    INCLUDE filename  ( eg. INCLUDE DEMO_PLAYER )
 
 The demo will usually tell you what to type in to start the demo.
 The name is typically the same as the file except the underscore
 is replaced by a period.
 
-	eg.  DEMO.PLAYER
+    eg.  DEMO.PLAYER
 
 It is remotely possible for one piece to leave the system
 in a state that interferes with the next piece.
@@ -50,7 +50,7 @@ If you suspect this, enter BYE, then rerun HMSL as before.
 You may also run out of dictionary space. The dictionary
 space can be reclaimed by entering:
 
-	COLD
+    COLD
 
 The demos can be terminated by hitting the close box.
 
@@ -188,9 +188,9 @@ presets on the keyboard will switch samples.
 I recommend copying some of these demos into your
 work directory and modifying them for fun and profit.
 
-	COPY HP:filename  HW:filename
-	CD HW:
+    COPY HP:filename  HW:filename
+    CD HW:
 
-	RUN editor filename
+    RUN editor filename
 
-	INCLUDE filename
+    INCLUDE filename

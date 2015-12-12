@@ -6,21 +6,21 @@ anew task-test_events.fth
 WindowTemplate testWindow
 
 : build.window
-	" A Test HMSL Window" testWindow ..! wt_Title
-	100 testWindow .. wt_Rect ..! rect_top
-	100 testWindow .. wt_Rect ..! rect_left
-	600 testWindow .. wt_Rect ..! rect_bottom
-	700 testWindow .. wt_Rect ..! rect_right
+    " A Test HMSL Window" testWindow ..! wt_Title
+    100 testWindow .. wt_Rect ..! rect_top
+    100 testWindow .. wt_Rect ..! rect_left
+    600 testWindow .. wt_Rect ..! rect_bottom
+    700 testWindow .. wt_Rect ..! rect_right
 ;
 
 : TEV.INIT
 \ hostInit()
     build.window
-	testWindow gr.openwindow gr-curwindow !
+    testWindow gr.openwindow gr-curwindow !
 ;
 
 : TEV.TERM
-	gr.closecurw
+    gr.closecurw
 ;
 
 : TEV.HANDLE.EVENT { event | ifquit -- ifquit , Process one event from event queue. }

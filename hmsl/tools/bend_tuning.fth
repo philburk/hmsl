@@ -19,22 +19,22 @@ fpinit
 $ 2000 constant BENDS_PER_SEMITONE
 12 constant SEMITONES_PER_OCTAVE
 : calc.bend.n { n bend_per_octave -- fbend }
-	n float fln
-	fln_2 f/
-	bend_per_octave float f*
+    n float fln
+    fln_2 f/
+    bend_per_octave float f*
 ;
 
 : calc.n>pbend ( n -- pbend )
-	BENDS_PER_SEMITONE SEMITONES_PER_OCTAVE *  \ pitch bends per octave
-	calc.bend.n
-	int
+    BENDS_PER_SEMITONE SEMITONES_PER_OCTAVE *  \ pitch bends per octave
+    calc.bend.n
+    int
 ;
 
 : gen.bend.table  ( max_n -- )
-	cr
-	1 max 1
-	DO  i calc.n>pbend . ."  ," cr
-	LOOP
+    cr
+    1 max 1
+    DO  i calc.n>pbend . ."  ," cr
+    LOOP
 ;
 
 \ 100 gen.bend.table
@@ -144,35 +144,35 @@ here swap - cell/ constant NUM_BENDS
 NUM_BENDS . ." bends in table" cr
 
 : N>PBEND  ( n -- pbend )
-	dup NUM_BENDS 1- >
-	IF
-		." N>PBEND - N too high = " dup . cr 0
-	ELSE
-		cell* bend-table + @
-	THEN
+    dup NUM_BENDS 1- >
+    IF
+        ." N>PBEND - N too high = " dup . cr 0
+    ELSE
+        cell* bend-table + @
+    THEN
 ;
 
 : RATIO>PBEND  { numer denom -- pbend }
-	numer n>pbend
-	denom n>pbend -
+    numer n>pbend
+    denom n>pbend -
 ;
 
 : PBEND>NOTE+PB  ( pbend -- note pbend , convert to reasonable note )
-	BENDS_PER_SEMITONE /mod swap
+    BENDS_PER_SEMITONE /mod swap
 ;
 
 : NOTE>PBEND ( note -- pbend )
-	BENDS_PER_SEMITONE *
+    BENDS_PER_SEMITONE *
 ;
 
 : PLAY.PBEND  { pbend vel -- }
-	pbend pbend>note+pb midi.pitch.bend
-	vel midi.noteon
+    pbend pbend>note+pb midi.pitch.bend
+    vel midi.noteon
 ;
 
 : PLAY.RATIO  { numer denom vel -- }
-	numer denom ratio>pbend \ convert the ratio to a relative pitch bend
-	60 note>pbend +    \ calc pbend of interval from Middle C
-	vel play.pbend     \ play interval
+    numer denom ratio>pbend \ convert the ratio to a relative pitch bend
+    60 note>pbend +    \ calc pbend of interval from Middle C
+    vel play.pbend     \ play interval
 ;
-
+

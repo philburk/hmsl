@@ -32,11 +32,11 @@ METHOD  CHAIN:
 
 :M CHAIN:  ( index -- index' , calculate weighted probablility )
     dup sum.row: self ?dup
-    IF	choose
-    	swap scan.row: self
+    IF  choose
+        swap scan.row: self
     THEN
 ;M
 
 ;CLASS
 
-
+

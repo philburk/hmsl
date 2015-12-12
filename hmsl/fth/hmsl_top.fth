@@ -145,7 +145,7 @@ variable NO-SAVE-FORTH
 
 : HMSL.INIT  ( -- , Initialize the system. )
     hmsl-if-init @ NOT
-    IF 	cr
+    IF  cr
         no-save-forth on
 \
         ob.init    \ set object stack, critical before any object use!!!
@@ -175,7 +175,7 @@ variable NO-SAVE-FORTH
 
 \ -------------------
 : QUIT.HMSL ( -- )
-	quit-hmsl on
+    quit-hmsl on
 ;
 
 defer CLOSEBOX.HIT
@@ -203,9 +203,9 @@ defer CLOSEBOX.HIT
 
          EV_KEY OF ev.get.key ?dup \ 00001
                  IF cg-current-screen @ ?dup
-                 	IF key: []
-                 	ELSE drop
-                 	THEN
+                    IF key: []
+                    ELSE drop
+                    THEN
                  THEN
              ENDOF
              
@@ -244,7 +244,7 @@ defer CLOSEBOX.HIT
     sys.start
     hmsl-graphics @
     IF  hmsl.open
-    	hmsl.1st.draw
+        hmsl.1st.draw
         ev.flush     ( flush old events )
         ev.track.off
     THEN

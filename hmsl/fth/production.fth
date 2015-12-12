@@ -18,11 +18,11 @@ V: CURRENT-PRODUCTION
 :CLASS OB.PRODUCTION <SUPER OB.MORPH
 
 :M ?NEW:  ( Max_elements -- addr | 0 )
-	1 ?NEW: SUPER   ( declare as one dimensional )
+    1 ?NEW: SUPER   ( declare as one dimensional )
 ;M
 
 :M NEW: ( max_elements -- , abort if error )
-	?new: self <new:error>
+    ?new: self <new:error>
 ;M
 
 \ Since this is a one-dimensional list, let's inherit a bunch

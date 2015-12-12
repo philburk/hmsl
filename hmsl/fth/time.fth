@@ -162,7 +162,7 @@ stack.header vtime-stack
 
 : DELAY  ( ticks -- , delay N ticks and advance VTIME )
 \ force VTIME to be N past now
-	dup vtime@ rtc.time@ max + vtime!
+    dup vtime@ rtc.time@ max + vtime!
     time@ +
     BEGIN dup time@ time<
     UNTIL drop
@@ -171,14 +171,14 @@ stack.header vtime-stack
 
 : ?DELAY  { ticks | flag -- flag , delay N ticks and advance VTIME }
 \ force VTIME to be N past now
-	ticks vtime@ rtc.time@ max + vtime!
+    ticks vtime@ rtc.time@ max + vtime!
     ticks time@ +
     BEGIN dup time@ time<
-		?terminal dup -> flag
-		OR
-	UNTIL
-	drop
-	flag
+        ?terminal dup -> flag
+        OR
+    UNTIL
+    drop
+    flag
 ;
 
 : SYS.TASK sys.task self.clock ;

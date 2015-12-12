@@ -26,33 +26,33 @@ VARIABLE OSSTACKPTR  ( defined in kernel )
 ; OS.SP!
 
 : OS.PUSH  ( N -- , Push onto object stack )
-	osstackptr @
-	cell-    \ pre-decrement
-	dup osstackptr !
-	!
+    osstackptr @
+    cell-    \ pre-decrement
+    dup osstackptr !
+    !
 ;
 
 : OS.DROP  ( -- , drop top of object stack )
-	cell osstackptr +!
+    cell osstackptr +!
 ;
 
 : OS.COPY  ( -- N , make copy of top of object stack )
-	osstackptr @ @
+    osstackptr @ @
 ;
 
 : OS+ ( M -- N+M , add top of object stack )
-	os.copy +
+    os.copy +
 ;
 
 : OS+PUSH  ( N -- , Add to OS TOP and push onto object stack )
-	os.copy +
-	os.push
+    os.copy +
+    os.push
 ;
 
 : OS.POP  ( -- N , pop from object stack )
-	osstackptr @ dup @
-	swap cell+   \ post-increment
-	osstackptr !
+    osstackptr @ dup @
+    swap cell+   \ post-increment
+    osstackptr !
 ;
 
 : OS.DEPTH ( -- #cells , depth of object stack )

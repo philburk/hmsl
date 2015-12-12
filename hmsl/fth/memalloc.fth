@@ -23,7 +23,7 @@ ANEW TASK-MEMALLOC.FTH
 \ Memory Manager
 
 : MM.ALLOC?  ( numbytes -- address | 0, allocate bytes) 
-	allocate drop
+    allocate drop
 ;
 : MM.ALLOC  ( numbytes -- address , allocate bytes) 
     allocate abort" MM.ALLOC - Not enough memory!!!"
@@ -32,7 +32,7 @@ ANEW TASK-MEMALLOC.FTH
 : MM.ZALLOC? ( numbytes -- address | 0, allocate and zero out memory )
     dup mm.alloc? dup
     IF dup rot 0 fill
-	ELSE nip
+    ELSE nip
     THEN
 ;
 
@@ -42,5 +42,5 @@ ANEW TASK-MEMALLOC.FTH
 ;
 
 : MM.FREE ( address -- , free allocated memory )
-   	free abort" MM.FREE - already freed!"
+    free abort" MM.FREE - already freed!"
 ;

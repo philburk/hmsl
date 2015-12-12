@@ -114,7 +114,7 @@ variable RC-ECHO-CHANNEL  ( which channel to echo on, or -1 )
     IF  swap dup rc-instr @ detranslate: []
         IF nip  ( replace by translated version )
         THEN
-	swap rc.add.note.on
+    swap rc.add.note.on
         rc-shape @ dup many: [] 1- swap  ( elmnt# shape )
         rc-instr @ element.on: [] ( just use ON when recording )
     ELSE rc-echo-channel @ dup 0<

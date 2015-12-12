@@ -14,21 +14,21 @@ ANEW TASK-TOP.FTH
 ;
 
 : HMSL.OPEN ( -- , open graphics window )
-	hmsl-window @ 0=
+    hmsl-window @ 0=
     IF  gr.openhmsl
-\	ELSE ." HMSL Window already open!" cr
-	THEN
-\	hmsl-window @ SelectWindow()
+\   ELSE ." HMSL Window already open!" cr
+    THEN
+\   hmsl-window @ SelectWindow()
 ;
 
 : HMSL.CLOSE ( -- , close graphics window )
-	hmsl-window @
-    IF	cg-current-screen @ ?dup
-		IF undraw: []
-		THEN
-		gr.closehmsl
-	THEN
-	menus.undraw
+    hmsl-window @
+    IF  cg-current-screen @ ?dup
+        IF undraw: []
+        THEN
+        gr.closehmsl
+    THEN
+    menus.undraw
 ;
 
 : HMSL.1ST.DRAW ( -- , draw initial screen )

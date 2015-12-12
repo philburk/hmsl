@@ -68,14 +68,14 @@ variable CG-DELTA-MODE
 ;
 
 :M PUT.VALUE: ( value part -- )
-	dup>r
-	ncg.clip.value  to: iv-cg-values
+    dup>r
+    ncg.clip.value  to: iv-cg-values
 \ update drawing of self if needed
-	?drawn: self
-	IF	r@ clear.part: self
-		r@ self draw.part: []
-	THEN
-	rdrop
+    ?drawn: self
+    IF  r@ clear.part: self
+        r@ self draw.part: []
+    THEN
+    rdrop
 ;M
 
 :M GET.VALUE:  ( part -- value )
@@ -111,9 +111,9 @@ variable CG-DELTA-MODE
 \ move in farther if using 3D bevel, 00001
     cg-3d @
     IF
-    	cg-bevel-thickness @ -
+        cg-bevel-thickness @ -
     ELSE
-    	1-
+        1-
     THEN
     iv-cg-width + swap gr.move
 \
@@ -134,10 +134,10 @@ variable CG-DELTA-MODE
        ?dup
        IF
 \ right justify text
-			2dup gr.textlen  ( -- a c xpixels )
-			iv-cg-leftx 2- swap -  ( -- addr count x' )
-			iv-cg-topy i 1+ iv-cg-height * + 4- gr.move
-			gr.type
+            2dup gr.textlen  ( -- a c xpixels )
+            iv-cg-leftx 2- swap -  ( -- addr count x' )
+            iv-cg-topy i 1+ iv-cg-height * + 4- gr.move
+            gr.type
        ELSE drop
        THEN
     LOOP

@@ -13,44 +13,44 @@ variable IF-HMSL-MENUS
 defer HMSL.RESET
 
 : MAIN.QUIT  ( - )
-	quit-hmsl on
+    quit-hmsl on
 ;
 
 133 constant HMSL_MENU_ID
-134	constant CUSTOM_MENU_ID
+134 constant CUSTOM_MENU_ID
 
 variable hmsl-menu-ptr
 variable custom-menu-ptr
 
 : MENUS.MAKE.SCR  ( -- , set text based on custom screen titles )
-	." MENUS.MAKE.SCR - unimplemented!" cr
+    ." MENUS.MAKE.SCR - unimplemented!" cr
 ;
 
 : MENUS.MAKE.HMSL  ( -- , create menus on the fly )
-	." MENUS.MAKE.HMSL - unimplemented!" cr
+    ." MENUS.MAKE.HMSL - unimplemented!" cr
 ;
 
 : MENUS.DISPOSE ( -- , get rid of them )
-	." MENUS.DISPOSE - unimplemented!" cr
+    ." MENUS.DISPOSE - unimplemented!" cr
 ;
 
 : MENUS.DRAW ( -- )
-	." MENUS.DRAW - unimplemented!" cr
+    ." MENUS.DRAW - unimplemented!" cr
 ;
 
 : MENUS.UNDRAW  ( -- )
-	." MENUS.UNDRAW - unimplemented!" cr
+    ." MENUS.UNDRAW - unimplemented!" cr
 ;
 
 : MENUS.INIT ( -- , Build Master Menu)
     " MENUS.INIT" debug.type
-\	'c menus.draw is draw.hmsl.menus
-\	'c menus.undraw is undraw.hmsl.menus
+\   'c menus.draw is draw.hmsl.menus
+\   'c menus.undraw is undraw.hmsl.menus
 ;
 
 : MENUS.TERM  ( -- )
-\	'c noop is draw.hmsl.menus
-\	'c noop is undraw.hmsl.menus
+\   'c noop is draw.hmsl.menus
+\   'c noop is undraw.hmsl.menus
 ;
 
 \ This word must be supported on different hosts.
@@ -63,7 +63,7 @@ variable custom-menu-ptr
 ;
 
 : PROCESS.CUSTOM.MENU  ( item -- )
-	1- 
+    1- 
     dup many: custom-screens <
     IF  cg-current-screen @ ?dup
         IF undraw: []
@@ -74,11 +74,11 @@ variable custom-menu-ptr
 ;
 
 : PROCESS.MENUS ( -- )
-	." PROCESS.MENUS - unimplemented!" cr
+    ." PROCESS.MENUS - unimplemented!" cr
 \    ev.get.menuitem  swap hmsl_menu_id =
-\	IF process.main.menu
-\	ELSE process.custom.menu
-\	THEN
+\   IF process.main.menu
+\   ELSE process.custom.menu
+\   THEN
 ;
 
 : SYS.INIT sys.init menus.init ;

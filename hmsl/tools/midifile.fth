@@ -10,7 +10,7 @@
 \ MOD: PLB 6/91 Add MIDIFILE1{
 \ 00001 PLB 9/5/91 Fix MIDIFILE1{ by c/i/j/
 \ 00002 PLB 3/17/92 Changed MF.WRITE.REL.SHAPE to make notes legato
-\		for notation programs.  Add $SAVE.REL.SHAPE and $..ABS..
+\       for notation programs.  Add $SAVE.REL.SHAPE and $..ABS..
 
 ANEW TASK-MIDIFILE
 decimal
@@ -252,11 +252,11 @@ variable MF-DIVISION \ packed division
 
 : FILEWORD  ( -- addr , parse name with quote delimiters)
     bl lword
-	dup 1+ c@ ascii " =  ( is first char a " )
-	IF ( -- addr , reset >in and reparse )
-		c@ negate >in +!
-		ascii " lword
-	THEN
+    dup 1+ c@ ascii " =  ( is first char a " )
+    IF ( -- addr , reset >in and reparse )
+        c@ negate >in +!
+        ascii " lword
+    THEN
 ;
 
 : MF.DOFILE ( <filename> -- )
@@ -307,7 +307,7 @@ variable MF-CHANNEL
         $ F0 OF ." F0 byte" cr mf.read.vln mf.process.sysex ENDOF
         $ F7 OF ." F7 byte" cr mf.read.vln mf.process.escape ENDOF
 \ Regular command.
-	dup mp.#bytes mf-#data !
+    dup mp.#bytes mf-#data !
         dup mp.handle.command
         mf-#data @ 0
         DO mf.read.byte mp.handle.data
@@ -404,7 +404,7 @@ ob.shape MF-SHAPE
 ;
 
 : MF.LOAD.SHAPE  ( track# <filename> -- , load track into mf-shape )
-	fileword $mf.load.shape
+    fileword $mf.load.shape
 ;
 
 : LOAD.ABS.SHAPE  ( shape <filename> -- )
@@ -542,15 +542,15 @@ variable MF-SHAPE-TIME
     shape reset: []
     shape many: [] 0
     DO
-		i 1 shape ed.at: [] -> note ( -- time note )
-		i 2 shape ed.at: [] -> vel ( -- time note vel )
-		mf-shape-time @	note vel mf.write.noteon
+        i 1 shape ed.at: [] -> note ( -- time note )
+        i 2 shape ed.at: [] -> vel ( -- time note vel )
+        mf-shape-time @ note vel mf.write.noteon
 \
 \ add to shape time so OFF occurs right before next notes ON 00002
-		i 0 shape ed.at: [] ( -- reltime )
-		mf-shape-time @ +
-		dup mf-shape-time !
-		note vel mf.write.noteoff
+        i 0 shape ed.at: [] ( -- reltime )
+        mf-shape-time @ +
+        dup mf-shape-time !
+        note vel mf.write.noteoff
     LOOP
 ;
 
@@ -570,11 +570,11 @@ variable MF-SHAPE-TIME
 ;
 
 : SAVE.REL.SHAPE  ( shape <name> -- , complete file output )
-	fileword $save.rel.shape
+    fileword $save.rel.shape
 ;
 
 : SAVE.ABS.SHAPE  ( shape <name> -- , complete file output )
-	fileword $save.abs.shape
+    fileword $save.abs.shape
 ;
 
 : MF.WRITE.TIMESIG  ( nn dd cc bb -- )
@@ -584,7 +584,7 @@ variable MF-SHAPE-TIME
     mf-event-pad     c!  ( 32nd notes in 24 clocks )
     mf-event-pad 4 $ 58 mf.write.meta
 ;
-	
+    
 : MF.WRITE.TEMPO  ( mics/beat -- )
     mf-event-pad !
     mf-event-pad 1+ 3 $ 51 mf.write.meta
@@ -628,57 +628,57 @@ variable MF-FIRST-WRITE
 CREATE MF-COUNT-CAPS 16 allot
 
 : CAP.GET.CHAN  ( status-byte -- channel# )
-	$ 0F and 1+
+    $ 0F and 1+
 ;
 
 : CAP.COUNT.CHANS ( -- #channels , count captured track/channels )
-	16 0
-	DO 0 i mf-count-caps + c!
-	LOOP
+    16 0
+    DO 0 i mf-count-caps + c!
+    LOOP
 \
     many: captured-midi 0
     DO i get: captured-midi midi.unpack drop c@
-		cap.get.chan 1-
-		nip
-		mf-count-caps + 1 swap c!  ( set flag in array )
+        cap.get.chan 1-
+        nip
+        mf-count-caps + 1 swap c!  ( set flag in array )
     LOOP
 \
-	0
-	16 0
-	DO i mf-count-caps + c@ +
-	LOOP
+    0
+    16 0
+    DO i mf-count-caps + c@ +
+    LOOP
 ;
 
 : (MF.CAPTURED>FILE1)  ( -- , write tracks with data to metafile )
-	cap.count.chans ( #chans )
-	\ write a track zero that should contain tempo maps
-	1+ \ for track zero
-	mf.begin.track  ( -- pos )
-	mf.write.end
-	mf.end.track
-	\ Write each track with sequence number
+    cap.count.chans ( #chans )
+    \ write a track zero that should contain tempo maps
+    1+ \ for track zero
+    mf.begin.track  ( -- pos )
+    mf.write.end
+    mf.end.track
+    \ Write each track with sequence number
     16 0
     DO i mf-count-caps + c@
-		IF
-			mf.begin.track  ( -- pos )
-    		0 0 ed.at: captured-midi mf-event-time !
-			i 1+ mf.write.seq#
-    		many: captured-midi 0
-    		DO
-    			i get: captured-midi midi.unpack
-				over c@ cap.get.chan 1- j  = \ 00001
-				IF
-					( time addr count -- )
-       				rot mf.write.event
-				ELSE 2drop drop
-				THEN
-    		LOOP
-    		mf.write.end
-			mf.end.track
+        IF
+            mf.begin.track  ( -- pos )
+            0 0 ed.at: captured-midi mf-event-time !
+            i 1+ mf.write.seq#
+            many: captured-midi 0
+            DO
+                i get: captured-midi midi.unpack
+                over c@ cap.get.chan 1- j  = \ 00001
+                IF
+                    ( time addr count -- )
+                    rot mf.write.event
+                ELSE 2drop drop
+                THEN
+            LOOP
+            mf.write.end
+            mf.end.track
        THEN
     LOOP
-	0 mf.seek
-	1 swap ticks/beat @ mf.write.header
+    0 mf.seek
+    1 swap ticks/beat @ mf.write.header
     mf.close
 ;
 
@@ -712,6 +712,7 @@ CREATE MF-COUNT-CAPS 16 allot
 : }MIDIFILE }midifile0 ;
 
 if.forgotten }midifile0
+
 
 : tmf
     " testzz5.mid" $midifile0{

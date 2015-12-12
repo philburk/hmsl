@@ -6,21 +6,21 @@ anew task-test_graphics.fth
 WindowTemplate testWindow
 
 : build.window
-	" A Test HMSL Window" testWindow ..! wt_Title
-	100 testWindow .. wt_Rect ..! rect_top
-	100 testWindow .. wt_Rect ..! rect_left
-	600 testWindow .. wt_Rect ..! rect_bottom
-	700 testWindow .. wt_Rect ..! rect_right
+    " A Test HMSL Window" testWindow ..! wt_Title
+    100 testWindow .. wt_Rect ..! rect_top
+    100 testWindow .. wt_Rect ..! rect_left
+    600 testWindow .. wt_Rect ..! rect_bottom
+    700 testWindow .. wt_Rect ..! rect_right
 ;
 
 : TGR.INIT
 \ hostInit()
     build.window
-	testWindow gr.openwindow gr-curwindow !
+    testWindow gr.openwindow gr-curwindow !
 ;
 
 : TGR.TERM
-	gr.closecurw
+    gr.closecurw
 ;
 
 if.forgotten tgr.term
@@ -28,12 +28,12 @@ if.forgotten tgr.term
 16 constant NUM_COLORS
 
 : random.rects
-	1000 0 DO
-		NUM_COLORS choose dup . cr gr.color!
-		4 0 DO 100 choose LOOP
+    1000 0 DO
+        NUM_COLORS choose dup . cr gr.color!
+        4 0 DO 100 choose LOOP
         .s cr
-		gr.rect
-	LOOP
+        gr.rect
+    LOOP
 ;
 
 : TGR.SHOW.COLORS { x0 y0 numColors -- }

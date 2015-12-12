@@ -162,14 +162,14 @@ defer DEFAULT.OFF.INTERP
 
 :M ELEMENT.ON: ( elmnt# shape -- )
     self iv-ins-on-cfa ?dup
-    IF	-3 exec.stack?
+    IF  -3 exec.stack?
     ELSE default.on.interp
     THEN
 ;M
 
 :M ELEMENT.OFF: ( elmnt# shape -- )
     self iv-ins-off-cfa ?dup
-    IF	-3 exec.stack?
+    IF  -3 exec.stack?
     ELSE default.off.interp
     THEN
 ;M

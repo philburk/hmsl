@@ -7,15 +7,15 @@
 \ anew task-load_hmsl.fth
 
 : '  ( <name> -- cfa , warn me if used the wrong way )
-	state @
-	IF
-		." ' used! ====================" cr
-		source type cr
-		." ============================" cr
-		postpone '
-	ELSE
-		'
-	THEN
+    state @
+    IF
+        ." ' used! ====================" cr
+        source type cr
+        ." ============================" cr
+        postpone '
+    ELSE
+        '
+    THEN
 ; immediate
 
 include? task-stubs.fth         fth/stubs.fth
@@ -70,22 +70,22 @@ include? toupper                fth/charmacr.fth
 
 include? task-misc_tools.fth    fth/misc_tools.fth
 include? task-utils.fth         fth/utils.fth
-include? stack.header 		    fth/stacks.fth
+include? stack.header           fth/stacks.fth
 
-include? task-errormsg.fth		fth/errormsg.fth
+include? task-errormsg.fth      fth/errormsg.fth
 include? task-memalloc.fth      fth/memalloc.fth
 
 
-include? task-global_data.fth	fth/global_data.fth
+include? task-global_data.fth   fth/global_data.fth
 include? task-service_tasks fth/service_tasks.fth
 
 \ MIDI and Time support-------------------------------
 if-load-midi @ [IF]
   include? task-midi_globals.fth fth/midi_globals.fth
-  include? task-time	        fth/time.fth
-  include? task-midi		    fth/midi.fth
-  include? task-midi_parser.fth	fth/midi_parser.fth
-  include? task-midi_text	    fth/midi_text.fth
+  include? task-time            fth/time.fth
+  include? task-midi            fth/midi.fth
+  include? task-midi_parser.fth fth/midi_parser.fth
+  include? task-midi_text       fth/midi_text.fth
 [ELSE]
   include? task-midi_stubs      fth/midi_stubs.fth
 [THEN]
@@ -107,14 +107,14 @@ include? task-ob_dlist.fth    fth/ob_dlist.fth
 \ Support for interactive screens
 if-load-graphics @ [IF]
   include? task-graphics.fth  fth/graphics.fth
-  include? task-graph_util	  fth/graph_util.fth
-  include? task-scg.fth		  fth/scg.fth
-  include? task-bevel		  fth/bevel.fth
-  include? task-control		  fth/control.fth
-  include? task-ctrl_count	  fth/ctrl_count.fth
+  include? task-graph_util    fth/graph_util.fth
+  include? task-scg.fth       fth/scg.fth
+  include? task-bevel         fth/bevel.fth
+  include? task-control       fth/control.fth
+  include? task-ctrl_count    fth/ctrl_count.fth
   include? task-ctrl_numeric  fth/ctrl_numeric.fth
   include? task-ctrl_fader    fth/ctrl_fader.fth
-  include? task-screen.fth		  fth/screen.fth
+  include? task-screen.fth        fth/screen.fth
   include? task-ctrl_text.fth     fth/ctrl_text.fth
   include? task-popup_text.fth    fth/popup_text.fth
 [THEN]
@@ -165,24 +165,24 @@ include? task-startup.fth     fth/startup.fth
 
 \ Editors in screen are loaded on top of the regular HMSL
 if-load-graphics @   if-load-shape-ed @ AND [IF]
-	include? task-shape_editor.fth fth/shape_editor.fth
+    include? task-shape_editor.fth fth/shape_editor.fth
 [THEN]
 
 0 [IF]
-	\ Load actions by Larry Polansky ,  "PERFORM" module
-	if-load-graphics @ if-load-actions @ AND [IF]
-		include? task-action_utils	fth/action_utils
-		include? task-ob_actions	fth/ob_actions
-		include? task-test_actions	fth/test_actions
-		include? task-action_table	fth/action_table
-		include? task-action_screen	fth/action_screen
-		include? task-action_top	fth/action_top
-	[THEN]
+    \ Load actions by Larry Polansky ,  "PERFORM" module
+    if-load-graphics @ if-load-actions @ AND [IF]
+        include? task-action_utils  fth/action_utils
+        include? task-ob_actions    fth/ob_actions
+        include? task-test_actions  fth/test_actions
+        include? task-action_table  fth/action_table
+        include? task-action_screen fth/action_screen
+        include? task-action_top    fth/action_top
+    [THEN]
 [THEN]
 
 \ load some tools
-include? task-midifile	           tools/midifile.fth
-include? task-score_entry	       tools/score_entry.fth
+include? task-midifile             tools/midifile.fth
+include? task-score_entry          tools/score_entry.fth
 
 mreset-warn on
 cr ." HMSL compilation finished." cr

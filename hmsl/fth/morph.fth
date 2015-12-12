@@ -111,7 +111,7 @@ METHOD EXEC.STACK:
     IV.LONG  IV-MORPH-DATA ( User data )
     IV.LONG IV-TIME-NEXT    ( execution time for next group )
     IV.LONG IV-REPCOUNT   \ Countdown times played.
-	iv.long	IV-HED-EXPANDED?
+    iv.long IV-HED-EXPANDED?
 \
 \ User Settable Parameters
     IV.LONG IV-WEIGHT     \ Statistical Weight.
@@ -125,8 +125,8 @@ METHOD EXEC.STACK:
     IV.SHORT IV-COL-DONE?   ( true if this rep is done )
     
 :M DEFAULT: ( -- , Set to default condition. )
-	0 iv=> iv-invoker
-	false iv=> iv-if-active
+    0 iv=> iv-invoker
+    false iv=> iv-if-active
     1 iv=> iv-weight
     1 iv=> iv-repeat
     0 iv=> iv-col-start-cfa
@@ -135,7 +135,7 @@ METHOD EXEC.STACK:
     0 iv=> iv-start-delay
     0 iv=> iv-repeat-delay
     0 iv=> iv-stop-delay
-	true iv=> iv-hed-expanded?
+    true iv=> iv-hed-expanded?
 ;M
     
 :M INIT:   ( -- )
@@ -258,17 +258,17 @@ METHOD EXEC.STACK:
 : IF.EXEC|DROP ( n cfa -- , execute or drop )
     ?dup
     IF
-    	-1 exec.stack?
+        -1 exec.stack?
     ELSE drop
     THEN
 ;
 
 : COL.EXEC.START ( -- , execute start function )
-	self iv-col-start-cfa if.exec|drop   \ 00001
+    self iv-col-start-cfa if.exec|drop   \ 00001
 ;
 
 : COL.EXEC.REPEAT ( -- , execute repeat function )
-   	self iv-col-repeat-cfa if.exec|drop   \ 00001
+    self iv-col-repeat-cfa if.exec|drop   \ 00001
 ;
 
 : COL.EXEC.STOP  ( -- , perform stop function )
@@ -277,7 +277,7 @@ METHOD EXEC.STACK:
 
 : MORPH.STOP  ( time -- )
     false iv=> iv-if-active
-	0 iv=> iv-repcount
+    0 iv=> iv-repcount
     col.exec.stop
     iv-stop-delay + dup vtime! ( adjust time )
     send.done  ( notify parent, if any )
@@ -333,7 +333,7 @@ METHOD EXEC.STACK:
 : COL.DO.REPEAT  ( -- , perform repeat function and decr counter )
     iv-repcount 1- dup iv=> iv-repcount 0>
     IF
-    	col.exec.repeat
+        col.exec.repeat
         iv-repeat-delay iv+> iv-time-next
         false iv=> iv-col-done?
     THEN
@@ -347,16 +347,16 @@ METHOD EXEC.STACK:
     false iv=> iv-col-done?
     iv-repeat 0>
     IF
-    	dup vtime!
-		col.exec.start
-    	iv-start-delay + dup iv=> iv-time-next vtime! ( apply delay )
+        dup vtime!
+        col.exec.start
+        iv-start-delay + dup iv=> iv-time-next vtime! ( apply delay )
         iv-repeat iv=> iv-repcount  ( set down-counter )
         self custom.exec: []   ( late bind to specific method )
         dup
         IF
-        	col.exec.stop
-        	over iv-stop-delay + vtime! ( adjust time )
-        	0 iv=> iv-invoker  false iv=> iv-if-active
+            col.exec.stop
+            over iv-stop-delay + vtime! ( adjust time )
+            0 iv=> iv-invoker  false iv=> iv-if-active
         THEN
     ELSE true  ( all done )
     THEN
@@ -462,25 +462,25 @@ variable HED-YPOS    \ used when drawing or scanning
 variable HED-XLEFT   \ left margin
 
 :M PUT.EXPANDED: ( flag -- )
-	iv=> iv-hed-expanded?
+    iv=> iv-hed-expanded?
 ;M
 :M GET.EXPANDED: ( -- flag )
-	iv-hed-expanded?
+    iv-hed-expanded?
 ;M
 
 :M DEINSTANTIATE.HIERARCHY:  ( -- , stub for non-hierarchical morphs )
 ;M
 
 :M CLASS.NAME: ( -- $name )
-	" OB.MORPH"
+    " OB.MORPH"
 ;M
 
 :M GET.HEIGHT: ( -- height , when drawn )
-	HED_LINE_HEIGHT
+    HED_LINE_HEIGHT
 ;M
 
 :M GET.WIDTH: ( -- width , when drawn )
-	300
+    300
 ;M
 
 0 constant MHED_EXP_X
@@ -490,156 +490,156 @@ variable HED-XLEFT   \ left margin
 
 :M XY.DRAW: { xpos ypos -- }
 \ Draw Line
-	xpos ypos gr.move
-	xpos 200 + ypos gr.draw
-	ypos hed_line_height + 2- -> ypos
+    xpos ypos gr.move
+    xpos 200 + ypos gr.draw
+    ypos hed_line_height + 2- -> ypos
 \
 \ Draw Expand gadget depending on state.
-	xpos mhed_exp_x + ypos gr.move
-	many: self 0>
-	self ?hierarchical: [] AND
-	IF
-		get.expanded: self
-		IF
-			" [-]"
-		ELSE
-			" [X]"
-		THEN
-	ELSE
-		" [ ]"
-	THEN
-	gr.text
+    xpos mhed_exp_x + ypos gr.move
+    many: self 0>
+    self ?hierarchical: [] AND
+    IF
+        get.expanded: self
+        IF
+            " [-]"
+        ELSE
+            " [X]"
+        THEN
+    ELSE
+        " [ ]"
+    THEN
+    gr.text
 \
 \ Draw Edit Gadget
-	xpos mhed_edit_x + ypos gr.move
-	" [E]" gr.text
+    xpos mhed_edit_x + ypos gr.move
+    " [E]" gr.text
 \
 \ Draw Repeat Count
-	xpos mhed_repeat_x + ypos gr.move
-	" [" gr.text
-	get.repeat: self n>text gr.type
-	" ]" gr.text
+    xpos mhed_repeat_x + ypos gr.move
+    " [" gr.text
+    get.repeat: self n>text gr.type
+    " ]" gr.text
 \
 \ Draw Name
-	xpos mhed_name_x + ypos gr.move
-	get.name: self gr.text
+    xpos mhed_name_x + ypos gr.move
+    get.name: self gr.text
 \
 \ Draw Class
-	"   - " gr.text self class.name: [] gr.text
+    "   - " gr.text self class.name: [] gr.text
 ;M
 
 :M EDIT: ( -- )
-	." Edit " name: self cr
+    ." Edit " name: self cr
 ;M
 
 variable MHED-CUR-MORPH
 
 \ Callback functions for Popup Text Requesters
 : MHED.SET.REPEAT ( $text -- )
-	number?
-	IF
-		drop mhed-cur-morph @ put.repeat: []
-	ELSE
-		." Bad number!" cr \ %Q
-	THEN
+    number?
+    IF
+        drop mhed-cur-morph @ put.repeat: []
+    ELSE
+        ." Bad number!" cr \ %Q
+    THEN
 ;
 
 : MHED.SET.NAME ( $text -- )
-	mhed-cur-morph @ put.name: []
+    mhed-cur-morph @ put.name: []
 ;
 
 :M HIT: { xoff yoff -- }
 \ offsets from top left corner
-	xoff mhed_edit_x <
-	IF
-		get.expanded: self 0= put.expanded: self
-	ELSE
-		xoff mhed_repeat_x <
-		IF
-			self edit: []
-		ELSE
-			xoff mhed_name_x <   \ edit REPEAT
-			IF
-				ev.getxy
-				yoff -
-				swap xoff - mhed_repeat_x + swap
-				popt.set.xy.dc
+    xoff mhed_edit_x <
+    IF
+        get.expanded: self 0= put.expanded: self
+    ELSE
+        xoff mhed_repeat_x <
+        IF
+            self edit: []
+        ELSE
+            xoff mhed_name_x <   \ edit REPEAT
+            IF
+                ev.getxy
+                yoff -
+                swap xoff - mhed_repeat_x + swap
+                popt.set.xy.dc
 \
-				get.repeat: self n>text   \ set default text
-				pad off pad $append
-				pad
-				8  'c mhed.set.repeat
-				self mhed-cur-morph !
-				open.popup.text
-			ELSE
-				ev.2click?
-				IF
-					ev.getxy yoff -
-					swap xoff - mhed_name_x + swap
-					popt.set.xy.dc
+                get.repeat: self n>text   \ set default text
+                pad off pad $append
+                pad
+                8  'c mhed.set.repeat
+                self mhed-cur-morph !
+                open.popup.text
+            ELSE
+                ev.2click?
+                IF
+                    ev.getxy yoff -
+                    swap xoff - mhed_name_x + swap
+                    popt.set.xy.dc
 \
-					self mhed-cur-morph !
-					get.name: self
-					16  'c mhed.set.name
-					open.popup.text
-				THEN
-			THEN
-		THEN
-	THEN
+                    self mhed-cur-morph !
+                    get.name: self
+                    16  'c mhed.set.name
+                    open.popup.text
+                THEN
+            THEN
+        THEN
+    THEN
 ;M
 
 \ generate source code to regenerate this object
 :M DUMP.SOURCE.NAME: ( -- )
-	>newline
-	self class.name: [] $type space name: self cr
+    >newline
+    self class.name: [] $type space name: self cr
 ;M
 
 : DUMP.MORPH.BODY ( -- , dump things common to all morphs )
-	>newline
-	iv-weight 1 = not
-	IF
-		tab iv-weight . ."  put.weight: " name: self cr
-	THEN
-	iv-repeat 1 = not
-	IF
-		tab iv-repeat . ."  put.repeat: " name: self cr
-	THEN
-	iv-start-delay 0>
-	IF
-		tab iv-start-delay . ."  put.start.delay: " name: self cr
-	THEN
-	iv-repeat-delay 0>
-	IF
-		tab iv-repeat-delay . ."  put.repeat.delay: " name: self cr
-	THEN
-	iv-stop-delay 0>
-	IF
-		tab iv-stop-delay . ."  put.stop.delay: " name: self cr
-	THEN
+    >newline
+    iv-weight 1 = not
+    IF
+        tab iv-weight . ."  put.weight: " name: self cr
+    THEN
+    iv-repeat 1 = not
+    IF
+        tab iv-repeat . ."  put.repeat: " name: self cr
+    THEN
+    iv-start-delay 0>
+    IF
+        tab iv-start-delay . ."  put.start.delay: " name: self cr
+    THEN
+    iv-repeat-delay 0>
+    IF
+        tab iv-repeat-delay . ."  put.repeat.delay: " name: self cr
+    THEN
+    iv-stop-delay 0>
+    IF
+        tab iv-stop-delay . ."  put.stop.delay: " name: self cr
+    THEN
 \
 \ Functions
-	iv-col-start-cfa 0>
-	IF
-		tab ." 'c " iv-col-start-cfa cfa.
-		."  put.start.function: " name: self cr
-	THEN
-	iv-col-repeat-cfa 0>
-	IF
-		tab ." 'c " iv-col-repeat-cfa cfa.
-		."  put.repeat.function: " name: self cr
-	THEN
-	iv-col-stop-cfa 0>
-	IF
-		tab ." 'c " iv-col-stop-cfa cfa.
-		."  put.stop.function: " name: self cr
-	THEN
+    iv-col-start-cfa 0>
+    IF
+        tab ." 'c " iv-col-start-cfa cfa.
+        ."  put.start.function: " name: self cr
+    THEN
+    iv-col-repeat-cfa 0>
+    IF
+        tab ." 'c " iv-col-repeat-cfa cfa.
+        ."  put.repeat.function: " name: self cr
+    THEN
+    iv-col-stop-cfa 0>
+    IF
+        tab ." 'c " iv-col-stop-cfa cfa.
+        ."  put.stop.function: " name: self cr
+    THEN
 ;
 :M DUMP.SOURCE.BODY: ( -- )
 ;M
 
 :M DUMP.SOURCE:
-	self dump.source.name: []
-	self dump.source.body: []
+    self dump.source.name: []
+    self dump.source.body: []
 ;M
 
 ;CLASS
@@ -654,22 +654,22 @@ variable MHED-CUR-MORPH
 V: HMSL-ABORT   ( Flag set true for top loop to abort. )
 
 : EXEC.OBJ|CFA  ( cfa|obj -- , execute as object or cfa )
-	dup ob.valid?
-	IF
-	    ." WARNING: EXEC.OBJ|CFA calling EXEC.STACK: []" cr
-		EXEC.STACK: []
-	ELSE
-		EXECUTE
-	THEN
+    dup ob.valid?
+    IF
+        ." WARNING: EXEC.OBJ|CFA calling EXEC.STACK: []" cr
+        EXEC.STACK: []
+    ELSE
+        EXECUTE
+    THEN
 ;
 
 : SYS.INIT
-	sys.init
-	'c exec.obj|cfa is deferred.execute
+    sys.init
+    'c exec.obj|cfa is deferred.execute
 ;
 
 : SYS.TERM
-	'c execute is deferred.execute
-	sys.term
+    'c execute is deferred.execute
+    sys.term
 ;
 

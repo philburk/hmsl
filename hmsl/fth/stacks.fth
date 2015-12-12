@@ -35,7 +35,7 @@ decimal
     IF .hex . ." - Custom stack full!" cr
     ELSE dup>r ..@ st_depth cell*
          r@ ..@ st_base rel->use + !
-	 1 r> .. st_depth +!
+     1 r> .. st_depth +!
     THEN
 ;
 

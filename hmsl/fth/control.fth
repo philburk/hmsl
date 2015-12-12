@@ -125,10 +125,10 @@ variable CG-BEVEL-THICKNESS
 2 cg-bevel-thickness !
 
 : CG.DEBUG.DRAW  ( -- , help debug drawing )
-	if-debug @
-	IF
-		>newline ." Drawing " self name: [] cr
-	THEN
+    if-debug @
+    IF
+        >newline ." Drawing " self name: [] cr
+    THEN
 ;
 
 ( Define OB.CONTROL Class )
@@ -180,8 +180,8 @@ variable CG-BEVEL-THICKNESS
     cg_enable_mask iv=> iv-cg-flag
     0 iv=> iv-cg-drawn
     0 iv=> iv-cg-active \ 00002
-	gr_small_text iv=> iv-cg-text-size
-	0 iv=> iv-cg-text-font
+    gr_small_text iv=> iv-cg-text-size
+    0 iv=> iv-cg-text-font
 ;M
 
 :M MANY:  ( -- n , number of values )
@@ -364,12 +364,12 @@ variable CG-BEVEL-THICKNESS
 ;M
 
 : CG.DRAW.TITLE ( -- , Draw title by control )
-	get.title: self   ?dup
-	IF
-		iv-cg-text-size gr.height! \ 1 gr.color!
-		iv-cg-text-font gr.font!
-		iv-cg-leftx iv-cg-topy  3 -
-		rot gr.xytext
+    get.title: self   ?dup
+    IF
+        iv-cg-text-size gr.height! \ 1 gr.color!
+        iv-cg-text-font gr.font!
+        iv-cg-leftx iv-cg-topy  3 -
+        rot gr.xytext
      THEN
 ;
 
@@ -382,10 +382,10 @@ variable CG-BEVEL-THICKNESS
 :M GET.INNER.RECT: { part | thick -- x1 y1 x2 y2 , in DC }
     cg-3d @
     IF
-    	cg-bevel-thickness @ -> thick
-	ELSE
-		1 -> thick
-	THEN
+        cg-bevel-thickness @ -> thick
+    ELSE
+        1 -> thick
+    THEN
     part self get.rect: []
     thick - >r
     thick - >r
@@ -398,11 +398,11 @@ variable CG-BEVEL-THICKNESS
 ;M
 
 :M DRAW:   ( -- , Draw control)
-	cg.debug.draw
+    cg.debug.draw
     gr.check  ( make sure there is a window open )
     iv-cg-draw-cfa ?dup
     IF
-    	0 exec.stack? \ 00004
+        0 exec.stack? \ 00004
     THEN
 \
     service.tasks
@@ -414,7 +414,7 @@ variable CG-BEVEL-THICKNESS
 :M UNDRAW:  ( -- )
     iv-cg-undraw-cfa ?dup
     IF
-    	0 exec.stack? \ 00004
+        0 exec.stack? \ 00004
     THEN
     false iv=> iv-cg-drawn
 ;M
@@ -428,10 +428,10 @@ variable CG-BEVEL-THICKNESS
 
 :M EXECUTE: ( cfa | 0 -- , execute DOWN/MOVE/UP function )
     ?dup
-    IF	>r
-    	iv-cg-lasthit dup self get.value: []
-		swap
-		r> -2 exec.stack? \ 00004
+    IF  >r
+        iv-cg-lasthit dup self get.value: []
+        swap
+        r> -2 exec.stack? \ 00004
     THEN
 ;M
 
@@ -462,7 +462,7 @@ variable CG-BEVEL-THICKNESS
 ;M
 
 :M KEY: ( character -- , process keyboard input 00001 )
-	drop
+    drop
 ;M
 
 : PRINT.XYWH ( x y w h -- )
@@ -511,25 +511,25 @@ METHOD CLEAR.PART:
     IV.SHORT IV-CG-NUMY
 
 : CG.PUT.ENABLE ( flag part# -- )
-	dup>r at: iv-cg-flags swap
-	IF cg_enable_mask OR
-	ELSE cg_enable_mask invert and
-	THEN r> to: iv-cg-flags
+    dup>r at: iv-cg-flags swap
+    IF cg_enable_mask OR
+    ELSE cg_enable_mask invert and
+    THEN r> to: iv-cg-flags
 ;
 
 :M PUT.ENABLE: ( flag part# -- , enable or disable cell )
-	dup 0<
-	IF
+    dup 0<
+    IF
 \ do them all if part# is less then zero, 00003
-		drop
-		many: iv-cg-flags 0
-		?DO
-			dup i cg.put.enable
-		LOOP
-		drop
-	ELSE
-		cg.put.enable
-	THEN
+        drop
+        many: iv-cg-flags 0
+        ?DO
+            dup i cg.put.enable
+        LOOP
+        drop
+    ELSE
+        cg.put.enable
+    THEN
 ;M
 :M GET.ENABLE:  ( part# -- flag , Check for enable bit )
       at: iv-cg-flags cg_enable_mask and
@@ -569,9 +569,9 @@ METHOD CLEAR.PART:
         swap iv-cg-width  + swap
         cg-3d @   \ inset bottom left corner to avoid overlap
         IF
-        	1- >r 1- r>
-\        	cg-bevel-thickness @ - >r 
-\        	cg-bevel-thickness @ - r>
+            1- >r 1- r>
+\           cg-bevel-thickness @ - >r 
+\           cg-bevel-thickness @ - r>
         THEN
     THEN
 ;M
@@ -604,7 +604,7 @@ METHOD CLEAR.PART:
     IF  gr.color@ swap get.inner.rect: self
         gr.highlight
         gr.color!
-	ELSE drop
+    ELSE drop
     THEN
     
 ;M
@@ -617,9 +617,9 @@ METHOD CLEAR.PART:
 ;M
 
 : CG.DRAW.PART.BEVEL { part down? -- }
-	 part self get.rect: []
-	 down?
-	 2 draw.thick.bevel
+     part self get.rect: []
+     down?
+     2 draw.thick.bevel
 ;
 
 :M DRAW:   ( -- , Draw control grid )
@@ -629,33 +629,33 @@ METHOD CLEAR.PART:
     service.tasks
     1 gr.color!
     service.tasks
-	cg-3d @ 0=
-	IF
-    	get.xy.dc: self
-    	get.wh.dc: self
-    	iv-cg-numx iv-cg-numy ug.grid  ( draw grid )
-	THEN
+    cg-3d @ 0=
+    IF
+        get.xy.dc: self
+        get.wh.dc: self
+        iv-cg-numx iv-cg-numy ug.grid  ( draw grid )
+    THEN
     service.tasks
 \
 \ Draw each part
     size: iv-cg-values ?dup
-	IF  0
-    	DO
+    IF  0
+        DO
 \
 \ draw 3d bevel if desired
-			cg-3d @
-			IF
-				i 0 cg.draw.part.bevel
-			THEN
+            cg-3d @
+            IF
+                i 0 cg.draw.part.bevel
+            THEN
 \
-    		i self draw.part: []
-    		service.tasks
+            i self draw.part: []
+            service.tasks
         LOOP
-	ELSE
-		cg-3d @
-		IF
-			0 0 cg.draw.part.bevel
-		THEN
+    ELSE
+        cg-3d @
+        IF
+            0 0 cg.draw.part.bevel
+        THEN
     THEN
 ;M
 
@@ -673,7 +673,7 @@ METHOD CLEAR.PART:
     ob.array  iv-cg-texts
 
 :M FREE:  ( -- )
-	free: super
+    free: super
     free: iv-cg-texts
 ;M
 
@@ -704,9 +704,9 @@ METHOD CLEAR.PART:
     iv-cg-text-cfa dup
     IF r@ swap 1 exec.stack?  ( addr count , 00004 )
     ELSE drop r@ at: iv-cg-texts ?dup
-		IF cg.fixtext count
-		ELSE 0 0
-		THEN
+        IF cg.fixtext count
+        ELSE 0 0
+        THEN
     THEN service.tasks
 \
     dup  ( -- addr count count )
@@ -716,11 +716,11 @@ METHOD CLEAR.PART:
         service.tasks
         r@ cg.part.topleft
         iv-cg-text-size dup gr.height!
-		+ 1+ swap 6 + swap  ( calc bottom left )
-		iv-cg-text-font gr.font!
+        + 1+ swap 6 + swap  ( calc bottom left )
+        iv-cg-text-font gr.font!
         gr.move   gr.type
 \
-		r@ get.enable: self 0=
+        r@ get.enable: self 0=
         IF r@ gr.end.dim
         THEN
     ELSE 2drop

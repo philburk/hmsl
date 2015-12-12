@@ -209,9 +209,9 @@ exists? OB.MIDI.INSTRUMENT [IF]
 : PL.START.ABSOLUTE ( -- , Set start timer )
     iv-pl-if-absolute
     IF  iv-time-next
-    	iv-pl-elmnt# 1+ iv-pl-dur-dim iv-pl-shape ed.at: []
-    	iv-pl-offset-add - -
-    		iv=> iv-pl-start-time
+        iv-pl-elmnt# 1+ iv-pl-dur-dim iv-pl-shape ed.at: []
+        iv-pl-offset-add - -
+            iv=> iv-pl-start-time
         iv-pl-offset-add iv+> iv-time-next  ( set time for first event )
     THEN
 ;
@@ -242,25 +242,25 @@ exists? OB.MIDI.INSTRUMENT [IF]
 \
 \ Get first shape.
     many: self 0>
-    IF	iv-pl-offset 0=  \ leave at current position if there
-    	IF	reset: self
-			pl.next.shape
-    	ELSE
-    		iv-pl-shape  \ avoid crash if set.timer past end
-    		IF	pl.start.absolute
-    		ELSE
-    			0 iv=> iv-pl-offset
-    			0 iv=> iv-pl-offset-add
-    			0 iv=> iv-pl-start-rep
-    		THEN
-    		iv-repcount iv-pl-start-rep - iv=> iv-repcount
-    	THEN
-    	iv-pl-shape 0=
-    	iv-repcount 0= OR
-    	IF  iv-time-next true   ( let's not bother )
-    	ELSE custom.exec: super
-    	THEN
-    	iv-pl-offset-add iv+> iv-time-next
+    IF  iv-pl-offset 0=  \ leave at current position if there
+        IF  reset: self
+            pl.next.shape
+        ELSE
+            iv-pl-shape  \ avoid crash if set.timer past end
+            IF  pl.start.absolute
+            ELSE
+                0 iv=> iv-pl-offset
+                0 iv=> iv-pl-offset-add
+                0 iv=> iv-pl-start-rep
+            THEN
+            iv-repcount iv-pl-start-rep - iv=> iv-repcount
+        THEN
+        iv-pl-shape 0=
+        iv-repcount 0= OR
+        IF  iv-time-next true   ( let's not bother )
+        ELSE custom.exec: super
+        THEN
+        iv-pl-offset-add iv+> iv-time-next
     ELSE
        " CUSTOM.EXEC: OB.PLAYER" " No shapes!"
        er_return ob.report.error
@@ -301,7 +301,7 @@ exists? OB.MIDI.INSTRUMENT [IF]
 \ Is there a DUR.FUNCTION ?
     iv-pl-dur-function ?dup
     IF >r iv-pl-elmnt# iv-pl-shape r>
-    	-1 exec.stack?  \ should ( e# sh -- dur )
+        -1 exec.stack?  \ should ( e# sh -- dur )
 \
 \ If not, then if no DUR dimension, use DURATION
     ELSE iv-pl-dur-dim 0<
@@ -326,87 +326,87 @@ exists? OB.MIDI.INSTRUMENT [IF]
 : PL.SCAN.TIME ( time -- total false | time true )
 \ scan for element and shape
 { time | shape num atime ifhit -- endat ifhit , calculate duration }
-	0 -> ifhit
+    0 -> ifhit
 \ Is there a DUR.FUNCTION ?
     iv-pl-dur-function
     IF 0 0
     ELSE iv-pl-dur-dim 0<
         IF \ use constant duration
-        	time iv-jb-duration /mod -> num
-        	iv=> iv-pl-offset-add
-        	many: self 0
-        	?DO	i at: self ( shape )
-        		many: [] dup num >
-        		IF	drop num i goto: self
-        			true -> ifhit LEAVE
-        		ELSE num swap - -> num
-        		THEN
-        	LOOP
-        	num iv-jb-duration * ifhit
+            time iv-jb-duration /mod -> num
+            iv=> iv-pl-offset-add
+            many: self 0
+            ?DO i at: self ( shape )
+                many: [] dup num >
+                IF  drop num i goto: self
+                    true -> ifhit LEAVE
+                ELSE num swap - -> num
+                THEN
+            LOOP
+            num iv-jb-duration * ifhit
         ELSE iv-pl-if-absolute  ( calc ticks to next event )
 \ ABSOLUTE TIME
-            IF	0 -> num
-        		many: self 0
-        		?DO	i at: self ( shape ) dup -> shape
-        			many: [] 0
-        			?DO i iv-pl-dur-dim shape ed.at: [] -> atime
-        				num atime + time >=
-        				IF	i j goto: self
-        					num atime + time - iv=> iv-pl-offset-add
-        					true -> ifhit
-        					LEAVE
-        				THEN
-        			LOOP
-        			ifhit
-        			IF LEAVE  ( got it )
-        			THEN
-        			atime num + -> num
-        		LOOP
-        		num ifhit
+            IF  0 -> num
+                many: self 0
+                ?DO i at: self ( shape ) dup -> shape
+                    many: [] 0
+                    ?DO i iv-pl-dur-dim shape ed.at: [] -> atime
+                        num atime + time >=
+                        IF  i j goto: self
+                            num atime + time - iv=> iv-pl-offset-add
+                            true -> ifhit
+                            LEAVE
+                        THEN
+                    LOOP
+                    ifhit
+                    IF LEAVE  ( got it )
+                    THEN
+                    atime num + -> num
+                LOOP
+                num ifhit
 \ RELATIVE TIME
-			ELSE 0 -> num
-        		many: self 0
-        		?DO	i at: self ( shape ) dup -> shape
-        			many: [] 0
-        			?DO	i iv-pl-dur-dim shape ed.at: [] ( Rtime )
-        				num + -> num
-        				num time >=
-        				IF	i j goto: self
-        					num time - iv=> iv-pl-offset-add
-        					true -> ifhit LEAVE
-        				THEN
-        			LOOP
-        			ifhit
-        			IF LEAVE  ( got it )
-        			THEN
-        		LOOP
-        		num ifhit
-			THEN
-		THEN
-	THEN
+            ELSE 0 -> num
+                many: self 0
+                ?DO i at: self ( shape ) dup -> shape
+                    many: [] 0
+                    ?DO i iv-pl-dur-dim shape ed.at: [] ( Rtime )
+                        num + -> num
+                        num time >=
+                        IF  i j goto: self
+                            num time - iv=> iv-pl-offset-add
+                            true -> ifhit LEAVE
+                        THEN
+                    LOOP
+                    ifhit
+                    IF LEAVE  ( got it )
+                    THEN
+                LOOP
+                num ifhit
+            THEN
+        THEN
+    THEN
 ;
 
 :M SET.TIMER:  ( time -- )
-	dup iv=> iv-pl-offset
-	0 iv=> iv-pl-start-rep
-	iv-start-delay - \ account for start delay
-	dup pl.scan.time 0=  \ Is it NOT in first repitition?
-	IF ( time' total )
-		dup 0>
-		IF	( time' total )
-			iv-repeat-delay +
-			/mod dup iv-repeat < \ Is it before end of last?
-			IF	( rem n )
-				iv=> iv-pl-start-rep
-				pl.scan.time
-			ELSE dup iv-repeat min  iv=> iv-pl-start-rep
-			THEN
-		THEN
-	THEN
-	iv-repeat iv-pl-start-rep - iv=> iv-repcount
-	2drop
+    dup iv=> iv-pl-offset
+    0 iv=> iv-pl-start-rep
+    iv-start-delay - \ account for start delay
+    dup pl.scan.time 0=  \ Is it NOT in first repitition?
+    IF ( time' total )
+        dup 0>
+        IF  ( time' total )
+            iv-repeat-delay +
+            /mod dup iv-repeat < \ Is it before end of last?
+            IF  ( rem n )
+                iv=> iv-pl-start-rep
+                pl.scan.time
+            ELSE dup iv-repeat min  iv=> iv-pl-start-rep
+            THEN
+        THEN
+    THEN
+    iv-repeat iv-pl-start-rep - iv=> iv-repcount
+    2drop
 ;M
-		
+        
 : PL.SET.DELAY ( delay -- , set timenext to delay )
     iv-jb-epochal?
     IF iv+> iv-time-next
@@ -500,7 +500,7 @@ exists? OB.MIDI.INSTRUMENT [IF]
     BEGIN
         iv-time-next doitnow?
     WHILE
-    	iv-pl-on# 0<   iv-pl-leg-shape OR
+        iv-pl-on# 0<   iv-pl-leg-shape OR
         IF  iv-pl-elmnt# iv-pl-shape many: [] 1- <
             IF pl.next.elmnt
             ELSE
@@ -554,12 +554,12 @@ OB.SHAPE SH1
 : TP.FILL
     32 4 new: sh1
     20 0
-    DO	10 i *
-    	10 i +
-    	100 8 add: sh1
+    DO  10 i *
+        10 i +
+        100 8 add: sh1
     LOOP
 \
-	default: ins1
+    default: ins1
     4 new: pl1
     sh1 add: pl1
     ins1 put.instrument: pl1
