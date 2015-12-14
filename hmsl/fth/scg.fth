@@ -17,7 +17,7 @@
 \ MOD: PLB 10/27/89 Add SCG.BOX
 \ MOD: PLB 10/31/90 Add rounding for better precision.
 
-ANEW TASK-SCG.FTH
+ANEW TASK-SCG
 
 \ Fixed point shift scale factor.
 -10 CONSTANT SCG_SCALE  ( negative to optimize wc->dc )

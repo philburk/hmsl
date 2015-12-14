@@ -2,7 +2,7 @@
 
 include? ob.xy.controller h:ctrl_xy
 
-ANEW TASK-TEST_XY
+ANEW TASK-DEMO_XY
 
 OB.XY.CONTROLLER  CG-XY-2D
 OB.XY.CONTROLLER  CG-XY-HORIZONTAL

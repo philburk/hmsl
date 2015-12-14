@@ -6,7 +6,7 @@
 \ Based on an idea by Saul Lande
 \ Copyright 1989 Phil Burk
 
-ANEW TASK-MANY_NOTES
+ANEW TASK-DEMO_MANY
 
 : INTERP.MANY.ON  { elmnt shape instr | velo -- , play several notes }
 \

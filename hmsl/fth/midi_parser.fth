@@ -37,7 +37,7 @@
 
 decimal
 
-ANEW TASK-MIDI_PARSER.FTH
+ANEW TASK-MIDI_PARSER
 
 : MP!, ( addr value -- addr+cell , store into vectors and advance pointer )
     midi_num_ports 0

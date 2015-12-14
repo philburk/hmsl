@@ -18,7 +18,7 @@ include? ob.fader  h:ctrl_fader
 include? ob.screen h:screen
 decimal
 
-ANEW TASK-EXAMPLE_GRIDS
+ANEW TASK-DEMO_CONTROLS
 
 variable MF-CHANNEL
 1 MF-CHANNEL !

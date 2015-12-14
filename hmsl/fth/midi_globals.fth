@@ -1,6 +1,6 @@
 \ MIDI Global deferred words used by both MIDI systems.
 
-ANEW TASK-MIDI_GLOBALS.FTH
+ANEW TASK-MIDI_GLOBALS
 
 \ -------------------------------MIDI Globals--------------------------------
 0   CONSTANT Modem_Port

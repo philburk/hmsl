@@ -5,7 +5,7 @@
 \ Author: Phil Burk
 \ Copyright 1991 Phil Burk
 
-ANEW TASK-DBL_LIST.FTH
+ANEW TASK-DBL_LIST
 
 :STRUCT DoubleList
     RPTR dll_Head

@@ -4,7 +4,7 @@
 \ Author: Phil Burk
 \ Copyright 1995 Phil Burk
 
-anew task-test_ode.fth
+ANEW TASK-TEST_ODE
 
 \ create a simple object
 object obj1

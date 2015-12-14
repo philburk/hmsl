@@ -6,7 +6,7 @@
 \ MOD: PLB 6/1/87 Add JOBs
 \ MOD: PLB 1/26/88 Add INIT: of INS-MIDI-5 thru 8
 
-ANEW TASK-STOCK_MORPHS.FTH
+ANEW TASK-STOCK_MORPHS
 
 \ Declare some shapes to use.
 OB.SHAPE SHAPE-1

@@ -25,7 +25,7 @@
 \ 00001 PLB 12/4/91 Moved DONE check before execution of function
 \   of functions.  Check stack for depth changes.
 
-ANEW TASK-JOB.FTH
+ANEW TASK-JOB
 
 METHOD PUT.DURATION:        METHOD GET.DURATION:
 METHOD PUT.INSTRUMENT:      METHOD GET.INSTRUMENT:

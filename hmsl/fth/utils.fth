@@ -13,7 +13,7 @@
 \ MOD: PLB 9/3/87 Add DEBUG.TYPE
 \ MOD: PLB 5/17/91 Merged with ho:more_utils
 
-ANEW TASK-UTILS.FTH
+ANEW TASK-UTILS
 
 VARIABLE IF-DEBUG   ( debug trace flag )
 VARIABLE IF-TESTING ( flag for loading test code )

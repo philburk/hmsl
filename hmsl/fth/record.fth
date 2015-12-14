@@ -7,7 +7,7 @@
 \ MOD: PLB 7/18/90 Allow record on only one channel, RC-REC-CHANNEL
 \ MOD: PLB 7/19/90 In SH.EXPAND.NOTES add TARGET EMPTY: []
 
-ANEW TASK-RECORD.FTH
+ANEW TASK-RECORD
 
 \ Utilities for converting one shape to another.
 \ The two most common forms for storing notes in a shape are:

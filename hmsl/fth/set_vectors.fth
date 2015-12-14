@@ -5,7 +5,7 @@
 \ Copyright 1986 -  Phil Burk, Larry Polansky, David Rosenboom.
 \ All Rights Reserved
 
-ANEW TASK-SET_VECTORS.FTH
+ANEW TASK-SET_VECTORS
 
 DEFER OLD.ABORT
 

@@ -1,7 +1,7 @@
 \ Test basic portable graphics code
 \ Author: rnm & Phil Burk
 
-anew task-test_graphics.fth
+ANEW TASK-TEST_GRAPHICS
 
 WindowTemplate testWindow
 

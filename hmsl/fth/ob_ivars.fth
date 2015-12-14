@@ -14,7 +14,7 @@
 \ 00001 PLB 4/8/92 Added IV.ARRAY
 \ 960710 PLB Add IV.RPTR
 
-ANEW TASK-OB_IVARS.FTH
+ANEW TASK-OB_IVARS
 
 decimal
 \ Support for fetching and storing into instance variables .

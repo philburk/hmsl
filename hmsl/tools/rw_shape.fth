@@ -1,5 +1,5 @@
 
-anew task-rw_shape
+ANEW TASK-RW_SHAPE
 
 : old
     mode_oldfile filemode !

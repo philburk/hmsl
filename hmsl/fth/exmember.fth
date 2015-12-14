@@ -29,7 +29,7 @@
 \ 941102 RDG port to pforth
 \ 941108 PLB more porting to pforth. Use ?LITERAL instead os smart literal.
 
-ANEW TASK-MEMBER
+ANEW TASK-EXMEMBER
 decimal
 
 : FIND.BODY   ( -- , pfa true | $name false , look for word in dict. )

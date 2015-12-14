@@ -76,7 +76,7 @@
 \ 00005 PLB 5/21/92 Add EDIT: method.
 \ 00006 PLB 8/3/92 Mac objects now absolute addresses.
 
-ANEW TASK-COLLECTION.FTH
+ANEW TASK-COLLECTION
 
 \ Control whether a collection is simply sequential, simply parallel
 \ or uses a complex behavior.

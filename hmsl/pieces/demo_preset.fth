@@ -4,7 +4,7 @@
 \
 \ Author: Phil Burk 1989
 
-ANEW TASK-DEMO_PRESET  ( mark beginning of file )
+ANEW TASK-DEMO_PRESET
 
 \ Declare objects needed by piece.
 OB.SHAPE           DPR-SHAPE

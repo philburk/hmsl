@@ -23,7 +23,7 @@ exists? play{
 
 decimal
 
-ANEW TASK-Score_Entry
+ANEW TASK-SCORE_ENTRY
 
 false [IF]
 This system can be used to build shapes for playback.

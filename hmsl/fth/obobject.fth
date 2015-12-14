@@ -42,7 +42,7 @@
 \ 00003 PLB 6/9/92 Clear object validation key when deinstantiated.
 \ 00004 PLB 8/3/92 Objects put absolute address on stack.
 
-ANEW TASK-OBOBJECT.FTH
+ANEW TASK-OBOBJECT
 
 variable DYNOBJ-COUNT
 

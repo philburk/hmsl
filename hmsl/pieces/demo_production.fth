@@ -7,7 +7,7 @@
 \ Copyright 1987 - Phil Burk , Larry Polansky, David Rosenboom.
 \ MOD: PLB 6/4/87 Use 0STUFF:
 
-ANEW TASK-DEMO_PRODUCTIONS
+ANEW TASK-DEMO_PRODUCTION
 
 \ Create 3 productions to modify shape.
 OB.PRODUCTION PROD-RANDOMIZE
