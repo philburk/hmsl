@@ -1,7 +1,7 @@
 \ Experiments with Score Entry System
 \ 10/11/90
 
-anew TASK-SES_FUN
+ANEW TASK-SES_FUN
 
 : POLY  ( -- )
     par{ 1/12 c4 c# d d# e f

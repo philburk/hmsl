@@ -8,7 +8,7 @@
 \ * Copyright 1989 Phil Burk , All Rights Reserved                    *
 \ *********************************************************************
 
-ANEW TASK-CHARMACR.FTH
+ANEW TASK-CHARMACR
 
 HEX
 

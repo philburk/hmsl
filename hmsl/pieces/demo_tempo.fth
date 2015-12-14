@@ -15,7 +15,7 @@
 \ Copyright 1986 -  Phil Burk, Larry Polansky, David Rosenboom.
 \ All Rights Reserved
 
-ANEW TASK-TEMPO
+ANEW TASK-DEMO_TEMPO
 
 \ Variables to use for scaling time.
 V: TEMPO*

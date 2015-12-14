@@ -4,7 +4,7 @@
 \ 050106 - unstub some MIDI and clock commands
 \ 060108 - change behavior of DO to match F83 style
 
-anew task-stubs.fth
+ANEW TASK-STUBS
 
 variable host-debug
 host-debug on

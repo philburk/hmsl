@@ -9,7 +9,7 @@
 
 include? seq.init hsc:sequencer
 
-ANEW TASK-HP:DEMO_SEQ
+ANEW TASK-DEMO_SEQ
 
 ." Read and edit this file to customize it for your setup." cr
 score{

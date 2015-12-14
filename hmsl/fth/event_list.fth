@@ -15,7 +15,7 @@
 \ 00003 PLB 3/12/92 Removed NEXT-EVENT-TIME, used DO LOOP
 \       in DO.NEXT.EVENT to prevent race condition, c/index/indx/
 
-ANEW TASK-EVENT_LIST.FTH
+ANEW TASK-EVENT_LIST
 
 OB.SHAPE EVENT-SHAPE
 

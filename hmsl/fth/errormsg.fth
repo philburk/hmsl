@@ -13,7 +13,7 @@
 \ MOD: PLB 3/21/90 Removed call to TIB.DUMP
 \ 00001 PLB 1/22/92 Use 0 ERROR instead of ABORT
 
-ANEW TASK-ERRORMSG.FTH
+ANEW TASK-ERRORMSG
 
 : $. ( $string -- , print it )
     count type

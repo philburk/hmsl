@@ -1,6 +1,6 @@
 \ Test ODE with local variables.
 
-anew task-test_ode_locals.fth
+ANEW TASK-TEST_ODE_LOCALS
 
 METHOD  TEST.SUM:
 

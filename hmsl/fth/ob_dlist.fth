@@ -1,7 +1,7 @@
 \ Doubly Linked List
 \
 
-anew task-ob_dlist.fth
+ANEW TASK-OB_DLIST
 
 METHOD GET.PREVIOUS:  ( -- prev_node )
 METHOD GET.NEXT:  ( next_node -- )

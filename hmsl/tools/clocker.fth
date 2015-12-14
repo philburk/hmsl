@@ -1,6 +1,6 @@
 \ Job that sends MIDI clock pulses every N ticks
 
-ANEW TASK-MIDI_CLOCKER
+ANEW TASK-CLOCKER
 
 OB.JOB CLOCKER-JOB
 

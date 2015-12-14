@@ -51,7 +51,7 @@
 
 decimal
 
-ANEW TASK-CONTROL.FTH
+ANEW TASK-CONTROL
 
 \ If you want to put the NFA of a word in a grid cell.
 \ This word will fix the name, done automatically.

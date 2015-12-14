@@ -18,7 +18,7 @@
 \ MOD: PLB 3/31/92 Added INHERIT.METHOD
 \ 00001 PLB 8/3/92 Objects put absolute address on stack.
 
-ANEW TASK-OBMETHOD.FTH
+ANEW TASK-OBMETHOD
 
 : MI++  ( -- index , allocate new method index )
     mi-next @  ( current )

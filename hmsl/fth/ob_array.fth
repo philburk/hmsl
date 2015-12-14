@@ -7,7 +7,7 @@
 \ MOD: PLB 5/17/91 Split OBJ_ARRAY into OBJ_OBJECT & OBJ_ARRAY
 \ 00001 PLB 8/27/91 Fixed }stuff when filling completely.
 
-ANEW TASK-OB_ARRAY.FTH
+ANEW TASK-OB_ARRAY
 
 
 \ Support ARRAY classes ----------------------------------

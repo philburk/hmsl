@@ -1,7 +1,7 @@
 \ Test event generation
 \ Author: rnm & Phil Burk
 
-anew task-test_events.fth
+ANEW TASK-TEST_EVENTS
 
 WindowTemplate testWindow
 

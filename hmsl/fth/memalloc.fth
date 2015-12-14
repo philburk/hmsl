@@ -13,7 +13,7 @@
 \
 \ -------------------------------------------------------
 
-ANEW TASK-MEMALLOC.FTH
+ANEW TASK-MEMALLOC
 
 \ -------------------------------------------------------
 \ Host Independant Memory Manager

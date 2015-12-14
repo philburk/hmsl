@@ -31,7 +31,7 @@
 \ 00009 PLB 8/3/92 Use OB.IN.DICT? to avoid relative/absolute issue.
 \ 00010 PLB 10/1/92 Clean up titles on Mac
 
-ANEW TASK-SCREEN.FTH
+ANEW TASK-SCREEN
 
 10 constant MAX_CUSTOM_SCREENS
 OB.OBJLIST CUSTOM-SCREENS

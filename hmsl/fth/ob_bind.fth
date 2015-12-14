@@ -27,7 +27,7 @@
 \ 00005 PLB 8/3/92 Objects put absolute address on stack.
 \ 19961106 PLB Port binding to objects passed as local variables to Pforth.
 
-ANEW TASK-OB_BIND.FTH
+ANEW TASK-OB_BIND
 
 ( Bind a method found in a CFA array. )
 ( Object base holds a pointer to an array of method CFAS )

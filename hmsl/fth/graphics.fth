@@ -14,7 +14,7 @@
 \ 920708 PLB Allow variable size HMSL window default.
 \ 930107 PLB Added ?CLOSEBOX
 
-ANEW TASK-GRAPHICS.FTH
+ANEW TASK-GRAPHICS
 
 \ Define device resolution 00003
   0 value GR_XMIN

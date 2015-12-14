@@ -5,7 +5,7 @@
 
 include? task-score_entry ht:score_entry
 decimal
-anew task-demo_structure
+ANEW TASK-DEMO_STRUCTURE
 
 \ Edit the tendencies of the structure ---------------
 \ This will eventually turn into a tabular Shape Editor

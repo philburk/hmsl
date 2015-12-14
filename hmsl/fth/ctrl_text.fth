@@ -6,7 +6,7 @@
 \
 \ 00001 PLB 2/6/92 Use EXEC.STACK?
 
-ANEW TASK-CTRL_TEXT.FTH
+ANEW TASK-CTRL_TEXT
 decimal
 
 \ -----------------------------------------------

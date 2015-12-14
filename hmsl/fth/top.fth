@@ -3,7 +3,7 @@
 \ Copyright 1987 - Phil Burk, Larry Polansky, David Rosenboom
 \ All Rights Reserved
 
-ANEW TASK-TOP.FTH
+ANEW TASK-TOP
 
 \ Open the HMSL window for graphics I/O
 

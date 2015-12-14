@@ -7,7 +7,7 @@
 include? par{  ht:score_entry
 include? ratio>pbend  bend_tuning.fth
 
-anew task-bend_score.fth
+ANEW TASK-BEND_SCORE
 
 
 : MIDI.SET.RPN { val rpn -- , set registered parameter number }

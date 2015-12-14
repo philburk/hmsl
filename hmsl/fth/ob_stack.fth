@@ -13,7 +13,7 @@
 \ MOD: PLB 4/25/88 Add OS_MAX_DEPTH and expand to 256 bytes.
 \ 951227 PLB Converted to high level for pForth
 
-ANEW TASK-OB_STACK.FTH
+ANEW TASK-OB_STACK
 
 256 constant OS_SIZE
 os_size cell/ constant OS_MAX_DEPTH

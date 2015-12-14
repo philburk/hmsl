@@ -3,7 +3,7 @@
 \ Author: Phil Burk
 \ Copyright 1989 Phil Burk
 
-ANEW TASK-STACK.FTH
+ANEW TASK-STACKS
 decimal
 
 :STRUCT STACK.HEADER

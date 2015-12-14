@@ -1,6 +1,6 @@
 \ Global Data used by many modules in HMSL
 
-ANEW TASK-GLOBAL_DATA.FTH
+ANEW TASK-GLOBAL_DATA
 
 variable HMSL-WINDOW   ( window to use for drawing HMSL )
 

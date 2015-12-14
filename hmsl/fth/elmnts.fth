@@ -28,7 +28,7 @@
 \ MOD: PLB 12/1/90 Make NEXTWRAP: loop without error.
 \ 00001 PLB 1/14/92 Use ?NEW: in ?INSTANTIATE:
 
-ANEW TASK-ELMNTS.FTH
+ANEW TASK-ELMNTS
 
 \ Declare OB.ELMNTS methods.
 METHOD RESET:   ( First method )

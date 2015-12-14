@@ -2,7 +2,7 @@
 \ Play in Gamut using MIDI input.
 \
 \ Author: Phil Burk
-ANEW TASK-BUBBLE
+ANEW TASK-BUBBLE1
 
 VARIABLE LAST-NOTE
 VARIABLE LAST-VELOCITY

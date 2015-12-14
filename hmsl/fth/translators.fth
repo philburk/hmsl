@@ -13,7 +13,7 @@
 \ MOD: PLB 5/28/87 Add PRINT:
 \ MOD: PLB 10/30/90 Use Floored division in TRANSLATE: for rems>0
 
-ANEW TASK-TRANSLATORS.FTH
+ANEW TASK-TRANSLATORS
 
 \ Declare methods.
 METHOD TRANSLATE:

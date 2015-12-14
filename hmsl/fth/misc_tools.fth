@@ -12,7 +12,7 @@
 \ MOD: PLB 9/25/91 Added REDUCE.FRACTION , RATIO+
 \ 00001 PLB 2/6/92 Add ?EXECUTE and EXEC.STACK?
 
-ANEW TASK-MISC_TOOLS.FTH
+ANEW TASK-MISC_TOOLS
 
 \ Larry's Utilities ========================================
 

@@ -84,7 +84,7 @@
 \ 00004 PLB 8/3/92  Use ..@ and ..! to simplify code
 \ 00005 PLB 8/3/92 Objects put absolute address on stack.
 
-ANEW TASK-OB_MAIN.FTH
+ANEW TASK-OB_MAIN
 
 \ Error Detection and reporting. ================================
 : OB.BAD.METHOD ( use_obj_base -- , Give error for undefined meth.)

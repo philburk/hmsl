@@ -9,7 +9,7 @@
 \ MOD: PLB 6/19/91 use only vtime
 decimal
 
-ANEW TASK-PACKED_MIDI.FTH
+ANEW TASK-PACKED_MIDI
 
 variable PM-OUT-PAD  ( only used by this next word in background )
 

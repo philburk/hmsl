@@ -7,7 +7,7 @@
 \
 \ 00001 PLB 10/1/92 Add screen title to avoid garbage 
 
-anew task-Popup_Text.fth
+ANEW TASK-POPUP_TEXT
 
 \ Data structures
 

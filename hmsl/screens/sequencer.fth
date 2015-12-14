@@ -28,7 +28,7 @@ include? shapei{ ht:Score_Entry
 include? capture{ ht:MIDIFile
 include? track.shape ht:Tracks
 
-ANEW TASK-Sequencer
+ANEW TASK-SEQUENCER
 
 decimal
 OB.COLLECTION TRACKS-TO-PLAY

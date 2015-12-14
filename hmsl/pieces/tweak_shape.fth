@@ -3,7 +3,7 @@
 \
 \ Phil Burk, 921207
 
-anew task-tweak_shape
+ANEW TASK-TWEAK_SHAPE
 
 ob.shape ts-shape
 
