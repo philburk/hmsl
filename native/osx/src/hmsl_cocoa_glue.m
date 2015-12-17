@@ -144,15 +144,27 @@ char* nullTermString( const char* string, int32_t size ) {
   return out;
 }
 
+int32_t hmslAvailableEventFIFO() {
+  return EVENT_BUFFER_SIZE - ((gHMSLContext.events_write_loc - gHMSLContext.events_read_loc) & ((2 * EVENT_BUFFER_SIZE) - 1));
+}
 
 void hmslAddEvent( enum HMSLEventID event_type ) {
-  gHMSLContext.events[gHMSLContext.events_write_loc & EVENT_BUFFER_MASK] = event_type;
-  gHMSLContext.events_write_loc += 1;
+  if (hmslAvailableEventFIFO() > 0) {
+    HMSLEvent event;
+    event.id = event_type;
+    gHMSLContext.events[gHMSLContext.events_write_loc & EVENT_BUFFER_MASK] = event;
+    gHMSLContext.events_write_loc += 1;
+  }
   return;
 }
 
-enum HMSLEventID hmslGetEvent( void ) {
-  enum HMSLEventID val = gHMSLContext.events[gHMSLContext.events_read_loc & EVENT_BUFFER_MASK];
-  gHMSLContext.events_read_loc += 1;
-  return val;
+void hmslAddMouseEvent( enum HMSLEventID event_type, HMSLPoint loc ) {
+  if (hmslAvailableEventFIFO() > 0) {
+    HMSLEvent event;
+    event.id = event_type;
+    event.loc = loc;
+    gHMSLContext.events[gHMSLContext.events_write_loc & EVENT_BUFFER_MASK] = event;
+    gHMSLContext.events_write_loc += 1;
+  }
+  return;
 }

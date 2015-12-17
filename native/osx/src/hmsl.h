@@ -70,11 +70,27 @@ enum HMSLColor {
   YELLOW
 };
 
+enum HMSLEventID {
+  EV_NULL,
+  EV_MOUSE_DOWN,
+  EV_MOUSE_UP,
+  EV_MOUSE_MOVE,
+  EV_MENU_PICK,
+  EV_CLOSE_WINDOW,
+  EV_REFRESH,
+  EV_KEY
+};
+
+typedef struct HMSLEvent {
+  enum HMSLEventID id;
+  HMSLPoint loc;
+} HMSLEvent;
+
 typedef struct HMSLContext {
   HMSLPoint currentPoint;
   HMSLPoint mouseEvent;
   enum HMSLColor color;
-  enum HMSLEventID *events;
+  HMSLEvent *events;
   uint32_t events_read_loc;
   uint32_t events_write_loc;
 } hmslContext;
@@ -87,16 +103,6 @@ typedef struct HMSLWindow {
   long title;
 } hmslWindow;
 
-enum HMSLEventID {
-  EV_NULL,
-  EV_MOUSE_DOWN,
-  EV_MOUSE_UP,
-  EV_MOUSE_MOVE,
-  EV_MENU_PICK,
-  EV_CLOSE_WINDOW,
-  EV_REFRESH,
-  EV_KEY
-} anHMSLEventID;
 
 /*
  * global variables
@@ -132,8 +138,8 @@ int32_t hostGetEvent( int32_t timeout );
  * communication with the obj-c layer
  */
 
-void hmslAddEvent( enum HMSLEventID );
-enum HMSLEventID hmslGetEvent( void );
+void hmslAddEvent( enum HMSLEventID event_type );
+void hmslAddMouseEvent( enum HMSLEventID event_type, HMSLPoint loc );
 char* nullTermString( const char*, int32_t );
 void hmslDrawLine( HMSLPoint start, HMSLPoint end );
 void hmslSetCurrentWindow( uint32_t );
