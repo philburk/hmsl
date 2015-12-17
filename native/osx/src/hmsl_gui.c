@@ -10,7 +10,7 @@
 #import "pf_all.h"
 
 int32_t hostInit( void ) {
-  gHMSLContext.events = malloc(sizeof(enum HMSLEventID) * EVENT_BUFFER_SIZE);
+  gHMSLContext.events = malloc(sizeof(HMSLEvent) * EVENT_BUFFER_SIZE);
   gHMSLContext.events_read_loc = 0;
   gHMSLContext.events_write_loc = 0;
   return -1;
@@ -175,8 +175,20 @@ void hostGetMouse( uint32_t x, uint32_t y) {
  */
 int32_t hostGetEvent( int32_t timeout ) {
   if (gHMSLContext.events_read_loc < gHMSLContext.events_write_loc) {
-    // Case statement should set global variables for mouseEvent, keyPress, etc.
-    return hmslGetEvent();
+    HMSLEvent event = gHMSLContext.events[gHMSLContext.events_read_loc & EVENT_BUFFER_MASK];
+    gHMSLContext.events_read_loc += 1;
+    switch (event.id) {
+      case EV_MOUSE_DOWN:
+      case EV_MOUSE_MOVE:
+      case EV_MOUSE_UP:
+        gHMSLContext.mouseEvent.x = event.loc.x;
+        gHMSLContext.mouseEvent.y = event.loc.y;
+        break;
+      default:
+        break;
+    }
+    
+    return event.id;
   } else {
     return EV_NULL;
   }

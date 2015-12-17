@@ -11,18 +11,18 @@
 @implementation HMSLView
 
 - (void)mouseDown:(NSEvent *)event {
-  gHMSLContext.mouseEvent = [self flipEventCoordinates:event];
-  hmslAddEvent(EV_MOUSE_DOWN);
+  HMSLPoint loc = [self flipEventCoordinates:event];
+  hmslAddMouseEvent(EV_MOUSE_DOWN, loc);
 }
 
 - (void)mouseUp:(NSEvent *)event {
-  gHMSLContext.mouseEvent = [self flipEventCoordinates:event];
-  hmslAddEvent(EV_MOUSE_UP);
+  HMSLPoint loc = [self flipEventCoordinates:event];
+  hmslAddMouseEvent(EV_MOUSE_UP, loc);
 }
 
 - (void)mouseDragged:(NSEvent *)event {
-  gHMSLContext.mouseEvent = [self flipEventCoordinates:event];
-  hmslAddEvent(EV_MOUSE_MOVE);
+  HMSLPoint loc = [self flipEventCoordinates:event];
+  hmslAddMouseEvent(EV_MOUSE_MOVE, loc);
 }
 
 - (void)keyDown:(NSEvent *)event {
