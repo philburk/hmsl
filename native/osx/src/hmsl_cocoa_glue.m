@@ -19,10 +19,8 @@ HMSLWindow *mainWindow;
 void hmslSetBackgroundColor( const double* color ) {
   if (mainWindow != NULL) {
     [mainWindow hmslBackgroundColor:color];
-    @autoreleasepool {
-      NSColor *bgcolor = [NSColor colorWithRed:color[0] green:color[1] blue:color[2] alpha:color[3]];
-      [APP.fontAttributes setObject:bgcolor forKey:NSBackgroundColorAttributeName];
-    }
+    NSColor *bgcolor = [NSColor colorWithRed:color[0] green:color[1] blue:color[2] alpha:color[3]];
+    [APP.fontAttributes setObject:bgcolor forKey:NSBackgroundColorAttributeName];
   }
 }
 
@@ -63,31 +61,18 @@ uint32_t hmslOpenWindow(const char* title, short x, short y, short w, short h) {
   HMSLWindow* hmslWindow = [HMSLWindow hmslWindowWithTitle:windowTitle frame:frame];
   [hmslWindow hmslBackgroundColor:hmslColors[0]];
   mainWindow = hmslWindow;
-  
-  NSGraphicsContext *currentContext = [NSGraphicsContext graphicsContextWithWindow:hmslWindow];
-  currentContext.shouldAntialias = NO;
-  
-  if (currentContext != nil) {
-    NSGraphicsContext.currentContext = currentContext;
-    hmslWindow.graphicsContext = currentContext;
-    drawingContext = currentContext.graphicsPort;
-  } else {
-    NSLog(@"Unable to initialize context");
-  }
-  
   return (uint32_t)hmslWindow.windowNumber;
 }
 
-void hmslSetDrawingColor( CGContextRef context, const double* rgba ) {
-
-  @autoreleasepool {
-    NSColor *newColor = [NSColor colorWithRed:rgba[0] green:rgba[1] blue:rgba[2] alpha:rgba[3]];
-    [newColor set];
-    [APP.fontAttributes setObject:newColor forKey:NSForegroundColorAttributeName];
-    CGContextSetRGBFillColor(context, rgba[0], rgba[1], rgba[2], rgba[3]);
-    CGContextSetRGBStrokeColor(context, rgba[0], rgba[1], rgba[2], rgba[3]);
+void hmslSetDrawingColor( const double* rgba ) {
+  if (mainWindow != NULL) {
+    [mainWindow hmslDrawingColor: rgba];
   }
-  
+  return;
+}
+
+void hmslSetDrawingMode( int32_t mode ) {
+  [mainWindow hmslDrawingMode: mode];
   return;
 }
 
@@ -121,16 +106,18 @@ uint32_t hmslGetTextLength( const char* string, int32_t size ) {
 void hmslDrawText( const char* string, int32_t size, HMSLPoint loc ) {
   
   @autoreleasepool {
-    char* nullTerm = nullTermString(string, size);
-    NSString *text = [NSString stringWithCString: nullTerm encoding:NSASCIIStringEncoding];
-    
-    NSPoint point;
-    point.x = loc.x;
-    point.y = ((HMSLView*)mainWindow.contentView).frame.size.height - loc.y - 3;
-    
-    [mainWindow drawText:text atPoint:point];
-    
-    free(nullTerm);
+    if (mainWindow != NULL) {
+      char* nullTerm = nullTermString(string, size);
+      NSString *text = [NSString stringWithCString: nullTerm encoding:NSASCIIStringEncoding];
+      
+      NSPoint point;
+      point.x = loc.x;
+      point.y = ((HMSLView*)mainWindow.contentView).frame.size.height - loc.y - 3;
+      
+      [mainWindow drawText:text atPoint:point];
+      
+      free(nullTerm);
+    }
   }
   
   return;

@@ -62,7 +62,6 @@ void hostMoveTo( int32_t x, int32_t y ) {
 void hostDrawText( uint32_t address, int32_t count ) {
   hmslDrawText( (char*)address, count, gHMSLContext.currentPoint );
   gHMSLContext.currentPoint.x += hmslGetTextLength( (char*)address, count);
-  CGContextSynchronize(drawingContext);
   return;
 }
 
@@ -99,9 +98,7 @@ void hostFillRectangle( int32_t x1, int32_t y1, int32_t x2, int32_t y2 ) {
  * color - index of color to use, defined as constants in hmsl.h
  */
 void hostSetColor( int32_t color ) {
-  if (drawingContext != nil) {
-      hmslSetDrawingColor(drawingContext, hmslColors[color & HMSL_COLORS_MASK]);
-  }
+  hmslSetDrawingColor(hmslColors[color & HMSL_COLORS_MASK]);
   return;
 }
 
@@ -112,7 +109,6 @@ void hostSetColor( int32_t color ) {
  */
 void hostSetBackgroundColor( int32_t color ) {
   hmslSetBackgroundColor(hmslColors[color & HMSL_COLORS_MASK]);
-  CGContextSynchronize(drawingContext);
   return;
 }
 
@@ -122,14 +118,7 @@ void hostSetBackgroundColor( int32_t color ) {
  * mode - 0 for normal (overwrite); 1 for XOR.
  */
 void hostSetDrawingMode( int32_t mode ) {
-  switch (mode) {
-    case 0:
-      CGContextSetBlendMode(drawingContext, kCGBlendModeNormal);
-      break;
-    case 1:
-      CGContextSetBlendMode(drawingContext, kCGBlendModeExclusion);
-      break;
-  }
+  hmslSetDrawingMode(mode);
   return;
 }
 

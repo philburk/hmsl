@@ -23,6 +23,8 @@
 - (void) drawLineFrom: (HMSLPoint) start to: (HMSLPoint) end;
 - (void) drawText: (NSString*) text atPoint: (NSPoint) point;
 - (void) flushCurrentContext;
+- (void) hmslDrawingMode: (int32_t) mode;
+- (void) hmslDrawingColor: (const double*) color;
 - (void) hmslBackgroundColor: (const double*) color;
 
 @end
