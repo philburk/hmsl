@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<svg width="600" height="600" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+ <!-- Created with Einked - http://einked.com/ -->
+ <g>
+  <title>Layer 1</title>
+  <circle id="svg_1" r="91.468246" cy="193.333334" cx="113.333334" stroke-width="11" stroke="#202040" fill="#f4f4f4"/>
+  <text stroke="#202080" transform="matrix(6.913777410854699,0,0,5.9024069288911,-2864.8748668913754,-1688.9442425985574) " xml:space="preserve" text-anchor="middle" font-family="Sans-serif" font-size="24" id="svg_3" y="327.572523" x="430.905225" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="0" fill="#202040">H</text>
+  <circle stroke="#202040" id="svg_4" r="15.277772" cy="30.952382" cx="387.142835" stroke-width="11" fill="#202040"/>
+  <line stroke="#202040" id="svg_5" y2="112.380955" x2="155.238092" y1="36.190473" x1="375.238067" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="11" fill="none"/>
+  <line stroke="#202040" id="svg_9" y2="107.619008" x2="357.619049" y1="39.999985" x1="383.333312" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="11" fill="none"/>
+  <circle id="svg_7" r="91.468246" cy="198.095235" cx="326.666666" stroke-width="11" stroke="#202040" fill="#f4f4f4"/>
+  <text id="svg_8" stroke="#202080" transform="matrix(6.913777410854699,0,0,5.9024069288911,-2864.8748668913754,-1688.9442425985574) " xml:space="preserve" text-anchor="middle" font-family="Sans-serif" font-size="24" y="328.379296" x="461.761487" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="0" fill="#202040">M</text>
+  <circle id="svg_10" r="91.468246" cy="429.904752" cx="271.38096" stroke-width="11" stroke="#202040" fill="#f4f4f4"/>
+  <text id="svg_11" stroke="#202080" transform="matrix(7.388053055841818,0,0,6.287725671549383,-3084.522498804533,-1827.1360683907633) " xml:space="preserve" text-anchor="middle" font-family="Sans-serif" font-size="24" y="367.523672" x="453.960019" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="0" fill="#202040">S</text>
+  <circle id="svg_12" r="91.468246" cy="429.904741" cx="486.619055" stroke-width="11" stroke="#202040" fill="#f4f4f4"/>
+  <text id="svg_13" stroke="#202080" transform="matrix(7.758158945759283,0,0,6.217668166098072,-3270.1414506701717,-1796.017159525494) " xml:space="preserve" text-anchor="middle" font-family="Sans-serif" font-size="24" y="366.573967" x="484.488447" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="0" fill="#202040">L</text>
+  <line id="svg_15" y2="362.523793" x2="336.28576" y1="176.666672" x1="522.381002" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="11" fill="none" stroke="#202040"/>
+  <line id="svg_16" y2="336.95236" x2="503.238099" y1="183.333333" x1="533.333281" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="11" fill="none" stroke="#202040"/>
+  <circle id="svg_14" stroke="#202040" r="15.277772" cy="165.71428" cx="536.190481" stroke-width="11" fill="#202040"/>
+  <line stroke="#202040" id="svg_17" y2="151.904741" x2="523.809501" y1="39.523806" x1="399.047601" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="11" fill="none"/>
+ </g>
+</svg>
