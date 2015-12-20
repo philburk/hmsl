@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		691278801C272F8B006A7834 /* hmsl.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6912787F1C272F6E006A7834 /* hmsl.icns */; };
 		691894171B8699CC0091AAF3 /* hmsl_cocoa_glue.m in Sources */ = {isa = PBXBuildFile; fileRef = 691894161B8699CC0091AAF3 /* hmsl_cocoa_glue.m */; };
 		692DBB931B754FBC009F889B /* HMSLWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 692DBB921B754FBC009F889B /* HMSLWindow.m */; };
 		6972FAD81A9A65CD0008E2E4 /* HMSLDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6972FAD71A9A65CD0008E2E4 /* HMSLDelegate.m */; };
@@ -102,7 +103,6 @@
 		69CB32611B8F9B350012EAF8 /* tweak_shape.fth in CopyFiles */ = {isa = PBXBuildFile; fileRef = 69CB32061B8F9AE80012EAF8 /* tweak_shape.fth */; };
 		69CB32621B8F9B350012EAF8 /* var.ping.pong.fth in CopyFiles */ = {isa = PBXBuildFile; fileRef = 69CB32071B8F9AE80012EAF8 /* var.ping.pong.fth */; };
 		69CB32631B8F9B350012EAF8 /* xforms.fth in CopyFiles */ = {isa = PBXBuildFile; fileRef = 69CB32081B8F9AE80012EAF8 /* xforms.fth */; };
-		69CB32641B8F9B490012EAF8 /* pforth.dic in Resources */ = {isa = PBXBuildFile; fileRef = 698C08461B8CE00E00C26E91 /* pforth.dic */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -185,6 +185,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6912787F1C272F6E006A7834 /* hmsl.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = hmsl.icns; sourceTree = "<group>"; };
 		691894161B8699CC0091AAF3 /* hmsl_cocoa_glue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = hmsl_cocoa_glue.m; sourceTree = "<group>"; };
 		692DBB911B754FBC009F889B /* HMSLWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMSLWindow.h; sourceTree = "<group>"; };
 		692DBB921B754FBC009F889B /* HMSLWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMSLWindow.m; sourceTree = "<group>"; };
@@ -241,7 +242,6 @@
 		6985ABDD1A785731003BC422 /* hmsl_midi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = hmsl_midi.m; sourceTree = "<group>"; };
 		6985ABE01A785941003BC422 /* hmsl_gui.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hmsl_gui.c; sourceTree = "<group>"; };
 		698C08171B8BB3B900C26E91 /* hmsl_bundle_main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = hmsl_bundle_main.m; sourceTree = "<group>"; };
-		698C08461B8CE00E00C26E91 /* pforth.dic */ = {isa = PBXFileReference; lastKnownFileType = file; path = pforth.dic; sourceTree = "<group>"; };
 		698C08471B8CE00E00C26E91 /* start_hmsl.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = start_hmsl.sh; sourceTree = "<group>"; };
 		698C08481B8CE00E00C26E91 /* runner.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = runner.sh; sourceTree = "<group>"; };
 		698C084F1B8CE54600C26E91 /* ChicagoFLF.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ChicagoFLF.ttf; sourceTree = "<group>"; };
@@ -313,8 +313,8 @@
 		6972FB611A9A9B9A0008E2E4 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				6912787F1C272F6E006A7834 /* hmsl.icns */,
 				698C084F1B8CE54600C26E91 /* ChicagoFLF.ttf */,
-				698C08461B8CE00E00C26E91 /* pforth.dic */,
 				698C08471B8CE00E00C26E91 /* start_hmsl.sh */,
 				698C08481B8CE00E00C26E91 /* runner.sh */,
 				6972FB491A9A996B0008E2E4 /* MainMenu.xib */,
@@ -566,7 +566,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				69CB32641B8F9B490012EAF8 /* pforth.dic in Resources */,
+				691278801C272F8B006A7834 /* hmsl.icns in Resources */,
 				698C07F51B8BAECA00C26E91 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
