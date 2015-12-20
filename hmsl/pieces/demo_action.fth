@@ -180,7 +180,10 @@ v: DACT-GOING-UP?  ( Is this note higher than th last? )
 
 : DACT.PLAY ( -- )
     midi.clear midi.parser.on
+    default-screen @
+    action-screen default-screen !
     HMSL  ( no preposted morphs )
+    default-screen !
     midi.parser.off
 ;
 

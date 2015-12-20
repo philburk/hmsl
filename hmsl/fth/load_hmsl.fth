@@ -38,7 +38,7 @@ if-load-demo off
 \ SET THESE VARIABLES TO CONTROL WHAT GETS LOADED!!!!
 TRUE if-load-midi !
 TRUE if-load-morphs !
-FALSE if-load-actions !    ( perform screen )
+TRUE if-load-actions !    ( perform screen )
 TRUE if-load-graphics !
 if-load-morphs @ if-load-shape-ed !
 
@@ -168,16 +168,14 @@ if-load-graphics @   if-load-shape-ed @ AND [IF]
     include? task-shape_editor fth/shape_editor.fth
 [THEN]
 
-0 [IF]
-    \ Load actions by Larry Polansky ,  "PERFORM" module
-    if-load-graphics @ if-load-actions @ AND [IF]
-        include? task-action_utils fth/action_utils
-        include? task-ob_actions fth/ob_actions
-        include? task-test_actions fth/test_actions
-        include? task-action_table fth/action_table
-        include? task-action_screen fth/action_screen
-        include? task-action_top fth/action_top
-    [THEN]
+\ Load actions by Larry Polansky ,  "PERFORM" module
+if-load-graphics @ if-load-actions @ AND [IF]
+    include? task-action_utils fth/action_utils.fth
+    include? task-ob_actions fth/ob_actions.fth
+    include? task-test_actions fth/test_actions.fth
+    include? task-action_table fth/action_table.fth
+    include? task-action_screen fth/action_screen.fth
+    include? task-action_top fth/action_top.fth
 [THEN]
 
 \ load some tools
