@@ -48,6 +48,9 @@ int main(int argc, const char * argv[]) {
     [HMSLApplication sharedApplication];
     _appDelegate = [[HMSLDelegate alloc] init];
 
+    NSString *hmslVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+    NSLog(@"Running hmsl-osx version: %@", hmslVersion);
+
     [[NSBundle mainBundle] loadNibNamed:@"MainMenu"
                                   owner:NSApp
                         topLevelObjects:nil];
