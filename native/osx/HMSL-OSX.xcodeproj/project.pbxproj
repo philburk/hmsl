@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		691278801C272F8B006A7834 /* hmsl.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6912787F1C272F6E006A7834 /* hmsl.icns */; };
 		691278141C25E4CF006A7834 /* actobj.fth in CopyFiles */ = {isa = PBXBuildFile; fileRef = 691277C81C25E494006A7834 /* actobj.fth */; };
 		691278151C25E4CF006A7834 /* allocator.fth in CopyFiles */ = {isa = PBXBuildFile; fileRef = 691277C91C25E494006A7834 /* allocator.fth */; };
 		691278161C25E4CF006A7834 /* bevel.fth in CopyFiles */ = {isa = PBXBuildFile; fileRef = 691277CA1C25E494006A7834 /* bevel.fth */; };
@@ -98,6 +97,7 @@
 		6912787C1C25E936006A7834 /* screen_editor.fth in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6912786D1C25E922006A7834 /* screen_editor.fth */; };
 		6912787D1C25E936006A7834 /* sine_table.fth in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6912786E1C25E922006A7834 /* sine_table.fth */; };
 		6912787E1C25E936006A7834 /* tracks.fth in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6912786F1C25E922006A7834 /* tracks.fth */; };
+		691278801C272F8B006A7834 /* hmsl.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6912787F1C272F6E006A7834 /* hmsl.icns */; };
 		691894171B8699CC0091AAF3 /* hmsl_cocoa_glue.m in Sources */ = {isa = PBXBuildFile; fileRef = 691894161B8699CC0091AAF3 /* hmsl_cocoa_glue.m */; };
 		692DBB931B754FBC009F889B /* HMSLWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 692DBB921B754FBC009F889B /* HMSLWindow.m */; };
 		6972FAD81A9A65CD0008E2E4 /* HMSLDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6972FAD71A9A65CD0008E2E4 /* HMSLDelegate.m */; };
@@ -284,7 +284,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		6912787F1C272F6E006A7834 /* hmsl.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = hmsl.icns; sourceTree = "<group>"; };
 		691277C71C25E46E006A7834 /* pforth_system.dic */ = {isa = PBXFileReference; lastKnownFileType = file; path = pforth_system.dic; sourceTree = "<group>"; };
 		691277C81C25E494006A7834 /* actobj.fth */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = actobj.fth; path = ../../../hmsl/fth/actobj.fth; sourceTree = "<group>"; };
 		691277C91C25E494006A7834 /* allocator.fth */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = allocator.fth; path = ../../../hmsl/fth/allocator.fth; sourceTree = "<group>"; };
@@ -375,6 +374,7 @@
 		6912786D1C25E922006A7834 /* screen_editor.fth */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = screen_editor.fth; path = ../../../hmsl/tools/screen_editor.fth; sourceTree = "<group>"; };
 		6912786E1C25E922006A7834 /* sine_table.fth */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = sine_table.fth; path = ../../../hmsl/tools/sine_table.fth; sourceTree = "<group>"; };
 		6912786F1C25E922006A7834 /* tracks.fth */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = tracks.fth; path = ../../../hmsl/tools/tracks.fth; sourceTree = "<group>"; };
+		6912787F1C272F6E006A7834 /* hmsl.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = hmsl.icns; sourceTree = "<group>"; };
 		691894161B8699CC0091AAF3 /* hmsl_cocoa_glue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = hmsl_cocoa_glue.m; sourceTree = "<group>"; };
 		692DBB911B754FBC009F889B /* HMSLWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMSLWindow.h; sourceTree = "<group>"; };
 		692DBB921B754FBC009F889B /* HMSLWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMSLWindow.m; sourceTree = "<group>"; };
