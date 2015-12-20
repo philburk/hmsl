@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "HMSLWindow.h"
 
 @interface HMSLWindowDelegate : NSObject<NSWindowDelegate>
 

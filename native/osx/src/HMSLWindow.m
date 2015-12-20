@@ -22,32 +22,48 @@
 + (HMSLWindow*)hmslWindowWithTitle:(NSString *)title frame:(NSRect)frame {
   HMSLWindow* hmslWindow = [[HMSLWindow alloc]
                             initWithContentRect: frame
-                            styleMask: NSMiniaturizableWindowMask | NSTitledWindowMask | NSClosableWindowMask
+                            styleMask:  NSTitledWindowMask | NSMiniaturizableWindowMask | NSClosableWindowMask
                             backing: NSBackingStoreBuffered
                             defer: YES];
-  
-  hmslWindow.title = [title retain];
-  
+  hmslWindow.title = title;
+  NSView *titleBarView = [[NSView alloc] init];
+  [[[hmslWindow contentView] superview] addSubview:titleBarView];
+  /*
   NSRect viewFrame = frame;
   viewFrame.origin.y += 30;
-//  [hmslWindow.contentView addSubview:[[HMSLView alloc] initWithFrame:viewFrame]];
-//  [hmslWindow.contentView addSubview:[[HMSLView alloc] initWithFrame:frame] positioned:NSWindowAbove relativeTo:];
-  [hmslWindow setContentView:[[HMSLView alloc] initWithFrame:frame]];
-  hmslWindow.delegate = [[HMSLWindowDelegate alloc] init];
-  [hmslWindow cascadeTopLeftFromPoint:NSZeroPoint];
-  [hmslWindow makeKeyAndOrderFront:self];
+  [hmslWindow.contentView addSubview:[[HMSLView alloc] initWithFrame:viewFrame]];
+   */
 
+  hmslWindow.contentView = [[HMSLView alloc] initWithFrame:frame];
+  hmslWindow.delegate = [[HMSLWindowDelegate alloc] init];
+  
+  [hmslWindow cascadeTopLeftFromPoint:NSZeroPoint];
+  [hmslWindow makeKeyAndOrderFront:hmslWindow];
   [[HMSLWindow windowDictionary] setObject:hmslWindow forKey:[NSNumber numberWithInteger:hmslWindow.windowNumber]];
   
+  NSGraphicsContext *currentContext = [NSGraphicsContext graphicsContextWithWindow:hmslWindow];
+  if (currentContext != nil) {
+    NSGraphicsContext.currentContext = currentContext;
+    hmslWindow.graphicsContext = currentContext;
+    hmslWindow.graphicsContext.shouldAntialias = NO;
+  } else {
+    NSLog(@"Unable to initialize context");
+  }
   return hmslWindow;
+}
+
+- (BOOL)canBecomeKeyWindow {
+  return YES;
+}
+
+- (BOOL)canBecomeMainWindow {
+  return YES;
 }
 
 - (void)close {
   [[HMSLWindow windowDictionary]
    removeObjectForKey:[NSNumber numberWithInteger:self.windowNumber]];
-  [self.contentView autorelease];
-  [self.delegate autorelease];
-  [self.title autorelease];
+  [self.graphicsContext release];
   [super close];
 }
 
@@ -75,6 +91,7 @@
 
 - (void) drawText: (NSString*) text atPoint: (NSPoint) point {
   [text drawAtPoint:point withAttributes:APP.fontAttributes];
+  CGContextSynchronize(self.graphicsContext.graphicsPort);
 }
 
 - (void)keyDown:(NSEvent *)event {
@@ -85,14 +102,30 @@
   [self.graphicsContext flushGraphics];
 }
 
+- (void)hmslDrawingMode:(int32_t)mode {
+  switch (mode) {
+    case 0:
+      CGContextSetBlendMode(self.graphicsContext.graphicsPort, kCGBlendModeNormal);
+      break;
+    case 1:
+      CGContextSetBlendMode(self.graphicsContext.graphicsPort, kCGBlendModeExclusion);
+      break;
+  }
+}
+
+- (void)hmslDrawingColor:(const double*)rgba {
+  CGContextRef context = self.graphicsContext.graphicsPort;
+  NSColor *newColor = [NSColor colorWithRed:rgba[0] green:rgba[1] blue:rgba[2] alpha:rgba[3]];
+  [newColor set];
+  [APP.fontAttributes setObject:newColor forKey:NSForegroundColorAttributeName];
+  CGContextSetRGBFillColor(context, rgba[0], rgba[1], rgba[2], rgba[3]);
+  CGContextSetRGBStrokeColor(context, rgba[0], rgba[1], rgba[2], rgba[3]);
+}
+
 - (void)hmslBackgroundColor:(const double*)rgba {
   NSColor *bgColor = [NSColor colorWithRed: rgba[0] green:rgba[1] blue:rgba[2] alpha:rgba[3]];
   [self setBackgroundColor:bgColor];
-}
-
-- (void)dealloc {
-  [_graphicsContext release];
-  [super dealloc];
+  CGContextSynchronize(self.graphicsContext.graphicsPort);
 }
 
 @end

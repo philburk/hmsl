@@ -108,9 +108,7 @@ typedef struct HMSLWindow {
  * global variables
  */
 
-
 hmslContext gHMSLContext;
-CGContextRef drawingContext;
 
 /*
  * hmsl_gui.m
@@ -148,9 +146,10 @@ uint32_t hmslOpenWindow( const char* title, short x, short y, short w, short h )
 void hmslFillRectangle( HMSLRect rect );
 void hmslDrawText( const char*, int32_t, HMSLPoint );
 uint32_t hmslGetTextLength( const char*, int32_t );
-void hmslSetDrawingColor( CGContextRef, const double* );
+void hmslSetDrawingColor( const double* );
 void hmslSetBackgroundColor( const double* );
 void hmslSetTextSize( int32_t );
+void hmslSetDrawingMode( int32_t );
 
 /* 
  * hmsl_midi.m
