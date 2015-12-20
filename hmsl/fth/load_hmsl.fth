@@ -48,7 +48,7 @@ if-load-graphics @ 0= [IF] ." Not loading Graphics Support" cr [THEN]
 if-load-shape-ed @ 0= [IF] ." Not loading Shape Editor" cr [THEN]
 
 \ Start of cascaded initialization and termination.
-exists? SYS.INIT not [if] 
+exists? SYS.INIT not [if]
     : SYS.INIT ;
     : SYS.TERM ;
     : SYS.RESET ;
@@ -68,16 +68,16 @@ exists? SYS.STATUS not [if]
 include? within?                fth/p4thbase.fth
 include? toupper                fth/charmacr.fth
 
-include? task-misc_tools fth/misc_tools.fth
-include? task-utils fth/utils.fth
+include? task-misc_tools        fth/misc_tools.fth
+include? task-utils             fth/utils.fth
 include? stack.header           fth/stacks.fth
 
-include? task-errormsg fth/errormsg.fth
-include? task-memalloc fth/memalloc.fth
+include? task-errormsg          fth/errormsg.fth
+include? task-memalloc          fth/memalloc.fth
+include? task-cond_comp         fth/cond_comp.fth
 
-
-include? task-global_data fth/global_data.fth
-include? task-service_tasks fth/service_tasks.fth
+include? task-global_data       fth/global_data.fth
+include? task-service_tasks     fth/service_tasks.fth
 
 \ MIDI and Time support-------------------------------
 if-load-midi @ [IF]
@@ -142,7 +142,7 @@ include? task-interpreters fth/interpreters.fth
 [THEN]
 
 \ Some predefined morphs.
-if-load-morphs @ [IF] 
+if-load-morphs @ [IF]
 include? task-stock_morphs fth/stock_morphs.fth
 [THEN]
 
