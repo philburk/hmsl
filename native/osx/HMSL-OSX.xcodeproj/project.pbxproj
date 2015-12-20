@@ -38,7 +38,6 @@
 		691278301C25E4CF006A7834 /* load_hmsl.fth in CopyFiles */ = {isa = PBXBuildFile; fileRef = 691277E41C25E494006A7834 /* load_hmsl.fth */; };
 		691278311C25E4CF006A7834 /* load_ode.fth in CopyFiles */ = {isa = PBXBuildFile; fileRef = 691277E51C25E494006A7834 /* load_ode.fth */; };
 		691278321C25E4CF006A7834 /* make_hmsl.fth in CopyFiles */ = {isa = PBXBuildFile; fileRef = 691277E61C25E494006A7834 /* make_hmsl.fth */; };
-		691278331C25E4CF006A7834 /* make_hmsl.fth~ in CopyFiles */ = {isa = PBXBuildFile; fileRef = 691277E71C25E494006A7834 /* make_hmsl.fth~ */; };
 		691278341C25E4CF006A7834 /* memalloc.fth in CopyFiles */ = {isa = PBXBuildFile; fileRef = 691277E81C25E494006A7834 /* memalloc.fth */; };
 		691278351C25E4CF006A7834 /* midi_globals.fth in CopyFiles */ = {isa = PBXBuildFile; fileRef = 691277E91C25E494006A7834 /* midi_globals.fth */; };
 		691278361C25E4CF006A7834 /* midi_instrument.fth in CopyFiles */ = {isa = PBXBuildFile; fileRef = 691277EA1C25E494006A7834 /* midi_instrument.fth */; };
@@ -188,7 +187,6 @@
 				691278301C25E4CF006A7834 /* load_hmsl.fth in CopyFiles */,
 				691278311C25E4CF006A7834 /* load_ode.fth in CopyFiles */,
 				691278321C25E4CF006A7834 /* make_hmsl.fth in CopyFiles */,
-				691278331C25E4CF006A7834 /* make_hmsl.fth~ in CopyFiles */,
 				691278341C25E4CF006A7834 /* memalloc.fth in CopyFiles */,
 				691278351C25E4CF006A7834 /* midi_globals.fth in CopyFiles */,
 				691278361C25E4CF006A7834 /* midi_instrument.fth in CopyFiles */,
@@ -316,7 +314,6 @@
 		691277E41C25E494006A7834 /* load_hmsl.fth */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = load_hmsl.fth; path = ../../../hmsl/fth/load_hmsl.fth; sourceTree = "<group>"; };
 		691277E51C25E494006A7834 /* load_ode.fth */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = load_ode.fth; path = ../../../hmsl/fth/load_ode.fth; sourceTree = "<group>"; };
 		691277E61C25E494006A7834 /* make_hmsl.fth */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = make_hmsl.fth; path = ../../../hmsl/fth/make_hmsl.fth; sourceTree = "<group>"; };
-		691277E71C25E494006A7834 /* make_hmsl.fth~ */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "make_hmsl.fth~"; path = "../../../hmsl/fth/make_hmsl.fth~"; sourceTree = "<group>"; };
 		691277E81C25E494006A7834 /* memalloc.fth */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = memalloc.fth; path = ../../../hmsl/fth/memalloc.fth; sourceTree = "<group>"; };
 		691277E91C25E494006A7834 /* midi_globals.fth */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = midi_globals.fth; path = ../../../hmsl/fth/midi_globals.fth; sourceTree = "<group>"; };
 		691277EA1C25E494006A7834 /* midi_instrument.fth */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = midi_instrument.fth; path = ../../../hmsl/fth/midi_instrument.fth; sourceTree = "<group>"; };
@@ -481,7 +478,6 @@
 				691277E41C25E494006A7834 /* load_hmsl.fth */,
 				691277E51C25E494006A7834 /* load_ode.fth */,
 				691277E61C25E494006A7834 /* make_hmsl.fth */,
-				691277E71C25E494006A7834 /* make_hmsl.fth~ */,
 				691277E81C25E494006A7834 /* memalloc.fth */,
 				691277E91C25E494006A7834 /* midi_globals.fth */,
 				691277EA1C25E494006A7834 /* midi_instrument.fth */,
