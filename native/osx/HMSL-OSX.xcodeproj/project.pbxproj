@@ -904,7 +904,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				ONLY_ACTIVE_ARCH = YES;
-				"OTHER_CPLUSPLUSFLAGS[arch=*]" = "$(OTHER_CFLAGS)";
 				PF_DEFAULT_DICTIONARY = "\"hmsl.dic\"";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALID_ARCHS = "i386 x86_64";
@@ -923,7 +922,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				ONLY_ACTIVE_ARCH = YES;
-				"OTHER_CPLUSPLUSFLAGS[arch=*]" = "$(OTHER_CFLAGS)";
 				PF_DEFAULT_DICTIONARY = "\"hmsl.dic\"";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALID_ARCHS = "i386 x86_64";
@@ -967,6 +965,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.4;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = "-DPF_SUPPORT_FP";
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -1002,6 +1001,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_CFLAGS = "-DPF_SUPPORT_FP";
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -1013,8 +1013,6 @@
 				CLANG_ENABLE_OBJC_ARC = NO;
 				DPF_USER_CUSTOM = pf_hmsl.c;
 				MACOSX_DEPLOYMENT_TARGET = 10.4;
-				"OTHER_CFLAGS[arch=*]" = "-DPF_SUPPORT_FP";
-				"OTHER_CPLUSPLUSFLAGS[arch=*]" = "$(OTHER_CFLAGS)";
 				PF_DEFAULT_DICTIONARY = "\"hmsl.dic\"";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -1028,8 +1026,6 @@
 				CLANG_ENABLE_OBJC_ARC = NO;
 				DPF_USER_CUSTOM = pf_hmsl.c;
 				MACOSX_DEPLOYMENT_TARGET = 10.4;
-				"OTHER_CFLAGS[arch=*]" = "-DPF_SUPPORT_FP";
-				"OTHER_CPLUSPLUSFLAGS[arch=*]" = "$(OTHER_CFLAGS)";
 				PF_DEFAULT_DICTIONARY = "\"hmsl.dic\"";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
