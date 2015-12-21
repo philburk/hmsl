@@ -99,6 +99,7 @@
 		691278801C272F8B006A7834 /* hmsl.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6912787F1C272F6E006A7834 /* hmsl.icns */; };
 		691894171B8699CC0091AAF3 /* hmsl_cocoa_glue.m in Sources */ = {isa = PBXBuildFile; fileRef = 691894161B8699CC0091AAF3 /* hmsl_cocoa_glue.m */; };
 		692DBB931B754FBC009F889B /* HMSLWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 692DBB921B754FBC009F889B /* HMSLWindow.m */; };
+		69500CD31C2865D200DACCD2 /* cond_comp.fth in CopyFiles */ = {isa = PBXBuildFile; fileRef = 69500CD21C2865B000DACCD2 /* cond_comp.fth */; };
 		6972FAD81A9A65CD0008E2E4 /* HMSLDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6972FAD71A9A65CD0008E2E4 /* HMSLDelegate.m */; };
 		6972FAE01A9A7BDE0008E2E4 /* HMSLWindowDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6972FADF1A9A7BDE0008E2E4 /* HMSLWindowDelegate.m */; };
 		6972FB391A9A98D10008E2E4 /* hmsl_main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6972FB381A9A98D10008E2E4 /* hmsl_main.m */; };
@@ -156,6 +157,7 @@
 			dstPath = fth;
 			dstSubfolderSpec = 6;
 			files = (
+				69500CD31C2865D200DACCD2 /* cond_comp.fth in CopyFiles */,
 				691278141C25E4CF006A7834 /* actobj.fth in CopyFiles */,
 				691278151C25E4CF006A7834 /* allocator.fth in CopyFiles */,
 				691278161C25E4CF006A7834 /* bevel.fth in CopyFiles */,
@@ -375,6 +377,7 @@
 		691894161B8699CC0091AAF3 /* hmsl_cocoa_glue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = hmsl_cocoa_glue.m; sourceTree = "<group>"; };
 		692DBB911B754FBC009F889B /* HMSLWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMSLWindow.h; sourceTree = "<group>"; };
 		692DBB921B754FBC009F889B /* HMSLWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMSLWindow.m; sourceTree = "<group>"; };
+		69500CD21C2865B000DACCD2 /* cond_comp.fth */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = cond_comp.fth; path = ../../../hmsl/fth/cond_comp.fth; sourceTree = "<group>"; };
 		6972FAD61A9A65CD0008E2E4 /* HMSLDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMSLDelegate.h; sourceTree = "<group>"; };
 		6972FAD71A9A65CD0008E2E4 /* HMSLDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMSLDelegate.m; sourceTree = "<group>"; };
 		6972FADE1A9A7BDE0008E2E4 /* HMSLWindowDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMSLWindowDelegate.h; sourceTree = "<group>"; };
@@ -455,6 +458,7 @@
 				691277CD1C25E494006A7834 /* charmacr.fth */,
 				691277CE1C25E494006A7834 /* circular.fth */,
 				691277CF1C25E494006A7834 /* collection.fth */,
+				69500CD21C2865B000DACCD2 /* cond_comp.fth */,
 				691277D01C25E494006A7834 /* control.fth */,
 				691277D11C25E494006A7834 /* ctrl_count.fth */,
 				691277D21C25E494006A7834 /* ctrl_fader.fth */,
