@@ -100,6 +100,12 @@
 		691894171B8699CC0091AAF3 /* hmsl_cocoa_glue.m in Sources */ = {isa = PBXBuildFile; fileRef = 691894161B8699CC0091AAF3 /* hmsl_cocoa_glue.m */; };
 		692DBB931B754FBC009F889B /* HMSLWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 692DBB921B754FBC009F889B /* HMSLWindow.m */; };
 		69500CD31C2865D200DACCD2 /* cond_comp.fth in CopyFiles */ = {isa = PBXBuildFile; fileRef = 69500CD21C2865B000DACCD2 /* cond_comp.fth */; };
+		69500CDA1C2866AA00DACCD2 /* action_screen.fth in CopyFiles */ = {isa = PBXBuildFile; fileRef = 69500CD41C28668C00DACCD2 /* action_screen.fth */; };
+		69500CDB1C2866AA00DACCD2 /* action_table.fth in CopyFiles */ = {isa = PBXBuildFile; fileRef = 69500CD51C28668C00DACCD2 /* action_table.fth */; };
+		69500CDC1C2866AA00DACCD2 /* action_top.fth in CopyFiles */ = {isa = PBXBuildFile; fileRef = 69500CD61C28668C00DACCD2 /* action_top.fth */; };
+		69500CDD1C2866AA00DACCD2 /* action_utils.fth in CopyFiles */ = {isa = PBXBuildFile; fileRef = 69500CD71C28668C00DACCD2 /* action_utils.fth */; };
+		69500CDE1C2866AA00DACCD2 /* ob_actions.fth in CopyFiles */ = {isa = PBXBuildFile; fileRef = 69500CD81C28668C00DACCD2 /* ob_actions.fth */; };
+		69500CDF1C2866AA00DACCD2 /* test_actions.fth in CopyFiles */ = {isa = PBXBuildFile; fileRef = 69500CD91C28668C00DACCD2 /* test_actions.fth */; };
 		6972FAD81A9A65CD0008E2E4 /* HMSLDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6972FAD71A9A65CD0008E2E4 /* HMSLDelegate.m */; };
 		6972FAE01A9A7BDE0008E2E4 /* HMSLWindowDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6972FADF1A9A7BDE0008E2E4 /* HMSLWindowDelegate.m */; };
 		6972FB391A9A98D10008E2E4 /* hmsl_main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6972FB381A9A98D10008E2E4 /* hmsl_main.m */; };
@@ -157,6 +163,12 @@
 			dstPath = fth;
 			dstSubfolderSpec = 6;
 			files = (
+				69500CDA1C2866AA00DACCD2 /* action_screen.fth in CopyFiles */,
+				69500CDB1C2866AA00DACCD2 /* action_table.fth in CopyFiles */,
+				69500CDC1C2866AA00DACCD2 /* action_top.fth in CopyFiles */,
+				69500CDD1C2866AA00DACCD2 /* action_utils.fth in CopyFiles */,
+				69500CDE1C2866AA00DACCD2 /* ob_actions.fth in CopyFiles */,
+				69500CDF1C2866AA00DACCD2 /* test_actions.fth in CopyFiles */,
 				69500CD31C2865D200DACCD2 /* cond_comp.fth in CopyFiles */,
 				691278141C25E4CF006A7834 /* actobj.fth in CopyFiles */,
 				691278151C25E4CF006A7834 /* allocator.fth in CopyFiles */,
@@ -378,6 +390,12 @@
 		692DBB911B754FBC009F889B /* HMSLWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMSLWindow.h; sourceTree = "<group>"; };
 		692DBB921B754FBC009F889B /* HMSLWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMSLWindow.m; sourceTree = "<group>"; };
 		69500CD21C2865B000DACCD2 /* cond_comp.fth */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = cond_comp.fth; path = ../../../hmsl/fth/cond_comp.fth; sourceTree = "<group>"; };
+		69500CD41C28668C00DACCD2 /* action_screen.fth */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = action_screen.fth; path = ../../../hmsl/fth/action_screen.fth; sourceTree = "<group>"; };
+		69500CD51C28668C00DACCD2 /* action_table.fth */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = action_table.fth; path = ../../../hmsl/fth/action_table.fth; sourceTree = "<group>"; };
+		69500CD61C28668C00DACCD2 /* action_top.fth */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = action_top.fth; path = ../../../hmsl/fth/action_top.fth; sourceTree = "<group>"; };
+		69500CD71C28668C00DACCD2 /* action_utils.fth */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = action_utils.fth; path = ../../../hmsl/fth/action_utils.fth; sourceTree = "<group>"; };
+		69500CD81C28668C00DACCD2 /* ob_actions.fth */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ob_actions.fth; path = ../../../hmsl/fth/ob_actions.fth; sourceTree = "<group>"; };
+		69500CD91C28668C00DACCD2 /* test_actions.fth */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = test_actions.fth; path = ../../../hmsl/fth/test_actions.fth; sourceTree = "<group>"; };
 		6972FAD61A9A65CD0008E2E4 /* HMSLDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMSLDelegate.h; sourceTree = "<group>"; };
 		6972FAD71A9A65CD0008E2E4 /* HMSLDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMSLDelegate.m; sourceTree = "<group>"; };
 		6972FADE1A9A7BDE0008E2E4 /* HMSLWindowDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMSLWindowDelegate.h; sourceTree = "<group>"; };
@@ -450,6 +468,10 @@
 		691277C61C25E45A006A7834 /* fth */ = {
 			isa = PBXGroup;
 			children = (
+				69500CD41C28668C00DACCD2 /* action_screen.fth */,
+				69500CD51C28668C00DACCD2 /* action_table.fth */,
+				69500CD61C28668C00DACCD2 /* action_top.fth */,
+				69500CD71C28668C00DACCD2 /* action_utils.fth */,
 				691277C81C25E494006A7834 /* actobj.fth */,
 				691277C91C25E494006A7834 /* allocator.fth */,
 				691277CA1C25E494006A7834 /* bevel.fth */,
@@ -492,6 +514,7 @@
 				691277EF1C25E494006A7834 /* misc_tools.fth */,
 				691277F01C25E494006A7834 /* morph_lists.fth */,
 				691277F11C25E494006A7834 /* morph.fth */,
+				69500CD81C28668C00DACCD2 /* ob_actions.fth */,
 				691277F21C25E494006A7834 /* ob_array.fth */,
 				691277F31C25E494006A7834 /* ob_bind.fth */,
 				691277F41C25E494006A7834 /* ob_dlist.fth */,
@@ -517,6 +540,7 @@
 				691278081C25E494006A7834 /* stock_morphs.fth */,
 				691278091C25E494006A7834 /* structure.fth */,
 				6912780A1C25E494006A7834 /* stubs.fth */,
+				69500CD91C28668C00DACCD2 /* test_actions.fth */,
 				6912780B1C25E494006A7834 /* test_events.fth */,
 				6912780C1C25E494006A7834 /* test_graphics.fth */,
 				6912780D1C25E494006A7834 /* test_ode_locals.fth */,
