@@ -167,6 +167,7 @@ variable THIS-SHAPE
     " Pitch" 1 put.dim.name: chord-shape
     " Velocity" 2 put.dim.name: chord-shape
     " Mode" 3 put.dim.name: chord-shape
+    clear: shape-holder
     chord-shape add: shape-holder
 \
 \ Set limits for editing
@@ -189,6 +190,5 @@ variable THIS-SHAPE
     chord-player hmsl.play
     chord.term
 ;
-
 
 ." Enter:  DEMO.CHORDS    to hear piece!" cr

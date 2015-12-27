@@ -5,7 +5,7 @@
 \
 \ MOD: PLB 8/31/89 Add H. etc. from Larry
 \ MOD: PLB 11/16/89 Added MM! and set TPW to DEFAULT_TPW
-\ MOD: PLB 3/13/90 Removed use of VOCABULARIES 
+\ MOD: PLB 3/13/90 Removed use of VOCABULARIES
 \ MOD: JHC 9/11/90 1numeric codes, flats added
 \ MOD: PLB 4/21/91 Merged J.Chalmers mods with mine
 \           Changed NTET to NS-NOTES/OCT
@@ -408,7 +408,7 @@ variable HUMANIZE-OFFSET
     ns-cur-velocity @
 \
     ns.humanize
-    ns.accent  
+    ns.accent
     1 127 clipto
 ;
 
@@ -455,7 +455,7 @@ variable HUMANIZE-OFFSET
 
 : NS.DURATION: \ add note of given time to shape
     CREATE ( numerator denominator -- )
-        swap w, w, 
+        swap w, w,
     DOES> ( addr -- )
         ns.duration@
         ns.set.length
@@ -472,8 +472,7 @@ variable HUMANIZE-OFFSET
     DOES> w@ ns.velocity!
 ;
 
-
-44100 64 / 2* value DEFAULT_TPW
+40 value DEFAULT_TPW
 
 : NS.RESET  ( -- )
     80 ns-cur-velocity !  ( forte )
@@ -629,7 +628,7 @@ score{
     drop
 ;
 
-\ define NS-NOTES/OCT - 1 notes  
+\ define NS-NOTES/OCT - 1 notes
 0 ns.note: C
 1 ns.note: C#
 1 ns.note: Db
@@ -639,71 +638,71 @@ score{
 4 ns.note: E
 5 ns.note: F
 6 ns.note: F#
-6 ns.note: Gb 
+6 ns.note: Gb
 7 ns.note: G
 8 ns.note: G#
 8 ns.note: Ab
 9 ns.note: A
-10 ns.note: A# 
+10 ns.note: A#
 10 ns.note: Bb
 11 ns.note: B
 
 0 octave !
 0 ns.noct: C0  1 ns.noct: C#0 2 ns.noct: D0   3 ns.noct: D#0
-4 ns.noct: E0  5 ns.noct: F0  6 ns.noct: F#0  7 ns.noct: G0  
+4 ns.noct: E0  5 ns.noct: F0  6 ns.noct: F#0  7 ns.noct: G0
 8 ns.noct: G#0 9 ns.noct: A0  10 ns.noct: A#0 11 ns.noct: B0
 1 ns.noct: Db0 3 ns.noct: Eb0  6 ns.noct: Gb0  8 ns.noct: Ab0
 10 ns.noct: Bb0
- 
- 
+
+
 1 octave !
 0 ns.noct: C1  1 ns.noct: C#1 2 ns.noct: D1   3 ns.noct: D#1
-4 ns.noct: E1  5 ns.noct: F1  6 ns.noct: F#1  7 ns.noct: G1  
-8 ns.noct: G#1 9 ns.noct: A1  10 ns.noct: A#1 11 ns.noct: B1 
+4 ns.noct: E1  5 ns.noct: F1  6 ns.noct: F#1  7 ns.noct: G1
+8 ns.noct: G#1 9 ns.noct: A1  10 ns.noct: A#1 11 ns.noct: B1
 1 ns.noct: Db1 3 ns.noct: Eb1  6 ns.noct: Gb1  8 ns.noct: Ab1
 10 ns.noct: Bb1
 
 2 octave !
 0 ns.noct: C2  1 ns.noct: C#2 2 ns.noct: D2   3 ns.noct: D#2
-4 ns.noct: E2  5 ns.noct: F2  6 ns.noct: F#2  7 ns.noct: G2  
+4 ns.noct: E2  5 ns.noct: F2  6 ns.noct: F#2  7 ns.noct: G2
 8 ns.noct: G#2 9 ns.noct: A2  10 ns.noct: A#2 11 ns.noct: B2
 1 ns.noct: Db2 3 ns.noct: Eb2  6 ns.noct: Gb2  8 ns.noct: Ab2
 10 ns.noct: Bb2
- 
+
 3 octave !
 0 ns.noct: C3  1 ns.noct: C#3 2 ns.noct: D3   3 ns.noct: D#3
-4 ns.noct: E3  5 ns.noct: F3  6 ns.noct: F#3  7 ns.noct: G3  
-8 ns.noct: G#3 9 ns.noct: A3  10 ns.noct: A#3 11 ns.noct: B3 
+4 ns.noct: E3  5 ns.noct: F3  6 ns.noct: F#3  7 ns.noct: G3
+8 ns.noct: G#3 9 ns.noct: A3  10 ns.noct: A#3 11 ns.noct: B3
 1 ns.noct: Db3 3 ns.noct: Eb3  6 ns.noct: Gb3  8 ns.noct: Ab3
-10 ns.noct: Bb3 
- 
-  
+10 ns.noct: Bb3
+
+
 4 octave !
 0 ns.noct: C4  1 ns.noct: C#4 2 ns.noct: D4   3 ns.noct: D#4
-4 ns.noct: E4  5 ns.noct: F4  6 ns.noct: F#4  7 ns.noct: G4  
-8 ns.noct: G#4 9 ns.noct: A4  10 ns.noct: A#4 11 ns.noct: B4 
+4 ns.noct: E4  5 ns.noct: F4  6 ns.noct: F#4  7 ns.noct: G4
+8 ns.noct: G#4 9 ns.noct: A4  10 ns.noct: A#4 11 ns.noct: B4
 1 ns.noct: Db4 3 ns.noct: Eb4  6 ns.noct: Gb4  8 ns.noct: Ab4
 10 ns.noct: Bb4
-  
+
 5 octave !
 0 ns.noct: C5  1 ns.noct: C#5 2 ns.noct: D5   3 ns.noct: D#5
-4 ns.noct: E5  5 ns.noct: F5  6 ns.noct: F#5  7 ns.noct: G5  
-8 ns.noct: G#5 9 ns.noct: A5  10 ns.noct: A#5 11 ns.noct: B5 
+4 ns.noct: E5  5 ns.noct: F5  6 ns.noct: F#5  7 ns.noct: G5
+8 ns.noct: G#5 9 ns.noct: A5  10 ns.noct: A#5 11 ns.noct: B5
 1 ns.noct: Db5 3 ns.noct: Eb5  6 ns.noct: Gb5  8 ns.noct: Ab5
-10 ns.noct: Bb5 
- 
+10 ns.noct: Bb5
+
 6 octave !
 0 ns.noct: C6  1 ns.noct: C#6 2 ns.noct: D6   3 ns.noct: D#6
-4 ns.noct: E6  5 ns.noct: F6  6 ns.noct: F#6  7 ns.noct: G6  
-8 ns.noct: G#6 9 ns.noct: A6  10 ns.noct: A#6 11 ns.noct: B6 
-1 ns.noct: Db6 3 ns.noct: Eb6  6 ns.noct: Gb6  8 ns.noct: Ab6 10 ns.noct: Bb6 
+4 ns.noct: E6  5 ns.noct: F6  6 ns.noct: F#6  7 ns.noct: G6
+8 ns.noct: G#6 9 ns.noct: A6  10 ns.noct: A#6 11 ns.noct: B6
+1 ns.noct: Db6 3 ns.noct: Eb6  6 ns.noct: Gb6  8 ns.noct: Ab6 10 ns.noct: Bb6
 
 7 octave !
 0 ns.noct: C7  1 ns.noct: C#7 2 ns.noct: D7   3 ns.noct: D#7
-4 ns.noct: E7  5 ns.noct: F7  6 ns.noct: F#7  7 ns.noct: G7  
-8 ns.noct: G#7 9 ns.noct: A7  10 ns.noct: A#7 11 ns.noct: B7 
+4 ns.noct: E7  5 ns.noct: F7  6 ns.noct: F#7  7 ns.noct: G7
+8 ns.noct: G#7 9 ns.noct: A7  10 ns.noct: A#7 11 ns.noct: B7
 1 ns.noct: Db7 3 ns.noct: Eb7  6 ns.noct: Gb7  8 ns.noct: Ab7
-10 ns.noct: Bb7 
+10 ns.noct: Bb7
 
 
 2 1  ns.duration: 2/1
@@ -888,7 +887,7 @@ exists? s>f
 : }ACCEL ( -- )
     0 ns-accelerate !
     false ns-if-accel !
-    
+
 ;
 
 : SET.CRESCENDO  ( dvel dticks break? -- )

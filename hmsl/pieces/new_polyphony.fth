@@ -9,7 +9,7 @@ ob.midi.instrument NP-INS
 : NEWP.INIT
     32 4 new: np-sh
     stuff{   ( load it up )
-\     time no  ve on
+\     dur no  ve on
         0   5  90 16
         0   9  80 16
         20 12  86 16

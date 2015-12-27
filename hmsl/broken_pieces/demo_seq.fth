@@ -7,7 +7,7 @@
 \ Copyright 1990 Phil Burk
 \ All Rights Reserved
 
-include? seq.init hsc:sequencer
+include? seq.init screens/sequencer.fth
 
 ANEW TASK-DEMO_SEQ
 
@@ -166,4 +166,15 @@ OB.COLLECTION  DSEQ-COLL
 ;
 
 if.forgotten dseq.term
+
+: DEMO.SEQ ( -- )
+    dseq.init
+    default-screen @
+    seq-screen default-screen !
+    HMSL  ( no preposted morphs )
+    default-screen !
+    dseq.term
+;
+
+cr ." Enter:   DEMO.SEQ     for demo." cr
 

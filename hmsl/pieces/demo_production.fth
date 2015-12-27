@@ -16,22 +16,26 @@ OB.PRODUCTION PROD-REVERSE
 
 \ Forth functions to use in productions.
 : DPR.RAND.NOTE  ( -- , randomize notes in shape-1 )
+    ." randomize" cr
     20 40                 ( allowable range )
     0   many: shape-1 1-  ( starting and ending index )
     1 randomize: shape-1  ( randomize note dimension )
 ;
 
 : DPR.RAND.DUTY  ( select random duty cycle for player )
+    ." random duty cycle" cr
     4 choose 1+ 5 put.duty.cycle: player-1
 ;
 
 : DPR.TRANS ( -- , transpose shape-1 )
+    ." transpose" cr
     12 choose             ( ammount to transpose )
     0   many: shape-1 1-  ( start and end index )
     1 transpose: shape-1  ( randomize notes )
 ;
 
 : DPR.REVERSE ( -- , reverse entire shape-1 )
+    ." reverse" cr
     0  many: shape-1 1-  ( start and end index )
     1 reverse: shape-1   ( randomize notes )
 ;

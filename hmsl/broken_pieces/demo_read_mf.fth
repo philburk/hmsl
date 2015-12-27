@@ -25,4 +25,3 @@ OB.MIDI.INSTRUMENT INS1
     pl1 hmsl.play
 ;
 
-s

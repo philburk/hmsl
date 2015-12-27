@@ -15,7 +15,11 @@
 
 ANEW TASK-JOB_JAM
 
-rtc.rate@ 8 / value dur_basic
+rtc.rate@ 10 / value dur_basic
+
+: DUR* ( n -- dur*n )
+    dur_basic *
+;
 
 \ Number of measures
 50 constant JAM_REP#
@@ -30,9 +34,10 @@ V: JJ-LAST-PEDAL  ( Used for harmonization between channels )
 
 \ Change these to match your setup !!!!!!!!!!!!
 : SITE.RANGE 1 8 ;
+
 \ Constants for appropriate preset.
-\ These work well for an FB-01 in Bank 3
 0 [IF]
+\ These work well for an FB-01 in Bank 3
 32 constant PRESET_DRUM
 10 constant PRESET_BASS
 20 constant PRESET_LEAD1
@@ -40,9 +45,10 @@ V: JJ-LAST-PEDAL  ( Used for harmonization between channels )
 [ELSE]
 \ General MIDI
 117 constant PRESET_DRUM
-35 constant PRESET_BASS
-42 constant PRESET_LEAD1
-57 constant PRESET_LEAD2
+13 constant PRESET_BASS
+\ 14 constant PRESET_LEAD1 \ xylophone
+41 constant PRESET_LEAD1 \ violin
+25 constant PRESET_LEAD2 \ nylon guitar
 [THEN]
 
 V: JAM-OFFSET
@@ -59,24 +65,24 @@ V: JAM-OFFSET
 : INTRO.INIT  ( -- , Set up Introduction )
 \ Allocate and stuff
     15  3 new: shape-1
-    320  4 100 add: shape-1
-    320  7  80 add: shape-1
-    480 11  80 add: shape-1
+    4 dur*  4 100 add: shape-1
+    4 dur*  7  80 add: shape-1
+    6 dur* 11  80 add: shape-1
 
-    160  7 100 add: shape-1
-    160  7  80 add: shape-1
-    320 11  80 add: shape-1
-    480  9  80 add: shape-1
+    2 dur*  7 100 add: shape-1
+    2 dur*  7  80 add: shape-1
+    4 dur* 11  80 add: shape-1
+    6 dur*  9  80 add: shape-1
 
-    320  7 100 add: shape-1
-    160  2  80 add: shape-1
-    160  7  80 add: shape-1
-    320  9  80 add: shape-1
-    160 11  80 add: shape-1
+    4 dur*  7 100 add: shape-1
+    2 dur*  2  80 add: shape-1
+    2 dur*  7  80 add: shape-1
+    4 dur*  9  80 add: shape-1
+    2 dur* 11  80 add: shape-1
 
-    320  2 100 add: shape-1
-    320  2  80 add: shape-1
-    480  7  80 add: shape-1
+    4 dur*  2 100 add: shape-1
+    4 dur*  2  80 add: shape-1
+    6 dur*  7  80 add: shape-1
 
 \ Build Introduction Player
     0 shape-1 0stuff: player-1
@@ -183,8 +189,8 @@ V: JAM-LEAD-SHIFT
 \ Stuff with rhythms.
 \ The data in this shape is unusual.
 \ A 1 in dimension 1 indicates the start of a measure.
-    80 1 100 add: shape-3
-    480 0  80 add: shape-3
+    1 dur* 1 100 add: shape-3
+    5 dur* 0  80 add: shape-3
 
 \ Link to player
     0 shape-3 0stuff: player-3
@@ -195,6 +201,7 @@ V: JAM-LEAD-SHIFT
 \ Install custom note generator.
     'c pedal.on  put.on.function: ins-midi-3
     'c pedal.off put.off.function: ins-midi-3
+    play.on&off: player-3 \ so we execute pedal.off
 ;
 
 \ -------------------------------------------------
@@ -202,9 +209,9 @@ V: JAM-LEAD-SHIFT
 : PULSE.INIT ( -- )
 \ Allocate and stuff
     3 3 new: shape-2
-        8  7 120 add: shape-2
-        8  7  80 add: shape-2
-    40 10 100 add: shape-2
+    1 dur*  7 120 add: shape-2
+    1 dur*  7  80 add: shape-2
+    4 dur* 10 100 add: shape-2
 \
 \ Link to player
     0 shape-2 0stuff: player-2
@@ -214,21 +221,24 @@ V: JAM-LEAD-SHIFT
 ;
 
 : JAM.INIT ( -- )
+    rtc.rate@ 10 / -> dur_basic
     intro.init
     pedal.init
     pulse.init
     jobs.init
 \
 \ Setup extended jam.
-    0 player-3
-        player-2
-        job-1
-        job-2
+    0
+    player-3
+    player-2
+    job-1
+    job-2
     0stuff: coll-p-1
 \
 \ Put introduction in master collection.
-    0 player-1
-        coll-p-1
+    0
+    player-1
+    coll-p-1
     0stuff: coll-s-1
     1 jam-lead-shift !
     print.hierarchy: coll-s-1 cr

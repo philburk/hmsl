@@ -63,4 +63,4 @@ V: DF-RANGE
 ;
 
 ." Enter:    DF.WAGNER" cr
-." ENter:    0 30 DF.1-1" cr
+." Enter:    0 30 DF.1-1" cr

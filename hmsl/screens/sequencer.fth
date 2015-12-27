@@ -24,9 +24,9 @@ host=amiga .IF
 include? get.file hh:arpFileRequest.f
 .THEN
 
-include? shapei{ ht:Score_Entry
-include? capture{ ht:MIDIFile
-include? track.shape ht:Tracks
+include? shapei{ tools/score_entry.fth
+include? capture{ tools/midifile.fth
+include? track.shape tools/tracks.fth
 
 ANEW TASK-SEQUENCER
 
@@ -396,7 +396,7 @@ TEXTROM METRO-LABELS ," Channel" ," Note" ," TimeSig" ," TimeSig"
     draw: seq-record
 ;
 
-host=mac .IF
+0 .IF   \ this was for the old Macintosh
 : SEQ.SAVE ( -- , save all tracks with data )
     mf.set.fileinfo \ 00001
     " hmsl.data" 50 50 " Save as..."
@@ -420,13 +420,13 @@ host=mac .IF
 .ELSE
 
 : seq.SAVE ( -- , save all tracks with data )
-    put.file
+    0 \ FIXME put.file
     IF $save.tracks
     THEN
 ;
 
 : seq.LOAD ( -- , load all tracks from file )
-    get.file
+    0 \ FIXME get.file
     IF $load.tracks
        true seq.enable.rows  ( enable new tracks )
        draw: seq-play
@@ -469,7 +469,7 @@ host=mac .IF
 
 TEXTROM SEQ.MODE.TEXT ," Stop" ," Start" ," Rewnd"
 
-    
+
 : seq.INIT ( -- )
     rg_num_tracks 2+ new: tracks-to-play
 \

@@ -26,7 +26,7 @@
 \
 \ MOD: PLB 1/14/87 Removed OPER.POST.EXECs.
 
-INCLUDE? LOGTO JU:LOGTO
+\ INCLUDE? LOGTO JU:LOGTO
 
 decimal
 ANEW TASK-POLYPHASE
@@ -47,10 +47,10 @@ V: POLY-#REP
 \ Duration - pitch - velocity
     12 18 100 3 pick83 add: []
     12 28  80 3 pick83 add: []
-        6 22 100 3 pick83 add: []
+    6 22 100 3 pick83 add: []
     12 32 100 3 pick83 add: []
     12 30 100 3 pick83 add: []
-        6 26 100 3 pick83 add: []
+    6 26 100 3 pick83 add: []
     drop
 ;
 
@@ -81,6 +81,7 @@ V: POLY-#REP
     shape-4 add: shape-holder
 ;
 
+exists? logto [IF]
 \ This word will save the shapes to a file.
 \ Use like:    POLY.SAVETO POLY-DUMP
 : POLY.SAVETO  ( <filename> -- , save to a file )
@@ -91,6 +92,7 @@ V: POLY-#REP
     dump.source: shape-4
     logend
 ;
+[THEN]
 
 : POLY.STAGGER ( dtime -- , stagger players by dtime )
     0 dup put.start.delay: player-1
@@ -124,9 +126,9 @@ V: POLY-#REP
 \ Set Instrument Presets for an FB-01 in bank 3.
 : POLY.FB-01 ( -- )
     7 1 midi.pc!
-15 2 midi.pc!
-18 3 midi.pc!
-28 4 midi.pc!
+    15 2 midi.pc!
+    18 3 midi.pc!
+    28 4 midi.pc!
 ;
 
 cr
