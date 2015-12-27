@@ -1,11 +1,11 @@
 \ Use Repeat Function to modify shape.
+\ This is similar to demo_production.fth.
 \
 \ Composer: Phil Burk
 \ Copyright 1987 - Phil Burk , Larry Polansky, David Rosenboom.
 
 ANEW TASK-DEMO_REPFUNC
 
-\ Forth functions to use in productions.
 : DRF.RAND.NOTE  ( -- , randomize notes in shape-1 )
     4 20
 \ select subrange of shape

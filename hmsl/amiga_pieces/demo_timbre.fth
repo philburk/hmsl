@@ -1,4 +1,4 @@
-\ Play a pseudo random melodyin equal tempered tuning.
+\ Play a pseudo random melody in equal tempered tuning.
 \ Edit melody and waveform.
 \
 \ Author: Phil Burk

@@ -7,8 +7,8 @@
 \
 \ 00001 PLB 9/20/91 Default to sequential tracks if no SEQ# metaevent.
 
-include? task-midifile ht:midifile
-include? shapei{ ht:score_entry
+include? task-midifile tools/midifile
+include? shapei{ tools/score_entry
 decimal
 
 ANEW TASK-TRACKS

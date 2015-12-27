@@ -81,7 +81,7 @@ METHOD SET.TIMER:
     IV.LONG  IV-PL-OFFSET     ( time offset for starting )
     IV.LONG  IV-PL-OFFSET-ADD ( time to add when starting )
     iv.long  IV-PL-START-REP  ( start on this repitition )
-    
+
     IV.LONG  IV-PL-ON#        ( index of element while on, waiting for off )
     IV.LONG  IV-PL-ALLOW?     ( Allow element off? )
 \
@@ -406,7 +406,7 @@ exists? OB.MIDI.INSTRUMENT [IF]
     iv-repeat iv-pl-start-rep - iv=> iv-repcount
     2drop
 ;M
-        
+
 : PL.SET.DELAY ( delay -- , set timenext to delay )
     iv-jb-epochal?
     IF iv+> iv-time-next

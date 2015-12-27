@@ -15,9 +15,9 @@
 \ Copyright 1989 Phil Burk
 
 decimal
-include? score{ ht:score_entry
-include? ob.fader h:ctrl_fader
-include? re-player hp:recent
+include? score{ tools/score_entry.fth
+include? ob.fader fth/ctrl_fader.fth
+include? re-player pieces/recent.fth
 
 ANEW TASK-PHRASES
 decimal
@@ -647,31 +647,31 @@ OB.CHECK.GRID af-cg-DRONE
 \ --------------------------------------------------
 \ The following code built using control screen editor.
 \
-    253 372  put.wh: AF-CG-CHORDS
-    253 349  put.wh: AF-CG-PHRASES
-    160 303  put.wh: AF-CG-DRONE
-    399 396  put.wh: AF-CG-MENU
-    173 884  put.wh: AF-CG-NUMPV
-    166 884  put.wh: AF-CG-CHANNEL
-    180 1,583  put.wh: AF-CG-PTIME
-    612 396  put.wh: AF-CG-CHECK
-    519 396  put.wh: AF-CG-MODE
-    180 1,396  put.wh: AF-CG-VOLUMEC
-    180 1,396  put.wh: AF-CG-VOLUMEL
-    180 1,396  put.wh: AF-CG-VOLUMEP
+    253  372  put.wh: AF-CG-CHORDS
+    253  349  put.wh: AF-CG-PHRASES
+    160  303  put.wh: AF-CG-DRONE
+    399  396  put.wh: AF-CG-MENU
+    173  884  put.wh: AF-CG-NUMPV
+    166  884  put.wh: AF-CG-CHANNEL
+    180 1583  put.wh: AF-CG-PTIME
+    612  396  put.wh: AF-CG-CHECK
+    519  396  put.wh: AF-CG-MODE
+    180 1396  put.wh: AF-CG-VOLUMEC
+    180 1396  put.wh: AF-CG-VOLUMEL
+    180 1396  put.wh: AF-CG-VOLUMEP
     20  3 new: AFEST-SCREEN
-    AF-CG-CHORDS           100   2,700  add: AFEST-SCREEN
-    AF-CG-PHRASES          100     600  add: AFEST-SCREEN
-    AF-CG-DRONE          1,729   2,746  add: AFEST-SCREEN
-    AF-CG-MENU           2,799     442  add: AFEST-SCREEN
-    AF-CG-NUMPV          1,157     628  add: AFEST-SCREEN
-    AF-CG-CHANNEL        2,400   1,024  add: AFEST-SCREEN
-    AF-CG-PTIME          2,168     326  add: AFEST-SCREEN
-    AF-CG-CHECK          1,489     303  add: AFEST-SCREEN
-    AF-CG-MODE           1,150   2,234  add: AFEST-SCREEN
-    AF-CG-VOLUMEC        2,806   1,769  add: AFEST-SCREEN
-    AF-CG-VOLUMEL        3,225   1,745  add: AFEST-SCREEN
-    AF-CG-VOLUMEP        3,597   1,745  add: AFEST-SCREEN
+    AF-CG-CHORDS          100   2700  add: AFEST-SCREEN
+    AF-CG-PHRASES         100    600  add: AFEST-SCREEN
+    AF-CG-DRONE          1729   2746  add: AFEST-SCREEN
+    AF-CG-MENU           2799    442  add: AFEST-SCREEN
+    AF-CG-NUMPV          1157    628  add: AFEST-SCREEN
+    AF-CG-CHANNEL        2400   1024  add: AFEST-SCREEN
+    AF-CG-PTIME          2168    326  add: AFEST-SCREEN
+    AF-CG-CHECK          1489    303  add: AFEST-SCREEN
+    AF-CG-MODE           1150   2234  add: AFEST-SCREEN
+    AF-CG-VOLUMEC        2806   1769  add: AFEST-SCREEN
+    AF-CG-VOLUMEL        3225   1745  add: AFEST-SCREEN
+    AF-CG-VOLUMEP        3597   1745  add: AFEST-SCREEN
 \ -----------------------------------------------
     " Phrases by Phil Burk" put.title: afest-screen
     afest-screen default-screen !

@@ -189,11 +189,11 @@ defer CLOSEBOX.HIT
                  IF gr.getxy rot mouse.down: [] drop THEN
              ENDOF
 
-         EV_MOUSE_UP OF cg-current-screen @ ?dup 
+         EV_MOUSE_UP OF cg-current-screen @ ?dup
                  IF gr.getxy rot mouse.up: [] THEN
              ENDOF
 
-         EV_MOUSE_MOVE OF  cg-current-screen @ ?dup 
+         EV_MOUSE_MOVE OF  cg-current-screen @ ?dup
                  IF gr.getxy rot mouse.move: [] THEN
              ENDOF
 
@@ -208,7 +208,7 @@ defer CLOSEBOX.HIT
                     THEN
                  THEN
              ENDOF
-             
+
          EV_MENU_PICK OF
                 process.menus
          ENDOF
@@ -272,7 +272,9 @@ create HMSL-IN-SCAN 0 ,
 
 : (HMSL.SCAN)  ( -- , low level scan )
     sys.task
-    midi-parser @ IF midi.parse.many THEN
+    midi-parser @ IF
+        midi.parse.many
+    THEN
     sys.task
     hmsl-graphics @
     IF  hmsl.check.events  ( -- flag , process user input )
@@ -302,8 +304,9 @@ create HMSL-IN-SCAN 0 ,
     false quit-hmsl !    ( set flag for QUIT on main menu )
     hmsl.startup
     BEGIN
-      hmsl.keys
-      hmsl.scan
+        hmsl.keys
+   		hmsl.scan
+      	5 msec \ prevent HMSL from eating 100% of a CPU
     UNTIL
     hmsl.stop
 ;

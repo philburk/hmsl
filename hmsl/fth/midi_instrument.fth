@@ -114,7 +114,7 @@ OB.ALLOCATOR MIDI-ALLOCATOR
 
 \ set default
 'c ob.midi.instrument is default.instrument
-    
+
 : SYS.INIT sys.init mi.init ;
 : SYS.RESET sys.reset clear: midi-allocator ;
 : SYS.TERM free: midi-allocator sys.term ;

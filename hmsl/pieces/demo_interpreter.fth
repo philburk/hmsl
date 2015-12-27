@@ -78,12 +78,13 @@ ANEW TASK-DEMO_INTERPRETER
 : DI.TERM ( -- , Clean up )
     default.hierarchy: coll-p-1
     free.hierarchy: coll-p-1
+    clear: shape-holder
 ;
 
 : DEMO.INTERPRETER ( -- , Run Demo )
     di.init   di.play  di.term
 ;
 
-
-." Enter:   DEMO.INTERPRETER   to hear piece. " cr
+." SHAPE-2 transposes SHAPE-1" cr
+." Enter:   DEMO.INTERPRETER   to hear piece." cr
 

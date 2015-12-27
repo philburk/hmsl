@@ -105,7 +105,7 @@ score{
 : DS.INIT.SHAPES
     32 4 new: m-s-1
     m-s-1 ins-midi-1
-    shapei{ eh c b4 a d }shapei
+    shapei{ 1/8 c b4 a d }shapei
 \
     32 4 new: m-s-2
     m-s-2 ins-midi-2
@@ -113,7 +113,7 @@ score{
 \
     32 4 new: m-s-3
     m-s-3 ins-midi-3
-    shapei{ eh e3 d c c 1/16 c c d c d eh e e e d }shapei
+    shapei{ 1/8 e3 d c c 1/16 c c d c d 1/8 e e e d }shapei
 \
     32 4 new: m-s-4
     m-s-4 ins-midi-4

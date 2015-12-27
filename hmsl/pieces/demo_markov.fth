@@ -4,7 +4,7 @@
 \ Copyright 1989
 \ All Rights Rserved
 
-include? ob.markov  ht:markov_chain
+include? ob.markov  ht:markov_chain.fth
 
 ANEW TASK-DEMO_MARKOV
 
@@ -45,4 +45,4 @@ variable default-interval
 
 .THEN
 
-cr ." Enter:  PLAY.MARKOV   to hear demo" cr
+cr ." Enter:  PLAY.MARKOV   to hear demo, hit ENTER to quit." cr

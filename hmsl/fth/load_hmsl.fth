@@ -6,6 +6,9 @@
 \
 ANEW TASK-LOAD_HMSL
 
+false constant HOST=AMIGA
+true constant HOST=MAC
+
 : '  ( <name> -- cfa , warn me if used the wrong way )
     state @
     IF
@@ -179,7 +182,9 @@ if-load-graphics @ if-load-actions @ AND [IF]
 [THEN]
 
 \ load some tools
+include? file_port tools/file_port.fth
 include? task-midifile tools/midifile.fth
+include? task-markov_chain tools/markov_chain.fth
 include? task-score_entry tools/score_entry.fth
 
 mreset-warn on
