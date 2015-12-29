@@ -148,10 +148,17 @@ OB.SHAPE SD-TRACKS-AVAIL  ( available subdivisions )
 ;
 
 : SUBDIV  ( -- , perform piece )
+    rtc.rate@ >r
+    ticks/measure 8 /
+    cr ." Setting RTC.RATE to " dup . cr
+    rtc.rate!
+
     sd.init.multi
     print.hierarchy: coll-p-1
     coll-p-1 hmsl.play
     sd.term.multi
+    r> rtc.rate!
+    ." Restoring original RTC.RATE" cr
 ;
 
 cr
