@@ -22,7 +22,7 @@ CREATE SPLORP-PRESETS \ General MIDI
    13 c, \ marimba
    66 c, \ alto sax
    31 c, \ distortion guitar
-    
+
 \ Define allowable intervals in order of
 \ increasing dissonance -->
 CREATE SP-INTERVALS here
@@ -96,14 +96,24 @@ OB.RADIO.GRID   SP-RADIO  \ for Record/Stop/Play
             empty: sp-sh-play
             rtc.time@ start-time !
             if-record on
+            false 0 put.enable: sp-radio
+            true 1 put.enable: sp-radio
+            false 2 put.enable: sp-radio
         ENDOF
 \ stop whatever
         1 OF sp.stop
+            true 0 put.enable: sp-radio
+            false 1 put.enable: sp-radio
+            true 2 put.enable: sp-radio
         ENDOF
 \ start playback
         2 OF start: sp-player
+            false 0 put.enable: sp-radio
+            true 1 put.enable: sp-radio
+            false 2 put.enable: sp-radio
         ENDOF
     ENDCASE
+    draw: sp-radio
 ;
 
 : BUILD.SP-RADIO ( -- , setup control )
@@ -115,6 +125,8 @@ OB.RADIO.GRID   SP-RADIO  \ for Record/Stop/Play
     stuff{ " Record" " Stop" " Play" }stuff.text: sp-radio
     true 1 put.value: sp-radio  ( default is STOP )
     " Record Faders" put.title: sp-radio
+    false 1 put.enable: sp-radio
+    false 2 put.enable: sp-radio
 ;
 
 \ -------------------------------------------------
