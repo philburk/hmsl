@@ -75,7 +75,6 @@
   
   CGContextRef drawingContext = self.graphicsContext.graphicsPort;
   CGContextFillRect(drawingContext, drawRect);
-  CGContextSynchronize(drawingContext);
   return;
 }
 
@@ -85,13 +84,11 @@
   CGContextMoveToPoint(drawingContext, start.x, start.y);
   CGContextAddLineToPoint(drawingContext, end.x, end.y);
   CGContextStrokePath(drawingContext);
-  CGContextSynchronize(drawingContext);
   return;
 }
 
 - (void) drawText: (NSString*) text atPoint: (NSPoint) point {
   [text drawAtPoint:point withAttributes:APP.fontAttributes];
-  CGContextSynchronize(self.graphicsContext.graphicsPort);
 }
 
 - (void)keyDown:(NSEvent *)event {
@@ -125,7 +122,6 @@
 - (void)hmslBackgroundColor:(const double*)rgba {
   NSColor *bgColor = [NSColor colorWithRed: rgba[0] green:rgba[1] blue:rgba[2] alpha:rgba[3]];
   [self setBackgroundColor:bgColor];
-  CGContextSynchronize(self.graphicsContext.graphicsPort);
 }
 
 @end
