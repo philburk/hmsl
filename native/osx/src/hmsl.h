@@ -2,7 +2,6 @@
 //  hmsl.h
 //  HMSL-OSX
 //
-//  Created by Andrew C Smith on 1/27/15.
 //  Copyright (c) 2015 Andrew C Smith. All rights reserved.
 //
 
