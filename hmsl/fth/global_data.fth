@@ -5,7 +5,7 @@ ANEW TASK-GLOBAL_DATA
 variable HMSL-WINDOW   ( window to use for drawing HMSL )
 
 variable TICKS/BEAT
-rtc.rate@ 2 * 3 / ticks/beat !
+40 ticks/beat !
 
 variable TIMESIG-NUMER  ( numerator )
 4 timesig-numer !
