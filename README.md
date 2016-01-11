@@ -36,8 +36,9 @@ Description of folders:
 
 ### Compiling the pforth dictionary
 
-* Clone [pforth-xcode](https://www.github.com/kristopherjohnson/pforth-xcode)
+* Clone [pforth](https://www.github.com/philburk/pforth)
     into the same directory into which you cloned hmsl.
+* Rename the folder `pforth-xcode`.
 * Open xcode project in `hmsl/native/osx`
 * Compile the HMSL-OSX command-line program. Ensure that it finds all necessary
     files, including the `pforth-xcode/csrc` folder.
