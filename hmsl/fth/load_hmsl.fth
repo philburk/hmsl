@@ -81,6 +81,7 @@ include? task-cond_comp         fth/cond_comp.fth
 
 include? task-global_data       fth/global_data.fth
 include? task-service_tasks     fth/service_tasks.fth
+include? task-float_port        fth/float_port.fth
 
 \ MIDI and Time support-------------------------------
 if-load-midi @ [IF]
