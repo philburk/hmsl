@@ -1,8 +1,10 @@
-\ Miscellaneous H4th words needed by HMSL.
+\ Floating point words from HMSL redefined using ANSI Forth
+\
+\ Author: Phil Burk
+\ Copyright 2016 -  Phil Burk, Larry Polansky, David Rosenboom.
+\ All Rights Reserved
 
-ANEW TASK-H4TH_PORT
-
-\ Floating point words redefined using ANSI Forth -------------
+ANEW TASK-FLOAT_PORT
 
 : FPINIT ; \ not needed, floats always available
 : FPTERM ;
@@ -25,8 +27,8 @@ ANEW TASK-H4TH_PORT
     f>s
 ;
 
-: FIX  ( r -f- , -- n , rounds ) \ FROUND not implemented in pForth!
-    0.5 f+ f>s
+: FIX  ( r -f- , -- n , rounds )
+    fround
 ;
 
 : FLOAT ( n -- , -f- r , convert to float )
