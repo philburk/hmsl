@@ -31,6 +31,7 @@ Description of folders:
     hmsl/tools - tools written using HMSL, e.g. the score entry system
 
     native/Win32 - port of HMSL to pForth for Windows by Robert Marsanyi and Phil Burk
+    native/osx - port of HMSL to pForth for Mac OSX by Andrew Smith and Phil Burk
 
 ## OSX: Compilation and installation
 
