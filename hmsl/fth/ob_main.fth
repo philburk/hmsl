@@ -11,6 +11,7 @@
 \  this means they are stored as addresses relative to the base of
 \  the dictionary.
 \
+\ (sizes are for a 32-bit Forth)
 \ Data Structures:    ( offsets are from PFA )
 \  CLASS Definition Structure
 \  offset     name           contents

@@ -192,7 +192,7 @@ ANEW TASK-OB_BIND
     state @
     IF
         [compile] literal  ( cfa )
-        [compile]  literal  ( offset )
+        [compile] literal  ( offset )
         compile (ob.exec.method.i)
     ELSE
         swap os+push
@@ -204,12 +204,11 @@ ANEW TASK-OB_BIND
 variable OB-IF-CHECK-BIND
 variable OB-CURRENT-MIND  \ currently compiling method index
 
-
-: OB.BIND.RUN  ( object method_index*4 -- , run time binding act)
+: OB.BIND.RUN  ( object method_index*cell -- , run time binding act)
     >r
 \ rel->use \ 00005
     ob-if-check-bind @
-    IF dup r@ 4/ ob.check.bind
+    IF dup r@ cell/ ob.check.bind
     THEN
     dup os.push   ( push object onto object stack )
     @ rel->use r> +  ( index to method cfa )

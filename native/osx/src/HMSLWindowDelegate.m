@@ -13,7 +13,7 @@
 
 -(void)windowWillClose:(NSNotification *)notification {
   hmslAddEvent(EV_CLOSE_WINDOW);
-  HMSLWindow *window = (HMSLWindow*)[notification object];
+  HMSLWindow *window = (HMSLWindow*)[notification object]; // TODO
 }
 
 @end

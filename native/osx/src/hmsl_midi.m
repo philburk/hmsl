@@ -9,6 +9,7 @@
 #import "hmsl.h"
 #import "pf_all.h"
 
+#import <mach/mach_time.h>
 #import <Foundation/Foundation.h>
 #import <CoreAudio/HostTime.h>
 
@@ -29,13 +30,12 @@ static UInt64 sHmslStartTime;
 static UInt32 sHmslTickOffset;
 static UInt32 sHmslTicksPerSecond;
 
-
-void hostClock_Init( void ) {
+void hostClock_Init() {
     hostClock_SetTime(0);
     sHmslTicksPerSecond = 60;
 }
 
-void hostClock_Term( void ) {
+void hostClock_Term() {
 }
 
 static UInt64 hostClock_GetNanoseconds(void) {
@@ -61,7 +61,7 @@ static UInt64 hostClock_TicksToNanoseconds( int ticks ) {
     return elapsedNanos + sHmslStartTime;
 }
 
-int hostClock_QueryTime( void ) {
+int hostClock_QueryTime() {
     UInt64 currentTime = hostClock_GetNanoseconds();
     return hostClock_NanosecondsToTicks(currentTime);
 }
@@ -75,7 +75,7 @@ void hostClock_AdvanceTime( int delta ) {
     sHmslTickOffset += delta;
 }
 
-int hostClock_QueryRate( void ) {
+int hostClock_QueryRate() {
     return sHmslTicksPerSecond;
 }
 
@@ -157,11 +157,10 @@ int hostMIDI_Init() {
 }
 
 // Called by HMSL to terminate the MIDI connection
-void hostMIDI_Term( void ) {
+void hostMIDI_Term() {
   free(hmslCurrentMIDIData);
   // This automatically disposes of the ports as well
   MIDIClientDispose(hmslMIDIClient);
-  return;
 }
 
 // Called when HMSL wants to schedule a MIDI packet

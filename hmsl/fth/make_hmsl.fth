@@ -2,6 +2,8 @@
 \ make_hmsl.fth
 \ Create HMSL dictionary
 
+echo on
+
 include fth/load_hmsl.fth
 
 \ Do not execute auto.init chain if stack is large.

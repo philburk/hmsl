@@ -16,8 +16,6 @@ decimal
 0 constant #HOST_MAC_H4TH
 1 constant #HOST_PFORTH
 
-\ why isn't this in members.fth???
-: RPTR    ( <name> -- ) -4 bytes ; \ relative relocatable pointer 00001
 : ..!
     state @
     IF
@@ -183,8 +181,7 @@ HO_MAX_INT 1+ CONSTANT HO_MIN_INT
     dup 1+ swap 0
     ?DO dup pick79 swap
     LOOP drop
-    ;
-
+;
 
 : WITHIN? ( N LO HI -- flag , true if within inclusive range )
     1+ within
@@ -193,7 +190,6 @@ HO_MAX_INT 1+ CONSTANT HO_MIN_INT
 : IN.DICT?  ( address -- flag , inside dictionary? )
     codebase here within?
 ;
-
 
 : INLINE ; IMMEDIATE
 : BOTH ;   IMMEDIATE
@@ -269,7 +265,12 @@ HEX
 [then]
 
 : 4/  2 arshift ;
-: CELL/  2 arshift ;
+
+cell 8 = [IF]
+    : CELL/  3 arshift ;
+[ELSE]
+    : CELL/  2 arshift ;
+[THEN]
 
 : EMIT-TO-COLUMN  ( char col -- )
     out @ -

@@ -48,17 +48,27 @@ void hmslDrawLine( HMSLPoint start, HMSLPoint end ) {
 }
 
 void hmslFillRectangle( HMSLRect rect ) {
-  // Flip the y-value of the origin
-  HMSLView *view = (HMSLView*)mainWindow.contentView;
-  rect.origin.y = view.frame.size.height - rect.origin.y - rect.size.h;
-  rect.size.h++; rect.size.w++;
-  [mainWindow drawRectangle:rect];
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        HMSLRect rect2 = rect;
+        // Flip the y-value of the origin
+        HMSLView *view = (HMSLView*)mainWindow.contentView;
+        rect2.origin.y = view.frame.size.height - rect.origin.y - rect.size.h;
+        rect2.size.h++;
+        rect2.size.w++;
+        [mainWindow drawRectangle:rect2];
+    });
 }
 
 uint32_t hmslOpenWindow(const char* title, short x, short y, short w, short h) {
   NSRect frame = NSMakeRect(x, y, w, h);
   NSString *windowTitle = [NSString stringWithCString:title encoding:NSASCIIStringEncoding];
-  HMSLWindow* hmslWindow = [HMSLWindow hmslWindowWithTitle:windowTitle frame:frame];
+  HMSLWindow* hmslWindow = NULL;
+  HMSLWindow** hmslWindowPtr = &hmslWindow;
+  dispatch_sync(dispatch_get_main_queue(), ^{
+         [HMSLWindow hmslWindowWithTitle:windowTitle
+                                    frame:frame
+                                windowPtr:hmslWindowPtr];
+  });
   [hmslWindow hmslBackgroundColor:hmslColors[0]];
   mainWindow = hmslWindow;
   return (uint32_t)hmslWindow.windowNumber;
@@ -104,21 +114,22 @@ uint32_t hmslGetTextLength( const char* string, int32_t size ) {
 
 // string parameter is not a Forth string
 void hmslDrawText( const char* string, int32_t size, HMSLPoint loc ) {
-  
-  @autoreleasepool {
-    if (mainWindow != NULL) {
-      char* nullTerm = nullTermString(string, size);
-      NSString *text = [NSString stringWithCString: nullTerm encoding:NSASCIIStringEncoding];
-      
-      NSPoint point;
-      point.x = loc.x;
-      point.y = ((HMSLView*)mainWindow.contentView).frame.size.height - loc.y - 3;
-      
-      [mainWindow drawText:text atPoint:point];
-      
-      free(nullTerm);
-    }
-  }
+    dispatch_sync(dispatch_get_main_queue(), ^{
+      @autoreleasepool {
+        if (mainWindow != NULL) {
+          char* nullTerm = nullTermString(string, size);
+          NSString *text = [NSString stringWithCString: nullTerm encoding:NSASCIIStringEncoding];
+
+          NSPoint point;
+          point.x = loc.x;
+          point.y = ((HMSLView*)mainWindow.contentView).frame.size.height - loc.y - 3;
+
+          [mainWindow drawText:text atPoint:point];
+
+          free(nullTerm);
+        }
+      }
+    });
   
   return;
 }
