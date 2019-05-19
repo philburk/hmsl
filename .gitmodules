@@ -1,0 +1,3 @@
+[submodule "pforth"]
+	path = pforth
+	url = https://github.com/philburk/pforth
