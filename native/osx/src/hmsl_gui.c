@@ -9,48 +9,46 @@
 #import "hmsl.h"
 #import "pf_all.h"
 
-int32_t hostInit( void ) {
+hmslContext gHMSLContext;
+
+int32_t hostInit() {
   gHMSLContext.events = malloc(sizeof(HMSLEvent) * EVENT_BUFFER_SIZE);
   gHMSLContext.events_read_loc = 0;
   gHMSLContext.events_write_loc = 0;
   return -1;
 }
 
-void hostTerm( void ) {
+void hostTerm() {
   free(gHMSLContext.events);
-  return;
 }
 
-uint32_t hostOpenWindow( hmslWindow *window ) {
+hmsl_window_index_t hostOpenWindow( hmslWindow *window ) {
   char title[80];
   ForthStringToC(title, (const char*)window->title, 80);
   uint32_t windowIndex = hmslOpenWindow(title, window->rect_left, window->rect_bottom, window->rect_right - window->rect_left, window->rect_bottom - window->rect_top);
   return windowIndex;
 }
 
-void hostCloseWindow( uint32_t window ) {
-  hmslCloseWindow( window );
-  return;
+void hostCloseWindow(hmsl_window_index_t window) {
+  hmslCloseWindow((uint32_t)window);
 }
 
-void hostSetCurrentWindow( uint32_t window ) {
-  hmslSetCurrentWindow( window );
-  return;
+void hostSetCurrentWindow( hmsl_window_index_t window ) {
+  hmslSetCurrentWindow((uint32_t)window);
 }
 
-void hostDrawLineTo( int32_t x, int32_t y ) {
+void hostDrawLineTo( cell_t x, cell_t y ) {
   HMSLPoint start, end;
   start.x = gHMSLContext.currentPoint.x; start.y = gHMSLContext.currentPoint.y;
-  end.x = x; end.y = y;
+  end.x = x;
+  end.y = y;
   hmslDrawLine( start, end );
   gHMSLContext.currentPoint = end;
-  return;
 }
 
-void hostMoveTo( int32_t x, int32_t y ) {
+void hostMoveTo( cell_t x, cell_t y ) {
   gHMSLContext.currentPoint.x = x;
   gHMSLContext.currentPoint.y = y;
-  return;
 }
 
 /*
@@ -59,10 +57,9 @@ void hostMoveTo( int32_t x, int32_t y ) {
  * address - address in memory of the string to copy
  * count - number of bytes to read
  */
-void hostDrawText( uint32_t address, int32_t count ) {
-  hmslDrawText( (char*)address, count, gHMSLContext.currentPoint );
-  gHMSLContext.currentPoint.x += hmslGetTextLength( (char*)address, count);
-  return;
+void hostDrawText( ucell_t address, cell_t count ) {
+  hmslDrawText( (char*)address, (int32_t)count, gHMSLContext.currentPoint );
+  gHMSLContext.currentPoint.x += hmslGetTextLength( (char*)address, (int32_t)count);
 }
 
 /*
@@ -73,23 +70,22 @@ void hostDrawText( uint32_t address, int32_t count ) {
  * 
  * Returns the length of the text
  */
-uint32_t hostGetTextLength( uint32_t address, int32_t count ) {
-  return hmslGetTextLength( (char*)address, count );
+uint32_t hostGetTextLength( ucell_ptr_t address, cell_t count ) {
+  return hmslGetTextLength( (char*)address, (int32_t)count );
 }
 
 /* 
  * Draws a filled rectangle in the current context
  * 
  * x1, y1 - integer coordinates of one corner of rectangle
- * x2, y2 - integer coordiantes of opposing corner of rectangle
+ * x2, y2 - integer coordinates of opposing corner of rectangle
  */
-void hostFillRectangle( int32_t x1, int32_t y1, int32_t x2, int32_t y2 ) {
+void hostFillRectangle( cell_t x1, cell_t y1, cell_t x2, cell_t y2 ) {
   HMSLRect rect;
   rect.origin.x = x1; rect.origin.y = y1;
   rect.size.w = x2 - x1; rect.size.h = y2 - y1;
   hmslFillRectangle( rect );
   gHMSLContext.currentPoint = rect.origin;
-  return;
 }
 
 /*
@@ -97,9 +93,8 @@ void hostFillRectangle( int32_t x1, int32_t y1, int32_t x2, int32_t y2 ) {
  *
  * color - index of color to use, defined as constants in hmsl.h
  */
-void hostSetColor( int32_t color ) {
+void hostSetColor( cell_t color ) {
   hmslSetDrawingColor(hmslColors[color & HMSL_COLORS_MASK]);
-  return;
 }
 
 /* 
@@ -107,9 +102,8 @@ void hostSetColor( int32_t color ) {
  *
  * color - index of color to use, defined as constants in hmsl.h
  */
-void hostSetBackgroundColor( int32_t color ) {
+void hostSetBackgroundColor( cell_t color ) {
   hmslSetBackgroundColor(hmslColors[color & HMSL_COLORS_MASK]);
-  return;
 }
 
 /*
@@ -117,9 +111,8 @@ void hostSetBackgroundColor( int32_t color ) {
  *
  * mode - 0 for normal (overwrite); 1 for XOR.
  */
-void hostSetDrawingMode( int32_t mode ) {
-  hmslSetDrawingMode(mode);
-  return;
+void hostSetDrawingMode( cell_t mode ) {
+  hmslSetDrawingMode((int32_t)mode);
 }
 
 /*
@@ -127,8 +120,8 @@ void hostSetDrawingMode( int32_t mode ) {
  * 
  * font - index of font to set
  */
-void hostSetFont( int32_t font ) {
-  return;
+void hostSetFont( cell_t font ) {
+    // TODO
 }
 
 /* 
@@ -136,23 +129,19 @@ void hostSetFont( int32_t font ) {
  *
  * size - integer size
  */
-void hostSetTextSize( int32_t size ) {
-  hmslSetTextSize(size);
-  return;
+void hostSetTextSize( cell_t size ) {
+  hmslSetTextSize((int32_t)size);
 }
 
-/*
+/**
  * Called whenever HMSL wants to know where the mouse is (usually open receiving an event)
  *
- * x - address in memory where the mouse event's x coordinates should be written
- * y - address in memory where the mouse event's y coordinates should be written
- *
- * should return void
+ * @param xPtr address in memory where the mouse event's x coordinates should be written
+ * @param yPtr address in memory where the mouse event's y coordinates should be written
  */
-void hostGetMouse( uint32_t x, uint32_t y) {
-  *(int32_t*)x = gHMSLContext.mouseEvent.x;
-  *(int32_t*)y = gHMSLContext.mouseEvent.y;
-  return;
+void hostGetMouse( ucell_ptr_t xPtr, ucell_ptr_t yPtr) {
+  *(cell_t*)xPtr = gHMSLContext.mouseEvent.x;
+  *(cell_t*)yPtr = gHMSLContext.mouseEvent.y;
 }
 
 /*
@@ -162,7 +151,7 @@ void hostGetMouse( uint32_t x, uint32_t y) {
  *
  * Returns an int, defined in the enum HMSLEventID
  */
-int32_t hostGetEvent( int32_t timeout ) {
+cell_t hostGetEvent( cell_t timeout ) {
   if (gHMSLContext.events_read_loc < gHMSLContext.events_write_loc) {
     HMSLEvent event = gHMSLContext.events[gHMSLContext.events_read_loc & EVENT_BUFFER_MASK];
     gHMSLContext.events_read_loc += 1;

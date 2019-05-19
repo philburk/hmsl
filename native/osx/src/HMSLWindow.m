@@ -19,24 +19,28 @@
 
 @synthesize graphicsContext = _graphicsContext;
 
-+ (HMSLWindow*)hmslWindowWithTitle:(NSString *)title frame:(NSRect)frame {
++ (void)hmslWindowWithTitle:(NSString *)title
+                             frame:(NSRect)frame
+                         windowPtr: (HMSLWindow**) windowPtr
+    {
   HMSLWindow* hmslWindow = [[HMSLWindow alloc]
                             initWithContentRect: frame
                             styleMask:  NSTitledWindowMask | NSMiniaturizableWindowMask | NSClosableWindowMask
                             backing: NSBackingStoreBuffered
                             defer: YES];
   hmslWindow.title = title;
+
+
   NSView *titleBarView = [[NSView alloc] init];
   [[[hmslWindow contentView] superview] addSubview:titleBarView];
-  /*
+
   NSRect viewFrame = frame;
   viewFrame.origin.y += 30;
   [hmslWindow.contentView addSubview:[[HMSLView alloc] initWithFrame:viewFrame]];
-   */
 
-  hmslWindow.contentView = [[HMSLView alloc] initWithFrame:frame];
-  hmslWindow.delegate = [[HMSLWindowDelegate alloc] init];
-  
+        hmslWindow.contentView = [[HMSLView alloc] initWithFrame:frame];
+        hmslWindow.delegate = [[HMSLWindowDelegate alloc] init];
+
   [hmslWindow cascadeTopLeftFromPoint:NSZeroPoint];
   [hmslWindow makeKeyAndOrderFront:hmslWindow];
   [[HMSLWindow windowDictionary] setObject:hmslWindow forKey:[NSNumber numberWithInteger:hmslWindow.windowNumber]];
@@ -49,7 +53,7 @@
   } else {
     NSLog(@"Unable to initialize context");
   }
-  return hmslWindow;
+  *windowPtr = hmslWindow;
 }
 
 - (BOOL)canBecomeKeyWindow {

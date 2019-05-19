@@ -12,11 +12,11 @@ decimal
     long   st_limit
 ;STRUCT
 
-: STACK.EMPTY? ( stack flag , true if empty )
+: STACK.EMPTY? ( stack -- flag , true if empty )
     ..@ st_depth 1 <
 ;
 
-: STACK.FULL?  ( stack flag , true if full )
+: STACK.FULL?  ( stack -- flag , true if full )
     dup>r ..@ st_depth r> ..@ st_limit >=
 ;
 

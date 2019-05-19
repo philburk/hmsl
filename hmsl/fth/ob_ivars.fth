@@ -66,11 +66,11 @@ false [IF]
 \ Some of this code appears redundant but is needed because they
 \ are CREATE-DOES> words.
 : IV.LONG  ( <name> --IN-- , declare a cell wide instance variable )
-    4 create.ivar
+    cell create.ivar
 ;
 
 : IV.RPTR  ( <name> --IN-- , declare a relocatable pointer instance variable )
-    -4 create.ivar
+    -cell create.ivar
 ;
 
 : IV.SHORT  ( <name> --IN-- , declare a 16 bit wide instance variable )

@@ -11,6 +11,8 @@
 #include <CoreMIDI/CoreMIDI.h>
 #include <CoreGraphics/CGContext.h>
 
+#import "pf_all.h"
+
 #ifndef PF_DEFAULT_DICTIONARY
 #define PF_DEFAULT_DICTIONARY "pforth.dic"
 #endif
@@ -34,7 +36,10 @@ static const double* hmslColors[HMSL_COLORS_SIZE] = {
   hmslWhite, hmslBlack, hmslRed, hmslGreen, hmslBlue, hmslCyan, hmslMagenta, hmslWhite
 };
 
-#endif
+#endif /* HMSL_COLORS */
+
+typedef ucell_t ucell_ptr_t; // cell that contains an address
+typedef ucell_t hmsl_window_index_t; // token for a window
 
 #define EVENT_BUFFER_SIZE 256
 #define EVENT_BUFFER_MASK (EVENT_BUFFER_SIZE - 1)
@@ -44,13 +49,13 @@ static const double* hmslColors[HMSL_COLORS_SIZE] = {
  */
 
 typedef struct HMSLPoint {
-  int32_t x;
-  int32_t y;
+  cell_t x;
+  cell_t y;
 } HMSLPoint;
 
 typedef struct HMSLSize {
-  int32_t w;
-  int32_t h;
+  cell_t w;
+  cell_t h;
 } HMSLSize;
 
 typedef struct HMSLRect {
@@ -99,7 +104,7 @@ typedef struct HMSLWindow {
   short rect_left;
   short rect_bottom;
   short rect_right;
-  long title;
+  ucell_ptr_t title;
 } hmslWindow;
 
 
@@ -107,29 +112,33 @@ typedef struct HMSLWindow {
  * global variables
  */
 
-hmslContext gHMSLContext;
+extern hmslContext gHMSLContext;
 
 /*
  * hmsl_gui.m
  */
 
-int32_t hostInit( void );
-void hostTerm( void );
-uint32_t hostOpenWindow( hmslWindow *window );
-void hostCloseWindow( uint32_t window );
-void hostSetCurrentWindow( uint32_t window );
-void hostDrawLineTo( int32_t x, int32_t y );
-void hostMoveTo( int32_t x, int32_t y );
-void hostDrawText( uint32_t address, int32_t count );
-uint32_t hostGetTextLength( uint32_t addr, int32_t count );
-void hostFillRectangle( int32_t x1, int32_t y1, int32_t x2, int32_t y2 );
-void hostSetColor( int32_t color );
-void hostSetBackgroundColor( int32_t color );
-void hostSetDrawingMode( int32_t mode );
-void hostSetFont( int32_t font );
-void hostSetTextSize( int32_t size );
-void hostGetMouse( uint32_t x, uint32_t y);
-int32_t hostGetEvent( int32_t timeout );
+/*
+ * These functions are called from Forth so they will take and return
+ * cell wide values.
+ */
+int32_t hostInit(void);
+void hostTerm(void);
+hmsl_window_index_t hostOpenWindow( hmslWindow *window );
+void hostCloseWindow( hmsl_window_index_t window );
+void hostSetCurrentWindow( hmsl_window_index_t window );
+void hostDrawLineTo( cell_t x, cell_t y );
+void hostMoveTo( cell_t x, cell_t y );
+void hostDrawText( ucell_ptr_t address, cell_t count );
+uint32_t hostGetTextLength( ucell_ptr_t addr, cell_t count );
+void hostFillRectangle( cell_t x1, cell_t y1, cell_t x2, cell_t y2 );
+void hostSetColor( cell_t color );
+void hostSetBackgroundColor( cell_t color );
+void hostSetDrawingMode( cell_t mode );
+void hostSetFont( cell_t font );
+void hostSetTextSize( cell_t size );
+void hostGetMouse( ucell_ptr_t xPtr, ucell_ptr_t yPtr);
+cell_t hostGetEvent( cell_t timeout );
 
 /*
  * communication with the obj-c layer
@@ -154,19 +163,21 @@ void hmslSetDrawingMode( int32_t );
  * hmsl_midi.m
  */
 
-void hostClock_Init( void );
-void hostClock_Term( void );
-int hostClock_QueryTime( void );
+void hostClock_Init(void);
+void hostClock_Term(void);
+int hostClock_QueryTime(void);
 void hostClock_SetTime( int time );
 void hostClock_AdvanceTime( int delta );
-int hostClock_QueryRate( void );
+int hostClock_QueryRate(void);
 void hostClock_SetRate( int rate );
 
-void midiSourceProc(MIDIPacketList *pktlist, void *readProcRefCon, void *srcConnRefCon);
-int hostMIDI_Init();
-void hostMIDI_Term( void );
-int hostMIDI_Write( unsigned char *addr, int count, int vtime );
-int hostMIDI_Recv( void );
+void midiSourceProc(MIDIPacketList *pktlist,
+                    void *readProcRefCon,
+                    void *srcConnRefCon);
+int hostMIDI_Init(void);
+void hostMIDI_Term(void);
+int hostMIDI_Write(unsigned char *addr, int count, int vtime);
+int hostMIDI_Recv(void);
 void hostSleep( int msec );
 
 int getMainScreenRefreshRate( void );

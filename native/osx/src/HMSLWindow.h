@@ -17,7 +17,9 @@
 @property (retain) NSGraphicsContext* graphicsContext;
 
 + (NSMutableDictionary*)windowDictionary;
-+ (HMSLWindow*)hmslWindowWithTitle: (NSString*) title frame: (NSRect) frame;
++ (void) hmslWindowWithTitle: (NSString*) title
+                             frame: (NSRect) frame
+                         windowPtr: (HMSLWindow**) windowPtr;
 
 - (void) drawRectangle: (HMSLRect) rect;
 - (void) drawLineFrom: (HMSLPoint) start to: (HMSLPoint) end;

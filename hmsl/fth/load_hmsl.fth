@@ -94,6 +94,8 @@ if-load-midi @ [IF]
   include? task-midi_stubs fth/midi_stubs.fth
 [THEN]
 
+echo on
+
 \
 \ Object Oriented Code -------------------------
 include? task-ob_stack fth/ob_stack.fth
