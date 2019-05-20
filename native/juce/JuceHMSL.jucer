@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<JUCERPROJECT id="C2IY5m" name="JuceHMSL" projectType="guiapp" jucerVersion="5.4.3"
+              companyName="Mobileer" companyCopyright="(C) 2019 Mobileer Inc"
+              companyWebsite="www.softsynth.com/hmsl" defines="PF_SUPPORT_FP&#10;"
+              headerPath="../../../../pforth/csrc">
+  <MAINGROUP id="Nc5YxD" name="JuceHMSL">
+    <GROUP id="{8A01FEA8-D9CE-7B32-B721-F7CCE4975AA1}" name="pforth">
+      <GROUP id="{94F40744-8DBC-EF43-806D-531BDB7B3AAB}" name="csrc">
+        <GROUP id="{1C212848-9B30-F879-38DB-F589BF5FA50C}" name="stdio">
+          <FILE id="NOMMJh" name="pf_fileio_stdio.c" compile="1" resource="0"
+                file="../../pforth/csrc/stdio/pf_fileio_stdio.c"/>
+        </GROUP>
+        <FILE id="MNKulP" name="pf_all.h" compile="0" resource="0" file="../../pforth/csrc/pf_all.h"/>
+        <FILE id="EcKa9S" name="pf_cglue.c" compile="1" resource="0" file="../../pforth/csrc/pf_cglue.c"/>
+        <FILE id="oOZXDv" name="pf_cglue.h" compile="0" resource="0" file="../../pforth/csrc/pf_cglue.h"/>
+        <FILE id="mvAbdA" name="pf_clib.c" compile="1" resource="0" file="../../pforth/csrc/pf_clib.c"/>
+        <FILE id="kH7lXm" name="pf_clib.h" compile="0" resource="0" file="../../pforth/csrc/pf_clib.h"/>
+        <FILE id="HRwg1l" name="pf_core.c" compile="1" resource="0" file="../../pforth/csrc/pf_core.c"/>
+        <FILE id="LUUfDX" name="pf_core.h" compile="0" resource="0" file="../../pforth/csrc/pf_core.h"/>
+        <FILE id="nnGOA2" name="pf_float.h" compile="0" resource="0" file="../../pforth/csrc/pf_float.h"/>
+        <FILE id="jn3nmS" name="pf_guts.h" compile="0" resource="0" file="../../pforth/csrc/pf_guts.h"/>
+        <FILE id="y6gr6X" name="pf_host.h" compile="0" resource="0" file="../../pforth/csrc/pf_host.h"/>
+        <FILE id="JBEkjP" name="pf_inc1.h" compile="0" resource="0" file="../../pforth/csrc/pf_inc1.h"/>
+        <FILE id="tLEOn2" name="pf_inner.c" compile="1" resource="0" file="../../pforth/csrc/pf_inner.c"/>
+        <FILE id="oZXEBy" name="pf_io.c" compile="1" resource="0" file="../../pforth/csrc/pf_io.c"/>
+        <FILE id="Sphrgf" name="pf_io.h" compile="0" resource="0" file="../../pforth/csrc/pf_io.h"/>
+        <FILE id="Zu0DLx" name="pf_io_none.c" compile="1" resource="0" file="../../pforth/csrc/pf_io_none.c"/>
+        <FILE id="tPwq0c" name="pf_mem.c" compile="1" resource="0" file="../../pforth/csrc/pf_mem.c"/>
+        <FILE id="Tfz5MU" name="pf_mem.h" compile="0" resource="0" file="../../pforth/csrc/pf_mem.h"/>
+        <FILE id="WYQbbq" name="pf_save.c" compile="1" resource="0" file="../../pforth/csrc/pf_save.c"/>
+        <FILE id="aYtxE2" name="pf_save.h" compile="0" resource="0" file="../../pforth/csrc/pf_save.h"/>
+        <FILE id="c5GRHs" name="pf_text.c" compile="1" resource="0" file="../../pforth/csrc/pf_text.c"/>
+        <FILE id="GRrZCg" name="pf_text.h" compile="0" resource="0" file="../../pforth/csrc/pf_text.h"/>
+        <FILE id="QyktL3" name="pf_types.h" compile="0" resource="0" file="../../pforth/csrc/pf_types.h"/>
+        <FILE id="KHIRw5" name="pf_win32.h" compile="0" resource="0" file="../../pforth/csrc/pf_win32.h"/>
+        <FILE id="ymoJoU" name="pf_words.c" compile="1" resource="0" file="../../pforth/csrc/pf_words.c"/>
+        <FILE id="dBIXAC" name="pf_words.h" compile="0" resource="0" file="../../pforth/csrc/pf_words.h"/>
+        <FILE id="h8PVPC" name="pfcompfp.h" compile="0" resource="0" file="../../pforth/csrc/pfcompfp.h"/>
+        <FILE id="greBTv" name="pfcompil.c" compile="1" resource="0" file="../../pforth/csrc/pfcompil.c"/>
+        <FILE id="p8xWk3" name="pfcompil.h" compile="0" resource="0" file="../../pforth/csrc/pfcompil.h"/>
+        <FILE id="XJ66yr" name="pfcustom.c" compile="1" resource="0" file="../../pforth/csrc/pfcustom.c"/>
+        <FILE id="kCuHLC" name="pfdicdat_arm.h" compile="0" resource="0" file="../../pforth/csrc/pfdicdat_arm.h"/>
+        <FILE id="yKA9Om" name="pfinnrfp.h" compile="0" resource="0" file="../../pforth/csrc/pfinnrfp.h"/>
+        <FILE id="msDIL2" name="pforth.h" compile="0" resource="0" file="../../pforth/csrc/pforth.h"/>
+      </GROUP>
+    </GROUP>
+    <GROUP id="{D4447538-6ED0-FC8B-8612-F845BF3B88BD}" name="Source">
+      <FILE id="wbRGoE" name="AtomicQueue.h" compile="0" resource="0" file="Source/AtomicQueue.h"/>
+      <FILE id="CEnRvd" name="pf_juce_io.cpp" compile="1" resource="0" file="Source/pf_juce_io.cpp"/>
+      <FILE id="XF4I3N" name="pf_juce_io.h" compile="0" resource="0" file="Source/pf_juce_io.h"/>
+      <FILE id="WoA1RF" name="TerminalComponent.cpp" compile="1" resource="0"
+            file="Source/TerminalComponent.cpp"/>
+      <FILE id="k215VT" name="TerminalComponent.h" compile="0" resource="0"
+            file="Source/TerminalComponent.h"/>
+      <FILE id="Kof0j9" name="ForthThread.cpp" compile="1" resource="0" file="Source/ForthThread.cpp"/>
+      <FILE id="sRF386" name="ForthThread.h" compile="0" resource="0" file="Source/ForthThread.h"/>
+      <FILE id="fxtSvY" name="MainComponent.h" compile="0" resource="0" file="Source/MainComponent.h"/>
+      <FILE id="V6iOSm" name="MainComponent.cpp" compile="1" resource="0"
+            file="Source/MainComponent.cpp"/>
+      <FILE id="QZHZST" name="Main.cpp" compile="1" resource="0" file="Source/Main.cpp"/>
+    </GROUP>
+  </MAINGROUP>
+  <EXPORTFORMATS>
+    <XCODE_MAC targetFolder="Builds/MacOSX" extraDefs="&#10;">
+      <CONFIGURATIONS>
+        <CONFIGURATION isDebug="1" name="Debug"/>
+        <CONFIGURATION isDebug="0" name="Release"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_audio_basics" path="../../../../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="../../../../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="../../../../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="../../../../../JUCE/modules"/>
+        <MODULEPATH id="juce_core" path="../../../../../JUCE/modules"/>
+        <MODULEPATH id="juce_cryptography" path="../../../../../JUCE/modules"/>
+        <MODULEPATH id="juce_data_structures" path="../../../../../JUCE/modules"/>
+        <MODULEPATH id="juce_events" path="../../../../../JUCE/modules"/>
+        <MODULEPATH id="juce_graphics" path="../../../../../JUCE/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="../../../../../JUCE/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="../../../../../JUCE/modules"/>
+        <MODULEPATH id="juce_opengl" path="../../../../../JUCE/modules"/>
+      </MODULEPATHS>
+    </XCODE_MAC>
+  </EXPORTFORMATS>
+  <MODULES>
+    <MODULE id="juce_audio_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_devices" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_formats" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_processors" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_core" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_cryptography" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_events" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_graphics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_gui_extra" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_opengl" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+  </MODULES>
+  <LIVE_SETTINGS>
+    <OSX/>
+  </LIVE_SETTINGS>
+  <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1"/>
+</JUCERPROJECT>
