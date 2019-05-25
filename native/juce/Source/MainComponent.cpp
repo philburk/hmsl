@@ -6,12 +6,12 @@
 
 //==============================================================================
 MainComponent::MainComponent()
-{
-    mImage.reset(new Image(Image::RGB, 200, 200, true));
+: mCommandQueue(256), mEventQueue(256) {
+    mImage.reset(new Image(Image::RGB, 1000, 800, true));
     Graphics g(*mImage.get());
     g.fillAll (Colours::blue);
 
-    setSize (600, 400);
+    setSize (800, 500);
     setFramesPerSecond(60);
 }
 
@@ -19,6 +19,34 @@ MainComponent::~MainComponent() {
 }
 
 void MainComponent::update() {
+    while (!mCommandQueue.empty()) {
+        HmslCommand_t cmd = mCommandQueue.read();
+        mCommandQueue.advanceRead();
+        switch(cmd.opcode) {
+            case MOVE_TO:
+                mCurrentX = cmd.x;
+                mCurrentY = cmd.y;
+                break;
+            case DRAW_TO:
+                drawLineTo(cmd.x, cmd.y);
+                break;
+            case FILL_RECT:
+                fillRect(cmd.x, cmd.y);
+                break;
+            case SET_COLOR:
+                setColor(cmd.x);
+                break;
+            case SET_BACKGROUND_COLOR:
+                setBackgroundColor(cmd.x);
+                break;
+            case DRAW_TEXT:
+                drawText(cmd.text, cmd.x);
+                free((void *)cmd.text); // allocated by postDrawTo()
+                break;
+            default:
+                break;
+        }
+    }
 }
 
 void MainComponent::drawLineTo(int x, int y) {
@@ -52,39 +80,36 @@ int32_t MainComponent::getTextLength(const char *text,
     return (int32_t) g.getCurrentFont().getStringWidth(string);
 }
 
-void MainComponent::fillRectangle(int32_t x1, int32_t y1, int32_t x2, int32_t y2) {
+void MainComponent::fillRect(int32_t width, int32_t height) {
     Graphics g(*mImage.get());
     g.setColour (mCurrentColour);
-    g.fillRect(x1, y1, x2 - x1, y2 - y1);
-    mCurrentX = x1;
-    mCurrentY = y1;
+    g.fillRect(mCurrentX, mCurrentY, width, height);
 }
 
 void MainComponent::setColor(int32_t color ) {
     mCurrentColour = Colour(kPalette[color % kPalette.size()]);
 }
 
+void MainComponent::setBackgroundColor(int32_t color ) {
+    mBackgroundColour = Colour(kPalette[color % kPalette.size()]);
+}
+
+bool MainComponent::getNextEvent(HmslEvent_t *event) {
+    if (!mEventQueue.empty()) {
+        *event = mEventQueue.read();
+        mEventQueue.advanceRead();
+        return true;
+    }
+    return false;
+}
+
+
 //==============================================================================
 void MainComponent::paint (Graphics& g) {
-    // Our component is opaque, so we must completely fill the background with a solid colour.
-    g.fillAll (Colours::green);
-
-    drawRandomLine();
-    drawText("hello", 5);
-    fillRectangle(10, 20, 130, 140);
-
-    int x = 10 + (getFrameCounter() % 200);
-    int y = 10;
-    g.drawImageAt(*mImage, x, y);
-
-
-    // Draw a moving circle.
-    g.setColour (Colours::white); // [2]
-    int radius = 150;                                                  // [3]
-    Point<float> p (getWidth()  / 2.0f + 1.0f * radius * std::sin (getFrameCounter() * 0.04f),
-                    getHeight() / 2.0f + 1.0f * radius * std::cos (getFrameCounter() * 0.04f));
-    g.fillEllipse (p.x, p.y, 30.0f, 30.0f);                           // [5]
+    g.fillAll (Colours::black);
+    g.drawImageAt(*mImage, 0, 0);
 }
 
 void MainComponent::resized() {
+    postEvent(EV_REFRESH, 0, 0);
 }

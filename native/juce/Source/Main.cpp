@@ -9,7 +9,7 @@
 */
 
 #include "../JuceLibraryCode/JuceHeader.h"
-#include "MainComponent.h"
+#include "GraphicsWindow.h"
 #include "TerminalComponent.h"
 #include "ForthThread.h"
 
@@ -28,26 +28,24 @@ public:
     void initialise (const String& commandLine) override
     {
         // This method is where you should put your application's initialisation code..
-
-        mMainWindow.reset (new MainWindow (getApplicationName()));
         mTerminalWindow.reset (new TerminalWindow (getApplicationName()));
 
-        mThread.reset(new ForthThread());
-        mThread->startThread();
+        mForthThread.reset(new ForthThread());
+        mForthThread->startThread();
     }
 
     void shutdown() override
     {
-        // Add your application's shutdown code here..
-        mThread->signalThreadShouldExit();
-        mThread->stopThread(1000);
-
-        mMainWindow = nullptr; // (deletes our window)
+        // TODO needed?
+        mForthThread->signalThreadShouldExit();
+        mForthThread->stopThread(1000);
     }
 
     //==============================================================================
     void systemRequestedQuit() override
     {
+        mTerminalWindow->requestClose();
+        mForthThread->waitForThreadToExit(500);
         // This is called when the app is being asked to quit: you can ignore this
         // request and let the app carry on running, or call quit() to allow the app to close.
         quit();
@@ -59,43 +57,6 @@ public:
         // this method is invoked, and the commandLine parameter tells you what
         // the other instance's command-line arguments were.
     }
-
-    //==============================================================================
-    /*
-        This class implements the desktop window that contains an instance of
-        our MainComponent class.
-    */
-    class MainWindow    : public DocumentWindow
-    {
-    public:
-        MainWindow (String name)  : DocumentWindow (name,
-                                                    Desktop::getInstance().getDefaultLookAndFeel()
-                                                                          .findColour (ResizableWindow::backgroundColourId),
-                                                    DocumentWindow::allButtons)
-        {
-            setUsingNativeTitleBar (true);
-            MainComponent *mainComponent = new MainComponent();
-            setContentOwned (mainComponent, true);
-
-           #if JUCE_IOS || JUCE_ANDROID
-            setFullScreen (true);
-           #else
-            setResizable (true, true);
-            centreWithSize (getWidth(), getHeight());
-           #endif
-
-            setVisible (true);
-        }
-
-        void closeButtonPressed() override
-        {
-            JUCEApplication::getInstance()->systemRequestedQuit();
-        }
-
-    private:
-        JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MainWindow)
-
-    };
 
     //==============================================================================
     /*
@@ -111,8 +72,8 @@ public:
                                                     DocumentWindow::allButtons)
         {
             setUsingNativeTitleBar (true);
-            TerminalComponent *terminalComponent = new TerminalComponent();
-            setContentOwned (terminalComponent, true);
+            mTerminalComponent.reset(new TerminalComponent());
+            setContentOwned (mTerminalComponent.get(), true);
 
 #if JUCE_IOS || JUCE_ANDROID
             setFullScreen (true);
@@ -125,8 +86,13 @@ public:
 
         }
 
+        void requestClose() {
+            mTerminalComponent->requestClose();
+        }
+
         void closeButtonPressed() override
         {
+            requestClose();
 
             // This is called when the user tries to close this window. Here, we'll just
             // ask the app to quit when this happens, but you can change this to do
@@ -144,12 +110,12 @@ public:
     private:
         JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (TerminalWindow)
 
+        std::unique_ptr<TerminalComponent> mTerminalComponent;
     };
 
 private:
-    std::unique_ptr<MainWindow> mMainWindow;
     std::unique_ptr<TerminalWindow> mTerminalWindow;
-    std::unique_ptr<ForthThread> mThread;
+    std::unique_ptr<ForthThread>    mForthThread;
 };
 
 //==============================================================================

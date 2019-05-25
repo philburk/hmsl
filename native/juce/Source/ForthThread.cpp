@@ -11,7 +11,13 @@
 #include "ForthThread.h"
 #include "pforth.h"
 
-void     ForthThread::run() {
-    usleep(2000 * 1000);
-    pfDoForth(NULL, NULL, true);
+#ifndef PF_DEFAULT_DICTIONARY
+// TODO use relative path
+#define PF_DEFAULT_DICTIONARY "/Users/phil/Work/hmsl/HMSL/hmsl/pforth.dic"
+#endif
+
+void ForthThread::run() {
+    // usleep(200 * 1000);
+    // TODO if SHIFT key held down then rebuild Forth
+    pfDoForth(PF_DEFAULT_DICTIONARY, NULL, false);
 }

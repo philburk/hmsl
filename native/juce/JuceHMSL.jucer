@@ -39,13 +39,19 @@
         <FILE id="h8PVPC" name="pfcompfp.h" compile="0" resource="0" file="../../pforth/csrc/pfcompfp.h"/>
         <FILE id="greBTv" name="pfcompil.c" compile="1" resource="0" file="../../pforth/csrc/pfcompil.c"/>
         <FILE id="p8xWk3" name="pfcompil.h" compile="0" resource="0" file="../../pforth/csrc/pfcompil.h"/>
-        <FILE id="XJ66yr" name="pfcustom.c" compile="1" resource="0" file="../../pforth/csrc/pfcustom.c"/>
         <FILE id="kCuHLC" name="pfdicdat_arm.h" compile="0" resource="0" file="../../pforth/csrc/pfdicdat_arm.h"/>
         <FILE id="yKA9Om" name="pfinnrfp.h" compile="0" resource="0" file="../../pforth/csrc/pfinnrfp.h"/>
         <FILE id="msDIL2" name="pforth.h" compile="0" resource="0" file="../../pforth/csrc/pforth.h"/>
       </GROUP>
     </GROUP>
     <GROUP id="{D4447538-6ED0-FC8B-8612-F845BF3B88BD}" name="Source">
+      <FILE id="ZwoXEy" name="hmsl_host_graphics.cpp" compile="1" resource="0"
+            file="Source/hmsl_host_graphics.cpp"/>
+      <FILE id="LNj0xf" name="GraphicsWindow.h" compile="0" resource="0"
+            file="Source/GraphicsWindow.h"/>
+      <FILE id="X1CEe2" name="hmsl_midi.c" compile="1" resource="0" file="Source/hmsl_midi.c"/>
+      <FILE id="faZYuU" name="hmsl_host.h" compile="0" resource="0" file="Source/hmsl_host.h"/>
+      <FILE id="qwwxhJ" name="hmsl_custom.c" compile="1" resource="0" file="Source/hmsl_custom.c"/>
       <FILE id="wbRGoE" name="AtomicQueue.h" compile="0" resource="0" file="Source/AtomicQueue.h"/>
       <FILE id="CEnRvd" name="pf_juce_io.cpp" compile="1" resource="0" file="Source/pf_juce_io.cpp"/>
       <FILE id="XF4I3N" name="pf_juce_io.h" compile="0" resource="0" file="Source/pf_juce_io.h"/>

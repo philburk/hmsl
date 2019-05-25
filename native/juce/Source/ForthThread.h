@@ -18,7 +18,7 @@ public:
     ForthThread() : Thread("Forth") {}
     virtual ~ForthThread() = default;
     
-    void     run() override;
+    void run() override;
 
 private:
 };
