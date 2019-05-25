@@ -11,7 +11,6 @@
 #include "pf_juce_io.h"
 #include "TerminalComponent.h"
 
-
 int  sdTerminalOut(char c)
 {
     while (TerminalComponent::getInstance()->isOutputFull()) {

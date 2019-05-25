@@ -52,6 +52,11 @@ void TerminalComponent::displayCharacter(char c) {
     }
 }
 
+void TerminalComponent::requestClose() {
+    mCloseRequested = true;
+    usleep(500 * 1000); // TODO handshake
+}
+
 void TerminalComponent::update() {
     int maxCharacters = 1000;
     while (!mOutputQueue.empty() && maxCharacters-- > 0) {
@@ -79,16 +84,15 @@ void TerminalComponent::paint (Graphics& g)
     g.setFont({Font::getDefaultMonospacedFontName(), 14.0f, Font::plain});
 
     // Draw previous lines.
-    const int lineSpacing = 20;
     const int currentLineY =getHeight() - kBottomMargin;
-    int y = currentLineY - (lineSpacing * (int)mPreviousLines.size());
+    int y = currentLineY - (kLineSpacing * (int)mPreviousLines.size());
     auto it = mPreviousLines.begin();
     while(it != mPreviousLines.end())
     {
         if (y > 0) {
             g.drawSingleLineText(*it, kLeftMargin, y);
         }
-        y += 20;
+        y += kLineSpacing;
         it++;
     }
 
@@ -110,7 +114,9 @@ void TerminalComponent::resized()
 }
 
 int TerminalComponent::getCharacter() {
-    if (mInputQueue.empty()) {
+    if (mCloseRequested) {
+        return kEndOfTransmissionChar;
+    } else if (mInputQueue.empty()) {
         return -1;
     } else {
         int c = mInputQueue.read();
@@ -125,7 +131,7 @@ int TerminalComponent::putCharacter(char c) {
 }
 
 bool TerminalComponent::isCharacterAvailable() {
-    return !mInputQueue.empty();
+    return !mInputQueue.empty() || mCloseRequested;
 }
 
 bool TerminalComponent::isOutputFull() {
