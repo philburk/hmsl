@@ -5,6 +5,105 @@
               companyWebsite="www.softsynth.com/hmsl" defines="PF_SUPPORT_FP&#10;"
               headerPath="../../../../pforth/csrc">
   <MAINGROUP id="Nc5YxD" name="JuceHMSL">
+    <GROUP id="{BCBFEA09-C5E2-B215-B6AE-1EC056093060}" name="hmsl">
+      <GROUP id="{444488E9-2970-5113-124E-3A808E08A893}" name="fth">
+        <FILE id="mc4mqc" name="action_screen.fth" compile="0" resource="1"
+              file="../../hmsl/fth/action_screen.fth"/>
+        <FILE id="tONu22" name="action_table.fth" compile="0" resource="1"
+              file="../../hmsl/fth/action_table.fth"/>
+        <FILE id="skLtQn" name="action_top.fth" compile="0" resource="1" file="../../hmsl/fth/action_top.fth"/>
+        <FILE id="VHdxbf" name="action_utils.fth" compile="0" resource="1"
+              file="../../hmsl/fth/action_utils.fth"/>
+        <FILE id="sQ1P8S" name="actobj.fth" compile="0" resource="1" file="../../hmsl/fth/actobj.fth"/>
+        <FILE id="rTVsk0" name="allocator.fth" compile="0" resource="1" file="../../hmsl/fth/allocator.fth"/>
+        <FILE id="qac44u" name="bevel.fth" compile="0" resource="1" file="../../hmsl/fth/bevel.fth"/>
+        <FILE id="KlmZSg" name="build_menus.fth" compile="0" resource="1" file="../../hmsl/fth/build_menus.fth"/>
+        <FILE id="oQhmBT" name="charmacr.fth" compile="0" resource="1" file="../../hmsl/fth/charmacr.fth"/>
+        <FILE id="kVE8Cp" name="circular.fth" compile="0" resource="1" file="../../hmsl/fth/circular.fth"/>
+        <FILE id="dru2mx" name="collection.fth" compile="0" resource="1" file="../../hmsl/fth/collection.fth"/>
+        <FILE id="qlCibR" name="cond_comp.fth" compile="0" resource="1" file="../../hmsl/fth/cond_comp.fth"/>
+        <FILE id="wAf7T1" name="control.fth" compile="0" resource="1" file="../../hmsl/fth/control.fth"/>
+        <FILE id="io91XP" name="ctrl_count.fth" compile="0" resource="1" file="../../hmsl/fth/ctrl_count.fth"/>
+        <FILE id="JrImeF" name="ctrl_fader.fth" compile="0" resource="1" file="../../hmsl/fth/ctrl_fader.fth"/>
+        <FILE id="hn5sc7" name="ctrl_numeric.fth" compile="0" resource="1"
+              file="../../hmsl/fth/ctrl_numeric.fth"/>
+        <FILE id="zMbcsR" name="ctrl_text.fth" compile="0" resource="1" file="../../hmsl/fth/ctrl_text.fth"/>
+        <FILE id="dNNeIa" name="ctrl_xy.fth" compile="0" resource="1" file="../../hmsl/fth/ctrl_xy.fth"/>
+        <FILE id="RknArx" name="dbl_list.fth" compile="0" resource="1" file="../../hmsl/fth/dbl_list.fth"/>
+        <FILE id="Luq6D5" name="deck.fth" compile="0" resource="1" file="../../hmsl/fth/deck.fth"/>
+        <FILE id="z6J9X4" name="elmnts.fth" compile="0" resource="1" file="../../hmsl/fth/elmnts.fth"/>
+        <FILE id="jD30qj" name="errormsg.fth" compile="0" resource="1" file="../../hmsl/fth/errormsg.fth"/>
+        <FILE id="N4uIZB" name="event_list.fth" compile="0" resource="1" file="../../hmsl/fth/event_list.fth"/>
+        <FILE id="edJ3IJ" name="exmember.fth" compile="0" resource="1" file="../../hmsl/fth/exmember.fth"/>
+        <FILE id="ANYP7M" name="float_port.fth" compile="0" resource="1" file="../../hmsl/fth/float_port.fth"/>
+        <FILE id="gCWpqE" name="global_data.fth" compile="0" resource="1" file="../../hmsl/fth/global_data.fth"/>
+        <FILE id="YKESiU" name="graph_util.fth" compile="0" resource="1" file="../../hmsl/fth/graph_util.fth"/>
+        <FILE id="sTGiGd" name="graphics.fth" compile="0" resource="1" file="../../hmsl/fth/graphics.fth"/>
+        <FILE id="l4i5Cu" name="hmsl_top.fth" compile="0" resource="1" file="../../hmsl/fth/hmsl_top.fth"/>
+        <FILE id="g5I0Y7" name="hmsl_version.fth" compile="0" resource="1"
+              file="../../hmsl/fth/hmsl_version.fth"/>
+        <FILE id="IyspVn" name="instrument.fth" compile="0" resource="1" file="../../hmsl/fth/instrument.fth"/>
+        <FILE id="n3ud08" name="interpreters.fth" compile="0" resource="1"
+              file="../../hmsl/fth/interpreters.fth"/>
+        <FILE id="N1rdXx" name="job.fth" compile="0" resource="1" file="../../hmsl/fth/job.fth"/>
+        <FILE id="xhd3N9" name="load_hmsl.fth" compile="0" resource="1" file="../../hmsl/fth/load_hmsl.fth"/>
+        <FILE id="XuHQnb" name="load_ode.fth" compile="0" resource="1" file="../../hmsl/fth/load_ode.fth"/>
+        <FILE id="EK7IwX" name="make_hmsl.fth" compile="0" resource="1" file="../../hmsl/fth/make_hmsl.fth"/>
+        <FILE id="HapY51" name="memalloc.fth" compile="0" resource="1" file="../../hmsl/fth/memalloc.fth"/>
+        <FILE id="hCmyQz" name="midi.fth" compile="0" resource="1" file="../../hmsl/fth/midi.fth"/>
+        <FILE id="ERWfek" name="midi_globals.fth" compile="0" resource="1"
+              file="../../hmsl/fth/midi_globals.fth"/>
+        <FILE id="OQjQLh" name="midi_instrument.fth" compile="0" resource="1"
+              file="../../hmsl/fth/midi_instrument.fth"/>
+        <FILE id="q9vRJN" name="midi_parser.fth" compile="0" resource="1" file="../../hmsl/fth/midi_parser.fth"/>
+        <FILE id="ctIHqE" name="midi_stubs.fth" compile="0" resource="1" file="../../hmsl/fth/midi_stubs.fth"/>
+        <FILE id="IAWEUo" name="midi_text.fth" compile="0" resource="1" file="../../hmsl/fth/midi_text.fth"/>
+        <FILE id="rdwXbU" name="misc_tools.fth" compile="0" resource="1" file="../../hmsl/fth/misc_tools.fth"/>
+        <FILE id="kkVyUC" name="morph.fth" compile="0" resource="1" file="../../hmsl/fth/morph.fth"/>
+        <FILE id="sJ0W9n" name="morph_lists.fth" compile="0" resource="1" file="../../hmsl/fth/morph_lists.fth"/>
+        <FILE id="w5fCND" name="ob_actions.fth" compile="0" resource="1" file="../../hmsl/fth/ob_actions.fth"/>
+        <FILE id="wgxkds" name="ob_array.fth" compile="0" resource="1" file="../../hmsl/fth/ob_array.fth"/>
+        <FILE id="yz51ad" name="ob_bind.fth" compile="0" resource="1" file="../../hmsl/fth/ob_bind.fth"/>
+        <FILE id="NT8Dc4" name="ob_dlist.fth" compile="0" resource="1" file="../../hmsl/fth/ob_dlist.fth"/>
+        <FILE id="ciuQea" name="ob_ivars.fth" compile="0" resource="1" file="../../hmsl/fth/ob_ivars.fth"/>
+        <FILE id="qWWqUt" name="ob_main.fth" compile="0" resource="1" file="../../hmsl/fth/ob_main.fth"/>
+        <FILE id="Hllsvc" name="ob_stack.fth" compile="0" resource="1" file="../../hmsl/fth/ob_stack.fth"/>
+        <FILE id="YHY3CZ" name="obmethod.fth" compile="0" resource="1" file="../../hmsl/fth/obmethod.fth"/>
+        <FILE id="vl6hRX" name="obobject.fth" compile="0" resource="1" file="../../hmsl/fth/obobject.fth"/>
+        <FILE id="OfhywZ" name="p4thbase.fth" compile="0" resource="1" file="../../hmsl/fth/p4thbase.fth"/>
+        <FILE id="Avo7Fx" name="packed_midi.fth" compile="0" resource="1" file="../../hmsl/fth/packed_midi.fth"/>
+        <FILE id="gof7ZU" name="player.fth" compile="0" resource="1" file="../../hmsl/fth/player.fth"/>
+        <FILE id="Z6ob6r" name="popup_text.fth" compile="0" resource="1" file="../../hmsl/fth/popup_text.fth"/>
+        <FILE id="PVYQyn" name="production.fth" compile="0" resource="1" file="../../hmsl/fth/production.fth"/>
+        <FILE id="LsMi1m" name="record.fth" compile="0" resource="1" file="../../hmsl/fth/record.fth"/>
+        <FILE id="P9hLKA" name="scg.fth" compile="0" resource="1" file="../../hmsl/fth/scg.fth"/>
+        <FILE id="n0TyHA" name="screen.fth" compile="0" resource="1" file="../../hmsl/fth/screen.fth"/>
+        <FILE id="wCq9KZ" name="service_tasks.fth" compile="0" resource="1"
+              file="../../hmsl/fth/service_tasks.fth"/>
+        <FILE id="Nt7lD8" name="set_vectors.fth" compile="0" resource="1" file="../../hmsl/fth/set_vectors.fth"/>
+        <FILE id="XdZzak" name="shape.fth" compile="0" resource="1" file="../../hmsl/fth/shape.fth"/>
+        <FILE id="sYj3s8" name="shape_editor.fth" compile="0" resource="1"
+              file="../../hmsl/fth/shape_editor.fth"/>
+        <FILE id="b8wXnP" name="stacks.fth" compile="0" resource="1" file="../../hmsl/fth/stacks.fth"/>
+        <FILE id="UZA3Ro" name="startup.fth" compile="0" resource="1" file="../../hmsl/fth/startup.fth"/>
+        <FILE id="F9iFbN" name="stock_morphs.fth" compile="0" resource="1"
+              file="../../hmsl/fth/stock_morphs.fth"/>
+        <FILE id="xNV65U" name="structure.fth" compile="0" resource="1" file="../../hmsl/fth/structure.fth"/>
+        <FILE id="ddvXHA" name="stubs.fth" compile="0" resource="1" file="../../hmsl/fth/stubs.fth"/>
+        <FILE id="KyGVhj" name="test_actions.fth" compile="0" resource="1"
+              file="../../hmsl/fth/test_actions.fth"/>
+        <FILE id="ogwAd6" name="test_events.fth" compile="0" resource="1" file="../../hmsl/fth/test_events.fth"/>
+        <FILE id="rgwMmL" name="test_graphics.fth" compile="0" resource="1"
+              file="../../hmsl/fth/test_graphics.fth"/>
+        <FILE id="NWNdhk" name="test_ode.fth" compile="0" resource="1" file="../../hmsl/fth/test_ode.fth"/>
+        <FILE id="hg2bwP" name="test_ode_locals.fth" compile="0" resource="1"
+              file="../../hmsl/fth/test_ode_locals.fth"/>
+        <FILE id="pubF4C" name="time.fth" compile="0" resource="1" file="../../hmsl/fth/time.fth"/>
+        <FILE id="XIknab" name="top.fth" compile="0" resource="1" file="../../hmsl/fth/top.fth"/>
+        <FILE id="YXbKsZ" name="translators.fth" compile="0" resource="1" file="../../hmsl/fth/translators.fth"/>
+        <FILE id="jn0fIi" name="utils.fth" compile="0" resource="1" file="../../hmsl/fth/utils.fth"/>
+      </GROUP>
+    </GROUP>
     <GROUP id="{8A01FEA8-D9CE-7B32-B721-F7CCE4975AA1}" name="pforth">
       <GROUP id="{94F40744-8DBC-EF43-806D-531BDB7B3AAB}" name="csrc">
         <GROUP id="{1C212848-9B30-F879-38DB-F589BF5FA50C}" name="stdio">
@@ -42,6 +141,69 @@
         <FILE id="kCuHLC" name="pfdicdat_arm.h" compile="0" resource="0" file="../../pforth/csrc/pfdicdat_arm.h"/>
         <FILE id="yKA9Om" name="pfinnrfp.h" compile="0" resource="0" file="../../pforth/csrc/pfinnrfp.h"/>
         <FILE id="msDIL2" name="pforth.h" compile="0" resource="0" file="../../pforth/csrc/pforth.h"/>
+      </GROUP>
+      <GROUP id="{34033204-F822-4543-0EF4-BEAF75968571}" name="fth">
+        <GROUP id="{E47CD822-D22B-D301-30CD-9780597CF928}" name="utils">
+          <FILE id="crU4kM" name="clone.fth" compile="0" resource="1" file="../../pforth/fth/utils/clone.fth"/>
+          <FILE id="c4MVsL" name="dump_struct.fth" compile="0" resource="1" file="../../pforth/fth/utils/dump_struct.fth"/>
+          <FILE id="bwRibk" name="load_file.fth" compile="0" resource="1" file="../../pforth/fth/utils/load_file.fth"/>
+          <FILE id="Dg3tmb" name="make_all256.fth" compile="0" resource="1" file="../../pforth/fth/utils/make_all256.fth"/>
+        </GROUP>
+        <FILE id="mgRMNL" name="ansilocs.fth" compile="0" resource="1" file="../../pforth/fth/ansilocs.fth"/>
+        <FILE id="z95XuM" name="bench.fth" compile="0" resource="1" file="../../pforth/fth/bench.fth"/>
+        <FILE id="albrgc" name="c_struct.fth" compile="0" resource="1" file="../../pforth/fth/c_struct.fth"/>
+        <FILE id="baLSxA" name="case.fth" compile="0" resource="1" file="../../pforth/fth/case.fth"/>
+        <FILE id="UhspV8" name="condcomp.fth" compile="0" resource="1" file="../../pforth/fth/condcomp.fth"/>
+        <FILE id="P7Kyoe" name="coretest.fth" compile="0" resource="1" file="../../pforth/fth/coretest.fth"/>
+        <FILE id="nymkQg" name="file.fth" compile="0" resource="1" file="../../pforth/fth/file.fth"/>
+        <FILE id="VC71uI" name="filefind.fth" compile="0" resource="1" file="../../pforth/fth/filefind.fth"/>
+        <FILE id="zA6uqU" name="floats.fth" compile="0" resource="1" file="../../pforth/fth/floats.fth"/>
+        <FILE id="BfbQzI" name="forget.fth" compile="0" resource="1" file="../../pforth/fth/forget.fth"/>
+        <FILE id="zRnZeL" name="history.fth" compile="0" resource="1" file="../../pforth/fth/history.fth"/>
+        <FILE id="NuoOKy" name="loadhist.fth" compile="0" resource="1" file="../../pforth/fth/loadhist.fth"/>
+        <FILE id="S5beRz" name="loadp4th.fth" compile="0" resource="1" file="../../pforth/fth/loadp4th.fth"/>
+        <FILE id="lpSPl5" name="locals.fth" compile="0" resource="1" file="../../pforth/fth/locals.fth"/>
+        <FILE id="WteExL" name="math.fth" compile="0" resource="1" file="../../pforth/fth/math.fth"/>
+        <FILE id="spJFjJ" name="member.fth" compile="0" resource="1" file="../../pforth/fth/member.fth"/>
+        <FILE id="k9k59w" name="misc1.fth" compile="0" resource="1" file="../../pforth/fth/misc1.fth"/>
+        <FILE id="oZvzSn" name="misc2.fth" compile="0" resource="1" file="../../pforth/fth/misc2.fth"/>
+        <FILE id="o3Qb9H" name="numberio.fth" compile="0" resource="1" file="../../pforth/fth/numberio.fth"/>
+        <FILE id="mghRic" name="private.fth" compile="0" resource="1" file="../../pforth/fth/private.fth"/>
+        <FILE id="SdOq1f" name="require.fth" compile="0" resource="1" file="../../pforth/fth/require.fth"/>
+        <FILE id="dO9o2U" name="save-input.fth" compile="0" resource="1" file="../../pforth/fth/save-input.fth"/>
+        <FILE id="B9A4FP" name="savedicd.fth" compile="0" resource="1" file="../../pforth/fth/savedicd.fth"/>
+        <FILE id="ntuLfZ" name="see.fth" compile="0" resource="1" file="../../pforth/fth/see.fth"/>
+        <FILE id="VqPMok" name="siev.fth" compile="0" resource="1" file="../../pforth/fth/siev.fth"/>
+        <FILE id="LQ6ABU" name="smart_if.fth" compile="0" resource="1" file="../../pforth/fth/smart_if.fth"/>
+        <FILE id="U2NGC2" name="strings.fth" compile="0" resource="1" file="../../pforth/fth/strings.fth"/>
+        <FILE id="g88NTA" name="system.fth" compile="0" resource="1" file="../../pforth/fth/system.fth"/>
+        <FILE id="s6SseM" name="t_alloc.fth" compile="0" resource="1" file="../../pforth/fth/t_alloc.fth"/>
+        <FILE id="BdIxiI" name="t_case.fth" compile="0" resource="1" file="../../pforth/fth/t_case.fth"/>
+        <FILE id="cNCfIc" name="t_corex.fth" compile="0" resource="1" file="../../pforth/fth/t_corex.fth"/>
+        <FILE id="i1CyEb" name="t_file.fth" compile="0" resource="1" file="../../pforth/fth/t_file.fth"/>
+        <FILE id="IE4znT" name="t_floats.fth" compile="0" resource="1" file="../../pforth/fth/t_floats.fth"/>
+        <FILE id="IpNBma" name="t_include.fth" compile="0" resource="1" file="../../pforth/fth/t_include.fth"/>
+        <FILE id="mWIAAl" name="t_load.fth" compile="0" resource="1" file="../../pforth/fth/t_load.fth"/>
+        <FILE id="r2ZnR2" name="t_load_defer.fth" compile="0" resource="1"
+              file="../../pforth/fth/t_load_defer.fth"/>
+        <FILE id="V2L7Ae" name="t_load_pairs.fth" compile="0" resource="1"
+              file="../../pforth/fth/t_load_pairs.fth"/>
+        <FILE id="fzPs3i" name="t_load_semi.fth" compile="0" resource="1" file="../../pforth/fth/t_load_semi.fth"/>
+        <FILE id="jacJVg" name="t_load_undef.fth" compile="0" resource="1"
+              file="../../pforth/fth/t_load_undef.fth"/>
+        <FILE id="zNQGyP" name="t_locals.fth" compile="0" resource="1" file="../../pforth/fth/t_locals.fth"/>
+        <FILE id="JtgIsX" name="t_nolf.fth" compile="0" resource="1" file="../../pforth/fth/t_nolf.fth"/>
+        <FILE id="vvkQzq" name="t_required_helper1.fth" compile="0" resource="1"
+              file="../../pforth/fth/t_required_helper1.fth"/>
+        <FILE id="TrBx0n" name="t_required_helper2.fth" compile="0" resource="1"
+              file="../../pforth/fth/t_required_helper2.fth"/>
+        <FILE id="vcrtLF" name="t_strings.fth" compile="0" resource="1" file="../../pforth/fth/t_strings.fth"/>
+        <FILE id="EkoZJ9" name="t_tools.fth" compile="0" resource="1" file="../../pforth/fth/t_tools.fth"/>
+        <FILE id="hU8Y8F" name="termio.fth" compile="0" resource="1" file="../../pforth/fth/termio.fth"/>
+        <FILE id="IcqIsK" name="tester.fth" compile="0" resource="1" file="../../pforth/fth/tester.fth"/>
+        <FILE id="xiJk6c" name="trace.fth" compile="0" resource="1" file="../../pforth/fth/trace.fth"/>
+        <FILE id="velasQ" name="tut.fth" compile="0" resource="1" file="../../pforth/fth/tut.fth"/>
+        <FILE id="xNcNcM" name="wordslik.fth" compile="0" resource="1" file="../../pforth/fth/wordslik.fth"/>
       </GROUP>
     </GROUP>
     <GROUP id="{D4447538-6ED0-FC8B-8612-F845BF3B88BD}" name="Source">

@@ -122,11 +122,10 @@ public:
     }
 
     void mouseDrag(const MouseEvent &event) override {
-        postEvent(EV_MOUSE_MOVE, event.getPosition().getX(), event.getPosition().getX());
-    }
-
-    void mouseMove(const MouseEvent &event) override {
-        postEvent(EV_MOUSE_MOVE, event.getPosition().getX(), event.getPosition().getX());
+        postEvent(EV_MOUSE_MOVE,
+                  event.getMouseDownX() + event.getDistanceFromDragStartX(),
+                  event.getMouseDownY() + event.getDistanceFromDragStartY()
+                  );
     }
 
     void onCloseButtonPressed() {

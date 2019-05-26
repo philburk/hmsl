@@ -27,6 +27,12 @@ TerminalComponent::TerminalComponent()
     addKeyListener(this);
     setWantsKeyboardFocus(true);
     setFramesPerSecond(60);
+
+    // Show working directory.
+    File defaultWDIR =
+    File::getSpecialLocation(File::SpecialLocationType::currentApplicationFile).getParentDirectory();
+
+    mPreviousLines.push_back(defaultWDIR.getFullPathName());
 }
 
 TerminalComponent::~TerminalComponent()
@@ -34,27 +40,116 @@ TerminalComponent::~TerminalComponent()
     removeKeyListener(this);
 }
 
-void TerminalComponent::onKeyPressed(juce_wchar textCharacter) {
-    mInputQueue.write((char)textCharacter);
+void TerminalComponent::sendCharacter(char c) {
+    mInputQueue.write(c);
+}
+
+void TerminalComponent::sendEscapeBracket() {
+    sendCharacter(kEscapeChar);
+    sendCharacter('[');
+}
+
+bool TerminalComponent::keyPressed (const KeyPress &key,
+                                    Component *originatingComponent) {
+    if (key == KeyPress::upKey) {
+        sendEscapeBracket();
+        sendCharacter(kUpArrowCode);
+    } else if (key == KeyPress::downKey) {
+        sendEscapeBracket();
+        sendCharacter(kDownArrowCode);
+    } else if (key == KeyPress::rightKey) {
+        sendEscapeBracket();
+        sendCharacter(kRightArrowCode);
+    } else if (key == KeyPress::leftKey) {
+        sendEscapeBracket();
+        sendCharacter(kLeftArrowCode);
+    } else {
+        sendCharacter((char)key.getTextCharacter());
+    }
+    return true;
+}
+
+// State machine for handling ANSI escape sequences for cursor movement, etc.
+bool TerminalComponent::handleEscapeSequence(char c) {
+    bool result = true;
+    switch(mAnsiState) {
+        case ANSI_STATE_IDLE:
+            if (c == kEscapeChar) {
+                mAnsiState = ANSI_STATE_GOT_ESCAPE;
+                mAnsiCount = 0;
+            } else {
+                result = false;
+            }
+            break;
+        case ANSI_STATE_GOT_ESCAPE:
+            if (c == '[') {
+                mAnsiState = ANSI_STATE_GOT_BRACKET;
+            } else {
+                result = false;
+                mAnsiState = ANSI_STATE_IDLE;
+            }
+            break;
+        case ANSI_STATE_GOT_BRACKET:
+            if (isdigit(c)) {
+                // accumulate number
+                mAnsiCount *= 10;
+                mAnsiCount += c - '0';
+            } else if (c == 'D') {
+                // move left
+                mLineCursor = std::max(0, mLineCursor - mAnsiCount);
+                mAnsiState = ANSI_STATE_IDLE;
+            } else if (c == 'C') {
+                // move right
+                mLineCursor = std::min(mLine.length(), mLineCursor + mAnsiCount);
+                mAnsiState = ANSI_STATE_IDLE;
+            } else if (c == 'K') {
+                // erase to end if line
+                mLine = mLine.dropLastCharacters(mLine.length() - mLineCursor);
+                mAnsiState = ANSI_STATE_IDLE;
+            } else if (c == 'J' && mAnsiCount == 2) {
+                // erase screen
+                mPreviousLines.clear();
+                mLine = String();
+                mAnsiState = ANSI_STATE_IDLE;
+            }
+            break;
+    }
+    return result;
 }
 
 void TerminalComponent::displayCharacter(char c) {
-    if (c == '\r' || c == '\n') {
+    if (handleEscapeSequence(c)) {
+        return;
+    }
+
+    if (c == '\r') {
+        mLineCursor = 0;
+    } else if (c == '\n') {
         if (mPreviousLines.size() >= kMaxLinesStored) {
             mPreviousLines.pop_front();
         }
         mPreviousLines.push_back(mLine);
         mLine = String();
+        mLineCursor = 0;
     } else if (c == kBackspaceChar || c == kDeleteChar) {
         mLine = mLine.dropLastCharacters(1);
-    } else {
+        mLineCursor--;
+    } else if (mLineCursor == mLine.length()) {
         mLine += c;
+        mLineCursor++;
+    } else {
+        // insert c in middle of mLine
+        String s = mLine.substring(0, mLineCursor);
+        s += c;
+        s += mLine.substring(mLineCursor);
+        mLine = s;
+        mLineCursor++;
     }
 }
 
 void TerminalComponent::requestClose() {
     mCloseRequested = true;
-    usleep(500 * 1000); // TODO handshake
+    usleep(50 * 1000); // wait for Forth to get the message
 }
 
 void TerminalComponent::update() {
@@ -68,13 +163,6 @@ void TerminalComponent::update() {
 
 void TerminalComponent::paint (Graphics& g)
 {
-    /* This demo code just fills the component's background and
-       draws some placeholder text to get you started.
-
-       You should replace everything in this method with your own
-       drawing code..
-    */
-
     g.fillAll (getLookAndFeel().findColour (ResizableWindow::backgroundColourId));   // clear the background
 
     g.setColour (Colours::grey);
@@ -100,10 +188,11 @@ void TerminalComponent::paint (Graphics& g)
     g.drawSingleLineText(mLine, kLeftMargin, currentLineY);
 
     // Draw cursor.
-    int cursorX = kLeftMargin + g.getCurrentFont().getStringWidth(mLine);
+    const int cursorX = kLeftMargin
+            + g.getCurrentFont().getStringWidth(mLine.substring(0, mLineCursor)) - 1;
     g.setColour(Colours::orange);
-    int cursorHeight = (int) g.getCurrentFont().getHeight();
-    int cursorWidth = 4;
+    const int cursorHeight = (int) g.getCurrentFont().getHeight();
+    const int cursorWidth = 1;
     g.fillRect(cursorX, currentLineY - cursorHeight + 2, cursorWidth, cursorHeight);
 }
 

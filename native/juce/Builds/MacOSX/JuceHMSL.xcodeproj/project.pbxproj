@@ -133,6 +133,10 @@
 			isa = PBXBuildFile;
 			fileRef = 8D343DFD202F44F344C144D2;
 		};
+		8997B92FB29F8AB88846CD53 = {
+			isa = PBXBuildFile;
+			fileRef = C4E0B535F3F30F698C262064;
+		};
 		FAAC60899C744646F90470BF = {
 			isa = PBXBuildFile;
 			fileRef = 50498062F7456179E2584BD5;
@@ -188,6 +192,27 @@
 			path = ../../Source/ForthThread.cpp;
 			sourceTree = "SOURCE_ROOT";
 		};
+		010C0CB9C9F8823EC1746A24 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = "t_strings.fth";
+			path = "../../../../pforth/fth/t_strings.fth";
+			sourceTree = "SOURCE_ROOT";
+		};
+		012AD9B2B3291B64275A291A = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = "t_load_defer.fth";
+			path = "../../../../pforth/fth/t_load_defer.fth";
+			sourceTree = "SOURCE_ROOT";
+		};
+		01F9176DACBF46F0C4DCC75D = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = "global_data.fth";
+			path = "../../../../hmsl/fth/global_data.fth";
+			sourceTree = "SOURCE_ROOT";
+		};
 		025DC8A1A06DBBB975022DE0 = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.objcpp;
@@ -209,12 +234,40 @@
 			path = "../../../../pforth/csrc/pf_inner.c";
 			sourceTree = "SOURCE_ROOT";
 		};
+		03E9DAFBDF5AA5586C0E7313 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = shape.fth;
+			path = ../../../../hmsl/fth/shape.fth;
+			sourceTree = "SOURCE_ROOT";
+		};
+		05806FBC4D20D55CCF01CBAD = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = history.fth;
+			path = ../../../../pforth/fth/history.fth;
+			sourceTree = "SOURCE_ROOT";
+		};
 		063424B4A4ABFCFA4C26E471 = {
 			isa = PBXFileReference;
 			lastKnownFileType = file;
 			name = "juce_core";
 			path = "~/JUCE/modules/juce_core";
 			sourceTree = "<absolute>";
+		};
+		06D7001FE5EC8AC8876746BB = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = coretest.fth;
+			path = ../../../../pforth/fth/coretest.fth;
+			sourceTree = "SOURCE_ROOT";
+		};
+		0831CB16DDF715CE84A01598 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = time.fth;
+			path = ../../../../hmsl/fth/time.fth;
+			sourceTree = "SOURCE_ROOT";
 		};
 		0997DE11BB2239512BC14F84 = {
 			isa = PBXFileReference;
@@ -223,6 +276,34 @@
 			path = "~/JUCE/modules/juce_cryptography";
 			sourceTree = "<absolute>";
 		};
+		0F5584100EF9E6DC2A19FF27 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = "ob_main.fth";
+			path = "../../../../hmsl/fth/ob_main.fth";
+			sourceTree = "SOURCE_ROOT";
+		};
+		120E57EA76C16F2E140F81E8 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = locals.fth;
+			path = ../../../../pforth/fth/locals.fth;
+			sourceTree = "SOURCE_ROOT";
+		};
+		129FFAEE233E6D8FD9DCDB19 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = "ctrl_count.fth";
+			path = "../../../../hmsl/fth/ctrl_count.fth";
+			sourceTree = "SOURCE_ROOT";
+		};
+		12AE8FF8B7FC0FC3610A0063 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = case.fth;
+			path = ../../../../pforth/fth/case.fth;
+			sourceTree = "SOURCE_ROOT";
+		};
 		12EC40D21343772235A175B0 = {
 			isa = PBXFileReference;
 			lastKnownFileType = wrapper.framework;
@@ -230,11 +311,60 @@
 			path = System/Library/Frameworks/Cocoa.framework;
 			sourceTree = SDKROOT;
 		};
+		141110D22205F26A03BEDC74 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = "smart_if.fth";
+			path = "../../../../pforth/fth/smart_if.fth";
+			sourceTree = "SOURCE_ROOT";
+		};
 		145C4DC5A266EC9883586394 = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.c;
 			name = "pf_mem.c";
 			path = "../../../../pforth/csrc/pf_mem.c";
+			sourceTree = "SOURCE_ROOT";
+		};
+		164F93FA8A2D42878BF2EE1E = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = "dbl_list.fth";
+			path = "../../../../hmsl/fth/dbl_list.fth";
+			sourceTree = "SOURCE_ROOT";
+		};
+		17A75AA855D181B624EE93C5 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = "load_file.fth";
+			path = "../../../../pforth/fth/utils/load_file.fth";
+			sourceTree = "SOURCE_ROOT";
+		};
+		198638942B0EAFDC19828582 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = interpreters.fth;
+			path = ../../../../hmsl/fth/interpreters.fth;
+			sourceTree = "SOURCE_ROOT";
+		};
+		1A387EA62DE0E657A29037E5 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = "midi_text.fth";
+			path = "../../../../hmsl/fth/midi_text.fth";
+			sourceTree = "SOURCE_ROOT";
+		};
+		1C240F5E21B3268DAA7314FE = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = "t_load_semi.fth";
+			path = "../../../../pforth/fth/t_load_semi.fth";
+			sourceTree = "SOURCE_ROOT";
+		};
+		1C5D26658530FA4D78B9693A = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = obobject.fth;
+			path = ../../../../hmsl/fth/obobject.fth;
 			sourceTree = "SOURCE_ROOT";
 		};
 		1CE55B87655C5C2C234A7E68 = {
@@ -244,6 +374,27 @@
 			path = "../../../../pforth/csrc/pf_clib.c";
 			sourceTree = "SOURCE_ROOT";
 		};
+		217293F9605AE0686CE86FE1 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = production.fth;
+			path = ../../../../hmsl/fth/production.fth;
+			sourceTree = "SOURCE_ROOT";
+		};
+		21AFDB091970A24A1FA7B501 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = obmethod.fth;
+			path = ../../../../hmsl/fth/obmethod.fth;
+			sourceTree = "SOURCE_ROOT";
+		};
+		21EB47A8ED21242A608ECD15 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = "action_utils.fth";
+			path = "../../../../hmsl/fth/action_utils.fth";
+			sourceTree = "SOURCE_ROOT";
+		};
 		225479E715F7C0732E52EAE7 = {
 			isa = PBXFileReference;
 			lastKnownFileType = wrapper.framework;
@@ -251,11 +402,25 @@
 			path = System/Library/Frameworks/IOKit.framework;
 			sourceTree = SDKROOT;
 		};
+		22D9C30848842202A45A3AAA = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = "midi_globals.fth";
+			path = "../../../../hmsl/fth/midi_globals.fth";
+			sourceTree = "SOURCE_ROOT";
+		};
 		2503D7B89AE4B06B28D23432 = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.objcpp;
 			name = "include_juce_data_structures.mm";
 			path = "../../JuceLibraryCode/include_juce_data_structures.mm";
+			sourceTree = "SOURCE_ROOT";
+		};
+		25AA0D256ADA060CFCAE760E = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = bench.fth;
+			path = ../../../../pforth/fth/bench.fth;
 			sourceTree = "SOURCE_ROOT";
 		};
 		274A45EA29C6AEFD07FAA91C = {
@@ -272,11 +437,46 @@
 			path = RecentFilesMenuTemplate.nib;
 			sourceTree = "SOURCE_ROOT";
 		};
+		289D2B6216846A3F8378D4D7 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = "t_required_helper1.fth";
+			path = "../../../../pforth/fth/t_required_helper1.fth";
+			sourceTree = "SOURCE_ROOT";
+		};
+		29B7BA5658F404385DE1741B = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = "make_all256.fth";
+			path = "../../../../pforth/fth/utils/make_all256.fth";
+			sourceTree = "SOURCE_ROOT";
+		};
+		2A3EA6E4909DE0ED90723BE3 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = "ob_array.fth";
+			path = "../../../../hmsl/fth/ob_array.fth";
+			sourceTree = "SOURCE_ROOT";
+		};
 		2D90348AD7A7438C16B49BB3 = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.objcpp;
 			name = "include_juce_events.mm";
 			path = "../../JuceLibraryCode/include_juce_events.mm";
+			sourceTree = "SOURCE_ROOT";
+		};
+		2DFCDF80EEB7EAC78E878312 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = see.fth;
+			path = ../../../../pforth/fth/see.fth;
+			sourceTree = "SOURCE_ROOT";
+		};
+		2E728536254DD0CFFF4B2E29 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = condcomp.fth;
+			path = ../../../../pforth/fth/condcomp.fth;
 			sourceTree = "SOURCE_ROOT";
 		};
 		2EBDBD2E521C0FBDE80B7216 = {
@@ -286,11 +486,109 @@
 			path = "../../../../pforth/csrc/pf_cglue.c";
 			sourceTree = "SOURCE_ROOT";
 		};
+		2F03CF8417DD4E0552C4E152 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = "t_load_undef.fth";
+			path = "../../../../pforth/fth/t_load_undef.fth";
+			sourceTree = "SOURCE_ROOT";
+		};
+		2FEEA412A4BAF4BCFD59A1B9 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = floats.fth;
+			path = ../../../../pforth/fth/floats.fth;
+			sourceTree = "SOURCE_ROOT";
+		};
+		3070314849DB9CE0071D7116 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = "t_include.fth";
+			path = "../../../../pforth/fth/t_include.fth";
+			sourceTree = "SOURCE_ROOT";
+		};
+		30885AA9B80888E637352326 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = "t_floats.fth";
+			path = "../../../../pforth/fth/t_floats.fth";
+			sourceTree = "SOURCE_ROOT";
+		};
+		319B1580055CC6B44B81D347 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = record.fth;
+			path = ../../../../hmsl/fth/record.fth;
+			sourceTree = "SOURCE_ROOT";
+		};
+		31E1586F9C06C7339338E40B = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = instrument.fth;
+			path = ../../../../hmsl/fth/instrument.fth;
+			sourceTree = "SOURCE_ROOT";
+		};
+		31F66DE6FF4BF682F48242B5 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = memalloc.fth;
+			path = ../../../../hmsl/fth/memalloc.fth;
+			sourceTree = "SOURCE_ROOT";
+		};
+		325BE0CEF6CF814E2BA355DA = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = "test_actions.fth";
+			path = "../../../../hmsl/fth/test_actions.fth";
+			sourceTree = "SOURCE_ROOT";
+		};
+		327A2D45AC8CA6A48F12A3C2 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = clone.fth;
+			path = ../../../../pforth/fth/utils/clone.fth;
+			sourceTree = "SOURCE_ROOT";
+		};
+		328DC5C0856C2D6E52C3D3CA = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = collection.fth;
+			path = ../../../../hmsl/fth/collection.fth;
+			sourceTree = "SOURCE_ROOT";
+		};
+		34E69FF7BA7133AF4754D5F1 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = siev.fth;
+			path = ../../../../pforth/fth/siev.fth;
+			sourceTree = "SOURCE_ROOT";
+		};
+		358E67DB2469C6CB4EE1A19F = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = "action_top.fth";
+			path = "../../../../hmsl/fth/action_top.fth";
+			sourceTree = "SOURCE_ROOT";
+		};
+		360F9C2F04FC37C59E3E78D4 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = "ctrl_xy.fth";
+			path = "../../../../hmsl/fth/ctrl_xy.fth";
+			sourceTree = "SOURCE_ROOT";
+		};
 		373EFA2E4C7100F7B12E7C2E = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
 			name = "pf_juce_io.cpp";
 			path = "../../Source/pf_juce_io.cpp";
+			sourceTree = "SOURCE_ROOT";
+		};
+		3910E7071BCEB98E065036FB = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = "c_struct.fth";
+			path = "../../../../pforth/fth/c_struct.fth";
 			sourceTree = "SOURCE_ROOT";
 		};
 		39B5CC71A5256DC9CE525426 = {
@@ -300,6 +598,27 @@
 			path = ../../../../pforth/csrc/pfcompfp.h;
 			sourceTree = "SOURCE_ROOT";
 		};
+		3B6B95459BAB2B43E04BFEF0 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = "shape_editor.fth";
+			path = "../../../../hmsl/fth/shape_editor.fth";
+			sourceTree = "SOURCE_ROOT";
+		};
+		3BC3DA4D523A02F542582247 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = tester.fth;
+			path = ../../../../pforth/fth/tester.fth;
+			sourceTree = "SOURCE_ROOT";
+		};
+		3EDA48E24B4E7F7B28FD1C19 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = elmnts.fth;
+			path = ../../../../hmsl/fth/elmnts.fth;
+			sourceTree = "SOURCE_ROOT";
+		};
 		40BB346BD0837B65CC1995C3 = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
@@ -307,11 +626,60 @@
 			path = ../../JuceLibraryCode/AppConfig.h;
 			sourceTree = "SOURCE_ROOT";
 		};
+		4383DCD5E7286C11ADE91B83 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = ansilocs.fth;
+			path = ../../../../pforth/fth/ansilocs.fth;
+			sourceTree = "SOURCE_ROOT";
+		};
+		4394064BC858ABEDD31F3DF7 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = savedicd.fth;
+			path = ../../../../pforth/fth/savedicd.fth;
+			sourceTree = "SOURCE_ROOT";
+		};
+		448DA6D5B3233D2E96FD89A1 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = "set_vectors.fth";
+			path = "../../../../hmsl/fth/set_vectors.fth";
+			sourceTree = "SOURCE_ROOT";
+		};
+		4580AE1C334C02BF43CC5327 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = "ob_dlist.fth";
+			path = "../../../../hmsl/fth/ob_dlist.fth";
+			sourceTree = "SOURCE_ROOT";
+		};
 		46BD6830054765A34A28F4D9 = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
 			name = pfcompil.h;
 			path = ../../../../pforth/csrc/pfcompil.h;
+			sourceTree = "SOURCE_ROOT";
+		};
+		49E36500DFDE9E0839C491C4 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = "ctrl_fader.fth";
+			path = "../../../../hmsl/fth/ctrl_fader.fth";
+			sourceTree = "SOURCE_ROOT";
+		};
+		4BA5F503ACEFC863DA8E5599 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = "morph_lists.fth";
+			path = "../../../../hmsl/fth/morph_lists.fth";
+			sourceTree = "SOURCE_ROOT";
+		};
+		4C060ED318839EDBFA0D1D0E = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = "test_ode.fth";
+			path = "../../../../hmsl/fth/test_ode.fth";
 			sourceTree = "SOURCE_ROOT";
 		};
 		4D74B3EEC746D6D6F339FCE9 = {
@@ -335,6 +703,13 @@
 			path = "../../JuceLibraryCode/include_juce_audio_basics.mm";
 			sourceTree = "SOURCE_ROOT";
 		};
+		5227C10F3B6D2109B12CED71 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = forget.fth;
+			path = ../../../../pforth/fth/forget.fth;
+			sourceTree = "SOURCE_ROOT";
+		};
 		5443F109A67D09447545C508 = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
@@ -347,6 +722,55 @@
 			lastKnownFileType = sourcecode.cpp.cpp;
 			name = TerminalComponent.cpp;
 			path = ../../Source/TerminalComponent.cpp;
+			sourceTree = "SOURCE_ROOT";
+		};
+		563E54AA0BB8F826D87194F6 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = startup.fth;
+			path = ../../../../hmsl/fth/startup.fth;
+			sourceTree = "SOURCE_ROOT";
+		};
+		5653753CB3568F9386B03F94 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = "stock_morphs.fth";
+			path = "../../../../hmsl/fth/stock_morphs.fth";
+			sourceTree = "SOURCE_ROOT";
+		};
+		56F2888366D41CBF4219868F = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = "t_required_helper2.fth";
+			path = "../../../../pforth/fth/t_required_helper2.fth";
+			sourceTree = "SOURCE_ROOT";
+		};
+		5803D81746FE5E7C581A344D = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = filefind.fth;
+			path = ../../../../pforth/fth/filefind.fth;
+			sourceTree = "SOURCE_ROOT";
+		};
+		59E57E875D44FFC758053744 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = "popup_text.fth";
+			path = "../../../../hmsl/fth/popup_text.fth";
+			sourceTree = "SOURCE_ROOT";
+		};
+		5A24B14D535E98585549D979 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = "service_tasks.fth";
+			path = "../../../../hmsl/fth/service_tasks.fth";
+			sourceTree = "SOURCE_ROOT";
+		};
+		5A7A3F7BEBA12657A5188F76 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = "make_hmsl.fth";
+			path = "../../../../hmsl/fth/make_hmsl.fth";
 			sourceTree = "SOURCE_ROOT";
 		};
 		5A80C7B797BEB29F054929E9 = {
@@ -363,11 +787,25 @@
 			path = "~/JUCE/modules/juce_gui_extra";
 			sourceTree = "<absolute>";
 		};
+		5ACF852F0165FCF545D74C84 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = top.fth;
+			path = ../../../../hmsl/fth/top.fth;
+			sourceTree = "SOURCE_ROOT";
+		};
 		5B055094D84001AEB48A2F2E = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
 			name = JuceHeader.h;
 			path = ../../JuceLibraryCode/JuceHeader.h;
+			sourceTree = "SOURCE_ROOT";
+		};
+		5BB99DC500D7FD92ABAD9FBD = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = private.fth;
+			path = ../../../../pforth/fth/private.fth;
 			sourceTree = "SOURCE_ROOT";
 		};
 		5D64068402BD474A492CC92F = {
@@ -377,6 +815,13 @@
 			path = "../../../../pforth/csrc/pf_clib.h";
 			sourceTree = "SOURCE_ROOT";
 		};
+		5DC7A0CF11A28337CF45AB4A = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = misc2.fth;
+			path = ../../../../pforth/fth/misc2.fth;
+			sourceTree = "SOURCE_ROOT";
+		};
 		5E4255CAFE413D221A6F2499 = {
 			isa = PBXFileReference;
 			lastKnownFileType = file;
@@ -384,12 +829,26 @@
 			path = "~/JUCE/modules/juce_audio_basics";
 			sourceTree = "<absolute>";
 		};
+		5E80A2A2E1787BFDE6EDF0C3 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = stubs.fth;
+			path = ../../../../hmsl/fth/stubs.fth;
+			sourceTree = "SOURCE_ROOT";
+		};
 		5F23D86AC3D4343F219C476D = {
 			isa = PBXFileReference;
 			lastKnownFileType = wrapper.framework;
 			name = CoreMIDI.framework;
 			path = System/Library/Frameworks/CoreMIDI.framework;
 			sourceTree = SDKROOT;
+		};
+		5FF30BE29B6D36F95D887D3A = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = "float_port.fth";
+			path = "../../../../hmsl/fth/float_port.fth";
+			sourceTree = "SOURCE_ROOT";
 		};
 		62661D1B1E272FC2D608F711 = {
 			isa = PBXFileReference;
@@ -419,12 +878,61 @@
 			path = ../../../../pforth/csrc/pfcompil.c;
 			sourceTree = "SOURCE_ROOT";
 		};
+		63A169E452132EBE7BD0EF85 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = player.fth;
+			path = ../../../../hmsl/fth/player.fth;
+			sourceTree = "SOURCE_ROOT";
+		};
+		6499247B293207AB8099BCAC = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = "t_corex.fth";
+			path = "../../../../pforth/fth/t_corex.fth";
+			sourceTree = "SOURCE_ROOT";
+		};
+		64A6F029E1C893C3E30A7FBC = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = "action_screen.fth";
+			path = "../../../../hmsl/fth/action_screen.fth";
+			sourceTree = "SOURCE_ROOT";
+		};
 		64BCFD18FCEA8D4C5B60D9BA = {
 			isa = PBXFileReference;
 			lastKnownFileType = file;
 			name = "juce_opengl";
 			path = "~/JUCE/modules/juce_opengl";
 			sourceTree = "<absolute>";
+		};
+		64ED94688450EA4C4709445B = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = math.fth;
+			path = ../../../../pforth/fth/math.fth;
+			sourceTree = "SOURCE_ROOT";
+		};
+		6759769D25A7550D6CEEFABA = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = actobj.fth;
+			path = ../../../../hmsl/fth/actobj.fth;
+			sourceTree = "SOURCE_ROOT";
+		};
+		69FFDFC48A787AB7CE89E1BD = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = "t_nolf.fth";
+			path = "../../../../pforth/fth/t_nolf.fth";
+			sourceTree = "SOURCE_ROOT";
+		};
+		6A19C18C2094B1B47725BA58 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = allocator.fth;
+			path = ../../../../hmsl/fth/allocator.fth;
+			sourceTree = "SOURCE_ROOT";
 		};
 		6A816CD57D946B796F34DC22 = {
 			isa = PBXFileReference;
@@ -433,11 +941,46 @@
 			path = "../../../../pforth/csrc/pf_inc1.h";
 			sourceTree = "SOURCE_ROOT";
 		};
+		6D0A6E10C91BFA8535305B22 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = midi.fth;
+			path = ../../../../hmsl/fth/midi.fth;
+			sourceTree = "SOURCE_ROOT";
+		};
 		6D6867BEB70114DD24AD1174 = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
 			name = TerminalComponent.h;
 			path = ../../Source/TerminalComponent.h;
+			sourceTree = "SOURCE_ROOT";
+		};
+		6EE89ADD4C13068ED7D625D8 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = "load_hmsl.fth";
+			path = "../../../../hmsl/fth/load_hmsl.fth";
+			sourceTree = "SOURCE_ROOT";
+		};
+		715BC9EAFC5B2AA1A4C55E35 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = numberio.fth;
+			path = ../../../../pforth/fth/numberio.fth;
+			sourceTree = "SOURCE_ROOT";
+		};
+		72521D172B25EE90E9D98699 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = member.fth;
+			path = ../../../../pforth/fth/member.fth;
+			sourceTree = "SOURCE_ROOT";
+		};
+		744E4FD62EF07C0ECEB703FC = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = "ob_ivars.fth";
+			path = "../../../../hmsl/fth/ob_ivars.fth";
 			sourceTree = "SOURCE_ROOT";
 		};
 		76035A8CD96EA0A6DCB38AEF = {
@@ -468,6 +1011,34 @@
 			path = "../../../../pforth/csrc/pf_mem.h";
 			sourceTree = "SOURCE_ROOT";
 		};
+		79313BF7952D6D4463F81014 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = strings.fth;
+			path = ../../../../pforth/fth/strings.fth;
+			sourceTree = "SOURCE_ROOT";
+		};
+		7AC9F229E66EE086B3556B60 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = "ob_actions.fth";
+			path = "../../../../hmsl/fth/ob_actions.fth";
+			sourceTree = "SOURCE_ROOT";
+		};
+		7ADD41BAD2CAB45658DC3B95 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = job.fth;
+			path = ../../../../hmsl/fth/job.fth;
+			sourceTree = "SOURCE_ROOT";
+		};
+		7AF6195089C65D070BCCE0F1 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = tut.fth;
+			path = ../../../../pforth/fth/tut.fth;
+			sourceTree = "SOURCE_ROOT";
+		};
 		7BE7097152B57F7CFC9DD6EC = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
@@ -489,11 +1060,53 @@
 			path = "../../../../pforth/csrc/pf_all.h";
 			sourceTree = "SOURCE_ROOT";
 		};
+		81215C7405DFACF4ECA4D3B7 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = errormsg.fth;
+			path = ../../../../hmsl/fth/errormsg.fth;
+			sourceTree = "SOURCE_ROOT";
+		};
 		830647C25DD0DA5F74347770 = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.objcpp;
 			name = "include_juce_audio_formats.mm";
 			path = "../../JuceLibraryCode/include_juce_audio_formats.mm";
+			sourceTree = "SOURCE_ROOT";
+		};
+		832426D8C4A252C23EF2B959 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = "graph_util.fth";
+			path = "../../../../hmsl/fth/graph_util.fth";
+			sourceTree = "SOURCE_ROOT";
+		};
+		83487AF1AF2EBE021B06D2FA = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = system.fth;
+			path = ../../../../pforth/fth/system.fth;
+			sourceTree = "SOURCE_ROOT";
+		};
+		84C1361688D33029D7931753 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = "action_table.fth";
+			path = "../../../../hmsl/fth/action_table.fth";
+			sourceTree = "SOURCE_ROOT";
+		};
+		851B1741E0D42C6987BC1517 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = p4thbase.fth;
+			path = ../../../../hmsl/fth/p4thbase.fth;
+			sourceTree = "SOURCE_ROOT";
+		};
+		8546EA63CDC8D16D02BC4401 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = circular.fth;
+			path = ../../../../hmsl/fth/circular.fth;
 			sourceTree = "SOURCE_ROOT";
 		};
 		85D1AFC284F2DA05AB2ADA98 = {
@@ -503,6 +1116,34 @@
 			path = "~/JUCE/modules/juce_data_structures";
 			sourceTree = "<absolute>";
 		};
+		8897E1E236C423F2344BF311 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = "t_alloc.fth";
+			path = "../../../../pforth/fth/t_alloc.fth";
+			sourceTree = "SOURCE_ROOT";
+		};
+		88CB42F7338359672DCCD63D = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = structure.fth;
+			path = ../../../../hmsl/fth/structure.fth;
+			sourceTree = "SOURCE_ROOT";
+		};
+		88FB7E86173700FF6767232E = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = wordslik.fth;
+			path = ../../../../pforth/fth/wordslik.fth;
+			sourceTree = "SOURCE_ROOT";
+		};
+		89F3795B3494E6054D26BEDB = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = "ob_bind.fth";
+			path = "../../../../hmsl/fth/ob_bind.fth";
+			sourceTree = "SOURCE_ROOT";
+		};
 		89F602E36BA644C641D08357 = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.objcpp;
@@ -510,11 +1151,32 @@
 			path = "../../JuceLibraryCode/include_juce_audio_devices.mm";
 			sourceTree = "SOURCE_ROOT";
 		};
+		8A6C5F3D3CD877CC956B69C4 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = trace.fth;
+			path = ../../../../pforth/fth/trace.fth;
+			sourceTree = "SOURCE_ROOT";
+		};
+		8AE82D0F092489B740E48AB1 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = scg.fth;
+			path = ../../../../hmsl/fth/scg.fth;
+			sourceTree = "SOURCE_ROOT";
+		};
 		8D343DFD202F44F344C144D2 = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
 			name = Main.cpp;
 			path = ../../Source/Main.cpp;
+			sourceTree = "SOURCE_ROOT";
+		};
+		8E6B452AE425E388DA499ACD = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = "midi_stubs.fth";
+			path = "../../../../hmsl/fth/midi_stubs.fth";
 			sourceTree = "SOURCE_ROOT";
 		};
 		8EA86F4DB5320799B9641013 = {
@@ -531,6 +1193,20 @@
 			path = "../../Source/hmsl_host_graphics.cpp";
 			sourceTree = "SOURCE_ROOT";
 		};
+		8F429FD8F89B2328EBD520C3 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = "load_ode.fth";
+			path = "../../../../hmsl/fth/load_ode.fth";
+			sourceTree = "SOURCE_ROOT";
+		};
+		927CBA461B9B19C19075F05E = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = "test_ode_locals.fth";
+			path = "../../../../hmsl/fth/test_ode_locals.fth";
+			sourceTree = "SOURCE_ROOT";
+		};
 		933B4928168DA6458F924187 = {
 			isa = PBXFileReference;
 			lastKnownFileType = wrapper.framework;
@@ -538,12 +1214,33 @@
 			path = System/Library/Frameworks/AudioToolbox.framework;
 			sourceTree = SDKROOT;
 		};
+		936C9685E3480831029CF98B = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = "midi_instrument.fth";
+			path = "../../../../hmsl/fth/midi_instrument.fth";
+			sourceTree = "SOURCE_ROOT";
+		};
+		950EACC220E975371BB286AF = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = loadp4th.fth;
+			path = ../../../../pforth/fth/loadp4th.fth;
+			sourceTree = "SOURCE_ROOT";
+		};
 		989369D8EC1BAD23543B02E9 = {
 			isa = PBXFileReference;
 			lastKnownFileType = file;
 			name = "juce_graphics";
 			path = "~/JUCE/modules/juce_graphics";
 			sourceTree = "<absolute>";
+		};
+		9A5D117C9F92DA6889EE6283 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = "midi_parser.fth";
+			path = "../../../../hmsl/fth/midi_parser.fth";
+			sourceTree = "SOURCE_ROOT";
 		};
 		9ADC0F138D82CF8D3EBEB438 = {
 			isa = PBXFileReference;
@@ -566,11 +1263,39 @@
 			path = ../../Source/AtomicQueue.h;
 			sourceTree = "SOURCE_ROOT";
 		};
+		9C7729F698F72D6079E6CDA8 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = "t_locals.fth";
+			path = "../../../../pforth/fth/t_locals.fth";
+			sourceTree = "SOURCE_ROOT";
+		};
+		9CB272AE618C2062B06285BC = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = "save-input.fth";
+			path = "../../../../pforth/fth/save-input.fth";
+			sourceTree = "SOURCE_ROOT";
+		};
 		9ECE9AB3CC4491F3FBCBA84C = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
 			name = "pf_types.h";
 			path = "../../../../pforth/csrc/pf_types.h";
+			sourceTree = "SOURCE_ROOT";
+		};
+		A00F3D990EC89A03AF2F0E51 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = "hmsl_top.fth";
+			path = "../../../../hmsl/fth/hmsl_top.fth";
+			sourceTree = "SOURCE_ROOT";
+		};
+		A0E0210580C65620792D243E = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = charmacr.fth;
+			path = ../../../../hmsl/fth/charmacr.fth;
 			sourceTree = "SOURCE_ROOT";
 		};
 		A266A2F3E86A331EC04B115F = {
@@ -580,6 +1305,20 @@
 			path = "../../../../pforth/csrc/pf_cglue.h";
 			sourceTree = "SOURCE_ROOT";
 		};
+		A3CFDC6BEBF13F984E9DE26C = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = misc1.fth;
+			path = ../../../../pforth/fth/misc1.fth;
+			sourceTree = "SOURCE_ROOT";
+		};
+		A4410F916A6E3663AF100B29 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = control.fth;
+			path = ../../../../hmsl/fth/control.fth;
+			sourceTree = "SOURCE_ROOT";
+		};
 		A600175C24A47AE4555DBAEF = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.c;
@@ -587,11 +1326,32 @@
 			path = "../../Source/hmsl_custom.c";
 			sourceTree = "SOURCE_ROOT";
 		};
+		A6C66355816951E596EDBDE4 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = screen.fth;
+			path = ../../../../hmsl/fth/screen.fth;
+			sourceTree = "SOURCE_ROOT";
+		};
 		A763F943E2C1D88514100505 = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
 			name = pforth.h;
 			path = ../../../../pforth/csrc/pforth.h;
+			sourceTree = "SOURCE_ROOT";
+		};
+		A9DB36912E3618059C1D7E8C = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = "t_tools.fth";
+			path = "../../../../pforth/fth/t_tools.fth";
+			sourceTree = "SOURCE_ROOT";
+		};
+		ABA5B4575D6E35839DAB22CD = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = deck.fth;
+			path = ../../../../hmsl/fth/deck.fth;
 			sourceTree = "SOURCE_ROOT";
 		};
 		AD747B57E89C274222C7AC89 = {
@@ -608,11 +1368,39 @@
 			path = "../../../../pforth/csrc/pf_host.h";
 			sourceTree = "SOURCE_ROOT";
 		};
+		B14B62FE78E357E3E46137FC = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = require.fth;
+			path = ../../../../pforth/fth/require.fth;
+			sourceTree = "SOURCE_ROOT";
+		};
 		B35738AF3385B41CB86E87B4 = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.c;
 			name = "hmsl_midi.c";
 			path = "../../Source/hmsl_midi.c";
+			sourceTree = "SOURCE_ROOT";
+		};
+		B481D2C82F51FA7D52948587 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = "test_events.fth";
+			path = "../../../../hmsl/fth/test_events.fth";
+			sourceTree = "SOURCE_ROOT";
+		};
+		B6629BCD3C8C01C1CE1BF4A0 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = "ob_stack.fth";
+			path = "../../../../hmsl/fth/ob_stack.fth";
+			sourceTree = "SOURCE_ROOT";
+		};
+		B66A1F435298DD9BBE4F781F = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = morph.fth;
+			path = ../../../../hmsl/fth/morph.fth;
 			sourceTree = "SOURCE_ROOT";
 		};
 		B6B439A5DB51B6314251782E = {
@@ -622,11 +1410,39 @@
 			path = ../../../../pforth/csrc/pfinnrfp.h;
 			sourceTree = "SOURCE_ROOT";
 		};
+		B767383880E95DF33907E143 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = exmember.fth;
+			path = ../../../../hmsl/fth/exmember.fth;
+			sourceTree = "SOURCE_ROOT";
+		};
 		B7779A6DB279C92E49040A5B = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.objcpp;
 			name = "include_juce_cryptography.mm";
 			path = "../../JuceLibraryCode/include_juce_cryptography.mm";
+			sourceTree = "SOURCE_ROOT";
+		};
+		B9ED26F04833E2493D816448 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = "misc_tools.fth";
+			path = "../../../../hmsl/fth/misc_tools.fth";
+			sourceTree = "SOURCE_ROOT";
+		};
+		BF65DC9B08A5B13E4CE79830 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = BinaryData.h;
+			path = ../../JuceLibraryCode/BinaryData.h;
+			sourceTree = "SOURCE_ROOT";
+		};
+		C0AD57D0CE3DBA2CE42528C3 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = "packed_midi.fth";
+			path = "../../../../hmsl/fth/packed_midi.fth";
 			sourceTree = "SOURCE_ROOT";
 		};
 		C0AF759F8101A04D8F099449 = {
@@ -650,6 +1466,27 @@
 			path = "../../JuceLibraryCode/include_juce_graphics.mm";
 			sourceTree = "SOURCE_ROOT";
 		};
+		C4E0B535F3F30F698C262064 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = BinaryData.cpp;
+			path = ../../JuceLibraryCode/BinaryData.cpp;
+			sourceTree = "SOURCE_ROOT";
+		};
+		C59608568035A4614A4782E1 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = file.fth;
+			path = ../../../../pforth/fth/file.fth;
+			sourceTree = "SOURCE_ROOT";
+		};
+		C6597EE9B9F2190B905E24BA = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = "t_case.fth";
+			path = "../../../../pforth/fth/t_case.fth";
+			sourceTree = "SOURCE_ROOT";
+		};
 		C7D864D4B38F1D1A7BA99307 = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
@@ -657,11 +1494,32 @@
 			path = ../../Source/GraphicsWindow.h;
 			sourceTree = "SOURCE_ROOT";
 		};
+		C964CA1180A7789F5CE298C8 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = "hmsl_version.fth";
+			path = "../../../../hmsl/fth/hmsl_version.fth";
+			sourceTree = "SOURCE_ROOT";
+		};
+		CCE305D745E6078E74AEC466 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = "test_graphics.fth";
+			path = "../../../../hmsl/fth/test_graphics.fth";
+			sourceTree = "SOURCE_ROOT";
+		};
 		CE7EE0D07DB78DF62251F77D = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
 			name = "pf_words.h";
 			path = "../../../../pforth/csrc/pf_words.h";
+			sourceTree = "SOURCE_ROOT";
+		};
+		CED2D0B40CAAA15B29BC943A = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = "t_load_pairs.fth";
+			path = "../../../../pforth/fth/t_load_pairs.fth";
 			sourceTree = "SOURCE_ROOT";
 		};
 		D03DD35F58C1C36114C5E74D = {
@@ -685,11 +1543,25 @@
 			path = System/Library/Frameworks/Carbon.framework;
 			sourceTree = SDKROOT;
 		};
+		D28FB9901CC5D6855C591FC2 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = bevel.fth;
+			path = ../../../../hmsl/fth/bevel.fth;
+			sourceTree = "SOURCE_ROOT";
+		};
 		D44FE684B020E836801D4CCB = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
 			name = "hmsl_host.h";
 			path = "../../Source/hmsl_host.h";
+			sourceTree = "SOURCE_ROOT";
+		};
+		D4A22E6E4595722C3DE72369 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = "build_menus.fth";
+			path = "../../../../hmsl/fth/build_menus.fth";
 			sourceTree = "SOURCE_ROOT";
 		};
 		D5E154C61E442B2E450210F0 = {
@@ -699,6 +1571,20 @@
 			path = System/Library/Frameworks/OpenGL.framework;
 			sourceTree = SDKROOT;
 		};
+		D5F8C8A2FD87ABA363405268 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = stacks.fth;
+			path = ../../../../hmsl/fth/stacks.fth;
+			sourceTree = "SOURCE_ROOT";
+		};
+		D616BAD04E21876BFD77AFAC = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = termio.fth;
+			path = ../../../../pforth/fth/termio.fth;
+			sourceTree = "SOURCE_ROOT";
+		};
 		D858E0ADEE601FD0115CCFEE = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
@@ -706,11 +1592,32 @@
 			path = "../../../../pforth/csrc/pf_guts.h";
 			sourceTree = "SOURCE_ROOT";
 		};
+		D8BBA75B2DFFC99547CA657A = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = "ctrl_numeric.fth";
+			path = "../../../../hmsl/fth/ctrl_numeric.fth";
+			sourceTree = "SOURCE_ROOT";
+		};
 		D99E1CA80AD4205E81C2686E = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.c;
 			name = "pf_fileio_stdio.c";
 			path = "../../../../pforth/csrc/stdio/pf_fileio_stdio.c";
+			sourceTree = "SOURCE_ROOT";
+		};
+		DBF1C30F4C62600E718840E8 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = "t_file.fth";
+			path = "../../../../pforth/fth/t_file.fth";
+			sourceTree = "SOURCE_ROOT";
+		};
+		DEB3AA9FF761E407B20C4444 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = graphics.fth;
+			path = ../../../../hmsl/fth/graphics.fth;
 			sourceTree = "SOURCE_ROOT";
 		};
 		DF9CCAAA26CC2D853E037A1D = {
@@ -734,11 +1641,25 @@
 			path = System/Library/Frameworks/WebKit.framework;
 			sourceTree = SDKROOT;
 		};
+		E4DCDE69C56D2288F6D7B287 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = "ctrl_text.fth";
+			path = "../../../../hmsl/fth/ctrl_text.fth";
+			sourceTree = "SOURCE_ROOT";
+		};
 		E5C87C31CA4B44EA3391330A = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.c;
 			name = "pf_core.c";
 			path = "../../../../pforth/csrc/pf_core.c";
+			sourceTree = "SOURCE_ROOT";
+		};
+		E6C343972735DFF12DB26D55 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = loadhist.fth;
+			path = ../../../../pforth/fth/loadhist.fth;
 			sourceTree = "SOURCE_ROOT";
 		};
 		E82E07442AB2C22195EA67FC = {
@@ -762,11 +1683,39 @@
 			path = System/Library/Frameworks/QuartzCore.framework;
 			sourceTree = SDKROOT;
 		};
+		EB8340066D3D027FDE9116BC = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = "t_load.fth";
+			path = "../../../../pforth/fth/t_load.fth";
+			sourceTree = "SOURCE_ROOT";
+		};
+		F27DF6ADEC7C2B2F7C596C5E = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = "dump_struct.fth";
+			path = "../../../../pforth/fth/utils/dump_struct.fth";
+			sourceTree = "SOURCE_ROOT";
+		};
 		F31B7D1770C8DA5F4D930DC8 = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.c;
 			name = "pf_text.c";
 			path = "../../../../pforth/csrc/pf_text.c";
+			sourceTree = "SOURCE_ROOT";
+		};
+		F4A519FB8B2B9D8D0F7ECDCC = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = utils.fth;
+			path = ../../../../hmsl/fth/utils.fth;
+			sourceTree = "SOURCE_ROOT";
+		};
+		F6589894C9FDD7DC2BECE724 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = "event_list.fth";
+			path = "../../../../hmsl/fth/event_list.fth";
 			sourceTree = "SOURCE_ROOT";
 		};
 		FB00695C7F1108A5A2746DC5 = {
@@ -776,12 +1725,122 @@
 			path = "~/JUCE/modules/juce_gui_basics";
 			sourceTree = "<absolute>";
 		};
+		FC9161AFCB51C28ACBE4EAFB = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = "cond_comp.fth";
+			path = "../../../../hmsl/fth/cond_comp.fth";
+			sourceTree = "SOURCE_ROOT";
+		};
 		FF74A9603B3551C321A61F6F = {
 			isa = PBXFileReference;
 			lastKnownFileType = file;
 			name = "juce_audio_formats";
 			path = "~/JUCE/modules/juce_audio_formats";
 			sourceTree = "<absolute>";
+		};
+		FFEE774A9A37F00506A3C363 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.fth;
+			name = translators.fth;
+			path = ../../../../hmsl/fth/translators.fth;
+			sourceTree = "SOURCE_ROOT";
+		};
+		EEDDB6CBF3669F87A54E51E3 = {
+			isa = PBXGroup;
+			children = (
+				64A6F029E1C893C3E30A7FBC,
+				84C1361688D33029D7931753,
+				358E67DB2469C6CB4EE1A19F,
+				21EB47A8ED21242A608ECD15,
+				6759769D25A7550D6CEEFABA,
+				6A19C18C2094B1B47725BA58,
+				D28FB9901CC5D6855C591FC2,
+				D4A22E6E4595722C3DE72369,
+				A0E0210580C65620792D243E,
+				8546EA63CDC8D16D02BC4401,
+				328DC5C0856C2D6E52C3D3CA,
+				FC9161AFCB51C28ACBE4EAFB,
+				A4410F916A6E3663AF100B29,
+				129FFAEE233E6D8FD9DCDB19,
+				49E36500DFDE9E0839C491C4,
+				D8BBA75B2DFFC99547CA657A,
+				E4DCDE69C56D2288F6D7B287,
+				360F9C2F04FC37C59E3E78D4,
+				164F93FA8A2D42878BF2EE1E,
+				ABA5B4575D6E35839DAB22CD,
+				3EDA48E24B4E7F7B28FD1C19,
+				81215C7405DFACF4ECA4D3B7,
+				F6589894C9FDD7DC2BECE724,
+				B767383880E95DF33907E143,
+				5FF30BE29B6D36F95D887D3A,
+				01F9176DACBF46F0C4DCC75D,
+				832426D8C4A252C23EF2B959,
+				DEB3AA9FF761E407B20C4444,
+				A00F3D990EC89A03AF2F0E51,
+				C964CA1180A7789F5CE298C8,
+				31E1586F9C06C7339338E40B,
+				198638942B0EAFDC19828582,
+				7ADD41BAD2CAB45658DC3B95,
+				6EE89ADD4C13068ED7D625D8,
+				8F429FD8F89B2328EBD520C3,
+				5A7A3F7BEBA12657A5188F76,
+				31F66DE6FF4BF682F48242B5,
+				6D0A6E10C91BFA8535305B22,
+				22D9C30848842202A45A3AAA,
+				936C9685E3480831029CF98B,
+				9A5D117C9F92DA6889EE6283,
+				8E6B452AE425E388DA499ACD,
+				1A387EA62DE0E657A29037E5,
+				B9ED26F04833E2493D816448,
+				B66A1F435298DD9BBE4F781F,
+				4BA5F503ACEFC863DA8E5599,
+				7AC9F229E66EE086B3556B60,
+				2A3EA6E4909DE0ED90723BE3,
+				89F3795B3494E6054D26BEDB,
+				4580AE1C334C02BF43CC5327,
+				744E4FD62EF07C0ECEB703FC,
+				0F5584100EF9E6DC2A19FF27,
+				B6629BCD3C8C01C1CE1BF4A0,
+				21AFDB091970A24A1FA7B501,
+				1C5D26658530FA4D78B9693A,
+				851B1741E0D42C6987BC1517,
+				C0AD57D0CE3DBA2CE42528C3,
+				63A169E452132EBE7BD0EF85,
+				59E57E875D44FFC758053744,
+				217293F9605AE0686CE86FE1,
+				319B1580055CC6B44B81D347,
+				8AE82D0F092489B740E48AB1,
+				A6C66355816951E596EDBDE4,
+				5A24B14D535E98585549D979,
+				448DA6D5B3233D2E96FD89A1,
+				03E9DAFBDF5AA5586C0E7313,
+				3B6B95459BAB2B43E04BFEF0,
+				D5F8C8A2FD87ABA363405268,
+				563E54AA0BB8F826D87194F6,
+				5653753CB3568F9386B03F94,
+				88CB42F7338359672DCCD63D,
+				5E80A2A2E1787BFDE6EDF0C3,
+				325BE0CEF6CF814E2BA355DA,
+				B481D2C82F51FA7D52948587,
+				CCE305D745E6078E74AEC466,
+				4C060ED318839EDBFA0D1D0E,
+				927CBA461B9B19C19075F05E,
+				0831CB16DDF715CE84A01598,
+				5ACF852F0165FCF545D74C84,
+				FFEE774A9A37F00506A3C363,
+				F4A519FB8B2B9D8D0F7ECDCC,
+			);
+			name = fth;
+			sourceTree = "<group>";
+		};
+		68880378BA86585FDE1F16C5 = {
+			isa = PBXGroup;
+			children = (
+				EEDDB6CBF3669F87A54E51E3,
+			);
+			name = hmsl;
+			sourceTree = "<group>";
 		};
 		D9AE4C36420AD4E6E3C8FE78 = {
 			isa = PBXGroup;
@@ -830,10 +1889,80 @@
 			name = csrc;
 			sourceTree = "<group>";
 		};
+		780C0CE744275AE25F2348BE = {
+			isa = PBXGroup;
+			children = (
+				327A2D45AC8CA6A48F12A3C2,
+				F27DF6ADEC7C2B2F7C596C5E,
+				17A75AA855D181B624EE93C5,
+				29B7BA5658F404385DE1741B,
+			);
+			name = utils;
+			sourceTree = "<group>";
+		};
+		F323FAD39AAB6C5CAF6BACB1 = {
+			isa = PBXGroup;
+			children = (
+				780C0CE744275AE25F2348BE,
+				4383DCD5E7286C11ADE91B83,
+				25AA0D256ADA060CFCAE760E,
+				3910E7071BCEB98E065036FB,
+				12AE8FF8B7FC0FC3610A0063,
+				2E728536254DD0CFFF4B2E29,
+				06D7001FE5EC8AC8876746BB,
+				C59608568035A4614A4782E1,
+				5803D81746FE5E7C581A344D,
+				2FEEA412A4BAF4BCFD59A1B9,
+				5227C10F3B6D2109B12CED71,
+				05806FBC4D20D55CCF01CBAD,
+				E6C343972735DFF12DB26D55,
+				950EACC220E975371BB286AF,
+				120E57EA76C16F2E140F81E8,
+				64ED94688450EA4C4709445B,
+				72521D172B25EE90E9D98699,
+				A3CFDC6BEBF13F984E9DE26C,
+				5DC7A0CF11A28337CF45AB4A,
+				715BC9EAFC5B2AA1A4C55E35,
+				5BB99DC500D7FD92ABAD9FBD,
+				B14B62FE78E357E3E46137FC,
+				9CB272AE618C2062B06285BC,
+				4394064BC858ABEDD31F3DF7,
+				2DFCDF80EEB7EAC78E878312,
+				34E69FF7BA7133AF4754D5F1,
+				141110D22205F26A03BEDC74,
+				79313BF7952D6D4463F81014,
+				83487AF1AF2EBE021B06D2FA,
+				8897E1E236C423F2344BF311,
+				C6597EE9B9F2190B905E24BA,
+				6499247B293207AB8099BCAC,
+				DBF1C30F4C62600E718840E8,
+				30885AA9B80888E637352326,
+				3070314849DB9CE0071D7116,
+				EB8340066D3D027FDE9116BC,
+				012AD9B2B3291B64275A291A,
+				CED2D0B40CAAA15B29BC943A,
+				1C240F5E21B3268DAA7314FE,
+				2F03CF8417DD4E0552C4E152,
+				9C7729F698F72D6079E6CDA8,
+				69FFDFC48A787AB7CE89E1BD,
+				289D2B6216846A3F8378D4D7,
+				56F2888366D41CBF4219868F,
+				010C0CB9C9F8823EC1746A24,
+				A9DB36912E3618059C1D7E8C,
+				D616BAD04E21876BFD77AFAC,
+				3BC3DA4D523A02F542582247,
+				8A6C5F3D3CD877CC956B69C4,
+				7AF6195089C65D070BCCE0F1,
+				88FB7E86173700FF6767232E,
+			);
+			name = fth;
+			sourceTree = "<group>";
+		};
 		5DBDA822C96F0F95F922E1FB = {
 			isa = PBXGroup;
 			children = (
 				400A5483E658C72C487F9364,
+				F323FAD39AAB6C5CAF6BACB1,
 			);
 			name = pforth;
 			sourceTree = "<group>";
@@ -863,6 +1992,7 @@
 		E661F695B5115BA0236CCA3D = {
 			isa = PBXGroup;
 			children = (
+				68880378BA86585FDE1F16C5,
 				5DBDA822C96F0F95F922E1FB,
 				6DAD776B44FBED4648BC2A62,
 			);
@@ -892,6 +2022,8 @@
 			isa = PBXGroup;
 			children = (
 				40BB346BD0837B65CC1995C3,
+				C4E0B535F3F30F698C262064,
+				BF65DC9B08A5B13E4CE79830,
 				50498062F7456179E2584BD5,
 				89F602E36BA644C641D08357,
 				830647C25DD0DA5F74347770,
@@ -1190,6 +2322,7 @@
 				22C463A22D802BD953A22117,
 				E184A927C03F04892487E273,
 				1264C0CEDECE0FB27E21E10B,
+				8997B92FB29F8AB88846CD53,
 				FAAC60899C744646F90470BF,
 				C3659A1489ADEFA51A2C0260,
 				22C1EA2AA00859E22D025546,
