@@ -27,10 +27,7 @@ public:
     void paint (Graphics&) override;
     void resized() override;
 
-    bool keyPressed (const KeyPress &key, Component *originatingComponent) override {
-        onKeyPressed(key.getTextCharacter());
-        return true; // true if consumed
-    }
+    bool keyPressed (const KeyPress &key, Component *originatingComponent) override;
 
     // These are used for Forth character IO.
     int getCharacter();
@@ -47,8 +44,10 @@ public:
 private:
 
     void displayCharacter(char c);
-
-    void onKeyPressed(juce_wchar keyCode);
+    void sendEscapeBracket();
+    void sendCharacter(char c); // to application
+    // return true if handled
+    bool handleEscapeSequence(char c);
 
     
     static TerminalComponent    *sTerminalComponent;
@@ -61,7 +60,22 @@ private:
     static constexpr  char kEndOfTransmissionChar = 0x04;
     static constexpr  char kBackspaceChar = 0x08;
     static constexpr  char kDeleteChar = 0x7F;
+    static constexpr  char kEscapeChar = 0x1B;
 
+    static constexpr  char kUpArrowCode = 0x41;
+    static constexpr  char kDownArrowCode = 0x42;
+    static constexpr  char kRightArrowCode = 0x43;
+    static constexpr  char kLeftArrowCode = 0x44;
+
+    int32_t               mAnsiCount = 0;
+    int32_t               mLineCursor = 0;
+
+    enum AnsiState {
+        ANSI_STATE_IDLE,
+        ANSI_STATE_GOT_ESCAPE,
+        ANSI_STATE_GOT_BRACKET,
+    };
+    AnsiState             mAnsiState = ANSI_STATE_IDLE;
 
     AtomicQueue<char>     mInputQueue;
     AtomicQueue<char>     mOutputQueue;

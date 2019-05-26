@@ -37,6 +37,7 @@ public:
     void shutdown() override
     {
         // TODO needed?
+        mTerminalWindow->requestClose();
         mForthThread->signalThreadShouldExit();
         mForthThread->stopThread(1000);
     }
