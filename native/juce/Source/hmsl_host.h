@@ -64,6 +64,7 @@ extern "C" {
 
 int32_t hostInit(void);
 void hostTerm(void);
+
 hmsl_window_index_t hostOpenWindow( hmslWindow *window );
 void hostCloseWindow( hmsl_window_index_t window );
 void hostSetCurrentWindow( hmsl_window_index_t window );
@@ -78,6 +79,7 @@ void hostSetDrawingMode( cell_t mode );
 void hostSetFont( cell_t font );
 void hostSetTextSize( cell_t size );
 
+// Events
 void hostGetMouse( ucell_ptr_t xPtr, ucell_ptr_t yPtr);
 cell_t hostGetEvent( cell_t timeout );
 

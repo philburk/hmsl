@@ -53,7 +53,6 @@
 
 ANEW TASK-PLAYER
 
-
 METHOD PUT.DUTY.CYCLE:      METHOD GET.DUTY.CYCLE:
 METHOD PUT.DUR.DIM:         METHOD GET.DUR.DIM:
 METHOD PUT.ON.DIM:          METHOD GET.ON.DIM:
@@ -71,7 +70,7 @@ METHOD SET.TIMER:
     IV.LONG  IV-PL-DUTY-ON    ( numerator for duty cycle )
     IV.LONG  IV-PL-DUTY-TOTAL ( denominator for duty cycle )
     IV.LONG  IV-PL-TIMEOFF    ( portion of time element is off )
-    IV.LONG  IV-PL-ON-DIM     ( dimension holding ON-TIMEs
+    IV.LONG  IV-PL-ON-DIM     ( dimension holding ON-TIMEs )
     IV.LONG  IV-PL-LEG-E#     ( element # of legato note )
 \ This next IV is also used as a flag, 0 if last was not legato.
     IV.LONG  IV-PL-LEG-SHAPE  ( shape legato note came from )
@@ -80,7 +79,7 @@ METHOD SET.TIMER:
     IV.LONG  IV-PL-ELMNT#     ( Points to current element in shape )
     IV.LONG  IV-PL-OFFSET     ( time offset for starting )
     IV.LONG  IV-PL-OFFSET-ADD ( time to add when starting )
-    iv.long  IV-PL-START-REP  ( start on this repitition )
+    iv.long  IV-PL-START-REP  ( start on this repetition )
 
     IV.LONG  IV-PL-ON#        ( index of element while on, waiting for off )
     IV.LONG  IV-PL-ALLOW?     ( Allow element off? )
