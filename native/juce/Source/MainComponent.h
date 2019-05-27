@@ -141,7 +141,11 @@ private:
 
     void postCommand(opcode_t opcode, int32_t x = 0, int32_t y = 0, const char *addr = nullptr) {
         HmslCommand_t cmd = {opcode, x, y, addr};
-        mCommandQueue.write(cmd); // TODO full?
+        int timeout = 50;
+        while(mCommandQueue.full() && (timeout-- > 0)) {
+            usleep(15 * 1000);
+        }
+        mCommandQueue.write(cmd);
     }
 
     void postEvent(HMSLEventID id, int32_t x = 0, int32_t y = 0) {

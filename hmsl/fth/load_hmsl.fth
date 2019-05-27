@@ -94,8 +94,6 @@ if-load-midi @ [IF]
   include? task-midi_stubs fth/midi_stubs.fth
 [THEN]
 
-echo on
-
 \
 \ Object Oriented Code -------------------------
 include? task-ob_stack fth/ob_stack.fth
@@ -124,7 +122,6 @@ if-load-graphics @ [IF]
   include? task-ctrl_text fth/ctrl_text.fth
   include? task-popup_text fth/popup_text.fth
 [THEN]
-
 
 \ HMSL Music Morphs
 if-load-morphs @ [IF]

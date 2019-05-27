@@ -41,6 +41,10 @@ gr_ymax value GR_WINDOW_HEIGHT
 0 CONSTANT GR_INSERT_MODE
 1 CONSTANT GR_XOR_MODE
 
+\ 2019 Modern GUIs redraw instead of XORing.
+\ XOR was used in the past because redrawing was too slow.
+0 constant GR_XOR_SUPPORTED
+
 V: GR-HEIGHT
 12 value GR_SMALL_TEXT
 16 value GR_BIG_TEXT
