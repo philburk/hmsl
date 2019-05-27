@@ -9,6 +9,7 @@
 */
 
 #include "../JuceLibraryCode/JuceHeader.h"
+#include "HostFileManager.h"
 #include "TerminalComponent.h"
 
 TerminalComponent *TerminalComponent::sTerminalComponent = nullptr;
@@ -29,10 +30,9 @@ TerminalComponent::TerminalComponent()
     setFramesPerSecond(60);
 
     // Show working directory.
-    File defaultWDIR =
-    File::getSpecialLocation(File::SpecialLocationType::currentApplicationFile).getParentDirectory();
-
-    mPreviousLines.push_back(defaultWDIR.getFullPathName());
+    File appFile = File::getSpecialLocation(File::SpecialLocationType::currentApplicationFile);
+    mPreviousLines.push_back(appFile.getFullPathName());
+    mPreviousLines.push_back(HostFileManager::getInstance()->getCurrentDirectory().getFullPathName());
 }
 
 TerminalComponent::~TerminalComponent()

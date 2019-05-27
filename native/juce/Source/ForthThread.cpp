@@ -8,16 +8,22 @@
   ==============================================================================
 */
 
-#include "ForthThread.h"
 #include "pforth.h"
 
-#ifndef PF_DEFAULT_DICTIONARY
-// TODO use relative path
-#define PF_DEFAULT_DICTIONARY "/Users/phil/Work/hmsl/HMSL/hmsl/pforth.dic"
-#endif
+#include "ForthThread.h"
+#include "HostFileManager.h"
+
+#define PF_COMPILE_SYSTEM     0
 
 void ForthThread::run() {
-    // usleep(200 * 1000);
-    // TODO if SHIFT key held down then rebuild Forth
-    pfDoForth(PF_DEFAULT_DICTIONARY, NULL, false);
+    HostFileManager *hostFileManager = HostFileManager::getInstance();
+#if PF_COMPILE_SYSTEM
+    // Build Forth dictionary
+    hostFileManager->setCurrentDirectory(hostFileManager->getPForthDirectory());
+    pfDoForth(NULL, hostFileManager->getSystemFileName(), true);
+#else
+    // Load precompiled HMSL dictionary.
+    hostFileManager->setCurrentDirectory(hostFileManager->getHmslDirectory());
+    pfDoForth(hostFileManager->getDictionaryFileName(), NULL, false);
+#endif
 }

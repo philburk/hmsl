@@ -180,7 +180,7 @@ namespace BinaryData
     const int            packed_midi_fthSize = 1811;
 
     extern const char*   player_fth;
-    const int            player_fthSize = 16233;
+    const int            player_fthSize = 16234;
 
     extern const char*   popup_text_fth;
     const int            popup_text_fthSize = 2820;
@@ -294,7 +294,7 @@ namespace BinaryData
     const int            forget_fthSize = 2748;
 
     extern const char*   history_fth;
-    const int            history_fthSize = 11401;
+    const int            history_fthSize = 11407;
 
     extern const char*   loadhist_fth;
     const int            loadhist_fthSize = 221;
@@ -399,7 +399,7 @@ namespace BinaryData
     const int            t_tools_fthSize = 1890;
 
     extern const char*   termio_fth;
-    const int            termio_fthSize = 1439;
+    const int            termio_fthSize = 1666;
 
     extern const char*   tester_fth;
     const int            tester_fthSize = 1760;

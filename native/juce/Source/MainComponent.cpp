@@ -11,7 +11,7 @@ MainComponent::MainComponent()
     Graphics g(*mImage.get());
     g.fillAll (Colours::blue);
 
-    setSize (800, 500);
+    setSize (640, 480);
     setFramesPerSecond(60);
 }
 

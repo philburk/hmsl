@@ -12415,7 +12415,6 @@ static const unsigned char temp_binary_data_57[] =
 "\n"
 "ANEW TASK-PLAYER\n"
 "\n"
-"\n"
 "METHOD PUT.DUTY.CYCLE:      METHOD GET.DUTY.CYCLE:\n"
 "METHOD PUT.DUR.DIM:         METHOD GET.DUR.DIM:\n"
 "METHOD PUT.ON.DIM:          METHOD GET.ON.DIM:\n"
@@ -12433,7 +12432,7 @@ static const unsigned char temp_binary_data_57[] =
 "    IV.LONG  IV-PL-DUTY-ON    ( numerator for duty cycle )\n"
 "    IV.LONG  IV-PL-DUTY-TOTAL ( denominator for duty cycle )\n"
 "    IV.LONG  IV-PL-TIMEOFF    ( portion of time element is off )\n"
-"    IV.LONG  IV-PL-ON-DIM     ( dimension holding ON-TIMEs\n"
+"    IV.LONG  IV-PL-ON-DIM     ( dimension holding ON-TIMEs )\n"
 "    IV.LONG  IV-PL-LEG-E#     ( element # of legato note )\n"
 "\\ This next IV is also used as a flag, 0 if last was not legato.\n"
 "    IV.LONG  IV-PL-LEG-SHAPE  ( shape legato note came from )\n"
@@ -12442,7 +12441,7 @@ static const unsigned char temp_binary_data_57[] =
 "    IV.LONG  IV-PL-ELMNT#     ( Points to current element in shape )\n"
 "    IV.LONG  IV-PL-OFFSET     ( time offset for starting )\n"
 "    IV.LONG  IV-PL-OFFSET-ADD ( time to add when starting )\n"
-"    iv.long  IV-PL-START-REP  ( start on this repitition )\n"
+"    iv.long  IV-PL-START-REP  ( start on this repetition )\n"
 "\n"
 "    IV.LONG  IV-PL-ON#        ( index of element while on, waiting for off )\n"
 "    IV.LONG  IV-PL-ALLOW?     ( Allow element off? )\n"
@@ -20368,7 +20367,7 @@ static const unsigned char temp_binary_data_95[] =
 "\\ The most recent entry is put at the beginning,\n"
 "\\ older entries are shifted up.\n"
 "\n"
-"4 constant KH_LINE_EXTRA_SIZE ( 2 count bytes plus 2 size bytes )\n"
+"4 constant KH_LINE_EXTRA_SIZE ( 2 count bytes plus 2 line_number bytes )\n"
 "\n"
 ": KH-END ( -- addr , end of history buffer )\n"
 "    kh-history kh_history_size +\n"
@@ -20661,7 +20660,6 @@ static const unsigned char temp_binary_data_95[] =
 "        $ 44 OF kh.go.left  ENDOF\n"
 "    ENDCASE\n"
 ";\n"
-"\n"
 "\n"
 ": KH.SPECIAL.KEY ( char  -- true | false , handle fkeys or arrows, true if handled )\n"
 "    true >r\n"
@@ -24913,7 +24911,18 @@ static const unsigned char temp_binary_data_130[] =
 "$ 05 constant ASCII_CTRL_E\n"
 "$ 18 constant ASCII_CTRL_X\n"
 "\n"
-"\\ ANSI Terminal Control\n"
+"\\ ANSI arrow key sequences\n"
+"\\ ESC [ 0x41 is UP\n"
+"\\ ESC [ 0x42 is DOWN\n"
+"\\ ESC [ 0x43 is RIGHT\n"
+"\\ ESC [ 0x44 is LEFT\n"
+"\n"
+"\\ ANSI terminal control\n"
+"\\ ESC [ 2J is clear screen\n"
+"\\ ESC [ {n} D is move left\n"
+"\\ ESC [ {n} C is move right\n"
+"\\ ESC [ K is erase to end of line\n"
+"\n"
 ": ESC[ ( send ESCAPE and [ )\n"
 "    ASCII_ESCAPE emit\n"
 "    ascii [ emit\n"
@@ -24943,7 +24952,6 @@ static const unsigned char temp_binary_data_130[] =
 "    ESC[\n"
 "    ascii K emit\n"
 ";\n"
-"\n"
 "\n"
 ": BELL ( -- , ring the terminal bell )\n"
 "    7 emit\n"
@@ -25697,7 +25705,7 @@ const char* getNamedResource (const char* resourceNameUTF8, int& numBytes)
         case 0x952eca6d:  numBytes = 7915; return obobject_fth;
         case 0x22a9f624:  numBytes = 6272; return p4thbase_fth;
         case 0x272ad323:  numBytes = 1811; return packed_midi_fth;
-        case 0x7cf0fefc:  numBytes = 16233; return player_fth;
+        case 0x7cf0fefc:  numBytes = 16234; return player_fth;
         case 0x4fcf657b:  numBytes = 2820; return popup_text_fth;
         case 0x0ae0a8d4:  numBytes = 1666; return production_fth;
         case 0x2bd2986c:  numBytes = 7206; return record_fth;
@@ -25735,7 +25743,7 @@ const char* getNamedResource (const char* resourceNameUTF8, int& numBytes)
         case 0x8819e750:  numBytes = 2902; return filefind_fth;
         case 0xc47442b2:  numBytes = 12389; return floats_fth;
         case 0xdcbfe008:  numBytes = 2748; return forget_fth;
-        case 0x1500372f:  numBytes = 11401; return history_fth;
+        case 0x1500372f:  numBytes = 11407; return history_fth;
         case 0xf95fb9a3:  numBytes = 221; return loadhist_fth;
         case 0x45ca9ab9:  numBytes = 1535; return loadp4th_fth;
         case 0x4ec55703:  numBytes = 2229; return locals_fth;
@@ -25770,7 +25778,7 @@ const char* getNamedResource (const char* resourceNameUTF8, int& numBytes)
         case 0xba619f2a:  numBytes = 31; return t_required_helper2_fth;
         case 0x95559ed2:  numBytes = 3389; return t_strings_fth;
         case 0x07271aeb:  numBytes = 1890; return t_tools_fth;
-        case 0xb20a0a2d:  numBytes = 1439; return termio_fth;
+        case 0xb20a0a2d:  numBytes = 1666; return termio_fth;
         case 0x858db9da:  numBytes = 1760; return tester_fth;
         case 0x2b308360:  numBytes = 13067; return trace_fth;
         case 0xc6893d2e:  numBytes = 1343; return tut_fth;

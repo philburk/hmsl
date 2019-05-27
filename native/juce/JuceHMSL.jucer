@@ -2,8 +2,8 @@
 
 <JUCERPROJECT id="C2IY5m" name="JuceHMSL" projectType="guiapp" jucerVersion="5.4.3"
               companyName="Mobileer" companyCopyright="(C) 2019 Mobileer Inc"
-              companyWebsite="www.softsynth.com/hmsl" defines="PF_SUPPORT_FP&#10;"
-              headerPath="../../../../pforth/csrc">
+              companyWebsite="www.softsynth.com/hmsl" defines="PF_SUPPORT_FP&#10;PF_USER_FILEIO=&quot;pf_juce_file_io.h&quot;&#10;PF_DEFAULT_HEADER_SIZE=300000&#10;PF_DEFAULT_CODE_SIZE=700000&#10;"
+              headerPath="../../../../pforth/csrc&#10;../../Source">
   <MAINGROUP id="Nc5YxD" name="JuceHMSL">
     <GROUP id="{BCBFEA09-C5E2-B215-B6AE-1EC056093060}" name="hmsl">
       <GROUP id="{444488E9-2970-5113-124E-3A808E08A893}" name="fth">
@@ -207,6 +207,14 @@
       </GROUP>
     </GROUP>
     <GROUP id="{D4447538-6ED0-FC8B-8612-F845BF3B88BD}" name="Source">
+      <FILE id="c6TBNv" name="HostFileManager.cpp" compile="1" resource="0"
+            file="Source/HostFileManager.cpp"/>
+      <FILE id="gRmNKN" name="HostFileManager.h" compile="0" resource="0"
+            file="Source/HostFileManager.h"/>
+      <FILE id="NK5oG8" name="pf_juce_file_io.cpp" compile="1" resource="0"
+            file="Source/pf_juce_file_io.cpp"/>
+      <FILE id="QVSKbP" name="pf_juce_file_io.h" compile="0" resource="0"
+            file="Source/pf_juce_file_io.h"/>
       <FILE id="ZwoXEy" name="hmsl_host_graphics.cpp" compile="1" resource="0"
             file="Source/hmsl_host_graphics.cpp"/>
       <FILE id="LNj0xf" name="GraphicsWindow.h" compile="0" resource="0"
