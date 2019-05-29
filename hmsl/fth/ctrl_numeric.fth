@@ -169,7 +169,7 @@ variable CG-DELTA-MODE
     ev.track.on
     cg-first-mx @ cg-prev-mx !
     cg-first-my @ cg-prev-my !
-    iv-cg-lasthit highlight: self
+    \ iv-cg-lasthit highlight: self
 ;M
 
 : CG.CALC.DELTA.POS  ( -- dv , delta based on x position)

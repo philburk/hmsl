@@ -4,9 +4,10 @@
 
 #include "MainComponent.h"
 
+
 //==============================================================================
 MainComponent::MainComponent()
-: mCommandQueue(256), mEventQueue(256) {
+: mCommandQueue(1024), mEventQueue(256) {
     mImage.reset(new Image(Image::RGB, 1000, 800, true));
     Graphics g(*mImage.get());
     g.fillAll (Colours::blue);

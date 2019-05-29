@@ -2,7 +2,7 @@
 \
 \ This is a host independant facility for interacting with
 \ a user.
-\ Control reside in a screen and are sent messages
+\ Controls reside in a screen and are sent messages
 \ to draw and to respond to mouse up and down events.
 \ Control grids display text in a grid, when selected
 \ with the mouse, they execute an associated CFA.  Different
@@ -100,7 +100,12 @@ METHOD XY.DRAW:       METHOD XY.UNDRAW:
 
 METHOD PUT.DATA:      METHOD GET.DATA:
 METHOD PUT.TITLE:     METHOD GET.TITLE:
-METHOD HIGHLIGHT:     METHOD DRAW.PART:
+
+GR_XOR_SUPPORTED [IF]
+METHOD HIGHLIGHT:
+[THEN]
+
+METHOD DRAW.PART:
 METHOD ?HIT:
 
 METHOD PUT.TEXT.FUNCTION:  METHOD GET.TEXT.FUNCTION:
@@ -500,7 +505,8 @@ variable CG-BEVEL-THICKNESS
 ;CLASS
 
 METHOD PUT.TEXT:      METHOD GET.TEXT:
-METHOD }STUFF.TEXT:   
+METHOD }STUFF.TEXT:
+METHOD COLOR.PART:
 METHOD CLEAR.PART:
 
 :CLASS OB.CONTROL.GRID <SUPER OB.CONTROL
@@ -580,11 +586,16 @@ METHOD CLEAR.PART:
     1- >r 1- >r 1+ >r 1+ r> r> r>   ( move in one pixel)
 ;
 
-:M CLEAR.PART:   ( part -- , clear that parts rectangle )
-    gr.color@ swap 0 gr.color!
-       get.inner.rect: self
-       gr.rect ( clear )
+:M COLOR.PART:   ( part color -- , color that parts rectangle )
+    gr.color@ >r
     gr.color!
+    get.inner.rect: self
+    gr.rect ( paint background )
+    r> gr.color!
+;M
+
+:M CLEAR.PART:   ( part -- , clear that parts rectangle )
+    0 color.part: self
 ;M
 
 :M ?HIT:   ( x y -- true_if_hit , report if hit , DC)
@@ -599,6 +610,7 @@ METHOD CLEAR.PART:
       THEN
 ;M
 
+GR_XOR_SUPPORTED [IF]
 :M HIGHLIGHT:   ( part -- , Highlight cell )
     iv-cg-drawn
     IF  gr.color@ swap get.inner.rect: self
@@ -606,8 +618,8 @@ METHOD CLEAR.PART:
         gr.color!
     ELSE drop
     THEN
-    
 ;M
+[THEN]
 
 :M PUT.VALUE: ( value part -- )
      >r cg.clip.value r> to: iv-cg-values
@@ -699,7 +711,13 @@ METHOD CLEAR.PART:
 
 :M DRAW.PART: ( part -- , draw a single part of a control )
     >r
-\
+
+\ draw background based on the value
+    r@ get.value: self
+    IF r@ gr_yellow color.part: self
+    ELSE r@ clear.part: self
+    THEN
+
 \ get text for this part
     iv-cg-text-cfa dup
     IF r@ swap 1 exec.stack?  ( addr count , 00004 )
@@ -710,9 +728,12 @@ METHOD CLEAR.PART:
     THEN service.tasks
 \
     dup  ( -- addr count count )
-    IF  r@ get.enable: self 0=
+    IF
+\ dim the text if disabled
+        r@ get.enable: self 0=
         IF r@ gr.start.dim
         THEN
+
         service.tasks
         r@ cg.part.topleft
         iv-cg-text-size dup gr.height!
@@ -725,10 +746,7 @@ METHOD CLEAR.PART:
         THEN
     ELSE 2drop
     THEN
-\ highlight if needed
-    r@ get.value: self
-    IF r@ highlight: self
-    THEN
+
     rdrop
 ;M
 
@@ -759,13 +777,24 @@ METHOD CLEAR.PART:
     THEN
 ;M
 
+GR_XOR_SUPPORTED [IF]
 :M PUT.VALUE:  ( value part# -- ,  toggle if changed )
-     dup get.value: self ( -- newv part oldv )
-     rot tuck ( -- part newv oldv newv ) - ( toggle if different )
-     IF   over highlight: self
-     THEN
-     swap put.value: super
+    dup get.value: self ( -- newv part oldv )
+    rot tuck ( -- part newv oldv newv )
+    - ( toggle if different )
+    IF   over highlight: self
+    THEN
+    swap put.value: super
 ;M
+[ELSE]
+:M PUT.VALUE:  ( value part# -- ,  toggle if changed )
+    tuck put.value: super
+    iv-cg-drawn
+    IF draw.part: self
+    ELSE drop
+    THEN
+;M
+[THEN]
 
 :M EXEC.DOWN: ( -- , perform modal action then cfa )
     iv-cg-lasthit    get.value: self   ( -- v )
@@ -785,7 +814,7 @@ METHOD CLEAR.PART:
 
 ;CLASS
 
-\ RADIO GRID CONTROL
+\ RADIO GRID CONTROL ------------------------------------------------
 :CLASS OB.RADIO.GRID <SUPER OB.CHECK.GRID
 
 :M NEW:  ( nx ny -- , set default on )
