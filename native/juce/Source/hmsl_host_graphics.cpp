@@ -104,8 +104,7 @@ void hostDrawText( ucell_t address, cell_t count ) {
  * Returns the length of the text
  */
 uint32_t hostGetTextLength( ucell_ptr_t address, cell_t count ) {
-//    return hmslGetTextLength( (char*)address, (int32_t)count );
-    return 20;
+    return cgw()->getTextLength((const char*)address, (int32_t)count);
 }
 
 /*
