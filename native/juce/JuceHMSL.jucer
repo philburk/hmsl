@@ -207,6 +207,7 @@
       </GROUP>
     </GROUP>
     <GROUP id="{D4447538-6ED0-FC8B-8612-F845BF3B88BD}" name="Source">
+      <FILE id="YD2SYV" name="host_midi.cpp" compile="1" resource="0" file="Source/host_midi.cpp"/>
       <FILE id="c6TBNv" name="HostFileManager.cpp" compile="1" resource="0"
             file="Source/HostFileManager.cpp"/>
       <FILE id="gRmNKN" name="HostFileManager.h" compile="0" resource="0"
@@ -219,7 +220,6 @@
             file="Source/hmsl_host_graphics.cpp"/>
       <FILE id="LNj0xf" name="GraphicsWindow.h" compile="0" resource="0"
             file="Source/GraphicsWindow.h"/>
-      <FILE id="X1CEe2" name="hmsl_midi.c" compile="1" resource="0" file="Source/hmsl_midi.c"/>
       <FILE id="faZYuU" name="hmsl_host.h" compile="0" resource="0" file="Source/hmsl_host.h"/>
       <FILE id="qwwxhJ" name="hmsl_custom.c" compile="1" resource="0" file="Source/hmsl_custom.c"/>
       <FILE id="wbRGoE" name="AtomicQueue.h" compile="0" resource="0" file="Source/AtomicQueue.h"/>
