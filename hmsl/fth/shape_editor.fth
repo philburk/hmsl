@@ -57,7 +57,7 @@ OB.SCREEN SE-SCREEN
 2 constant SE_REPLACE
 3 constant SE_SELECT
 4 constant SE_RUBBER
-5 constant SE_TRACE
+5 constant SE_TRACE    \ draw
 6 constant SE_SET_Y
 7 constant SE_RANDOMIZE
 
@@ -209,7 +209,8 @@ METHOD NOW.PLAYING:     METHOD STOP.PLAYING:
     r> scg.wc->dc   ( -- xd1 yd1 )
 ;
 
-: SE.DRAW.SELECT ( -- , Highlight Range )
+: SE.DRAW.SELECT ( -- , highlight range )
+    \ Is the selected range visible?
     iv-edit-start iv-edit-left iv-edit-right within?
     iv-edit-end   iv-edit-left iv-edit-right within? OR
     IF  iv-edit-start iv-edit-top se.calc.sxy
@@ -271,11 +272,16 @@ METHOD NOW.PLAYING:     METHOD STOP.PLAYING:
     THEN
 ;
 
-: SE.DRAW.LINES ( -- , clear and redraw data )
-    service.tasks
+: SE.CLEAR.RECT ( -- , clear background behind the lines )
+    se_edit_tnr scg.selnt
+    gr.color@
     0 gr.color!
     -1 get.rect: self gr.rect    ( blank out rect )
-    1 gr.color!
+    gr.color!
+;
+
+: SE.DRAW.LINES ( -- , clear and redraw data )
+    service.tasks
     se_edit_tnr scg.selnt
     se.draw.shape
     se.draw.playing
@@ -294,16 +300,18 @@ METHOD NOW.PLAYING:     METHOD STOP.PLAYING:
     se_edit_tnr scg.showvp
     se_edit_tnr scg.selnt
     1 1 scg.delta.wc->dc
-    2/ iv=> iv-edit-height/2 2/ iv=> iv-edit-width/2
-    se.draw.ymark
+    2/ iv=> iv-edit-height/2
+    2/ iv=> iv-edit-width/2
     se.draw.select   ( highlight selected range )
+    se.draw.ymark
     0 scg.selnt
 ;
 
 :M DRAW.DATA:   ( -- , Draw control and morph )
     service.tasks
-    se.draw.lines
+    se.clear.rect
     se.draw.trim
+    se.draw.lines
 ;M
 
 : SE.TELL.SHAPE ( -- )
@@ -386,7 +394,8 @@ METHOD NOW.PLAYING:     METHOD STOP.PLAYING:
     2dup tell.xy: self
     se-mode @
     CASE  ( -- value elmnt# )
-        SE_INSERT OF se.insert se.clip.select
+        SE_INSERT OF
+            se.insert se.clip.select
             draw.data: self
         ENDOF
         SE_DELETE OF
@@ -399,15 +408,16 @@ METHOD NOW.PLAYING:     METHOD STOP.PLAYING:
         ENDOF
         SE_TRACE OF 
             get.dim: self iv-edit-shape clip.ed.to: []
-            se.draw.lines
+            draw.data: self
             ev.track.on
         ENDOF
         SE_SELECT OF  ( pick first point )
             se_edit_tnr scg.selnt
-            se.draw.select
+            \ se.draw.select
             dup put.select: self drop
-            se.draw.select
+            \ se.draw.select
             ev.track.on
+            draw.data: self
             0 scg.selnt
         ENDOF
         SE_SET_Y OF
@@ -448,20 +458,16 @@ METHOD NOW.PLAYING:     METHOD STOP.PLAYING:
                 get.dim: self iv-edit-shape clip.ed.to: []
               THEN
             THEN
-            se.draw.lines
+            draw.data: self
         ENDOF
         SE_RUBBER OF
-            gr.mode@ >r
             gr.color@ >r
-            gr_xor_mode gr.mode!
-            gr_white gr.color!
+            draw.data: self
+            gr_green gr.color!
             se_edit_tnr scg.selnt
-            iv-edit-first-elm iv-edit-first-val scg.wc->dc
-              2dup gr.move
-            iv-edit-last-elm iv-edit-last-val scg.draw
-            gr.move swap scg.draw
+            iv-edit-first-elm iv-edit-first-val scg.move
+            ( -- value elmnt )swap scg.draw
             r> gr.color!
-            r> gr.mode!
         ENDOF
         2drop  
     ENDCASE
@@ -475,17 +481,7 @@ METHOD NOW.PLAYING:     METHOD STOP.PLAYING:
             update.draw: self
         ENDOF
         SE_RUBBER OF
-            gr.mode@ >r
-            gr.color@ >r
-            gr_xor_mode gr.mode!
-            gr_white gr.color!
-            se_edit_tnr scg.selnt
-            iv-edit-first-elm iv-edit-first-val scg.move
-            iv-edit-last-elm iv-edit-last-val scg.draw
             2drop
-            r> gr.color!
-            r> gr.mode!
-\
             iv-edit-first-elm iv-edit-last-elm -
             IF  iv-edit-first-elm iv-edit-first-val
                 iv-edit-last-elm iv-edit-last-val  set.interp
@@ -501,7 +497,8 @@ METHOD NOW.PLAYING:     METHOD STOP.PLAYING:
             draw.data: self
         ENDOF
         SE_TRACE OF
-            2drop se.draw.trim  \ draw remaining stuff
+            2drop
+            draw.data: self
         ENDOF
         2drop
     ENDCASE
@@ -547,10 +544,9 @@ METHOD NOW.PLAYING:     METHOD STOP.PLAYING:
         2 pick iv-edit-last-val = AND not
         IF  
             se_edit_tnr scg.selnt
-            se.draw.select
             iv-edit-first-elm 2sort
             put.select: self
-            se.draw.select
+            draw.data: self
             drop \ don't need value
         ELSE 2drop
         THEN
@@ -583,9 +579,7 @@ METHOD NOW.PLAYING:     METHOD STOP.PLAYING:
     mouse.down: super
 ;M
 
-
 ;CLASS
-
 
 \ Declare edit objects -------------------------------------
 OB.CTRL.EDIT SE-EDITBOX

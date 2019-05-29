@@ -100,7 +100,12 @@ METHOD XY.DRAW:       METHOD XY.UNDRAW:
 
 METHOD PUT.DATA:      METHOD GET.DATA:
 METHOD PUT.TITLE:     METHOD GET.TITLE:
-METHOD HIGHLIGHT:     METHOD DRAW.PART:
+
+GR_XOR_SUPPORTED [IF]
+METHOD HIGHLIGHT:
+[THEN]
+
+METHOD DRAW.PART:
 METHOD ?HIT:
 
 METHOD PUT.TEXT.FUNCTION:  METHOD GET.TEXT.FUNCTION:
@@ -605,6 +610,7 @@ METHOD CLEAR.PART:
       THEN
 ;M
 
+GR_XOR_SUPPORTED [IF]
 :M HIGHLIGHT:   ( part -- , Highlight cell )
     iv-cg-drawn
     IF  gr.color@ swap get.inner.rect: self
@@ -613,6 +619,7 @@ METHOD CLEAR.PART:
     ELSE drop
     THEN
 ;M
+[THEN]
 
 :M PUT.VALUE: ( value part -- )
      >r cg.clip.value r> to: iv-cg-values
