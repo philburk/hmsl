@@ -71,13 +71,25 @@ void hostClock_SetRate( cell_t rate ) {
 // Called by HMSL upon initializing MIDI
 //
 // Returns error code (0 for no error)
+
+static MidiOutput *sMidiOutput = nullptr;
+
+static void *createNewMidiOutput(void *text) {
+    return (void *) MidiOutput::createNewDevice(String((char *)text));
+}
+
 cell_t hostMIDI_Init() {
     hostClock_Init();
+    MessageManager *messageManager = MessageManager::getInstance();
+    sMidiOutput = (MidiOutput *) messageManager->callFunctionOnMessageThread(createNewMidiOutput,
+                                                               (void *)"HMSL");
     return 0;
 }
 
 // Called by HMSL to terminate the MIDI connection
 void hostMIDI_Term() {
+    delete sMidiOutput;
+    sMidiOutput = nullptr;
 }
 
 // Called when HMSL wants to schedule a MIDI packet
@@ -87,8 +99,10 @@ void hostMIDI_Term() {
 // vtime - time in ms from the start of the scheduler to create event
 //
 // Returns error code (0 for no error)
+
 cell_t hostMIDI_Write(ucell_ptr_t buffer, cell_t count, cell_t vtime) {
-    // TODO unsigned char *addr = (unsigned char *)buffer;
+    // TODO Use the timestamp to schedule the MIDI events in the future.
+    sMidiOutput->sendMessageNow(MidiMessage((const void *)buffer, (int)count));
     return 0;
 }
 
