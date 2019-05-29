@@ -23,5 +23,5 @@ include fth/load_hmsl.fth
 
 ." Block AUTO.INIT that is called by SAVE-FORTH" cr
 1 2 3 4 5 6
-\ c" pforth.dic" save-forth
+c" pforth.dic" save-forth
 6 0 DO drop LOOP

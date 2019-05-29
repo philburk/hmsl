@@ -68,8 +68,15 @@ void MainComponent::drawRandomLine() {
 void MainComponent::drawText(const char *text, int32_t numChars) {
     String string(text, numChars);
     Graphics g(*mImage.get());
-    g.setColour (mCurrentColour);
     float descent = g.getCurrentFont().getDescent();
+    // Old graphics was based on bit-mapped fonts that overwrote the background.
+    g.setColour(Colours::white);
+    float width = g.getCurrentFont().getStringWidth(string);
+    float height = g.getCurrentFont().getHeight();
+    g.fillRect((float)mCurrentX, mCurrentY + descent - height,
+               width, height);
+    // Draw text in current colour.
+    g.setColour (mCurrentColour);
     g.drawSingleLineText(string, mCurrentX, mCurrentY + descent);
     mCurrentX += g.getCurrentFont().getStringWidth(string);
 }
@@ -78,6 +85,7 @@ int32_t MainComponent::getTextLength(const char *text,
                                      int32_t numChars) {
     String string(text, numChars);
     Graphics g(*mImage.get());
+     const MessageManagerLock myLock;
     return (int32_t) g.getCurrentFont().getStringWidth(string);
 }
 

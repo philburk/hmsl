@@ -413,9 +413,7 @@ METHOD NOW.PLAYING:     METHOD STOP.PLAYING:
         ENDOF
         SE_SELECT OF  ( pick first point )
             se_edit_tnr scg.selnt
-            \ se.draw.select
             dup put.select: self drop
-            \ se.draw.select
             ev.track.on
             draw.data: self
             0 scg.selnt
