@@ -231,37 +231,15 @@ METHOD NOW.PLAYING:     METHOD STOP.PLAYING:
 ;
 
 : SE.DRAW.PLAYING ( -- , play currently playing element )
-\ Use XOR mode so we can draw or undraw with same word.
     iv-edit-playing iv-edit-left iv-edit-right within?
-    IF gr.mode@
-       gr_xor_mode gr.mode!
-       gr.color@
-       gr_white gr.color!
+    IF gr.color@
+       gr_cyan gr.color!
        iv-edit-playing iv-edit-top scg.move
        iv-edit-playing iv-edit-bot scg.draw
        gr.color!
-       gr.mode!
     THEN
 ;
 
-:M NOW.PLAYING:  ( elmnt# shape -- )
-    iv-edit-shape =
-    IF se_edit_tnr scg.selnt
-       1 gr.color! se.draw.playing
-       iv=> iv-edit-playing se.draw.playing
-       0 scg.selnt
-    ELSE drop
-    THEN
-;M
-
-:M STOP.PLAYING: ( shape -- , turn off display if right shape )
-    iv-edit-shape =   iv-edit-playing -1 > and
-    IF se_edit_tnr scg.selnt
-       1 gr.color! se.draw.playing
-       -1 iv=> iv-edit-playing
-       0 scg.selnt
-    THEN
-;M
 
 : SE.DRAW.SHAPE ( -- )
     iv-edit-shape
@@ -312,6 +290,21 @@ METHOD NOW.PLAYING:     METHOD STOP.PLAYING:
     se.clear.rect
     se.draw.trim
     se.draw.lines
+;M
+
+:M NOW.PLAYING:  ( elmnt# shape -- )
+    iv-edit-shape =
+    IF  iv=> iv-edit-playing
+        draw.data: self
+    ELSE drop
+    THEN
+;M
+
+:M STOP.PLAYING: ( shape -- , turn off display if right shape )
+    iv-edit-shape =   iv-edit-playing -1 > and
+    IF  -1 iv=> iv-edit-playing
+        draw.data: self
+    THEN
 ;M
 
 : SE.TELL.SHAPE ( -- )

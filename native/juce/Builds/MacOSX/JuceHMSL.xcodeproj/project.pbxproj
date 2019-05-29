@@ -101,6 +101,10 @@
 			isa = PBXBuildFile;
 			fileRef = 635FD059ACA0C52F48218EDD;
 		};
+		B180CDF2B22E47F472B2B1BE = {
+			isa = PBXBuildFile;
+			fileRef = D12B04A7F9542783F968BC4B;
+		};
 		CB67FC9D3AE2A58671B0C8EC = {
 			isa = PBXBuildFile;
 			fileRef = C0FC9CC5ABFE34D42A5BAE85;
@@ -112,10 +116,6 @@
 		B9DFCBDBF18194479C41737A = {
 			isa = PBXBuildFile;
 			fileRef = 8EF22D960C65F8D3A3543024;
-		};
-		CC7EA1A4DE3F8D6637BD51CC = {
-			isa = PBXBuildFile;
-			fileRef = B35738AF3385B41CB86E87B4;
 		};
 		5248762E2A7D03BE4D43B13E = {
 			isa = PBXBuildFile;
@@ -1390,13 +1390,6 @@
 			path = ../../../../pforth/fth/require.fth;
 			sourceTree = "SOURCE_ROOT";
 		};
-		B35738AF3385B41CB86E87B4 = {
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.c;
-			name = "hmsl_midi.c";
-			path = "../../Source/hmsl_midi.c";
-			sourceTree = "SOURCE_ROOT";
-		};
 		B481D2C82F51FA7D52948587 = {
 			isa = PBXFileReference;
 			lastKnownFileType = file.fth;
@@ -1549,6 +1542,13 @@
 			lastKnownFileType = sourcecode.cpp.objcpp;
 			name = "include_juce_gui_basics.mm";
 			path = "../../JuceLibraryCode/include_juce_gui_basics.mm";
+			sourceTree = "SOURCE_ROOT";
+		};
+		D12B04A7F9542783F968BC4B = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = "host_midi.cpp";
+			path = "../../Source/host_midi.cpp";
 			sourceTree = "SOURCE_ROOT";
 		};
 		D216894B7339985AD1C30D48 = {
@@ -2006,13 +2006,13 @@
 		6DAD776B44FBED4648BC2A62 = {
 			isa = PBXGroup;
 			children = (
+				D12B04A7F9542783F968BC4B,
 				C0FC9CC5ABFE34D42A5BAE85,
 				2DD8948703F61E765F10B799,
 				E6204CDA409C5E4F51632A9C,
 				F4EBBDA7DE5F71DE5F08D72B,
 				8EF22D960C65F8D3A3543024,
 				C7D864D4B38F1D1A7BA99307,
-				B35738AF3385B41CB86E87B4,
 				D44FE684B020E836801D4CCB,
 				A600175C24A47AE4555DBAEF,
 				9B8B6A950002152BC20C6A2D,
@@ -2362,10 +2362,10 @@
 				6C11A2E29524CBDE4EAA132A,
 				8B0771F1529BEFDDFE148550,
 				2CD967AF1AC0A8F2CED43FA3,
+				B180CDF2B22E47F472B2B1BE,
 				CB67FC9D3AE2A58671B0C8EC,
 				48599A51AE79FB5274210014,
 				B9DFCBDBF18194479C41737A,
-				CC7EA1A4DE3F8D6637BD51CC,
 				5248762E2A7D03BE4D43B13E,
 				F1A1823EAAF32EB395DF5C87,
 				FAB69C1BA6D5FD326E55191E,

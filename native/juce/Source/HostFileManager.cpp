@@ -12,7 +12,6 @@
 #include "HostFileManager.h"
 
 #ifndef PF_DEFAULT_DICTIONARY
-// TODO use relative path
 #define PF_DEFAULT_DICTIONARY "pforth.dic"
 #endif
 

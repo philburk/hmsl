@@ -85,7 +85,7 @@ int32_t MainComponent::getTextLength(const char *text,
                                      int32_t numChars) {
     String string(text, numChars);
     Graphics g(*mImage.get());
-     const MessageManagerLock myLock;
+    const MessageManagerLock myLock;
     return (int32_t) g.getCurrentFont().getStringWidth(string);
 }
 

@@ -149,8 +149,8 @@ private:
     }
 
     void postEvent(HMSLEventID id, int32_t x = 0, int32_t y = 0) {
-        HmslEvent_t cmd = {id, x, y};
-        mEventQueue.write(cmd); // TODO full?
+        HmslEvent_t event = {id, x, y};
+        mEventQueue.write(event); // TODO what if it is full?
     }
 
     struct HmslCommand_t {

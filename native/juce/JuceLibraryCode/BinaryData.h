@@ -45,7 +45,7 @@ namespace BinaryData
     const int            cond_comp_fthSize = 1934;
 
     extern const char*   control_fth;
-    const int            control_fthSize = 19116;
+    const int            control_fthSize = 19604;
 
     extern const char*   ctrl_count_fth;
     const int            ctrl_count_fthSize = 2578;
@@ -54,7 +54,7 @@ namespace BinaryData
     const int            ctrl_fader_fthSize = 3423;
 
     extern const char*   ctrl_numeric_fth;
-    const int            ctrl_numeric_fthSize = 5766;
+    const int            ctrl_numeric_fthSize = 5768;
 
     extern const char*   ctrl_text_fth;
     const int            ctrl_text_fthSize = 11976;
@@ -90,7 +90,7 @@ namespace BinaryData
     const int            graph_util_fthSize = 1503;
 
     extern const char*   graphics_fth;
-    const int            graphics_fthSize = 9046;
+    const int            graphics_fthSize = 9179;
 
     extern const char*   hmsl_top_fth;
     const int            hmsl_top_fthSize = 9152;
@@ -108,13 +108,13 @@ namespace BinaryData
     const int            job_fthSize = 5116;
 
     extern const char*   load_hmsl_fth;
-    const int            load_hmsl_fthSize = 5589;
+    const int            load_hmsl_fthSize = 5579;
 
     extern const char*   load_ode_fth;
     const int            load_ode_fthSize = 1286;
 
     extern const char*   make_hmsl_fth;
-    const int            make_hmsl_fthSize = 687;
+    const int            make_hmsl_fthSize = 688;
 
     extern const char*   memalloc_fth;
     const int            memalloc_fthSize = 1100;
@@ -207,7 +207,7 @@ namespace BinaryData
     const int            shape_fthSize = 18623;
 
     extern const char*   shape_editor_fth;
-    const int            shape_editor_fthSize = 33227;
+    const int            shape_editor_fthSize = 32912;
 
     extern const char*   stacks_fth;
     const int            stacks_fthSize = 1871;
@@ -270,7 +270,7 @@ namespace BinaryData
     const int            bench_fthSize = 4444;
 
     extern const char*   c_struct_fth;
-    const int            c_struct_fthSize = 7009;
+    const int            c_struct_fthSize = 7012;
 
     extern const char*   case_fth;
     const int            case_fthSize = 2016;
