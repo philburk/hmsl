@@ -1,16 +1,10 @@
-
-# UNDER CONSTRUCTION
-# CURRENTLY BEING PORTED to JUCE
-# DO NOT USE - 5/27/2019
-# Status
+# Status of Port
 
 * PForth is now a git submodule under HMSL.
 * PForth works in a new Terminal Window written using JUCE.
 * Command line history working in Forth.
-* Basic graphic commands are working except for XOR.
+* Basic graphic commands are working.
 * HMSL compiles on a 64-bit pForth. We switched to 64-bit because XCode no longer supports 32-bit apps.
-* MIDI not implemented.
-* Control grids draw badly because of missing XOR mode that was used for highlights and rubber banding.
 
 # HMSL
 Hierarchical Music Specification Language
@@ -46,8 +40,6 @@ Description of folders:
 
     native/Win32 - port of HMSL to pForth for Windows by Robert Marsanyi and Phil Burk
     native/juce - port of HMSL to pForth using JUCE by Phil Burk
-    
-    native/osx - port of HMSL to pForth for Mac OSX by Andrew Smith and Phil Burk - OBSOLETE
 
 ## Building HMSL on OSX
 
@@ -56,6 +48,7 @@ found by the HostFileManager in HMSL.
 
 The XCode project was exported using the ProJucer tool.
 JUCE is not required to build HMSL.
+New C/C++ files should only be added using the ProJucer.
 
 ### Compiling the JUCE port
 * Launch the XCode project at "HMSL/native/juce/Builds/MacOSX/JuceHMSL.xcodeproj".
@@ -67,26 +60,5 @@ JUCE is not required to build HMSL.
 * Enter:   include fth/make_hmsl.fth
 * It will compile HMSL and save a new pforth.dic.
 * Close the terminal window.
-* The next time you launch the application, it will ruun HMSL.
-
-### OBSOLETE Compiling the Objective-C port
-* Clone [pforth](https://www.github.com/philburk/pforth)
-    into the same directory into which you cloned hmsl.
-* Rename the folder `pforth-xcode`.
-* Open xcode project in `hmsl/native/osx`
-* Compile the HMSL-OSX command-line program. Ensure that it finds all necessary
-    files, including the `pforth-xcode/csrc` folder.
-* Copy the built HMSL-OSX program to `pforth-xcode/fth`. You can generally find it in
-    `native/osx/Build/Products/Debug`.
-* Navigate to `pforth-xcode/fth` and run `./HMSL-OSX -i system.fth`
-* Copy the newly-created `pforth.dic` and HMSL-OSX to `hmsl/hmsl`
-* In `hmsl/hsml`, run command `./HMSL-OSX fth/make_hmsl.fth`
-* Press `n` to avoid starting HMSL this first time (it won't work anyway)
-* Run `./HMSL-OSX` to start HMSL! (and this time press `y`)
-
-#### Packaging as a .app package
-
-* Open xcode project in `hmsl/native/osx`.
-* Select target `hmsl` from the target selection menu.
-* Select Product > Build from the menu bar.
+* The next time you launch the application, it will run HMSL.
 
