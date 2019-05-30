@@ -1,11 +1,3 @@
-# Status of Port
-
-* PForth is now a git submodule under HMSL.
-* PForth works in a new Terminal Window written using JUCE.
-* Command line history working in Forth.
-* Basic graphic commands are working.
-* HMSL compiles on a 64-bit pForth. We switched to 64-bit because XCode no longer supports 32-bit apps.
-
 # HMSL
 Hierarchical Music Specification Language
 
@@ -49,6 +41,14 @@ found by the HostFileManager in HMSL.
 The XCode project was exported using the ProJucer tool.
 JUCE is not required to build HMSL.
 New C/C++ files should only be added using the ProJucer.
+
+## Status of JUCE Port
+
+* PForth is now a git submodule under HMSL.
+* PForth works in a new Terminal Window written using JUCE.
+* Command line history working in Forth.
+* Basic graphic commands are working.
+* HMSL compiles on a 64-bit pForth. We switched to 64-bit because XCode no longer supports 32-bit apps.
 
 ### Compiling the JUCE port
 * Launch the XCode project at "HMSL/native/juce/Builds/MacOSX/JuceHMSL.xcodeproj".
