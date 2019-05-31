@@ -13,7 +13,7 @@ HMSL provides:
 * MIDI I/O toolbox and parsers
 * cross platform GUI toolkit for editors and instruments
 * support for live coding
-* utilities for Markov Chains, randomness, scales, etc.
+* utilities for algorithmic composition including Markov Chains, randomness, scales, etc.
 
 HMSL (C) 1986 Phil Burk, Larry Polansky, David Rosenboom.
 HMSL is now released under the open source Apache License V2.
@@ -75,18 +75,38 @@ New C/C++ files should only be added using the ProJucer.
 1. Double click JuceHMSL.app
 1. Hit 'y' key to initialize HMSL.
 1. Launch a synthesizer program like [Simple Synth](http://notahat.com/simplesynth/) and select "HMSL" as the MIDI source.
-1. Enter: midi.seqout
-1. You should hear a few notes play.
-1. Enter: shep
-1. The Shape Editor window should appear and you should hear a repeated melody.
-1. Click "Draw" option.
-1. Draw on the graph to extend the melody.
-1. Close the graphics window to stop the editor.
-1. Enter:   score{
-1. That prepares the score entry system.
-1. To play 4 notes enter:   playnow  c4  a  g  e
-1. To play notes using a Forth DO LOOP enter:   playnow 4 0 do  1/4 c4  1/8 a g  1/4 e loop
-1. Read more tutorials and docs at <http://www.softsynth.com/hmsl/>
+
+To test MIDI output, enter:
+
+    midi.seqout
+
+You should hear a few notes play. Now enter:
+
+    shep
+    
+The Shape Editor window should appear and you should hear a repeated melody. Click the "Draw" option.
+Draw on the graph to extend the melody.
+Close the graphics window to stop the editor.
+
+HMSL include a text based score entry system. Enter:
+
+    score{
+    playnow  c4  a  g  e
+
+To play notes using a Forth DO LOOP enter:
+
+    playnow 4 0 do  1/4 c4  1/8 a g  1/4 e loop
+
+HMSL includes [several](https://github.com/philburk/hmsl/tree/master/hmsl/pieces) old algorithmic compositions. Most of them are designed to work with a General MIDI Synthesizer.
+[XFORMS](https://github.com/philburk/hmsl/blob/master/hmsl/pieces/xforms.fth) is a piece that copies a theme and then ornaments it. 
+To compile and run it, enter:
+
+    include pieces/xforms.fth
+    xforms
+
+Click up arrow in "Select Shape" widget to see "sh-devel". You can watch the theme be copied and modified.
+
+Read more tutorials and docs at <http://www.softsynth.com/hmsl/>
 
 ## Credits
 
