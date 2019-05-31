@@ -3,7 +3,7 @@ Hierarchical Music Specification Language
 
 HMSL is a set of extensions to the Forth programming language.
 It includes tools and editors for experimental music composition and performance. 
-HMSL was originally released in the 1980's for Mac Plus and Amiga, and was widely used by the computer music programming community. It has recently been resurrected and runs on today's Mac OS.
+HMSL was originally released in the 1980's for Mac Plus and Amiga, and was widely used by the computer music programming community. It has recently been ported to run on today's Mac OS using JUCE.
 
 HMSL provides:
 
@@ -14,7 +14,6 @@ HMSL provides:
 * cross platform GUI toolkit for editors and instruments
 * support for live coding
 * utilities for Markov Chains, randomness, scales, etc.
-
 
 HMSL (C) 1986 Phil Burk, Larry Polansky, David Rosenboom.
 HMSL is now released under the open source Apache License V2.
@@ -83,6 +82,10 @@ New C/C++ files should only be added using the ProJucer.
 1. Click "Draw" option.
 1. Draw on the graph to extend the melody.
 1. Close the graphics window to stop the editor.
+1. Enter:   score{
+1. That prepares the score entry system.
+1. To play 4 notes enter:   playnow  c4  a  g  e
+1. To play notes using a Forth DO LOOP enter:   playnow 4 0 do  1/4 c4  1/8 a g  1/4 e loop
 1. Read more tutorials and docs at <http://www.softsynth.com/hmsl/>
 
 ## Credits
