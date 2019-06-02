@@ -207,7 +207,7 @@ namespace BinaryData
     const int            shape_fthSize = 18623;
 
     extern const char*   shape_editor_fth;
-    const int            shape_editor_fthSize = 32912;
+    const int            shape_editor_fthSize = 32664;
 
     extern const char*   stacks_fth;
     const int            stacks_fthSize = 1871;

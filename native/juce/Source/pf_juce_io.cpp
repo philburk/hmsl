@@ -9,15 +9,15 @@
 */
 
 #include "pf_juce_io.h"
-#include "TerminalComponent.h"
+#include "Terminal.h"
 
 int  sdTerminalOut(char c)
 {
-    while (TerminalComponent::getInstance()->isOutputFull()) {
+    while (Terminal::getInstance()->isOutputFull()) {
         usleep(15 * 1000); // block until we have room to write
         // TODO While in here we may also handle event queues and abort signals.
     }
-    return TerminalComponent::getInstance()->putCharacter(c);
+    return Terminal::getInstance()->putCharacter(c);
 }
 
 int  sdTerminalEcho(char c)
@@ -27,11 +27,11 @@ int  sdTerminalEcho(char c)
 
 int  sdTerminalIn()
 {
-    while (!TerminalComponent::getInstance()->isCharacterAvailable()) {
+    while (!Terminal::getInstance()->isCharacterAvailable()) {
         usleep(15 * 1000); // block until we get a character
         // TODO While in here we may also handle event queues and abort signals.
     }
-    return TerminalComponent::getInstance()->getCharacter();
+    return Terminal::getInstance()->getCharacter();
 }
 
 int  sdTerminalFlush()
@@ -41,7 +41,7 @@ int  sdTerminalFlush()
 
 int sdQueryTerminal()
 {
-    return TerminalComponent::getInstance()->isCharacterAvailable();
+    return Terminal::getInstance()->isCharacterAvailable();
 }
 
 void sdTerminalInit()

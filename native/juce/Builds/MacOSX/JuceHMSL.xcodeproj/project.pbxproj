@@ -101,6 +101,14 @@
 			isa = PBXBuildFile;
 			fileRef = 635FD059ACA0C52F48218EDD;
 		};
+		B76A9510C902B20548F07350 = {
+			isa = PBXBuildFile;
+			fileRef = 1B102E3B38B2C06266059738;
+		};
+		12F9D5C8C7FE9B3734C5CC79 = {
+			isa = PBXBuildFile;
+			fileRef = 0831190FD309BCCD013885CF;
+		};
 		B180CDF2B22E47F472B2B1BE = {
 			isa = PBXBuildFile;
 			fileRef = D12B04A7F9542783F968BC4B;
@@ -270,6 +278,13 @@
 			path = ../../../../pforth/fth/coretest.fth;
 			sourceTree = "SOURCE_ROOT";
 		};
+		0831190FD309BCCD013885CF = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = Terminal.cpp;
+			path = ../../Source/Terminal.cpp;
+			sourceTree = "SOURCE_ROOT";
+		};
 		0831CB16DDF715CE84A01598 = {
 			isa = PBXFileReference;
 			lastKnownFileType = file.fth;
@@ -359,6 +374,13 @@
 			lastKnownFileType = file.fth;
 			name = "midi_text.fth";
 			path = "../../../../hmsl/fth/midi_text.fth";
+			sourceTree = "SOURCE_ROOT";
+		};
+		1B102E3B38B2C06266059738 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = TerminalModel.cpp;
+			path = ../../Source/TerminalModel.cpp;
 			sourceTree = "SOURCE_ROOT";
 		};
 		1C240F5E21B3268DAA7314FE = {
@@ -1250,6 +1272,13 @@
 			path = "~/JUCE/modules/juce_graphics";
 			sourceTree = "<absolute>";
 		};
+		997612FDF13B9C86618B84D5 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = Terminal.h;
+			path = ../../Source/Terminal.h;
+			sourceTree = "SOURCE_ROOT";
+		};
 		9A5D117C9F92DA6889EE6283 = {
 			isa = PBXFileReference;
 			lastKnownFileType = file.fth;
@@ -1479,6 +1508,13 @@
 			lastKnownFileType = sourcecode.cpp.objcpp;
 			name = "include_juce_graphics.mm";
 			path = "../../JuceLibraryCode/include_juce_graphics.mm";
+			sourceTree = "SOURCE_ROOT";
+		};
+		C45551793732B03486F99CD7 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = TerminalModel.h;
+			path = ../../Source/TerminalModel.h;
 			sourceTree = "SOURCE_ROOT";
 		};
 		C4E0B535F3F30F698C262064 = {
@@ -2006,6 +2042,10 @@
 		6DAD776B44FBED4648BC2A62 = {
 			isa = PBXGroup;
 			children = (
+				1B102E3B38B2C06266059738,
+				C45551793732B03486F99CD7,
+				0831190FD309BCCD013885CF,
+				997612FDF13B9C86618B84D5,
 				D12B04A7F9542783F968BC4B,
 				C0FC9CC5ABFE34D42A5BAE85,
 				2DD8948703F61E765F10B799,
@@ -2362,6 +2402,8 @@
 				6C11A2E29524CBDE4EAA132A,
 				8B0771F1529BEFDDFE148550,
 				2CD967AF1AC0A8F2CED43FA3,
+				B76A9510C902B20548F07350,
+				12F9D5C8C7FE9B3734C5CC79,
 				B180CDF2B22E47F472B2B1BE,
 				CB67FC9D3AE2A58671B0C8EC,
 				48599A51AE79FB5274210014,

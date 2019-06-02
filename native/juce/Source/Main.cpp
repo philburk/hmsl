@@ -10,7 +10,7 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "GraphicsWindow.h"
-#include "TerminalComponent.h"
+#include "Terminal.h"
 #include "ForthThread.h"
 
 //==============================================================================
@@ -73,8 +73,8 @@ public:
                                                     DocumentWindow::allButtons)
         {
             setUsingNativeTitleBar (true);
-            mTerminalComponent.reset(new TerminalComponent());
-            setContentOwned (mTerminalComponent.get(), true);
+            mTerminal.reset(new Terminal());
+            setContentOwned (mTerminal->getComponent(), true);
 
 #if JUCE_IOS || JUCE_ANDROID
             setFullScreen (true);
@@ -88,7 +88,8 @@ public:
         }
 
         void requestClose() {
-            mTerminalComponent->requestClose();
+            mTerminal->requestClose();
+            usleep(50 * 1000); // wait for Forth to get the message
         }
 
         void closeButtonPressed() override
@@ -111,7 +112,7 @@ public:
     private:
         JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (TerminalWindow)
 
-        std::unique_ptr<TerminalComponent> mTerminalComponent;
+        std::unique_ptr<Terminal>   mTerminal;
     };
 
 private:

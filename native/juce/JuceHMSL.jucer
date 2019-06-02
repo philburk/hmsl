@@ -207,6 +207,11 @@
       </GROUP>
     </GROUP>
     <GROUP id="{D4447538-6ED0-FC8B-8612-F845BF3B88BD}" name="Source">
+      <FILE id="LisOcw" name="TerminalModel.cpp" compile="1" resource="0"
+            file="Source/TerminalModel.cpp"/>
+      <FILE id="klkn0G" name="TerminalModel.h" compile="0" resource="0" file="Source/TerminalModel.h"/>
+      <FILE id="k0X9Vo" name="Terminal.cpp" compile="1" resource="0" file="Source/Terminal.cpp"/>
+      <FILE id="GcbLXO" name="Terminal.h" compile="0" resource="0" file="Source/Terminal.h"/>
       <FILE id="YD2SYV" name="host_midi.cpp" compile="1" resource="0" file="Source/host_midi.cpp"/>
       <FILE id="c6TBNv" name="HostFileManager.cpp" compile="1" resource="0"
             file="Source/HostFileManager.cpp"/>
