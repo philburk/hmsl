@@ -1,4 +1,4 @@
-\ This series of simple studies are based on descriptions
+\ This series of simple studies is based on descriptions
 \ of pieces by David Feldman.
 \
 \ Translated to HMSL by Phil Burk
