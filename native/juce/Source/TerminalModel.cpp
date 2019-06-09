@@ -14,25 +14,21 @@
 
 TerminalModel::TerminalModel()
 : mInputQueue(1024)
-, mOutputQueue(4 * 1024)
+, mOutputQueue(kOutputQueueSize)
 {
     // Show working directory.
     File appFile = File::getSpecialLocation(File::SpecialLocationType::currentApplicationFile);
-    mPreviousLines.push_back(appFile.getFullPathName());
-    mPreviousLines.push_back(HostFileManager::getInstance()->getCurrentDirectory().getFullPathName());
+    mStoredLines.push_back(appFile.getFullPathName());
+    mStoredLines.push_back(HostFileManager::getInstance()->getCurrentDirectory().getFullPathName());
 }
 
-// Read chacter from queue and add them to the display model.
-bool TerminalModel::processOutputQueue() {
-    int maxCharacters = 1000;
-    bool changed = false;
-    while (!mOutputQueue.empty() && maxCharacters-- > 0) {
+// Read chacters from queue and add them to the display model.
+void TerminalModel::processOutputQueue(int maxChars) {
+    while (!mOutputQueue.empty() && maxChars-- > 0) {
         char c = mOutputQueue.read();
         mOutputQueue.advanceRead();
         displayCharacter(c);
-        changed = true;
     }
-    return changed;
 }
 
 void TerminalModel::sendCharacter(char c) {
@@ -102,7 +98,7 @@ bool TerminalModel::handleEscapeSequence(char c) {
                 mAnsiState = ANSI_STATE_IDLE;
             } else if (c == 'J' && mAnsiCount == 2) {
                 // erase screen
-                mPreviousLines.clear();
+                mStoredLines.clear();
                 mLine = String();
                 mAnsiState = ANSI_STATE_IDLE;
             }
@@ -119,10 +115,10 @@ void TerminalModel::displayCharacter(char c) {
     if (c == '\r') {
         mLineCursor = 0;
     } else if (c == '\n') {
-        if (mPreviousLines.size() >= kMaxLinesStored) {
-            mPreviousLines.pop_front();
+        if (mStoredLines.size() >= kMaxLinesStored) {
+            mStoredLines.pop_front();
         }
-        mPreviousLines.push_back(mLine);
+        mStoredLines.push_back(mLine);
         mLine = String();
         mLineCursor = 0;
     } else if (c == kBackspaceChar || c == kDeleteChar) {

@@ -24,7 +24,7 @@ class TerminalModel {
 public:
     TerminalModel();
 
-    bool processOutputQueue();
+    void processOutputQueue(int maxChars = kOutputQueueSize);
 
     bool onKeyPressed (const KeyPress &key);
 
@@ -44,7 +44,13 @@ public:
         return mLine;
     }
 
-    std::list<String>     mPreviousLines;
+    std::list<String> &getStoredLines() {
+        return mStoredLines;
+    }
+
+    int32_t getNumLinesStored() const {
+        return (int32_t)mStoredLines.size();
+    }
 
 private:
     void displayCharacter(char c);
@@ -53,7 +59,7 @@ private:
     // return true if handled
     bool handleEscapeSequence(char c);
 
-    static constexpr  int  kMaxLinesStored = 500; // allow scrolling
+    static constexpr  int  kMaxLinesStored = 1024;
     static constexpr  char kEndOfLineChar = '\r';
     static constexpr  char kEndOfTransmissionChar = 0x04;
     static constexpr  char kBackspaceChar = 0x08;
@@ -64,6 +70,10 @@ private:
     static constexpr  char kDownArrowCode = 0x42;
     static constexpr  char kRightArrowCode = 0x43;
     static constexpr  char kLeftArrowCode = 0x44;
+
+    static constexpr  int  kOutputQueueSize = 512;
+
+    std::list<String>      mStoredLines;
 
     int32_t                mAnsiCount = 0;
     int32_t                mLineCursor = 0;
