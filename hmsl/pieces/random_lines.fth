@@ -1,9 +1,12 @@
 ANEW TASK-RANDOM_LINES
 
+\ Draw random lines in different colors.
+\ This will run as fast as possible and use 100% of CPU time.
+
 : DRAW.RAND  ( -- , draw a random vector )
     8 choose gr.color!  ( set random color )
-    400 choose   ( generate random x ) 
-    200 choose   ( generate random y ) 
+    600 choose   ( generate random x ) 
+    400 choose   ( generate random y ) 
     gr.draw      ( draw line ) 
 ; 
 
@@ -16,4 +19,4 @@ ANEW TASK-RANDOM_LINES
     hmsl.close
 ; 
 
-." MANY.RAND" cr
+." To see random lines drawn, enter:  MANY.RAND" cr

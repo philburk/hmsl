@@ -71,5 +71,7 @@ OB.MIDI.INSTRUMENT DPR-INSTR
 \ Cleanup automatically if code forgotten.
 IF.FORGOTTEN DPR.TERM
 
-cr ." Enter:   DEMO.PRESET" cr  ( remind user how to run it )
+cr
+." Dimension 3 contains a MIDI program number." cr
+." Enter:   DEMO.PRESET" cr  ( remind user how to run it )
 

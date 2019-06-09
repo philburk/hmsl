@@ -48,8 +48,7 @@ static double hostClock_TicksToMillis( cell_t ticks ) {
 }
 
 cell_t hostClock_QueryTime() {
-    double currentTime = Time::getMillisecondCounterHiRes();
-    return hostClock_MillisToTicks(currentTime);
+    return hostClock_MillisToTicks(Time::getMillisecondCounterHiRes());
 }
 
 void hostClock_SetTime( cell_t time ) {
@@ -110,8 +109,10 @@ void hostMIDI_Term() {
 cell_t hostMIDI_Write(ucell_ptr_t data, cell_t count, cell_t ticks) {
     // Use the timestamp to schedule the MIDI events in the future.
     MidiBuffer midiBuffer(MidiMessage((const void *)data, (int)count));
-    double millis = hostClock_TicksToMillis(ticks);
-    sMidiOutput->sendBlockOfMessages(midiBuffer, millis, 44100 /* sample rate */);
+    const double scheduledMillis = hostClock_TicksToMillis(ticks);
+    const double nowMillis = Time::getMillisecondCounterHiRes();
+    const double playTimeMillis = std::max(scheduledMillis, nowMillis);
+    sMidiOutput->sendBlockOfMessages(midiBuffer, playTimeMillis, 44100 /* sample rate */);
     return 0;
 }
 
