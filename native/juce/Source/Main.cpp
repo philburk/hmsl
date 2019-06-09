@@ -74,7 +74,7 @@ public:
         {
             setUsingNativeTitleBar (true);
             mTerminal.reset(new Terminal());
-            setContentOwned (mTerminal->getComponent(), true);
+            setContentOwned(mTerminal.get(), true);
 
 #if JUCE_IOS || JUCE_ANDROID
             setFullScreen (true);

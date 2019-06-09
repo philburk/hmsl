@@ -18,15 +18,23 @@
 /**
  * A console terminal with a scrolling display.
  */
-class Terminal
+class Terminal : public Component, ScrollBar::Listener
 {
 public:
     Terminal()
-    : mTerminalComponent(mTerminalModel, mScrollingViewport) {
+    : mTerminalComponent(mTerminalModel)
+    , mScrollBar(true)
+    {
         sTerminal = this;
-        mScrollingViewport.setSize (800, 600);
-        mScrollingViewport.setViewedComponent(&mTerminalComponent, false);
+        addAndMakeVisible(mTerminalComponent);
+        addAndMakeVisible(mScrollBar);
+        mScrollBar.addListener(this);
+        mScrollBar.setAutoHide(false);
+        mScrollBar.setRangeLimits(0.0, 200.0); // TODO
+
+        setSize(1024, 640);
     }
+    virtual ~Terminal() = default;
 
     // These are used for Forth character IO.
     int getCharacter();
@@ -38,31 +46,31 @@ public:
         mTerminalModel.requestClose();
     }
 
-    /**
-     * @return component to display
-     */
-    Component  *getComponent() {
-        return &mScrollingViewport;
-    }
+    void scrollBarMoved (ScrollBar* scrollBarThatHasMoved,
+                         double newRangeStart) override;
+
+    void resized() override;
+
+    void paint (Graphics&) override {}
 
     static Terminal *getInstance() {
         return sTerminal;
     }
 
-    // Allow user to type into Terminal when the Scrollbar has the focus.
-    class KeyPassingViewport : public Viewport {
-    public:
-        bool keyPressed (const KeyPress &key) override {
-            return ((TerminalComponent*)getViewedComponent())
-            ->keyPressed(key, getViewedComponent());
-        }
-    };
-
 private:
+
+    void adjustScrollBar();
+    void showBottom();
+
     TerminalModel       mTerminalModel;
     TerminalComponent   mTerminalComponent;
-    KeyPassingViewport  mScrollingViewport;
+    ScrollBar           mScrollBar;
+
+    int32_t             mNumLinesVisible = 0;
+    int32_t             mNumLinesStored = 0;
 
     static Terminal    *sTerminal;
+
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (Terminal)
 };
 
