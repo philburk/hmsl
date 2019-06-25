@@ -13,7 +13,7 @@
 #include "HostFileManager.h"
 
 TerminalModel::TerminalModel()
-: mInputQueue(1024)
+: mInputQueue(kInputQueueSize)
 , mOutputQueue(kOutputQueueSize)
 {
     // Show working directory.
@@ -37,7 +37,7 @@ void TerminalModel::sendCharacter(char c) {
 
 void TerminalModel::sendEscapeBracket() {
     sendCharacter(kEscapeChar);
-    sendCharacter('[');
+    sendCharacter(kLeftBracketChar);
 }
 
 bool TerminalModel::onKeyPressed(const KeyPress &key) {
@@ -72,7 +72,7 @@ bool TerminalModel::handleEscapeSequence(char c) {
             }
             break;
         case ANSI_STATE_GOT_ESCAPE:
-            if (c == '[') {
+            if (c == kLeftBracketChar) {
                 mAnsiState = ANSI_STATE_GOT_BRACKET;
             } else {
                 result = false;

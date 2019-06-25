@@ -65,18 +65,22 @@ private:
     static constexpr  char kBackspaceChar = 0x08;
     static constexpr  char kDeleteChar = 0x7F;
     static constexpr  char kEscapeChar = 0x1B;
+    static constexpr  char kLeftBracketChar = '[';
 
+    // ANSI ESC[ codes
     static constexpr  char kUpArrowCode = 0x41;
     static constexpr  char kDownArrowCode = 0x42;
     static constexpr  char kRightArrowCode = 0x43;
     static constexpr  char kLeftArrowCode = 0x44;
 
     static constexpr  int  kOutputQueueSize = 512;
+    static constexpr  int  kInputQueueSize = 1024;
 
     std::list<String>      mStoredLines;
 
     int32_t                mAnsiCount = 0;
     int32_t                mLineCursor = 0;
+    String                 mLine; // current line
 
     bool                   mCloseRequested = false;
 
@@ -87,8 +91,7 @@ private:
     };
     AnsiState              mAnsiState = ANSI_STATE_IDLE;
 
-    AtomicQueue<char>      mInputQueue;
-    AtomicQueue<char>      mOutputQueue;
+    AtomicQueue<char>      mInputQueue; // hold for app to read
+    AtomicQueue<char>      mOutputQueue; // hold for display
 
-    String                 mLine;
 };

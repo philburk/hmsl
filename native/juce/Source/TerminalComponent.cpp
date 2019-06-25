@@ -41,7 +41,7 @@ void TerminalComponent::paint (Graphics& g)
 
     std::list<String> &storedLines = mTerminalModel.getStoredLines();
     const int numLines = (int) storedLines.size();
-    int y = kLineSpacing + g.getCurrentFont().getDescent();
+    int y = getHeight() - (getNumLinesVisible() * kLineSpacing);
     int yLimit = getHeight() + kLineSpacing;
     if ( numLines > 0) {
         // Draw previous lines starting with mTopLine
@@ -77,6 +77,7 @@ void TerminalComponent::paint (Graphics& g)
         g.drawSingleLineText(line, kLeftMargin, y);
     }
 
+    // Display debug info
     String info = "stored = ";
     info += numLines;
     info += ", top = ";
@@ -92,8 +93,8 @@ void TerminalComponent::paint (Graphics& g)
 
 void TerminalComponent::requestRepaint() {
     if (!mRepaintRequested.exchange(true)) {
-        mNumRepaintsRequested++;
         juce::MessageManager::callAsync([this]() {
+            mNumRepaintsRequested++;
             this->repaint();
         });
     }

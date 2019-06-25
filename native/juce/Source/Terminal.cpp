@@ -63,19 +63,22 @@ bool Terminal::isOutputFull() {
 
 void Terminal::scrollBarMoved(ScrollBar* scrollBarThatHasMoved,
                      double newRangeStart) {
-    int topLine = (int) newRangeStart;
-    if (topLine != mTerminalComponent.getTopLine()) {
+//    int topLine = (int) newRangeStart;
+//    if (topLine != mTerminalComponent.getTopLine()) {
         mTerminalComponent.setTopLine((int)newRangeStart);
         mTerminalComponent.requestRepaint();
-    }
+//    }
 }
 
 void Terminal::resized() {
+    int oldNumLinesVisible = mNumLinesVisible;
+    int oldTopLine = mTerminalComponent.getTopLine();
     auto area = getLocalBounds();
     auto scrollBarWidth = 16;
     auto textComponentWidth = getWidth() - scrollBarWidth;
     mTerminalComponent.setBounds(area.removeFromLeft(textComponentWidth));
     mScrollBar.setBounds(area.removeFromRight(scrollBarWidth));
-    mScrollBar.setCurrentRange(mScrollBar.getCurrentRangeStart(),
-                               mTerminalComponent.getNumLinesVisible());
+    int numLinesVisible = mTerminalComponent.getNumLinesVisible();
+    int topLine = oldTopLine + numLinesVisible - oldNumLinesVisible;
+    mScrollBar.setCurrentRange(topLine, numLinesVisible);
 }
