@@ -33,10 +33,13 @@ void Terminal::showBottom() {
 void Terminal::adjustScrollBar() {
     int32_t numLinesStored = mTerminalModel.getNumLinesStored();
     if (numLinesStored != mNumLinesStored) {
-        mScrollBar.setRangeLimits(0.0, numLinesStored + 1);
-        mScrollBar.setCurrentRange(mScrollBar.getCurrentRangeStart(),
-                                   mTerminalComponent.getNumLinesVisible());
         mNumLinesStored = numLinesStored;
+        // TODO Why do we need to +2 to avoid having the current line hidden?
+        double newMaximum = numLinesStored + 2.0; // +1 for current line, which is not stored
+        mScrollBar.setRangeLimits(0.0, newMaximum);
+        double newStart = newMaximum - mTerminalComponent.getNumLinesVisible();
+        mScrollBar.setCurrentRange(newStart,
+                                   mTerminalComponent.getNumLinesVisible());
         mScrollBar.scrollToBottom();
     }
 }
@@ -47,9 +50,11 @@ int Terminal::putCharacter(char c) {
     if (numLinesStored != mNumLinesStored) {
         juce::MessageManager::callAsync([this]() {
             this->adjustScrollBar();
+            this->mTerminalComponent.requestRepaint();
         });
+    } else {
+        this->mTerminalComponent.requestRepaint();
     }
-    this->mTerminalComponent.requestRepaint();
     return result;
 }
 
@@ -71,11 +76,14 @@ void Terminal::scrollBarMoved(ScrollBar* scrollBarThatHasMoved,
 }
 
 void Terminal::resized() {
+    int oldNumLinesVisible = mNumLinesVisible;
+    int oldTopLine = mTerminalComponent.getTopLine();
     auto area = getLocalBounds();
     auto scrollBarWidth = 16;
     auto textComponentWidth = getWidth() - scrollBarWidth;
     mTerminalComponent.setBounds(area.removeFromLeft(textComponentWidth));
     mScrollBar.setBounds(area.removeFromRight(scrollBarWidth));
-    mScrollBar.setCurrentRange(mScrollBar.getCurrentRangeStart(),
-                               mTerminalComponent.getNumLinesVisible());
+    int numLinesVisible = mTerminalComponent.getNumLinesVisible();
+    int topLine = oldTopLine + numLinesVisible - oldNumLinesVisible;
+    mScrollBar.setCurrentRange(topLine, numLinesVisible);
 }

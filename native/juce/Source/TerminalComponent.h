@@ -59,6 +59,7 @@ private:
     TerminalModel         &mTerminalModel;
     Colour                 mCursorColour;
     int32_t                mTopLine = 0;
+
     int32_t                mNumPaints = 0;
     int32_t                mNumRepaintsRequested = 0;
 

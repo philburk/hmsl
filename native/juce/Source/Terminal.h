@@ -32,7 +32,7 @@ public:
         mScrollBar.setAutoHide(false);
         mScrollBar.setRangeLimits(0.0, 200.0); // TODO
 
-        setSize(1024, 640);
+        setSize(1024, 640); // window size in pixels
     }
     virtual ~Terminal() = default;
 
@@ -69,7 +69,7 @@ private:
     int32_t             mNumLinesVisible = 0;
     int32_t             mNumLinesStored = 0;
 
-    static Terminal    *sTerminal;
+    static Terminal    *sTerminal; // singleton
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (Terminal)
 };
