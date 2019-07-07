@@ -1,6 +1,5 @@
 #pragma once
 
-/* $Id$ */
 /***************************************************************
 ** I/O subsystem for PForth based on 'C'
 **

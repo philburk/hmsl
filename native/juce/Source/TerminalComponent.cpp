@@ -76,7 +76,7 @@ void TerminalComponent::paint (Graphics& g)
         g.setColour (Colours::white);
         g.drawSingleLineText(line, kLeftMargin, y);
     }
-
+/*
     // Display debug info
     String info = "stored = ";
     info += numLines;
@@ -89,6 +89,7 @@ void TerminalComponent::paint (Graphics& g)
     g.setColour (Colours::yellow);
     const int leftX = getWidth() - (int)g.getCurrentFont().getStringWidth(info);
     g.drawSingleLineText(info, leftX, kLineSpacing);
+ */
 }
 
 void TerminalComponent::requestRepaint() {
