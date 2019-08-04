@@ -4,7 +4,7 @@
 
 You probably don't need to build HMSL from source.
 You can download a [precompiled binary release](https://github.com/philburk/hmsl/releases) from GitHub and try it out.
-But if you want to modify the C port of HMSL then read on.
+But if you want to modify the C++ part of HMSL then read on.
 
 ## Building on OSX
 
@@ -25,4 +25,4 @@ New C/C++ files should only be added using the ProJucer.
 * Enter:   include fth/make_hmsl.fth
 * It will compile HMSL and save a new pforth.dic.
 * Close the terminal window.
-* The next time you launch the application, it will run HMSL.
+* The next time you run the application, it will initialize HMSL.
