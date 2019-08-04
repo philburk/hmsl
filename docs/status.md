@@ -1,3 +1,5 @@
+[Docs Home](.)
+
 # Status of HMSL
 
 Summer 2019: HMSL is currently being ported to run on modern laptops using [JUCE](https://juce.com).
