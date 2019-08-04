@@ -1,3 +1,4 @@
+[Docs Home](.)
 
 # Building HMSL from Source
 
