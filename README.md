@@ -1,5 +1,4 @@
-# HMSL
-Hierarchical Music Specification Language
+# HMSL - the Hierarchical Music Specification Language
 
 HMSL is a set of extensions to the Forth programming language.
 It includes tools and editors for experimental music composition and performance. 
@@ -19,7 +18,7 @@ HMSL provides:
 
 Description of folders:
 
-    [docs](docs)/ - Original docs converted to Open Office format
+    docs/ - Original docs converted to Open Office format
 
     hmsl/ - original package
     hmsl/fth - the guts of HMSL
@@ -32,13 +31,12 @@ Description of folders:
 
 ## Credits
 
-HMSL (C) 1986 Phil Burk, Larry Polansky, David Rosenboom.
-HMSL is now released under the open source Apache License V2.
-
 The current version of HMSL is built on top of pForth, a ‘C’ based Forth.
 
    <http://www.softsynth.com/pforth/>
 
+* HMSL (C) 1986 Phil Burk, Larry Polansky, David Rosenboom.
+* HMSL is now released under the open source Apache License V2.
 * Original development 1985 - 1993 by Phil Burk, Larry Polansky and David Rosenboom at the Mills College Center for Contemporary Music.
 * Port to Windows in 1996 by Phil Burk and Robert Marsanyi
 * Port to Macintosh using Objective-C in 2015 by Andrew C Smith
