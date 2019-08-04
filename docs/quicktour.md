@@ -1,4 +1,4 @@
-[Doce Home](.)
+[Docs Home](.)
 
 # Quick Tour
 
