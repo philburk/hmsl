@@ -472,7 +472,18 @@ variable HUMANIZE-OFFSET
     DOES> w@ ns.velocity!
 ;
 
-40 value DEFAULT_TPW
+\ Base default ticks per whole note on clock rate when compiled.
+: BPM>TPW  { bpm -- tpw , convert beats per minute to ticks per whole note }
+    rtc.rate@ \ ticks per second
+    60        \ seconds per minute
+    *         \ ticks per minute
+    bpm       \ beats per minute, default tempo
+    /         \ ticks per beat
+    4         \ beats per whole note
+    *         \ ticks per whole note
+;
+
+120 bpm>tpw value DEFAULT_TPW
 
 : NS.RESET  ( -- )
     80 ns-cur-velocity !  ( forte )

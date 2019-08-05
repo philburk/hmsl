@@ -4,11 +4,10 @@
 \ By Phil Burk
 \ Copyright 1995
 
-include? par{  ht:score_entry
+include? par{  score_entry.fth
 include? ratio>pbend  bend_tuning.fth
 
 ANEW TASK-BEND_SCORE
-
 
 : MIDI.SET.RPN { val rpn -- , set registered parameter number }
     101 0 midi.control
@@ -88,6 +87,7 @@ pr.reset
 ;
 
 \ move this to EVENT_BUFFER !!!
+0 [if]
 : EB.CATCHUP  ( -- , wait for free nodes silently )
     eb-free-nodes eb.next 0=
     IF
@@ -99,15 +99,16 @@ pr.reset
         drop
     THEN
 ;
+[then]
 
 : (PR) { numer denom pbend --  }
     bsc.next.channel
     numer denom ratio>pbend \ convert the ratio to a relative pitch bend
     pbend + \ convert the ratio to an absolute pitch bend
     dup bsc-last-pbend !
-    eb.catchup
+\    eb.catchup
     pbend>note+pb midi.pitch.bend
-    eb.catchup
+\    eb.catchup
     note
 ;
 
@@ -127,8 +128,8 @@ pr.reset
 : >>PR ( numer denom -- , play ratio based on previous note)
     bsc-last-pbend @ (pr)
 ;
-: >>PR! ( numer denom -- , play ratio based on previous note, update fundamental
+
+: >>PR! ( numer denom -- , play ratio based on previous note, update fundamental )
     >>pr
     bsc-last-pbend @ bsc-fundamental !    \ update fundamental
 ;
-
