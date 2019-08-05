@@ -27,6 +27,19 @@ variable FILE-IF-NEW
     .s cr
 ;
 
+: FILEWORD  ( <filename> -- addr , parse name with quote delimiters )
+    bl lword
+    dup 1+ c@ ascii " =  ( is first char a " )
+    IF ( -- addr , reset >in and reparse )
+        c@ negate >in +!
+        ascii " lword
+    THEN
+;
+
+: FOPEN ( <filename> -- refnum | 0 , open a file )
+    fileword $fopen
+;
+
 : FCLOSE ( refnum -- , close the file )
     close-file
     IF ." ERROR closing the file." cr
@@ -40,7 +53,26 @@ variable FILE-IF-NEW
 : FWRITE ( refnum addr num_bytes -- bytes_written )
     dup >r
     rot write-file
-    drop r>
+    r> swap IF
+        drop 0   \ error so return 0 bytes written
+    THEN
 ;
 
-." TODO define remaining FILE words." cr
+: FEMIT ( refnum char -- , write single char to the file, abort on error )
+    0 >r rp@ c! \ store char on return stack
+    rp@ 1 rot  ( --  addr 1 refnum )
+    write-file abort" failed in FEMIT"
+    rdrop
+;
+
+-1 constant EOF \ 00002
+VARIABLE FIO-CHAR-BUFFER
+: FKEY  ( fid -- char | -1)
+    fio-char-buffer 1 fread
+    1 =
+    IF   fio-char-buffer c@
+    ELSE EOF \ 00002
+    THEN
+;
+
+." TODO define remaining FILE words: FSEEK " cr
