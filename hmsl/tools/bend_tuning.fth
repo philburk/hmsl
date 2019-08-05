@@ -5,7 +5,7 @@
 decimal
 include? fpinit hsys:FloatingPoint
 
-anew bend_tuning.fth
+anew TASK-BEND_TUNING
 
 fpinit
 
@@ -19,15 +19,15 @@ fpinit
 $ 2000 constant BENDS_PER_SEMITONE
 12 constant SEMITONES_PER_OCTAVE
 : calc.bend.n { n bend_per_octave -- fbend }
-    n float fln
+    n s>f fln
     fln_2 f/
-    bend_per_octave float f*
+    bend_per_octave s>f f*
 ;
 
 : calc.n>pbend ( n -- pbend )
     BENDS_PER_SEMITONE SEMITONES_PER_OCTAVE *  \ pitch bends per octave
     calc.bend.n
-    int
+    f>s
 ;
 
 : gen.bend.table  ( max_n -- )

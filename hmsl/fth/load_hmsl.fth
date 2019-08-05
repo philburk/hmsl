@@ -186,6 +186,8 @@ include? file_port tools/file_port.fth
 include? task-midifile tools/midifile.fth
 include? task-markov_chain tools/markov_chain.fth
 include? task-score_entry tools/score_entry.fth
+include? task-bend_tuning  tools/bend_tuning.fth
+include? task-bend_score  tools/bend_score.fth
 
 mreset-warn on
 cr ." HMSL compilation finished." cr
