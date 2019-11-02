@@ -61,11 +61,19 @@ variable BSC-CUR-CHANNEL
     note>pbend bsc-fundamental !
 ;
 
+: BSC.RESET.BENDS ( -- )
+    bsc-num-channels @ 0
+    DO
+        0 midi.pitch.bend
+        bsc.next.channel
+    LOOP
+;
+
 : PR.RESET
     1 gm.set.bend.range.all
     60 bsc.set.fundamental
+    bsc.reset.bends
 ;
-pr.reset
 
 : BSC.RATIO>PBEND ( numer denom -- fundamental+pbend )
     ratio>pbend \ convert the ratio to a relative pitch bend
