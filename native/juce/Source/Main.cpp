@@ -13,6 +13,8 @@
 #include "Terminal.h"
 #include "ForthThread.h"
 
+#define HMSL_VERSION "v0.5.2"
+
 //==============================================================================
 class ProtoHMSLApplication  : public JUCEApplication
 {
@@ -67,7 +69,7 @@ public:
     class TerminalWindow    : public DocumentWindow
     {
     public:
-        TerminalWindow (String name)  : DocumentWindow (name,
+        TerminalWindow (String name)  : DocumentWindow (name + (" " HMSL_VERSION),
                                                     Desktop::getInstance().getDefaultLookAndFeel()
                                                     .findColour (ResizableWindow::backgroundColourId),
                                                     DocumentWindow::allButtons)
