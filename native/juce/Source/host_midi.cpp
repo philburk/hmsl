@@ -23,7 +23,7 @@ static double sHmslStartTime = 0;
 static cell_t sHmslTickOffset = 0;
 static cell_t sHmslTicksPerSecond = kDefaultTicksPerSecond;
 
-static MidiOutput *sMidiOutput = nullptr;
+static std::unique_ptr<MidiOutput> sMidiOutput;
 
 // ============== Clock Time ===================================
 void hostClock_Init() {
@@ -77,7 +77,9 @@ void hostSleep(cell_t msec) {
 // ============== MIDI ===================================
 // for callFunctionOnMessageThread()
 static void *createNewMidiOutput(void *text) {
-    return (void *) MidiOutput::createNewDevice(String((char *)text));
+    // Save in a static unique_ptr.
+    sMidiOutput = MidiOutput::createNewDevice(String((char *)text));
+    return text;
 }
 
 // Called by HMSL upon initializing MIDI
@@ -86,7 +88,7 @@ static void *createNewMidiOutput(void *text) {
 cell_t hostMIDI_Init() {
     hostClock_Init();
     MessageManager *messageManager = MessageManager::getInstance();
-    sMidiOutput = (MidiOutput *) messageManager->callFunctionOnMessageThread(createNewMidiOutput,
+    messageManager->callFunctionOnMessageThread(createNewMidiOutput,
                                                                (void *) kMidiName);
     sMidiOutput->startBackgroundThread();
     return 0;
@@ -95,8 +97,7 @@ cell_t hostMIDI_Init() {
 // Called by HMSL to terminate the MIDI connection
 void hostMIDI_Term() {
     if (sMidiOutput) sMidiOutput->stopBackgroundThread();
-    delete sMidiOutput;
-    sMidiOutput = nullptr;
+    sMidiOutput.reset(nullptr);
 }
 
 // Called when HMSL wants to schedule a MIDI packet
