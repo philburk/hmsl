@@ -14,90 +14,56 @@
 
 #import "hmsl_host.h"
 #import "pf_all.h"
+#include "MidiBase.h"
+#include "ExternalMidi.h"
+#include "LocalSynth.h"
 
-constexpr int kDefaultTicksPerSecond = 60; // original tick rate, rtc.rate@
-constexpr int kMillisPerSecond = 1000;
-constexpr const char *kMidiName = "HMSL"; // name for external MIDI ports
-
-static double sHmslStartTime = 0;
-static cell_t sHmslTickOffset = 0;
-static cell_t sHmslTicksPerSecond = kDefaultTicksPerSecond;
-
-static std::unique_ptr<MidiOutput> sMidiOutput;
+static std::unique_ptr<MidiBase> sMidiBase;
 
 // ============== Clock Time ===================================
 void hostClock_Init() {
-    sHmslTicksPerSecond = kDefaultTicksPerSecond;
-    hostClock_SetTime(0);
+    sMidiBase = std::make_unique<ExternalMidi>();
+    sMidiBase->init();
 }
 
 void hostClock_Term() {
 }
 
-//  Convert from milliseconds to HMSL clock ticks
-static cell_t hostClock_MillisToTicks( double millis ) {
-    cell_t elapsed = (cell_t) (sHmslTicksPerSecond * (millis - sHmslStartTime)
-                               / kMillisPerSecond);
-    return elapsed + sHmslTickOffset;
-}
-
-static double hostClock_TicksToMillis( cell_t ticks ) {
-    cell_t elapsedTicks = ticks - sHmslTickOffset;
-    double elapsedHighResTicks = (elapsedTicks * kMillisPerSecond) / sHmslTicksPerSecond;
-    return elapsedHighResTicks + sHmslStartTime;
-}
-
 cell_t hostClock_QueryTime() {
-    return hostClock_MillisToTicks(Time::getMillisecondCounterHiRes());
+    return sMidiBase->queryTime();
 }
 
 void hostClock_SetTime( cell_t time ) {
-    sHmslStartTime = Time::getMillisecondCounterHiRes();
-    sHmslTickOffset = time;
+    sMidiBase->setTime(time);
 }
 
 void hostClock_AdvanceTime( cell_t delta ) {
-    sHmslTickOffset += delta;
+    sMidiBase->advanceTime(delta);
 }
 
 cell_t hostClock_QueryRate() {
-    return sHmslTicksPerSecond;
+    return (sMidiBase) ? sMidiBase->queryRate() : 60;
 }
 
 void hostClock_SetRate( cell_t rate ) {
-    cell_t currentTicks = hostClock_QueryTime();
-    sHmslTicksPerSecond = rate;
-    hostClock_SetTime(currentTicks);
+    sMidiBase->setTime(rate);
 }
 
 void hostSleep(cell_t msec) {
     usleep((useconds_t)(msec * 1000));
 }
 
-// ============== MIDI ===================================
-// for callFunctionOnMessageThread()
-static void *createNewMidiOutput(void *text) {
-    // Save in a static unique_ptr.
-    sMidiOutput = MidiOutput::createNewDevice(String((char *)text));
-    return text;
-}
-
 // Called by HMSL upon initializing MIDI
 //
 // Returns error code (0 for no error)
 cell_t hostMIDI_Init() {
-    hostClock_Init();
-    MessageManager *messageManager = MessageManager::getInstance();
-    messageManager->callFunctionOnMessageThread(createNewMidiOutput,
-                                                               (void *) kMidiName);
-    sMidiOutput->startBackgroundThread();
+    // MIDI is initialized in hostClock_Init()
     return 0;
 }
 
 // Called by HMSL to terminate the MIDI connection
 void hostMIDI_Term() {
-    if (sMidiOutput) sMidiOutput->stopBackgroundThread();
-    sMidiOutput.reset(nullptr);
+    if (sMidiBase) sMidiBase->term();
 }
 
 // Called when HMSL wants to schedule a MIDI packet
@@ -108,12 +74,7 @@ void hostMIDI_Term() {
 //
 // Returns error code (0 for no error)
 cell_t hostMIDI_Write(ucell_ptr_t data, cell_t count, cell_t ticks) {
-    // Use the timestamp to schedule the MIDI events in the future.
-    MidiBuffer midiBuffer(MidiMessage((const void *)data, (int)count));
-    const double scheduledMillis = hostClock_TicksToMillis(ticks);
-    const double nowMillis = Time::getMillisecondCounterHiRes();
-    const double playTimeMillis = std::max(scheduledMillis, nowMillis);
-    sMidiOutput->sendBlockOfMessages(midiBuffer, playTimeMillis, 44100 /* sample rate */);
+    if (sMidiBase) sMidiBase->write(data, count, ticks);
     return 0;
 }
 
