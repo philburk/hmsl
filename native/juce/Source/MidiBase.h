@@ -25,7 +25,6 @@ public:
     virtual cell_t write(ucell_ptr_t data, cell_t count, cell_t ticks) = 0;
 
     /** ------- CLOCK ----------- */
-    virtual double getNativeTime() = 0;
 
     cell_t queryTime() {
         return nativeToTicks(getNativeTime());
@@ -52,25 +51,26 @@ public:
 
 protected:
 
+    virtual double getNativeTime() = 0;
+    virtual cell_t getNativeRate() const = 0;
+
     //  Convert from milliseconds to HMSL clock ticks
     cell_t nativeToTicks( double millis ) {
         cell_t elapsed = (cell_t) (mHmslTicksPerSecond * (millis - mNativeStartTime)
-                                   / mNativeTicksPerSecond);
+                                   / getNativeRate());
         return elapsed + mHmslTickOffset;
     }
 
     double ticksToNative( cell_t ticks ) {
         cell_t elapsedTicks = ticks - mHmslTickOffset;
-        double elapsedHighResTicks = (elapsedTicks * mNativeTicksPerSecond) / mHmslTicksPerSecond;
+        double elapsedHighResTicks = (elapsedTicks * getNativeRate()) / mHmslTicksPerSecond;
         return elapsedHighResTicks + mNativeStartTime;
     }
 
     static constexpr int kDefaultTicksPerSecond = 60; // original tick rate, rtc.rate@
-//    static constexpr int kMillisPerSecond = 1000;
     static constexpr const char *kMidiName = "HMSL"; // name for external MIDI ports
 
-    double mNativeStartTime = 0;
-    cell_t mNativeTicksPerSecond = 1000;
+    double mNativeStartTime = 0.0;
     cell_t mHmslTickOffset = 0;
     cell_t mHmslTicksPerSecond = kDefaultTicksPerSecond;
 };

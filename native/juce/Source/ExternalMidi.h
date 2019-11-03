@@ -24,4 +24,8 @@ public:
 
     double getNativeTime() override;
 
+    cell_t getNativeRate() const override {
+        return 1000; // JUCE MIDI uses a millisecond timer
+    }
+
 };
