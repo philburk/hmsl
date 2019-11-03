@@ -10,10 +10,27 @@
 
 #pragma once
 
-#include "../JuceLibraryCode/JuceHeader.h"
+#include <memory>
 
-class MyAudioCallback : public AudioIODeviceCallback {
+#include "../JuceLibraryCode/JuceHeader.h"
+#include "MidiBase.h"
+
+class LocalSynth : public MidiBase, AudioIODeviceCallback  {
 public:
+
+    virtual ~LocalSynth() = default;
+
+    cell_t init() override;
+
+    void term() override;
+
+    cell_t write(ucell_ptr_t data, cell_t count, cell_t ticks) override;
+
+    double getNativeTime() override;
+
+    cell_t getNativeRate() const override;
+
+    /** -------------- AUDIO ----------------------------------- */
     void audioDeviceIOCallback(const float **inputChannelData,
                                int           numInputChannels,
                                float **      outputChannelData,
@@ -23,13 +40,8 @@ public:
     void audioDeviceAboutToStart(AudioIODevice *device) override {};
     void audioDeviceStopped() override {};
 
-};
-
-class LocalSynth {
-public:
-    int initialize();
-
 private:
     AudioDeviceManager mAudioDeviceManager;
-    MyAudioCallback    mCallback;
+    int                mFramesPerTick = 0;
+    std::unique_ptr<short> mShortBuffer;
 };

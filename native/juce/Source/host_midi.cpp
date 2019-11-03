@@ -22,7 +22,12 @@ static std::unique_ptr<MidiBase> sMidiBase;
 
 // ============== Clock Time ===================================
 void hostClock_Init() {
-    sMidiBase = std::make_unique<ExternalMidi>();
+    const bool useLocalSynth = true;
+    if (useLocalSynth) {
+        sMidiBase = std::make_unique<LocalSynth>();
+    } else {
+        sMidiBase = std::make_unique<ExternalMidi>();
+    }
     sMidiBase->init();
 }
 

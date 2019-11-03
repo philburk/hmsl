@@ -2270,7 +2270,7 @@
 				HEADER_SEARCH_PATHS = (
 					"../../JuceLibraryCode",
 					"$(HOME)/JUCE/modules",
-					"/Users/phil/Work/hmsl/HMSL/native/common/include/spmidi",
+					"/Users/phil/Work/hmsl/HMSL/native/common",
 					"../../../../pforth/csrc",
 					"../../Source",
 					"$(inherited)",
@@ -2326,7 +2326,7 @@
 				HEADER_SEARCH_PATHS = (
 					"../../JuceLibraryCode",
 					"$(HOME)/JUCE/modules",
-					"/Users/phil/Work/hmsl/HMSL/native/common/include/spmidi",
+					"/Users/phil/Work/hmsl/HMSL/native/common",
 					"../../../../pforth/csrc",
 					"../../Source",
 					"$(inherited)",

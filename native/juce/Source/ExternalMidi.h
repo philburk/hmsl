@@ -18,6 +18,7 @@ public:
     virtual ~ExternalMidi() = default;
 
     cell_t init() override;
+
     void term() override;
 
     cell_t write(ucell_ptr_t data, cell_t count, cell_t ticks) override;

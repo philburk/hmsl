@@ -253,9 +253,9 @@
     <XCODE_MAC targetFolder="Builds/MacOSX" extraDefs="&#10;" externalLibraries="me2000">
       <CONFIGURATIONS>
         <CONFIGURATION isDebug="1" name="Debug" libraryPath="/Users/phil/Work/hmsl/HMSL/native/osx/libs"
-                       headerPath="/Users/phil/Work/hmsl/HMSL/native/common/include/spmidi"/>
+                       headerPath="/Users/phil/Work/hmsl/HMSL/native/common"/>
         <CONFIGURATION isDebug="0" name="Release" libraryPath="/Users/phil/Work/hmsl/HMSL/native/osx/libs"
-                       headerPath="/Users/phil/Work/hmsl/HMSL/native/common/include/spmidi"/>
+                       headerPath="/Users/phil/Work/hmsl/HMSL/native/common"/>
       </CONFIGURATIONS>
       <MODULEPATHS>
         <MODULEPATH id="juce_audio_basics" path="../../../../../JUCE/modules"/>
