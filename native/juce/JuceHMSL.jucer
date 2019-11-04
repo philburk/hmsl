@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<JUCERPROJECT id="C2IY5m" name="JuceHMSL" projectType="guiapp" jucerVersion="5.4.3"
+<JUCERPROJECT id="C2IY5m" name="JuceHMSL" projectType="guiapp" jucerVersion="5.4.5"
               companyName="Mobileer" companyCopyright="(C) 2019 Mobileer Inc"
               companyWebsite="www.softsynth.com/hmsl" defines="PF_SUPPORT_FP&#10;PF_USER_FILEIO=&quot;pf_juce_file_io.h&quot;&#10;PF_DEFAULT_HEADER_SIZE=300000&#10;PF_DEFAULT_CODE_SIZE=700000&#10;"
               headerPath="../../../../pforth/csrc&#10;../../Source">
@@ -207,6 +207,13 @@
       </GROUP>
     </GROUP>
     <GROUP id="{D4447538-6ED0-FC8B-8612-F845BF3B88BD}" name="Source">
+      <FILE id="x9rN64" name="ExternalMidi.cpp" compile="1" resource="0"
+            file="Source/ExternalMidi.cpp"/>
+      <FILE id="UH2b62" name="ExternalMidi.h" compile="0" resource="0" file="Source/ExternalMidi.h"/>
+      <FILE id="eCx3tG" name="MidiBase.cpp" compile="1" resource="0" file="Source/MidiBase.cpp"/>
+      <FILE id="mrtN66" name="MidiBase.h" compile="0" resource="0" file="Source/MidiBase.h"/>
+      <FILE id="FG69ry" name="LocalSynth.cpp" compile="1" resource="0" file="Source/LocalSynth.cpp"/>
+      <FILE id="OXX8Pf" name="LocalSynth.h" compile="0" resource="0" file="Source/LocalSynth.h"/>
       <FILE id="LisOcw" name="TerminalModel.cpp" compile="1" resource="0"
             file="Source/TerminalModel.cpp"/>
       <FILE id="klkn0G" name="TerminalModel.h" compile="0" resource="0" file="Source/TerminalModel.h"/>
@@ -243,10 +250,12 @@
     </GROUP>
   </MAINGROUP>
   <EXPORTFORMATS>
-    <XCODE_MAC targetFolder="Builds/MacOSX" extraDefs="&#10;">
+    <XCODE_MAC targetFolder="Builds/MacOSX" extraDefs="&#10;" externalLibraries="me2000">
       <CONFIGURATIONS>
-        <CONFIGURATION isDebug="1" name="Debug"/>
-        <CONFIGURATION isDebug="0" name="Release"/>
+        <CONFIGURATION isDebug="1" name="Debug" libraryPath="/Users/phil/Work/hmsl/HMSL/native/osx/libs"
+                       headerPath="/Users/phil/Work/hmsl/HMSL/native/common"/>
+        <CONFIGURATION isDebug="0" name="Release" libraryPath="/Users/phil/Work/hmsl/HMSL/native/osx/libs"
+                       headerPath="/Users/phil/Work/hmsl/HMSL/native/common"/>
       </CONFIGURATIONS>
       <MODULEPATHS>
         <MODULEPATH id="juce_audio_basics" path="../../../../../JUCE/modules"/>
