@@ -43,5 +43,5 @@ public:
 private:
     AudioDeviceManager mAudioDeviceManager;
     int                mFramesPerTick = 0;
-    std::unique_ptr<short> mShortBuffer;
+    std::unique_ptr<short[]> mShortBuffer;
 };

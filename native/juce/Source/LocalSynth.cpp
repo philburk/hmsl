@@ -21,6 +21,8 @@
 #define SAMPLES_PER_FRAME   (2)
 #define BITS_PER_SAMPLE     (sizeof(short)*8)
 
+#define CALL_JUKEBOX   1
+
 void LocalSynth::audioDeviceIOCallback(const float **inputChannelData,
                                             int           numInputChannels,
                                             float **      outputChannelData,
@@ -36,16 +38,24 @@ void LocalSynth::audioDeviceIOCallback(const float **inputChannelData,
     while( framesLeft )
     {
         int framesToSynthesize = std::min(framesLeft, mFramesPerTick);
+#if CALL_JUKEBOX
         int framesGenerated = JukeBox_SynthesizeAudioTick( mShortBuffer.get(), framesToSynthesize, SAMPLES_PER_FRAME );
-        if (framesGenerated < 0) {
-            return;
+#else
+        int framesGenerated = framesToSynthesize;
+#endif
+        if (framesGenerated <= 0) {
+            return; // TODO report the error
         }
         short *shortData = mShortBuffer.get();
         for (int frame = 0; frame < framesGenerated; frame++) {
             for (int channel = 0; channel < commonChannels; channel++) {
+#if CALL_JUKEBOX
                 float floatSample = shortData[channel] * (1.0f / 32768);
+#else
+                float floatSample = (drand48() - 0.5) * 0.1;
+#endif
                 float *channelArray = outputChannelData[channel];
-                // channelArray[frameCursor] = floatSample;
+                channelArray[frameCursor] = floatSample;
             }
             frameCursor++;
             shortData += SAMPLES_PER_FRAME;
@@ -73,11 +83,12 @@ cell_t LocalSynth::init() {
     mHmslTicksPerSecond = kDefaultTicksPerSecond;
     setTime(0);
 
-    mAudioDeviceManager.initialiseWithDefaultDevices(0, 2);
+    mAudioDeviceManager.initialiseWithDefaultDevices(0, 2); // audio device
+    
     int result = JukeBox_Initialize(SAMPLE_RATE);
     mFramesPerTick = JukeBox_GetFramesPerTick();
     int maxSamples = mFramesPerTick * SAMPLES_PER_FRAME;
-    mShortBuffer = std::make_unique<short>(maxSamples);
+    mShortBuffer = std::make_unique<short[]>(maxSamples);
 
     // Start the synth.
     mAudioDeviceManager.addAudioCallback(this);

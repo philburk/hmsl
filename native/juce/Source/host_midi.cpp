@@ -51,7 +51,7 @@ cell_t hostClock_QueryRate() {
 }
 
 void hostClock_SetRate( cell_t rate ) {
-    sMidiBase->setTime(rate);
+    sMidiBase->setRate(rate);
 }
 
 void hostSleep(cell_t msec) {

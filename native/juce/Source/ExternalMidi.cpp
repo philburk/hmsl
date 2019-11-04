@@ -38,6 +38,8 @@ cell_t ExternalMidi::init() {
     MessageManager *messageManager = MessageManager::getInstance();
     messageManager->callFunctionOnMessageThread(createNewMidiOutput,
                                                 (void *) kMidiName);
+    // This will crash if another instance of HMSL is running.
+    assert(sMidiOutput != nullptr);
     sMidiOutput->startBackgroundThread();
     return 0;
 }
