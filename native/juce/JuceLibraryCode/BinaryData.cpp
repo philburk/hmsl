@@ -6908,6 +6908,8 @@ static const unsigned char temp_binary_data_33[] =
 "include? task-midifile tools/midifile.fth\n"
 "include? task-markov_chain tools/markov_chain.fth\n"
 "include? task-score_entry tools/score_entry.fth\n"
+"include? task-bend_tuning  tools/bend_tuning.fth\n"
+"include? task-bend_score  tools/bend_score.fth\n"
 "\n"
 "mreset-warn on\n"
 "cr .\" HMSL compilation finished.\" cr\n"
@@ -26500,7 +26502,7 @@ const char* getNamedResource (const char* resourceNameUTF8, int& numBytes)
         case 0x74a7d502:  numBytes = 7246; return instrument_fth;
         case 0x26121154:  numBytes = 4234; return interpreters_fth;
         case 0xaa5031d8:  numBytes = 5116; return job_fth;
-        case 0x55e7faf2:  numBytes = 5579; return load_hmsl_fth;
+        case 0x55e7faf2:  numBytes = 5675; return load_hmsl_fth;
         case 0x756e7772:  numBytes = 1286; return load_ode_fth;
         case 0x9dec62ea:  numBytes = 688; return make_hmsl_fth;
         case 0x1d3ad71b:  numBytes = 1100; return memalloc_fth;
