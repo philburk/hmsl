@@ -108,7 +108,7 @@ namespace BinaryData
     const int            job_fthSize = 5116;
 
     extern const char*   load_hmsl_fth;
-    const int            load_hmsl_fthSize = 5579;
+    const int            load_hmsl_fthSize = 5675;
 
     extern const char*   load_ode_fth;
     const int            load_ode_fthSize = 1286;
