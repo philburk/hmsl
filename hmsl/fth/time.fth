@@ -136,7 +136,7 @@ stack.header vtime-stack
     'c ahead.time@ is time@
     'c rtc.time+!  is time+!
     'c noop is self.clock
-    rtc.rate@ time-advance !
+    rtc.rate@ 6 / time-advance !
     rtc.rate@ 2* 3 / ticks/beat !
     anow
     vtime-data vtime_smax vtime-stack stack.setup
