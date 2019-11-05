@@ -49,11 +49,13 @@ public:
 private:
 
     static constexpr  int  kMaxLinesVisible = 200; // allow scrolling
-    static constexpr  int  kLineSpacing = 16;
     static constexpr  int  kLeftMargin = 5;
     static constexpr  int  kBottomMargin = 20;
     static constexpr  int  kWidthMin = 200;
     static constexpr  int  kHeightMin = 100;
+
+    float                  kFontSize = 18.0f;
+    int                    kLineSpacing = static_cast<int>(kFontSize + 2);
 
     int32_t                mWidestLine = kWidthMin;
     TerminalModel         &mTerminalModel;

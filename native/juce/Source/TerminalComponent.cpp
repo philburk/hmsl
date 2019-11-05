@@ -37,7 +37,7 @@ void TerminalComponent::paint (Graphics& g)
     mTerminalModel.processOutputQueue();
 
     g.fillAll (getLookAndFeel().findColour (ResizableWindow::backgroundColourId));   // clear the background
-    g.setFont({Font::getDefaultMonospacedFontName(), 14.0f, Font::plain});
+    g.setFont({Font::getDefaultMonospacedFontName(), kFontSize, Font::plain});
 
     std::list<String> &storedLines = mTerminalModel.getStoredLines();
     const int numLines = (int) storedLines.size();
