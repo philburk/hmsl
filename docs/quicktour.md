@@ -2,17 +2,18 @@
 
 # Quick Tour
 
-First, either [build HMSL](build.md) or download a [precompiled release](https://github.com/philburk/hmsl/releases).
+First, download a [precompiled release](https://github.com/philburk/hmsl/releases).
 
 1. Double click JuceHMSL.app
 1. Hit 'y' key to initialize HMSL.
-1. Launch a synthesizer program like [Simple Synth](http://notahat.com/simplesynth/) and select "HMSL" as the MIDI source.
 
 To test MIDI output, enter:
 
     midi.seqout
 
-You should hear a few notes play. Now enter:
+You should hear a few notes play. 
+
+To launch an interactive editor, enter:
 
     shep
     
