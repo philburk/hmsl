@@ -7,6 +7,7 @@ First, download a [precompiled release](https://github.com/philburk/hmsl/release
 1. Double click JuceHMSL.app
 1. Hit 'y' key to initialize HMSL.
 
+The new HMSL provides a built-in General MIDI synthesizer based on the Mobileer ME2000.
 To test MIDI output, enter:
 
     midi.seqout
