@@ -2,8 +2,6 @@
 //  hmsl.h
 //  HMSL-OSX
 //
-//  Copyright (c) 2015 Andrew C Smith. All rights reserved.
-//
 
 #ifndef HMSL_OSX_hmsl_h
 #define HMSL_OSX_hmsl_h

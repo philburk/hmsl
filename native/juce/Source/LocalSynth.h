@@ -42,6 +42,7 @@ public:
 
 private:
     AudioDeviceManager mAudioDeviceManager;
+    int32_t            mSampleRate = 44100;
     int                mFramesPerTick = 0;
     std::unique_ptr<short[]> mShortBuffer;
 };

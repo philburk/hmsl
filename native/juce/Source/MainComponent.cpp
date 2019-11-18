@@ -4,7 +4,6 @@
 
 #include "MainComponent.h"
 
-
 //==============================================================================
 MainComponent::MainComponent()
 : mCommandQueue(1024), mEventQueue(256) {
