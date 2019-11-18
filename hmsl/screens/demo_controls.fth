@@ -23,7 +23,7 @@ ANEW TASK-DEMO_CONTROLS
 variable MF-CHANNEL
 1 MF-CHANNEL !
 
-350 value DCG_HEIGHT \ 00002
+250 value DCG_HEIGHT \ 00002
 
 \ Simple control class.
 OB.CONTROL MY-CONTROL
@@ -41,7 +41,7 @@ OB.CONTROL MY-CONTROL
     THEN midi.control
 ;
 
-OB.check.GRID MY-check    ( declare check grid )
+OB.check.GRID MY-CHECK    ( declare check grid )
 
 : BUILD.MY-check ( -- )
     1 2 new: my-check     ( allocate room for two cells )
@@ -324,14 +324,14 @@ OB.SCREEN MY-SCREEN
 \
 \ Make this screen come up first.
     my-screen default-screen !
-    cg-3d on
+    cg-3d off
 ;
 
 : MY-SCREEN.TERM   ( -- , free allocated memory )
     freeall: my-screen
     free: my-screen
     0 default-screen !
-    cg-3d off
+    cg-3d off \ TODO fix colors
 ;
 
 exists? HMSL .IF

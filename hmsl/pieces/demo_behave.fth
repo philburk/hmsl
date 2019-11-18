@@ -62,7 +62,7 @@ ANEW TASK-DEMO_BEHAVE
     ds.init.coll
     ." Hierarchy of piece."
     print.hierarchy: coll-p-2 cr
-    ." Hit key." key drop
+    ." Hit key." key drop cr
 ;
 
 : DS.PLAY ( -- )

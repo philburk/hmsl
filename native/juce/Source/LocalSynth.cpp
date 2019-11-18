@@ -17,7 +17,6 @@
 
 #include "LocalSynth.h"
 
-#define SAMPLE_RATE         (44100)
 #define SAMPLES_PER_FRAME   (2)
 #define BITS_PER_SAMPLE     (sizeof(short)*8)
 
@@ -73,7 +72,7 @@ double LocalSynth::getNativeTime() {
 }
 
 cell_t LocalSynth::getNativeRate() const {
-    return SAMPLE_RATE / JukeBox_GetFramesPerTick();
+    return mSampleRate / JukeBox_GetFramesPerTick();
 }
 
 // Called by HMSL upon initializing MIDI
@@ -84,8 +83,10 @@ cell_t LocalSynth::init() {
     setTime(0);
 
     mAudioDeviceManager.initialiseWithDefaultDevices(0, 2); // audio device
-    
-    int result = JukeBox_Initialize(SAMPLE_RATE);
+    AudioDeviceManager::AudioDeviceSetup audioSetup =
+            mAudioDeviceManager.getAudioDeviceSetup();
+    mSampleRate = audioSetup.sampleRate;
+    int result = JukeBox_Initialize(mSampleRate);
     mFramesPerTick = JukeBox_GetFramesPerTick();
     int maxSamples = mFramesPerTick * SAMPLES_PER_FRAME;
     mShortBuffer = std::make_unique<short[]>(maxSamples);
