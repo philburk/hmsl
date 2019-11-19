@@ -4,7 +4,9 @@
 
 First, download a [precompiled release](https://github.com/philburk/hmsl/releases).
 
-1. Double click JuceHMSL.app
+1. Double click the .zip file to uncompress HMSL.
+1. Drag the uncompressed HMSL folder to the Applications folder. (IMPORTANT)
+1. Open HMSL folder and double click JuceHMSL.app
 1. Hit 'y' key to initialize HMSL.
 
 The new HMSL provides a built-in General MIDI synthesizer based on the Mobileer ME2000.
