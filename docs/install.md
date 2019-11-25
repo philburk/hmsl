@@ -1,6 +1,6 @@
 [Docs Home](.)
 
-#Downloading and Installing HMSL
+# Downloading and Installing HMSL
 
 First, download a [precompiled release](https://github.com/philburk/hmsl/releases).
 
