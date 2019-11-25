@@ -1,6 +1,7 @@
 # HMSL Docs
 
 * [Status of HMSL](status.md)
+* [Downloading and Installing HMSL](install.md)
 * Tours
   * [Quick Tour of Forth and HMSL](quicktour.md)
   
