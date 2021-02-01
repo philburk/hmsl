@@ -172,9 +172,11 @@ DEFER MF.ERROR
 
 : MF.WHERE ( -- current_pos , in file )
     mf-fileid @ file-position abort" file-position failed"
+    d>s   \ file-position returns a double word
 ;
 
 : MF.SEEK ( position -- , in file )
+    s>d   \ reposition-file takes a double word
     mf-fileid @ reposition-file abort" reposition-file failed"
 ;
 
@@ -304,7 +306,7 @@ variable MF-CHANNEL
         DO mf.read.byte mp.handle.data
         LOOP
        ENDCASE
-    ELSE 
+    ELSE
         mp.handle.data  ( call MIDI parser with byte read )
         mf-#data @ 1- 0 max 0
         DO mf.read.byte mp.handle.data
@@ -575,7 +577,7 @@ variable MF-SHAPE-TIME
     mf-event-pad     c!  ( 32nd notes in 24 clocks )
     mf-event-pad 4 $ 58 mf.write.meta
 ;
-    
+
 : MF.WRITE.TEMPO  ( mics/beat -- )
     mf-event-pad !
     mf-event-pad 1+ 3 $ 51 mf.write.meta
