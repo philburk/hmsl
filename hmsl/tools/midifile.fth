@@ -67,6 +67,9 @@ chkid MThd 'MThd'
 chkid MTrk 'MTrk'
 
 variable mf-FILEID
+4 constant MF_CHKID_SIZE  \ size of a length number in an SMF file
+4 constant MF_LENGTH_SIZE  \ size of a length number in an SMF file
+mf_chkid_size mf_length_size + constant MF_HEADER_SIZE
 16 constant MF_PAD_SIZE
 variable mf-PAD mf_pad_size allot
 
@@ -110,12 +113,12 @@ DEFER MF.ERROR
 ;
 
 : MF.READ.CHKID  ( -- size chkid )
-    dup>r mf-pad 8 mf.read
-    8 -
+    dup>r mf-pad mf_header_size mf.read
+    mf_header_size -
     IF ." Truncated chunk " r@ .chkid cr mf.error
     THEN
     rdrop
-    mf-pad cell+ be@
+    mf-pad mf_chkid_size + be@
     mf-pad be@
 ;
 
@@ -153,8 +156,8 @@ DEFER MF.ERROR
 
 : MF.WRITE.CHKID  ( size chkid -- , write chunk header )
     mf-pad be!
-    mf-pad cell+ be!
-    mf-pad 8 mf.write?
+    mf-pad mf_chkid_size + be!
+    mf-pad mf_header_size mf.write?
 ;
 
 : MF.WRITE.CHUNK  ( address size chkid -- , write complete chunk )
@@ -478,7 +481,7 @@ variable MF-EVENT-PAD
 : MF.END.TRACK  ( startpos -- , write length to track beginning )
     mf.where dup>r  ( so we can return )
     over -   ( -- start #bytes )
-    swap cell- mf.seek
+    swap mf_length_size - mf.seek
     mf-pad be! mf-pad 4 mf.write?
     r> mf.seek
 ;
