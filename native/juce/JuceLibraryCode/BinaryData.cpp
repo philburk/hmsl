@@ -17246,7 +17246,7 @@ static const unsigned char temp_binary_data_77[] =
 "    'c ahead.time@ is time@\n"
 "    'c rtc.time+!  is time+!\n"
 "    'c noop is self.clock\n"
-"    rtc.rate@ time-advance !\n"
+"    rtc.rate@ 6 / time-advance !\n"
 "    rtc.rate@ 2* 3 / ticks/beat !\n"
 "    anow\n"
 "    vtime-data vtime_smax vtime-stack stack.setup\n"
@@ -26546,7 +26546,7 @@ const char* getNamedResource (const char* resourceNameUTF8, int& numBytes)
         case 0x2da3cc33:  numBytes = 2044; return test_graphics_fth;
         case 0x537d8b1e:  numBytes = 958; return test_ode_fth;
         case 0x3ca914bf:  numBytes = 763; return test_ode_locals_fth;
-        case 0x8432e0e8:  numBytes = 4146; return time_fth;
+        case 0x8432e0e8:  numBytes = 4150; return time_fth;
         case 0xbc13cb70:  numBytes = 875; return top_fth;
         case 0xe4b651b4:  numBytes = 5098; return translators_fth;
         case 0x468a0ccc:  numBytes = 3504; return utils_fth;

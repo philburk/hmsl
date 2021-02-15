@@ -8,6 +8,8 @@
 
 #pragma once
 
+#include <unistd.h>
+
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "AtomicQueue.h"
 

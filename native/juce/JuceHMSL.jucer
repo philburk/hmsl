@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<JUCERPROJECT id="C2IY5m" name="JuceHMSL" projectType="guiapp" jucerVersion="5.4.5"
-              companyName="Mobileer" companyCopyright="(C) 2019 Mobileer Inc"
-              companyWebsite="www.softsynth.com/hmsl" defines="PF_SUPPORT_FP&#10;PF_USER_FILEIO=&quot;pf_juce_file_io.h&quot;&#10;PF_DEFAULT_HEADER_SIZE=300000&#10;PF_DEFAULT_CODE_SIZE=700000&#10;"
-              headerPath="../../../../pforth/csrc&#10;../../Source">
+<JUCERPROJECT id="C2IY5m" name="JuceHMSL" projectType="guiapp" companyName="Mobileer"
+              companyCopyright="(C) 2019 Mobileer Inc" companyWebsite="www.softsynth.com/hmsl"
+              defines="PF_SUPPORT_FP&#10;PF_USER_FILEIO=&quot;pf_juce_file_io.h&quot;&#10;PF_DEFAULT_HEADER_SIZE=300000&#10;PF_DEFAULT_CODE_SIZE=700000&#10;"
+              headerPath="../../../../pforth/csrc&#10;../../Source" displaySplashScreen="1"
+              jucerFormatVersion="1">
   <MAINGROUP id="Nc5YxD" name="JuceHMSL">
     <GROUP id="{BCBFEA09-C5E2-B215-B6AE-1EC056093060}" name="hmsl">
       <GROUP id="{444488E9-2970-5113-124E-3A808E08A893}" name="fth">

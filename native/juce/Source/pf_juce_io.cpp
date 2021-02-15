@@ -15,6 +15,8 @@
  **
  ***************************************************************/
 
+#include <unistd.h>
+
 #include "pf_juce_io.h"
 #include "Terminal.h"
 
