@@ -240,7 +240,7 @@ namespace BinaryData
     const int            test_ode_locals_fthSize = 763;
 
     extern const char*   time_fth;
-    const int            time_fthSize = 4146;
+    const int            time_fthSize = 4150;
 
     extern const char*   top_fth;
     const int            top_fthSize = 875;
