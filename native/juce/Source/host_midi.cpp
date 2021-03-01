@@ -32,6 +32,7 @@ void hostClock_Init() {
 }
 
 void hostClock_Term() {
+    sMidiBase.reset();
 }
 
 cell_t hostClock_QueryTime() {
