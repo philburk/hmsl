@@ -63,6 +63,7 @@ extern "C" {
 int32_t hostInit(void);
 void hostTerm(void);
 
+// GUI
 hmsl_window_index_t hostOpenWindow( hmslWindow *window );
 void hostCloseWindow( hmsl_window_index_t window );
 void hostSetCurrentWindow( hmsl_window_index_t window );
@@ -77,11 +78,13 @@ void hostSetDrawingMode( cell_t mode );
 void hostSetFont( cell_t font );
 void hostSetTextSize( cell_t size );
 
+// int getMainScreenRefreshRate( void );
+
 // Events
 void hostGetMouse( ucell_ptr_t xPtr, ucell_ptr_t yPtr);
 cell_t hostGetEvent( cell_t timeout );
 
-// hmsl_midi.c
+// MIDI
 void hostClock_Init(void);
 void hostClock_Term(void);
 cell_t hostClock_QueryTime(void);
@@ -94,32 +97,11 @@ cell_t hostMIDI_Init(void);
 void hostMIDI_Term(void);
 cell_t hostMIDI_Write(ucell_ptr_t buffer, cell_t count, cell_t vtime);
 cell_t hostMIDI_Recv(void);
+cell_t hostMIDI_Port(void);
 void hostSleep( cell_t msec );
-
-int getMainScreenRefreshRate( void );
 
 #ifdef __cplusplus
 }
 #endif
-
-/*
-// communication with JUCE =========
-
-// hmsl_host.c
-void hmslAddEvent( enum HMSLEventID event_type );
-void hmslAddMouseEvent( enum HMSLEventID event_type, HMSLPoint loc );
-char* nullTermString( const char*, int32_t );
-void hmslDrawLine( HMSLPoint start, HMSLPoint end );
-void hmslSetCurrentWindow( uint32_t );
-void hmslCloseWindow( uint32_t );
-uint32_t hmslOpenWindow( const char* title, short x, short y, short w, short h );
-void hmslFillRectangle( HMSLRect rect );
-void hmslDrawText( const char*, int32_t, HMSLPoint );
-uint32_t hmslGetTextLength( const char*, int32_t );
-void hmslSetDrawingColor( const double* );
-void hmslSetBackgroundColor( const double* );
-void hmslSetTextSize( int32_t );
-void hmslSetDrawingMode( int32_t );
-*/
 
 #endif

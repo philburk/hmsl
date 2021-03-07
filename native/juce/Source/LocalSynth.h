@@ -13,9 +13,12 @@
 #include <memory>
 
 #include "../JuceLibraryCode/JuceHeader.h"
-#include "MidiBase.h"
+#include "MidiNativePort.h"
 
-class LocalSynth : public MidiBase, AudioIODeviceCallback  {
+/**
+ * Built-in synthesizer using ME2000 from Mobileer.
+ */
+class LocalSynth : public MidiNativePort, AudioIODeviceCallback  {
 public:
 
     virtual ~LocalSynth() = default;
@@ -24,7 +27,8 @@ public:
 
     void term() override;
 
-    cell_t write(ucell_ptr_t data, cell_t count, cell_t ticks) override;
+    // @return error code (0 for no error)
+    cell_t write(ucell_ptr_t data, cell_t count, double nativeTicks) override;
 
     double getNativeTime() override;
 

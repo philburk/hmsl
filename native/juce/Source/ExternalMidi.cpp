@@ -32,9 +32,6 @@ static void *createNewMidiOutput(void *text) {
 //
 // Returns error code (0 for no error)
 cell_t ExternalMidi::init() {
-    mHmslTicksPerSecond = kDefaultTicksPerSecond;
-    setTime(0);
-
     MessageManager *messageManager = MessageManager::getInstance();
     messageManager->callFunctionOnMessageThread(createNewMidiOutput,
                                                 (void *) kMidiName);
@@ -54,13 +51,13 @@ void ExternalMidi::term() {
 //
 // addr - Array of unsigned chars to write to MIDI (the data)
 // count - the number of bytes in the addr array
-// vtime - time in ticks to play the data
+// nativeTicks - time in native ticks to play the data
 //
 // Returns error code (0 for no error)
-cell_t ExternalMidi::write(ucell_ptr_t data, cell_t count, cell_t ticks) {
+cell_t ExternalMidi::write(ucell_ptr_t data, cell_t count, double nativeTicks) {
     // Use the timestamp to schedule the MIDI events in the future.
     MidiBuffer midiBuffer(MidiMessage((const void *)data, (int)count));
-    const double scheduledMillis = ticksToNative(ticks);
+    const double scheduledMillis = nativeTicks;
     const double nowMillis = Time::getMillisecondCounterHiRes();
     const double playTimeMillis = std::max(scheduledMillis, nowMillis);
     sMidiOutput->sendBlockOfMessages(midiBuffer, playTimeMillis, 44100 /* sample rate */);

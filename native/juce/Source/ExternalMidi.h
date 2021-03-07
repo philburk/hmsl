@@ -11,9 +11,16 @@
 #pragma once
 
 #include "../JuceLibraryCode/JuceHeader.h"
-#include "MidiBase.h"
 
-class ExternalMidi : public MidiBase {
+#include "MidiNativePort.h"
+
+/**
+ * Provide an external port that can drive DAWs like Logic Pro
+ * or physical MIDI ports.
+ * To target individual channels in Logic:
+ *   goto File>Project Settings>Recording and check 'Auto Demix by Channel...'
+ */
+class ExternalMidi : public MidiNativePort {
 public:
     virtual ~ExternalMidi() = default;
 
@@ -21,12 +28,15 @@ public:
 
     void term() override;
 
-    cell_t write(ucell_ptr_t data, cell_t count, cell_t ticks) override;
+    cell_t write(ucell_ptr_t data, cell_t count, double nativeTicks) override;
 
     double getNativeTime() override;
 
     cell_t getNativeRate() const override {
-        return 1000; // JUCE MIDI uses a millisecond timer
+        return kMillisPerSecond; // JUCE MIDI uses a millisecond timer
     }
 
+private:
+    static constexpr const char *kMidiName = "HMSL"; // name for external MIDI ports
+    static constexpr int kMillisPerSecond = 1000;
 };

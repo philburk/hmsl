@@ -67,6 +67,7 @@ void * CustomFunctionTable[] =
     (void *) hostMIDI_Term,
     (void *) hostMIDI_Write,
     (void *) hostMIDI_Recv,
+    (void *) hostMIDI_Port,
     (void *) hostSleep,
     (void *) hostClock_Init,
     (void *) hostClock_Term,
@@ -111,6 +112,7 @@ Err CompileCustomFunctions( void )
     CreateGlueToC( "HOSTMIDI_TERM()", i++, C_RETURNS_VOID, 0 );
     CreateGlueToC( "HOSTMIDI_WRITE()", i++, C_RETURNS_VOID, 3 );
     CreateGlueToC( "HOSTMIDI_RECV()", i++, C_RETURNS_VALUE, 0 );
+    CreateGlueToC( "HOSTMIDI_PORT()", i++, C_RETURNS_VALUE, 0 );
     CreateGlueToC( "HOSTSLEEP()", i++, C_RETURNS_VOID, 1 );
     CreateGlueToC( "HOSTCLOCKINIT()", i++, C_RETURNS_VOID, 0 );
     CreateGlueToC( "HOSTCLOCKTERM()", i++, C_RETURNS_VOID, 0 );
