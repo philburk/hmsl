@@ -1,6 +1,6 @@
 //
-//  hmsl_midi.m
-//  HMSL-OSX
+//  Host Dependent MIDI
+//     hmsl_midi.cpp
 //
 //  Contributors:
 //     1997 Robert Marsanyi
@@ -22,16 +22,12 @@ static std::unique_ptr<MidiBase> sMidiBase;
 
 // ============== Clock Time ===================================
 void hostClock_Init() {
-    const bool useLocalSynth = true;
-    if (useLocalSynth) {
-        sMidiBase = std::make_unique<LocalSynth>();
-    } else {
-        sMidiBase = std::make_unique<ExternalMidi>();
-    }
+    sMidiBase = std::make_unique<MidiBase>();
     sMidiBase->init();
 }
 
 void hostClock_Term() {
+    sMidiBase->term();
     sMidiBase.reset();
 }
 
@@ -48,7 +44,8 @@ void hostClock_AdvanceTime( cell_t delta ) {
 }
 
 cell_t hostClock_QueryRate() {
-    return (sMidiBase) ? sMidiBase->queryRate() : 60;
+    if (sMidiBase) return sMidiBase->queryRate();
+    else return 1000;
 }
 
 void hostClock_SetRate( cell_t rate ) {
@@ -69,7 +66,7 @@ cell_t hostMIDI_Init() {
 
 // Called by HMSL to terminate the MIDI connection
 void hostMIDI_Term() {
-    if (sMidiBase) sMidiBase->term();
+    sMidiBase->term();
 }
 
 // Called when HMSL wants to schedule a MIDI packet
@@ -86,5 +83,10 @@ cell_t hostMIDI_Write(ucell_ptr_t data, cell_t count, cell_t ticks) {
 
 cell_t hostMIDI_Recv(void) {
     return 0; // TODO MIDI input
+}
+
+// @return address of MIDI-PORT variable
+cell_t hostMIDI_Port(void) {
+    return sMidiBase->getMidiPortAddress();
 }
 

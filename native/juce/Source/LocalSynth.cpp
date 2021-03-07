@@ -20,7 +20,9 @@
 #define SAMPLES_PER_FRAME   (2)
 #define BITS_PER_SAMPLE     (sizeof(short)*8)
 
-#define CALL_JUKEBOX   1
+// Set to 1 if you want to generate white noise instead of notes.
+// This could be handy testing the audio interface.
+#define PLAY_WHITE_NOISE   0
 
 void LocalSynth::audioDeviceIOCallback(const float **inputChannelData,
                                             int           numInputChannels,
@@ -37,10 +39,10 @@ void LocalSynth::audioDeviceIOCallback(const float **inputChannelData,
     while( framesLeft )
     {
         int framesToSynthesize = std::min(framesLeft, mFramesPerTick);
-#if CALL_JUKEBOX
-        int framesGenerated = JukeBox_SynthesizeAudioTick( mShortBuffer.get(), framesToSynthesize, SAMPLES_PER_FRAME );
-#else
+#if PLAY_WHITE_NOISE
         int framesGenerated = framesToSynthesize;
+#else
+        int framesGenerated = JukeBox_SynthesizeAudioTick( mShortBuffer.get(), framesToSynthesize, SAMPLES_PER_FRAME );
 #endif
         if (framesGenerated <= 0) {
             return; // TODO report the error
@@ -48,10 +50,10 @@ void LocalSynth::audioDeviceIOCallback(const float **inputChannelData,
         short *shortData = mShortBuffer.get();
         for (int frame = 0; frame < framesGenerated; frame++) {
             for (int channel = 0; channel < commonChannels; channel++) {
-#if CALL_JUKEBOX
-                float floatSample = shortData[channel] * (1.0f / 32768);
-#else
+#if PLAY_WHITE_NOISE
                 float floatSample = (drand48() - 0.5) * 0.1;
+#else
+                float floatSample = shortData[channel] * (1.0f / 32768);
 #endif
                 float *channelArray = outputChannelData[channel];
                 channelArray[frameCursor] = floatSample;
@@ -79,8 +81,6 @@ cell_t LocalSynth::getNativeRate() const {
 //
 // Returns error code (0 for no error)
 cell_t LocalSynth::init() {
-    mHmslTicksPerSecond = kDefaultTicksPerSecond;
-    setTime(0);
 
     mAudioDeviceManager.initialiseWithDefaultDevices(0, 2); // audio device
     AudioDeviceManager::AudioDeviceSetup audioSetup =
@@ -107,17 +107,16 @@ void LocalSynth::term() {
 //
 // addr - Array of unsigned chars to write to MIDI (the data)
 // count - the number of bytes in the addr array
-// vtime - time in ticks to play the data
+// nativeTicks - time in ticks to play the data
 //
-// Returns error code (0 for no error)
-cell_t LocalSynth::write(ucell_ptr_t data, cell_t count, cell_t ticks) {
+// @return error code (0 for no error)
+cell_t LocalSynth::write(ucell_ptr_t data, cell_t count, double nativeTicks) {
     uint8_t *byteData = reinterpret_cast<uint8_t *>(data);
     if( count > 0 )
     {
         int timeOut = 20;
-
-        const cell_t scheduledNativeTicks = ticksToNative(ticks);
-        const cell_t playTimeNativeTicks = std::max(scheduledNativeTicks, (cell_t) getNativeTime());
+        // Cannot playt it in the past.
+        const cell_t playTimeNativeTicks = (cell_t)std::max(nativeTicks, getNativeTime());
         while( (JukeBox_SendMIDI( (int)playTimeNativeTicks, (int)count, byteData ) < 0) && (timeOut-- > 0) )
         {
             hostSleep(50);

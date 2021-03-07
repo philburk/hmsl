@@ -208,6 +208,10 @@
       </GROUP>
     </GROUP>
     <GROUP id="{D4447538-6ED0-FC8B-8612-F845BF3B88BD}" name="Source">
+      <FILE id="RfwC9Q" name="MidiNativePort.cpp" compile="1" resource="0"
+            file="Source/MidiNativePort.cpp"/>
+      <FILE id="Nr4cXy" name="MidiNativePort.h" compile="0" resource="0"
+            file="Source/MidiNativePort.h"/>
       <FILE id="x9rN64" name="ExternalMidi.cpp" compile="1" resource="0"
             file="Source/ExternalMidi.cpp"/>
       <FILE id="UH2b62" name="ExternalMidi.h" compile="0" resource="0" file="Source/ExternalMidi.h"/>

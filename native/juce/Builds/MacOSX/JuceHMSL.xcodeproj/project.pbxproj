@@ -101,6 +101,10 @@
 			isa = PBXBuildFile;
 			fileRef = 635FD059ACA0C52F48218EDD;
 		};
+		6FEF4F01D120B31DB362CE20 = {
+			isa = PBXBuildFile;
+			fileRef = 7C6B49813E1B2340CC103729;
+		};
 		3E6DDE7FEB5425358F1459D0 = {
 			isa = PBXBuildFile;
 			fileRef = 9BA4DD270E3C7CA98EFBE5EF;
@@ -1025,6 +1029,13 @@
 			path = ../../Source/TerminalComponent.h;
 			sourceTree = "SOURCE_ROOT";
 		};
+		6E3759C18437D9A4B13B8C1D = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = MidiNativePort.h;
+			path = ../../Source/MidiNativePort.h;
+			sourceTree = "SOURCE_ROOT";
+		};
 		6EE89ADD4C13068ED7D625D8 = {
 			isa = PBXFileReference;
 			lastKnownFileType = file.fth;
@@ -1114,6 +1125,13 @@
 			lastKnownFileType = sourcecode.cpp.cpp;
 			name = MainComponent.cpp;
 			path = ../../Source/MainComponent.cpp;
+			sourceTree = "SOURCE_ROOT";
+		};
+		7C6B49813E1B2340CC103729 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = MidiNativePort.cpp;
+			path = ../../Source/MidiNativePort.cpp;
 			sourceTree = "SOURCE_ROOT";
 		};
 		7DEB3E3988B2FB1723A7E1E1 = {
@@ -2096,6 +2114,8 @@
 		6DAD776B44FBED4648BC2A62 = {
 			isa = PBXGroup;
 			children = (
+				7C6B49813E1B2340CC103729,
+				6E3759C18437D9A4B13B8C1D,
 				9BA4DD270E3C7CA98EFBE5EF,
 				36DB06DA87C1B166DDE287E3,
 				41FAC74FFCB0849AC2BE9CC7,
@@ -2494,6 +2514,7 @@
 				6C11A2E29524CBDE4EAA132A,
 				8B0771F1529BEFDDFE148550,
 				2CD967AF1AC0A8F2CED43FA3,
+				6FEF4F01D120B31DB362CE20,
 				3E6DDE7FEB5425358F1459D0,
 				1A82E6EFB5522680778E0248,
 				BE8024292897C31703AFDD30,

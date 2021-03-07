@@ -3,9 +3,15 @@
 ANEW TASK-MIDI_GLOBALS
 
 \ -------------------------------MIDI Globals--------------------------------
-0   CONSTANT Modem_Port
-1   CONSTANT Printer_Port
-VARIABLE MIDI-PORT      \  Current port being used; 0=modem, 1=printer
+0 CONSTANT Modem_Port     \ For MacPlus
+1 CONSTANT Printer_Port   \ For MacPlus
+
+\ As of 2021, the variable now resides in the Host code.
+\ VARIABLE MIDI-PORT      \  Current port being used; 0=modem, 1=printer
+: MIDI-PORT hostmidi_port() ;
+0 CONSTANT MIDI_PORT_INTERNAL  \ use built-in ME2000 synth
+1 CONSTANT MIDI_PORT_EXTERNAL  \ use external port for Logic Pro, etc.
+
 2 constant MIDI_NUM_PORTS
 
 variable MIDI-ERROR
@@ -60,7 +66,7 @@ variable RTC-USE-MIDI  ( if true use MIDI for time )
             >newline
             1 OF ." MIDI Buffer Overflow!" ENDOF
             2 OF ." MIDI Serial Transmission Error!" ENDOF
-            3 OF ." MIDI Msg had Incorrect Length!" cr 
+            3 OF ." MIDI Msg had Incorrect Length!" cr
                 ." Perhaps a MIDI Cable was plugged in or unplugged!" ENDOF
             ." MIDI Error# = " dup .
         ENDCASE cr
