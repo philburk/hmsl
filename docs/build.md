@@ -31,6 +31,15 @@ New C/C++ files should only be added using the ProJucer.
     git submodule init
     git submodule update
     
+### Exporting from ProJucer
+
+Unless you need to add a JUCE file, or update the JUCE version, you can probably skip to "Compiling the JUCE port" below.
+
+* Open the folder "native/juce"
+* Double click on JuceHMSL.jucer
+* At the top of the ProJucer page, set "Selected exporter" to "XCode (macOS)"
+* Click on the white and blue circulat icon to the right of that menu to "Save and Open IDE".
+
 ### Compiling the JUCE port
 * Launch the XCode project at "HMSL/native/juce/Builds/MacOSX/JuceHMSL.xcodeproj".
 * In "HMSL/native/juce/Source/ForthThread.cpp", set PF_COMPILE_SYSTEM to 1
