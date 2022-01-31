@@ -7651,9 +7651,15 @@ static const unsigned char temp_binary_data_38[] =
 "ANEW TASK-MIDI_GLOBALS\n"
 "\n"
 "\\ -------------------------------MIDI Globals--------------------------------\n"
-"0   CONSTANT Modem_Port\n"
-"1   CONSTANT Printer_Port\n"
-"VARIABLE MIDI-PORT      \\  Current port being used; 0=modem, 1=printer\n"
+"0 CONSTANT Modem_Port     \\ For MacPlus\n"
+"1 CONSTANT Printer_Port   \\ For MacPlus\n"
+"\n"
+"\\ As of 2021, the variable now resides in the Host code.\n"
+"\\ VARIABLE MIDI-PORT      \\  Current port being used; 0=modem, 1=printer\n"
+": MIDI-PORT hostmidi_port() ;\n"
+"0 CONSTANT MIDI_PORT_INTERNAL  \\ use built-in ME2000 synth\n"
+"1 CONSTANT MIDI_PORT_EXTERNAL  \\ use external port for Logic Pro, etc.\n"
+"\n"
 "2 constant MIDI_NUM_PORTS\n"
 "\n"
 "variable MIDI-ERROR\n"
@@ -7708,7 +7714,7 @@ static const unsigned char temp_binary_data_38[] =
 "            >newline\n"
 "            1 OF .\" MIDI Buffer Overflow!\" ENDOF\n"
 "            2 OF .\" MIDI Serial Transmission Error!\" ENDOF\n"
-"            3 OF .\" MIDI Msg had Incorrect Length!\" cr \n"
+"            3 OF .\" MIDI Msg had Incorrect Length!\" cr\n"
 "                .\" Perhaps a MIDI Cable was plugged in or unplugged!\" ENDOF\n"
 "            .\" MIDI Error# = \" dup .\n"
 "        ENDCASE cr\n"
@@ -26459,6 +26465,7 @@ static const unsigned char temp_binary_data_134[] =
 const char* wordslik_fth = (const char*) temp_binary_data_134;
 
 
+const char* getNamedResource (const char* resourceNameUTF8, int& numBytes);
 const char* getNamedResource (const char* resourceNameUTF8, int& numBytes)
 {
     unsigned int hash = 0;
@@ -26507,7 +26514,7 @@ const char* getNamedResource (const char* resourceNameUTF8, int& numBytes)
         case 0x9dec62ea:  numBytes = 688; return make_hmsl_fth;
         case 0x1d3ad71b:  numBytes = 1100; return memalloc_fth;
         case 0x9de7673c:  numBytes = 14014; return midi_fth;
-        case 0x9e4eedad:  numBytes = 3511; return midi_globals_fth;
+        case 0x9e4eedad:  numBytes = 3761; return midi_globals_fth;
         case 0x05a459e0:  numBytes = 3375; return midi_instrument_fth;
         case 0x40dc7518:  numBytes = 11904; return midi_parser_fth;
         case 0x415ae802:  numBytes = 454; return midi_stubs_fth;
@@ -26889,6 +26896,7 @@ const char* originalFilenames[] =
     "wordslik.fth"
 };
 
+const char* getNamedResourceOriginalFilename (const char* resourceNameUTF8);
 const char* getNamedResourceOriginalFilename (const char* resourceNameUTF8)
 {
     for (unsigned int i = 0; i < (sizeof (namedResourceList) / sizeof (namedResourceList[0])); ++i)
