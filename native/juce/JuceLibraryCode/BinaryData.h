@@ -123,7 +123,7 @@ namespace BinaryData
     const int            midi_fthSize = 14014;
 
     extern const char*   midi_globals_fth;
-    const int            midi_globals_fthSize = 3511;
+    const int            midi_globals_fthSize = 3761;
 
     extern const char*   midi_instrument_fth;
     const int            midi_instrument_fthSize = 3375;
