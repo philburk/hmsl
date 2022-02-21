@@ -38,6 +38,11 @@ variable TIME-VIRTUAL
 variable TIME-ADVANCE  ( time in advance that event buffered HMSL runs )
 600 time-advance !
 
+: EB.ON ( -- , turn event buffering ON, stub, always on ) ;
+: EB.OFF ( -- , turn event buffering OFF, stub, always on )
+    ." EB.OFF ignored." cr
+;
+
 defer RTC.START ( -- )
 defer RTC.STOP ( -- )
 defer RTC.RATE! ( ticks/second -- )
