@@ -4,6 +4,8 @@
 
 ANEW TASK-OB.PING.PONG
 
+METHOD PLAY:
+
 :CLASS  OB.PING.PONG  <SUPER  OBJECT
     iv.long  iv-pp-min
     iv.long  iv-pp-max
@@ -73,6 +75,7 @@ OB.PING.PONG PING1
 OB.PING.PONG PING2
 
 : PLAY.OPP  ( -- )
+    cr ." Press ENTER to stop." cr
     51 put.max: ping2
     time@ vtime!
     BEGIN
@@ -82,5 +85,8 @@ OB.PING.PONG PING2
         ?terminal
     UNTIL
 ;
+." Enter:   PLAY.OPP" cr
+
+
 
 

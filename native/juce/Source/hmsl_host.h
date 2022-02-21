@@ -96,6 +96,7 @@ void hostClock_SetRate( cell_t rate );
 cell_t hostMIDI_Init(void);
 void hostMIDI_Term(void);
 cell_t hostMIDI_Write(ucell_ptr_t buffer, cell_t count, cell_t vtime);
+// @return positive MIDI byte or negative number
 cell_t hostMIDI_Recv(void);
 cell_t hostMIDI_Port(void);
 void hostSleep( cell_t msec );

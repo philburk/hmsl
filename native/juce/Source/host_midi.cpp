@@ -81,8 +81,9 @@ cell_t hostMIDI_Write(ucell_ptr_t data, cell_t count, cell_t ticks) {
     return 0;
 }
 
+// @return positive MIDI byte or negative number
 cell_t hostMIDI_Recv(void) {
-    return 0; // TODO MIDI input
+    return -1; // TODO MIDI input
 }
 
 // @return address of MIDI-PORT variable
