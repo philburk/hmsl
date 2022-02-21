@@ -16,6 +16,7 @@
 decimal
 ANEW TASK-FILE_TOOLS
 
+private{
 50 constant MAX_#ASSIGNS
 80 constant MAX_REAL_CHARS
 32 constant MAX_LOGICAL_CHARS
@@ -74,14 +75,6 @@ as.init
     THEN
 ;
 
-: ASSIGNS? ( -- , print logical assignments )
-    as-#names @ 0
-    DO  cr i . 4 spaces i as-logical-names count type
-        bl 20 emit-to-column
-        i as-real-names count type
-    LOOP cr
-;
-
 variable EF-NAME
 variable EF-TEMP-ADDR
 variable EF-LOGLEN
@@ -91,6 +84,18 @@ variable EF-LOGLEN
     IF ( -- $string ) dup c@ 1- swap c!
     ELSE drop
     THEN
+;
+
+defer ASSIGN.OLD.MAP.FILENAME
+
+}private
+
+: ASSIGNS? ( -- , print logical assignments )
+    as-#names @ 0
+    DO  cr i . 4 spaces i as-logical-names count type
+        bl 20 emit-to-column
+        i as-real-names count type
+    LOOP cr
 ;
 
 : EXPAND.FILENAME ( $name -- $fullname, expand logical to full path )
@@ -143,5 +148,31 @@ variable EF-LOGLEN
     32 lword $assign
 ;
 
-\ TODO port related words from the H4thSystem/file_tools.f file.
-\ TODO make FOPEN a deferred word
+: ASSIGN.ON ( -- , install ASSIGN vectors )
+    what's map.filename  ['] expand.filename = not
+    IF
+        what's map.filename is assign.old.map.filename
+        ['] expand.filename is map.filename
+        ." MAP.FILENAME was set to use HMSL ASSIGN tool." cr
+    THEN
+;
+
+: ASSIGN.OFF ( -- , uninstall ASSIGN vectors )
+    what's map.filename  ['] expand.filename =
+    IF
+        what's assign.old.map.filename is map.filename
+    THEN
+;
+
+privatize
+
+: AUTO.INIT
+    auto.init
+    assign.on
+;
+: AUTO.TERM
+    assign.off
+    auto.term
+;
+
+if.forgotten assign.off
