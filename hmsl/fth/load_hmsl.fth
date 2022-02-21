@@ -182,6 +182,7 @@ if-load-graphics @ if-load-actions @ AND [IF]
 [THEN]
 
 \ load some tools
+include? assign    tools/assigns.fth
 include? file_port tools/file_port.fth
 include? task-midifile tools/midifile.fth
 include? task-markov_chain tools/markov_chain.fth
