@@ -46,8 +46,12 @@ void Terminal::adjustScrollBar() {
 
 int Terminal::putCharacter(char c) {
     int result = mTerminalModel.putCharacter(c);
+    // The characters are put in a queue and read later.
+    // So there is a race condition that can cause lines to be written below
+    // the bottom of the terminal.
+    // We check c == EOL to detect line advance.
     int32_t numLinesStored = mTerminalModel.getNumLinesStored();
-    if (numLinesStored != mNumLinesStored) {
+    if (c == '\n' || numLinesStored != mNumLinesStored) {
         juce::MessageManager::callAsync([this]() {
             this->adjustScrollBar();
             this->mTerminalComponent.requestRepaint();
