@@ -4,7 +4,11 @@
 * [Downloading and Installing HMSL](install.md)
 * Tours
   * [Quick Tour of Forth and HMSL](quicktour.md)
-  
+  * Shapes and Shape Editing
+  * Hierarchical Scheduling
+  * Score Entry
+  * MIDI Output
 * [Original HMSL User Manuals](http://www.softsynth.com/hmsl/docs/)
+* [Pieces](/hmsl/pieces) - play some original HMSL pieces
 * [Forth Tutorial](http://www.softsynth.com/pforth/pf_tut.php)
 * [How to Build HMSL from Source](build.md)
