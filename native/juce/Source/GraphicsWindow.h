@@ -49,18 +49,32 @@ public:
         return mMainComponent.get();
     }
 
-    static GraphicsWindow *openNewWindow(const char *text) {
+    typedef struct GraphicsWindowTemplate_s {
+        const char *name;
+        int x;
+        int y;
+        int width;
+        int height;
+    } GraphicsWindowTemplate;
+
+    static GraphicsWindow *openNewWindow(const GraphicsWindowTemplate *windowTemplate) {
         MessageManager *messageManager = MessageManager::getInstance();
         void *window = messageManager->callFunctionOnMessageThread(createNewWindow,
-                                                                          (void *)"HMSL");
+                                                                          (void *)windowTemplate);
         return static_cast<GraphicsWindow *>(window);
     }
 
 private:
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (GraphicsWindow)
 
-    static void *createNewWindow(void *text) {
-        return (void *) new GraphicsWindow(String((char *)text));
+    static void *createNewWindow(void *voidTemplate) {
+        GraphicsWindowTemplate *windowTemplate = (GraphicsWindowTemplate *)voidTemplate;
+        GraphicsWindow *window = new GraphicsWindow(String(windowTemplate->name));
+        window->setBounds(windowTemplate->x,
+                          windowTemplate->y,
+                          windowTemplate->width,
+                          windowTemplate->height);
+        return (void *) window;
     }
 
     std::unique_ptr<MainComponent> mMainComponent;
