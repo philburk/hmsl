@@ -182,13 +182,19 @@ if-load-graphics @ if-load-actions @ AND [IF]
 [THEN]
 
 \ load some tools
-include? assign    tools/assigns.fth
-include? file_port tools/file_port.fth
-include? task-midifile tools/midifile.fth
+include? assign            tools/assigns.fth
+include? file_port         tools/file_port.fth
+include? task-midifile     tools/midifile.fth
 include? task-markov_chain tools/markov_chain.fth
-include? task-score_entry tools/score_entry.fth
+include? task-score_entry  tools/score_entry.fth
 include? task-bend_tuning  tools/bend_tuning.fth
-include? task-bend_score  tools/bend_score.fth
+include? task-bend_score   tools/bend_score.fth
+
+\ Set common HMSL named folder assignments.
+assign hmsl .
+assign hp   hmsl:pieces
+assign ht   hmsl:tools
+assign hsc  hmsl:screens
 
 mreset-warn on
 cr ." HMSL compilation finished." cr
