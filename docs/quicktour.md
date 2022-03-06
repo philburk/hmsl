@@ -24,7 +24,7 @@ HMSL include a text based score entry system. Enter:
     score{
     playnow  c4  a  g  e
 
-To play notes using a Forth DO LOOP enter:
+To play notes with differrent durations using a Forth DO LOOP enter:
 
     playnow 4 0 do  1/4 c4  1/8 a g  1/4 e loop
 
