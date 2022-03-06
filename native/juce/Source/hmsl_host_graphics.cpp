@@ -55,17 +55,24 @@ void hostTerm() {
 }
 
 hmsl_window_index_t hostOpenWindow( hmslWindow *windowInfo ) {
+    GraphicsWindow::GraphicsWindowTemplate windowTemplate;
+
     char title[80];
-    ForthStringToC(title, (const char*)windowInfo->title, 80);
-    GraphicsWindow *window = GraphicsWindow::openNewWindow(title);
+    if (windowInfo->title == 0) {
+        windowTemplate.name = "HMSL?";
+    } else {
+        ForthStringToC(title, (const char*)windowInfo->title, 80);
+        windowTemplate.name = title;
+    }
+    windowTemplate.x = windowInfo->rect_left;
+    windowTemplate.y = windowInfo->rect_top;
+    windowTemplate.width = windowInfo->rect_right - windowInfo->rect_left;
+    windowTemplate.height = windowInfo->rect_bottom - windowInfo->rect_top;
+
+    GraphicsWindow *window = GraphicsWindow::openNewWindow(&windowTemplate);
     gHMSLContext.currentWindow = window;
     cell_t handle = gHMSLContext.nextWindowHandle++;
     gHMSLContext.windowMap[handle] = window;
-//    uint32_t windowIndex = hmslOpenWindow(title,
-//            window->rect_left, window->rect_bottom,
-//            window->rect_right - window->rect_left,
-//            window->rect_bottom - window->rect_top);
-//    return windowIndex;
     return handle;
 }
 
