@@ -4,5 +4,5 @@ See [Docs](/docs) for more information.
 
 ## Important files
 
-* load_hmsl.fth - include all files, useful when rebuilding HMSL.
-* make_hmsl.fth - include HMSL then save a dictionary.
+* [load_hmsl.fth](load_hmsl.fth) - include all files, useful when rebuilding HMSL.
+* [make_hmsl.fth](make_hmsl.fth) - include HMSL then save a dictionary.
