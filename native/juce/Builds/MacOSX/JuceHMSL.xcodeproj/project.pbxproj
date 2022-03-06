@@ -23,6 +23,21 @@
 		2E545D132DCFA1747E72DC84 /* include_juce_gui_extra.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D74B3EEC746D6D6F339FCE9 /* include_juce_gui_extra.mm */; };
 		3E6DDE7FEB5425358F1459D0 /* ExternalMidi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BA4DD270E3C7CA98EFBE5EF /* ExternalMidi.cpp */; };
 		48599A51AE79FB5274210014 /* pf_juce_file_io.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E6204CDA409C5E4F51632A9C /* pf_juce_file_io.cpp */; };
+		4AF894C727D43D5F0059DB04 /* clocker.fth in Resources */ = {isa = PBXBuildFile; fileRef = 4AF894B827D43D5F0059DB04 /* clocker.fth */; };
+		4AF894C827D43D5F0059DB04 /* tracks.fth in Resources */ = {isa = PBXBuildFile; fileRef = 4AF894B927D43D5F0059DB04 /* tracks.fth */; };
+		4AF894C927D43D5F0059DB04 /* calc_ntet.fth in Resources */ = {isa = PBXBuildFile; fileRef = 4AF894BA27D43D5F0059DB04 /* calc_ntet.fth */; };
+		4AF894CA27D43D5F0059DB04 /* rw_shape.fth in Resources */ = {isa = PBXBuildFile; fileRef = 4AF894BB27D43D5F0059DB04 /* rw_shape.fth */; };
+		4AF894CB27D43D5F0059DB04 /* bend_tuning.fth in Resources */ = {isa = PBXBuildFile; fileRef = 4AF894BC27D43D5F0059DB04 /* bend_tuning.fth */; };
+		4AF894CC27D43D5F0059DB04 /* bend_score.fth in Resources */ = {isa = PBXBuildFile; fileRef = 4AF894BD27D43D5F0059DB04 /* bend_score.fth */; };
+		4AF894CD27D43D5F0059DB04 /* score_entry.fth in Resources */ = {isa = PBXBuildFile; fileRef = 4AF894BE27D43D5F0059DB04 /* score_entry.fth */; };
+		4AF894CE27D43D5F0059DB04 /* markov_chain.fth in Resources */ = {isa = PBXBuildFile; fileRef = 4AF894BF27D43D5F0059DB04 /* markov_chain.fth */; };
+		4AF894CF27D43D5F0059DB04 /* assigns.fth in Resources */ = {isa = PBXBuildFile; fileRef = 4AF894C027D43D5F0059DB04 /* assigns.fth */; };
+		4AF894D027D43D5F0059DB04 /* file_xfer.fth in Resources */ = {isa = PBXBuildFile; fileRef = 4AF894C127D43D5F0059DB04 /* file_xfer.fth */; };
+		4AF894D127D43D5F0059DB04 /* screen_editor.fth in Resources */ = {isa = PBXBuildFile; fileRef = 4AF894C227D43D5F0059DB04 /* screen_editor.fth */; };
+		4AF894D227D43D5F0059DB04 /* 2d_transform.fth in Resources */ = {isa = PBXBuildFile; fileRef = 4AF894C327D43D5F0059DB04 /* 2d_transform.fth */; };
+		4AF894D327D43D5F0059DB04 /* file_port.fth in Resources */ = {isa = PBXBuildFile; fileRef = 4AF894C427D43D5F0059DB04 /* file_port.fth */; };
+		4AF894D427D43D5F0059DB04 /* midifile.fth in Resources */ = {isa = PBXBuildFile; fileRef = 4AF894C527D43D5F0059DB04 /* midifile.fth */; };
+		4AF894D527D43D5F0059DB04 /* sine_table.fth in Resources */ = {isa = PBXBuildFile; fileRef = 4AF894C627D43D5F0059DB04 /* sine_table.fth */; };
 		4F85FF345310E015102D3940 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5E154C61E442B2E450210F0 /* OpenGL.framework */; };
 		5248762E2A7D03BE4D43B13E /* hmsl_custom.c in Sources */ = {isa = PBXBuildFile; fileRef = A600175C24A47AE4555DBAEF /* hmsl_custom.c */; };
 		5A580D791585EBB6D6D1B2EE /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 933B4928168DA6458F924187 /* AudioToolbox.framework */; };
@@ -138,6 +153,21 @@
 		4580AE1C334C02BF43CC5327 /* ob_dlist.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = ob_dlist.fth; path = ../../../../hmsl/fth/ob_dlist.fth; sourceTree = SOURCE_ROOT; };
 		46BD6830054765A34A28F4D9 /* pfcompil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = pfcompil.h; path = ../../../../pforth/csrc/pfcompil.h; sourceTree = SOURCE_ROOT; };
 		49E36500DFDE9E0839C491C4 /* ctrl_fader.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = ctrl_fader.fth; path = ../../../../hmsl/fth/ctrl_fader.fth; sourceTree = SOURCE_ROOT; };
+		4AF894B827D43D5F0059DB04 /* clocker.fth */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = clocker.fth; sourceTree = "<group>"; };
+		4AF894B927D43D5F0059DB04 /* tracks.fth */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = tracks.fth; sourceTree = "<group>"; };
+		4AF894BA27D43D5F0059DB04 /* calc_ntet.fth */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = calc_ntet.fth; sourceTree = "<group>"; };
+		4AF894BB27D43D5F0059DB04 /* rw_shape.fth */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = rw_shape.fth; sourceTree = "<group>"; };
+		4AF894BC27D43D5F0059DB04 /* bend_tuning.fth */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = bend_tuning.fth; sourceTree = "<group>"; };
+		4AF894BD27D43D5F0059DB04 /* bend_score.fth */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = bend_score.fth; sourceTree = "<group>"; };
+		4AF894BE27D43D5F0059DB04 /* score_entry.fth */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = score_entry.fth; sourceTree = "<group>"; };
+		4AF894BF27D43D5F0059DB04 /* markov_chain.fth */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = markov_chain.fth; sourceTree = "<group>"; };
+		4AF894C027D43D5F0059DB04 /* assigns.fth */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = assigns.fth; sourceTree = "<group>"; };
+		4AF894C127D43D5F0059DB04 /* file_xfer.fth */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = file_xfer.fth; sourceTree = "<group>"; };
+		4AF894C227D43D5F0059DB04 /* screen_editor.fth */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = screen_editor.fth; sourceTree = "<group>"; };
+		4AF894C327D43D5F0059DB04 /* 2d_transform.fth */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2d_transform.fth; sourceTree = "<group>"; };
+		4AF894C427D43D5F0059DB04 /* file_port.fth */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = file_port.fth; sourceTree = "<group>"; };
+		4AF894C527D43D5F0059DB04 /* midifile.fth */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = midifile.fth; sourceTree = "<group>"; };
+		4AF894C627D43D5F0059DB04 /* sine_table.fth */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sine_table.fth; sourceTree = "<group>"; };
 		4BA5F503ACEFC863DA8E5599 /* morph_lists.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = morph_lists.fth; path = ../../../../hmsl/fth/morph_lists.fth; sourceTree = SOURCE_ROOT; };
 		4C060ED318839EDBFA0D1D0E /* test_ode.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = test_ode.fth; path = ../../../../hmsl/fth/test_ode.fth; sourceTree = SOURCE_ROOT; };
 		4D74B3EEC746D6D6F339FCE9 /* include_juce_gui_extra.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_gui_extra.mm; path = ../../JuceLibraryCode/include_juce_gui_extra.mm; sourceTree = SOURCE_ROOT; };
@@ -407,6 +437,29 @@
 			name = csrc;
 			sourceTree = "<group>";
 		};
+		4AF894B727D43D5F0059DB04 /* tools */ = {
+			isa = PBXGroup;
+			children = (
+				4AF894B827D43D5F0059DB04 /* clocker.fth */,
+				4AF894B927D43D5F0059DB04 /* tracks.fth */,
+				4AF894BA27D43D5F0059DB04 /* calc_ntet.fth */,
+				4AF894BB27D43D5F0059DB04 /* rw_shape.fth */,
+				4AF894BC27D43D5F0059DB04 /* bend_tuning.fth */,
+				4AF894BD27D43D5F0059DB04 /* bend_score.fth */,
+				4AF894BE27D43D5F0059DB04 /* score_entry.fth */,
+				4AF894BF27D43D5F0059DB04 /* markov_chain.fth */,
+				4AF894C027D43D5F0059DB04 /* assigns.fth */,
+				4AF894C127D43D5F0059DB04 /* file_xfer.fth */,
+				4AF894C227D43D5F0059DB04 /* screen_editor.fth */,
+				4AF894C327D43D5F0059DB04 /* 2d_transform.fth */,
+				4AF894C427D43D5F0059DB04 /* file_port.fth */,
+				4AF894C527D43D5F0059DB04 /* midifile.fth */,
+				4AF894C627D43D5F0059DB04 /* sine_table.fth */,
+			);
+			name = tools;
+			path = ../../../../hmsl/tools;
+			sourceTree = "<group>";
+		};
 		537CE185E6C5AF37E5C01FC0 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -428,6 +481,7 @@
 		68880378BA86585FDE1F16C5 /* hmsl */ = {
 			isa = PBXGroup;
 			children = (
+				4AF894B727D43D5F0059DB04 /* tools */,
 				EEDDB6CBF3669F87A54E51E3 /* fth */,
 			);
 			name = hmsl;
@@ -761,7 +815,22 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4AF894C727D43D5F0059DB04 /* clocker.fth in Resources */,
+				4AF894CE27D43D5F0059DB04 /* markov_chain.fth in Resources */,
+				4AF894CA27D43D5F0059DB04 /* rw_shape.fth in Resources */,
+				4AF894D127D43D5F0059DB04 /* screen_editor.fth in Resources */,
+				4AF894D527D43D5F0059DB04 /* sine_table.fth in Resources */,
+				4AF894D027D43D5F0059DB04 /* file_xfer.fth in Resources */,
+				4AF894D327D43D5F0059DB04 /* file_port.fth in Resources */,
+				4AF894CB27D43D5F0059DB04 /* bend_tuning.fth in Resources */,
 				DC0163D7DF666D8E530C4E97 /* RecentFilesMenuTemplate.nib in Resources */,
+				4AF894CF27D43D5F0059DB04 /* assigns.fth in Resources */,
+				4AF894D427D43D5F0059DB04 /* midifile.fth in Resources */,
+				4AF894CD27D43D5F0059DB04 /* score_entry.fth in Resources */,
+				4AF894CC27D43D5F0059DB04 /* bend_score.fth in Resources */,
+				4AF894C927D43D5F0059DB04 /* calc_ntet.fth in Resources */,
+				4AF894C827D43D5F0059DB04 /* tracks.fth in Resources */,
+				4AF894D227D43D5F0059DB04 /* 2d_transform.fth in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
