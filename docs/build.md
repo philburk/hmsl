@@ -59,7 +59,7 @@ Unless you need to add a JUCE file, or update the JUCE version, you can probably
 2. Update the version number in native/juce/Source/Main.cpp
 3. Update master repository.
 4. Build the app as described above.
-5. Open the folder ~/Work/HMSL_Release/HMSL/hmsl.
+5. Open the folder ~/Work/hmsl/HMSL_Release/HMSL/hmsl.
 6. Replace the JuceHMSL.app file with "~/Work/hmsl/HMSL/native/juce/Builds/MacOSX/build/Debug/JuceHMSL.app".
 7. Replace the pforth.dic file with "~/Work/hmsl/HMSL/hmsl/pforth.dic".
 8. Replace the "pieces" folder with "~/Work/hmsl/HMSL/hmsl/pieces".
