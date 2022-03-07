@@ -1,3 +1,7 @@
+IMPORTANT - This is the original document from the 1980's.
+For current documentation, see the README.md file.
+---------------------------------------------------------
+
 Description of Demos
 by Phil Burk
 
