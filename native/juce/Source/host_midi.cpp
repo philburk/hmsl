@@ -45,7 +45,7 @@ void hostClock_AdvanceTime( cell_t delta ) {
 
 cell_t hostClock_QueryRate() {
     if (sMidiBase) return sMidiBase->queryRate();
-    else return 1000;
+    else return 60;
 }
 
 void hostClock_SetRate( cell_t rate ) {
