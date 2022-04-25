@@ -1,0 +1,41 @@
+\ Ongoing modification file.
+
+3/90 Added ON.TIME to Players and Interpreters,
+	Merged INTERP.EL.ON.FOR and INTERP.EL.ON
+	EB.ON is now automatic.
+    
+	* USE-GRAPHICS changed to HMSL-GRAPHICS
+	
+	Added:
+		SH.COMPRESS.NOTES  ( source target -- )
+		SH.EXPAND.NOTES  ( source target -- )
+	
+	Converted some SHAPE methods to use local variables.
+	
+	Changed layout of Shape Editor
+	
+	Reorder load so that Shape Editor and Actions are above
+	HMSL_TOP
+	
+	Changed main menu, move MAIN.QUIT to host Menu file.
+	
+	Fixed Undraw for screens.
+	
+4/90 - V3.47
+
+	Moved Methods from OB.MIDI.INSTRUMENT
+
+	Players now no longer use OFF Interpreter unless
+	you use the PLAY.ON&OFF: method
+
+	Added PUT.TEXT.FONT: and PUT.TEXT.SIZE: to controls.
+
+6/90
+
+	Fixed RBF.STAMP.HANDLER. Was hanging if incoming bytes during INIT.
+	Problem traced to unresolved BEQ.  Added label.
+	
+	Fixed stack leftover in DELAY ( ticks -- )
+
+	Fixed logic for morph stopping so STOP.FUNCTION gets
+	called correctly.
