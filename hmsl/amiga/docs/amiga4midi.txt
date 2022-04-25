@@ -1,0 +1,53 @@
+
+Amiga in place of MIDI
+
+Many of the MIDI commands have no equivalent for Amiga sound.
+You can, however, write something that will work like MIDI.NOTEON
+using the Amiga.
+
+	: AMIGA.NOTEON  ( note velocity -- )
+	    2/ DA.VOLUME!
+	    36 - AT: TUNING-EQUAL DA.PERIOD!
+	    DA.START
+	;
+	: AMIGA.NOTEOFF  ( note velocity -- )
+	    2DROP DA.STOP
+	;
+	: AMIGA.LASTOFF  ( -- )
+	    DA.STOP
+	;
+
+Use these words in place of MIDI.NOTEON, etc.
+For example:
+
+	: BANG  ( note -- )
+	    100 AMIGA.NOTEON
+	    250 MSEC
+	    AMIGA.LASTOFF
+	;
+
+	
+For the tutorials that use an OB.MIDI.INSTRUMENT, substitute
+an OB.AMIGA.INSTRUMENT.  This will allow you to experiment with
+collections, shapes, players, etc.
+For tutorial 3, instead of:
+
+	OB.MIDI.INSTRUMENT INS-1
+
+use:
+
+	OB.AMIGA.INSTRUMENT INS-1
+
+Tutorial 2 uses the command HMSL.EDIT.PLAY which uses the player SE-PLAYER.
+SE-PLAYER normally uses INS-MIDI-1.  You can make it use INS-AMIGA-1
+by entering the following:
+
+	INS-AMIGA-1 PUT.INSTRUMENT: SE-PLAYER
+	SH-1 HMSL.EDIT.PLAY
+
+If you want to use equal temper instead of slendro, enter:
+
+	TUNING-EQUAL PUT.TUNING: INS-AMIGA-1
+
+You can also substitute Amiga instruments in the example programs.
+
