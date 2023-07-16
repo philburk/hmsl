@@ -42,7 +42,7 @@ Unless you need to add a JUCE file, or update the JUCE version, you can probably
 
 ### Compiling the JUCE port
 * Launch the XCode project at "HMSL/native/juce/Builds/MacOSX/JuceHMSL.xcodeproj".
-* In "HMSL/native/juce/Source/ForthThread.cpp", set PF_COMPILE_SYSTEM to 1
+* In "JuceHMSL/Source/ForthThread.cpp", set PF_COMPILE_SYSTEM to 1
 * Run the application from XCode.
 * It will open a terminal window and compile the pForth dictionary.
 * Close the terminal window.
@@ -51,7 +51,7 @@ Unless you need to add a JUCE file, or update the JUCE version, you can probably
 * Run the application. It will open a terminal window.
 * Enter:   include fth/make_hmsl.fth
 * It will compile HMSL and save a new pforth.dic.
-* Close the terminal window.
+* Close the terminal window by entering:  BYE
 * The next time you run the application, it will initialize HMSL.
 
 ### Packaging a Release for Mac OS
@@ -60,7 +60,7 @@ Unless you need to add a JUCE file, or update the JUCE version, you can probably
 3. Update master repository.
 4. Build the app as described above.
 5. Open the folder ~/Work/hmsl/HMSL_Release/HMSL/hmsl.
-6. Replace the JuceHMSL.app file with "~/Work/hmsl/HMSL/native/juce/Builds/MacOSX/build/Debug/JuceHMSL.app".
+6. Replace the JuceHMSL.app file in that folder with "~/Work/hmsl/HMSL/native/juce/Builds/MacOSX/build/Debug/JuceHMSL.app".
 7. Replace the pforth.dic file with "~/Work/hmsl/HMSL/hmsl/pforth.dic".
 8. Replace the "pieces" folder with "~/Work/hmsl/HMSL/hmsl/pieces".
 8. Replace the "tools" folder with "~/Work/hmsl/HMSL/hmsl/tools".
