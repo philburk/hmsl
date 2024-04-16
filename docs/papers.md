@@ -1,45 +1,61 @@
 [Docs Home](.)
 
-# Papers, Articles, etcetera
+# Writings about HMSL
+
+## Articles
 
 * [Larry Polansky on HMSL and Computer Music](docs/chroma_interview_polansky.pdf), interview by Alistair Riddell in Melbourne, 1989-02-08
 
-Overview: https://www.jstor.org/stable/833016
+## Papers
 
-Larry's published artitles: http://digitalmusics.dartmouth.edu/~larry/published_articles/hmsl/HMSLPNM.pdf
+### 1985
 
-Live Interactive: https://www.jstor.org/stable/3680444
+Rosenboom, David; Polansky, Larry.
+"HMSL (Hierarchical Music Specification Language): A Real-Time Environment for Formal, Perceptual and Compositional Experimentation".
+Proceedings Of The 1985 International Computer Music Conference, 244-250.
+Permalink: http://hdl.handle.net/2027/spo.bbp2372.1985.039
 
-David Rosenboom's HMSL related pages:
-https://davidrosenboom.com/search?q=HMSL
+### 1987
 
-https://quod.lib.umich.edu/i/icmc/bbp2372.1985.039/2/--hmsl-hierarchical-music-specification-language-a-real-time?page=root;size=175;view=text
+Polansky, Larry; Rosenboom, David; Burk, Phil.
+"HMSL: Overview (Version 3.1) and Notes on Intelligent Instrument Design".
+Proceedings Of The 1987 International Computer Music Conference, 220-227.
+Permalink: http://hdl.handle.net/2027/spo.bbp2372.1987.031
+PDF at https://eamusic.dartmouth.edu/~larry/published_articles/icmc_articles/hmsl_icmc_rosenboom_polansky.pdf
 
-Some articles that reference HMSL
-https://www.semanticscholar.org/paper/HMSL-(Hierarchical-Music-Specification-Language)%3A-A-Polansky-Burk/febe539db3c567c5c400101d17c91409a1d8ef82
-
-Lary has lot of links to articles on this page:
-https://eamusic.dartmouth.edu/~larry/published_articles/index.html
-
-1987 ICMC: https://eamusic.dartmouth.edu/~larry/published_articles/icmc_articles/hmsl_icmc_rosenboom_polansky.pdf
-
-Iconic Programming for HMSL
-https://quod.lib.umich.edu/i/icmc/bbp2372.1992.044/1/--iconic-programming-for-hmsl?page=root;size=150;view=image
-https://softsynth.com/hmsl/links.php
-
+### 1990
 
 HMSL (Hierarchical Music Specification Language): A Theoretical Overview
 Larry Polansky, Phil Burk and David Rosenboom
 Perspectives of New Music
 Vol. 28, No. 2 (Summer, 1990), pp. 136-178 (43 pages)
-https://www.jstor.org/stable/833016?origin=crossref
+https://www.jstor.org/stable/833016
 
-HMSL: Overview (Version 3.1) and Notes on Intelligent Instrument Design
-Polansky, Larry; Rosenboom, David; Burk, Phil
-Proceedings Of The 1987 International Computer Music Conference, 220-227
-Volume 1987, 1987
-Permalink: http://hdl.handle.net/2027/spo.bbp2372.1987.031
+### 1992
 
-HMSL (Hierarchical Music Specification Language) a real–time environment for formal, perceptual and compositional experimentation. With Polansky, L. (1985)
-Proceedings of the International Computer Music Conference, 243-250. (San Francisco: International Computer Music Association - ICMA).
-Look for a PDF here: https://davidrosenboom.com/writings
+"Iconic Programming for HMSL" - Wire flowgraph
+Burk, Phil; Marsanyi, Robert
+Proceedings Of The 1992 International Computer Music Conference, 166-169
+Permalink: http://hdl.handle.net/2027/spo.bbp2372.1992.044
+
+### 1994
+
+"Live Interactive Computer Music in HMSL, 1984-1992"
+Larry Polansky
+Computer Music Journal
+Vol. 18, No. 2 (Summer, 1994), pp. 59-77 (19 pages)
+https://www.jstor.org/stable/3680444
+
+## Collections
+
+Larry's published articles: http://digitalmusics.dartmouth.edu/~larry/published_articles/hmsl/HMSLPNM.pdf
+
+Larry has lot of links to articles on this page:
+https://eamusic.dartmouth.edu/~larry/published_articles/index.html
+
+David Rosenboom's HMSL related pages:
+https://davidrosenboom.com/search?q=HMSL
+
+Some articles that reference HMSL
+https://www.semanticscholar.org/paper/HMSL-(Hierarchical-Music-Specification-Language)%3A-A-Polansky-Burk/febe539db3c567c5c400101d17c91409a1d8ef82
+
