@@ -29,6 +29,8 @@ ANEW TASK-FLOAT_PORT
 
 : FIX  ( r -f- , -- n , rounds )
     fround
+    f>s \ fround leaves the result on the float stack!
+    \ See https://github.com/philburk/hmsl/issues/161
 ;
 
 : FLOAT ( n -- , -f- r , convert to float )
