@@ -9,6 +9,7 @@
 */
 
 #include "ExternalMidi.h"
+#include <assert.h>
 
 
 static std::unique_ptr<MidiOutput> sMidiOutput;
