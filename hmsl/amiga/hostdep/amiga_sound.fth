@@ -26,26 +26,34 @@ include? msec ju:msec
 
 ANEW TASK-AMIGA_SOUND
 
+: >ABS ( pforth-address -- absolute-address )
+    \ JForth used to use relative addresses on the stack.
+    \ But pForth uses real addresses so this can be a NOOP.
+;
+
+: +SHIFT ( a b -- a<<b, left shift )
+    lshift
+;
+
 \ Define Register Locations
-HEX 
-DFF000 CONSTANT AMIGA_CHIP_BASE
-10 CONSTANT ADKCONR_OFFSET
-9E CONSTANT ADKCONW_OFFSET
-A0 CONSTANT AUDXLCH_OFFSET
-A4 CONSTANT AUDXLEN_OFFSET
-A6 CONSTANT AUDXPER_OFFSET
-A8 CONSTANT AUDXVOL_OFFSET
-AA CONSTANT AUDXDAT_OFFSET
-96 CONSTANT DMACONW_OFFSET
-2  CONSTANT DMACONR_OFFSET
+$ DFF000 CONSTANT AMIGA_CHIP_BASE
+$ 10 CONSTANT ADKCONR_OFFSET
+$ 9E CONSTANT ADKCONW_OFFSET
+$ A0 CONSTANT AUDXLCH_OFFSET
+$ A4 CONSTANT AUDXLEN_OFFSET
+$ A6 CONSTANT AUDXPER_OFFSET
+$ A8 CONSTANT AUDXVOL_OFFSET
+$ AA CONSTANT AUDXDAT_OFFSET
+$ 96 CONSTANT DMACONW_OFFSET
+$  2 CONSTANT DMACONR_OFFSET
 
 \ Flags for setting bits.
-8000 CONSTANT SET/CLR
-0200 CONSTANT DMA_DMAEN
-0001 CONSTANT AUD0EN
-0002 CONSTANT AUD1EN
-0004 CONSTANT AUD2EN
-0008 CONSTANT AUD3EN
+$ 8000 CONSTANT SET/CLR
+$ 0200 CONSTANT DMA_DMAEN
+$ 0001 CONSTANT AUD0EN
+$ 0002 CONSTANT AUD1EN
+$ 0004 CONSTANT AUD2EN
+$ 0008 CONSTANT AUD3EN
 
 DECIMAL
 \ Stock Audio Waveforms, 8 samples long.
@@ -88,12 +96,18 @@ defer DA.CHIPW!  ( value16 offset16 -- , store into chip )
 defer DA.CHIP!   ( value24 offset8 -- , store at 8 bit offset )
 
 : (DA.CHIPW!)  ( value16 offset16 -- , store into chip )
-    amiga_chip_base + absw!
+    \ amiga_chip_base + absw!
+    ." FAKE  " swap .
+    ." 0x" .hex
+    ." (DA.CHIPW!)" cr
 ;
 'c (da.chipw!) is da.chipw!
 
 : (DA.CHIP!)   ( value24 offset8 -- , store at 8 bit offset )
-    amiga_chip_base + abs!
+    \ amiga_chip_base + abs!
+    ." FAKE  " swap .
+    ." 0x" .hex
+    ." (DA.CHIP!)" cr
 ;
 
 'c (da.chip!) is da.chip!
@@ -181,7 +195,7 @@ defer DA.CHIP!   ( value24 offset8 -- , store at 8 bit offset )
 \ This one word converts both ways.
 \ From hertz to period or vice versa.
 : DA.FL->P  ( frequency[hz] length_in_bytes -- period )
-    *   3,579,547 swap /
+    *   3579547 swap /
 ;
 
 \ This works for repetitive waveforms after setting length.
@@ -272,10 +286,12 @@ $ DFF09C constant INTREQ
 
 .NEED Disable()
 : Disable()  ( -- , disable interrupts )
-    callvoid exec_lib disable
+    \ This was JForth Amiga specific.
+    \ callvoid exec_lib disable
 ;
 : Enable()  ( -- , enable interrupts )
-    callvoid exec_lib enable
+    \ This was JForth Amiga specific.
+    \ callvoid exec_lib enable
 ;
 .THEN
 
@@ -283,19 +299,23 @@ $ DFF09C constant INTREQ
 \ the cutoff filters. You can get a brighter sound by
 \ turning them off. The bit is shared with the Power LED!
 : DA.FILTERS.OFF ( -- turn off filters )
-    disable() $ BFE001 absc@ 2 OR $ BFE001 absc! enable()
+    \ FIXME use da.chip! Define a fake filter control register.
+    \ disable() $ BFE001 absc@ 2 OR $ BFE001 absc! enable()
 ;
 : DA.FILTERS.ON ( -- turn off filters )
-    disable() $ BFE001 absc@ $ FD and $ BFE001 absc! enable()
+    \ FIXME use da.chip!
+    \ disable() $ BFE001 absc@ $ FD and $ BFE001 absc! enable()
 ;
 
 : DA.INIT  ( -- , Initialize Digital Audio System )
 \ Allocate chip RAM for waveforms.
     da-wave-storage @ 0=
-    IF MEMF_CHIP da_wave_space allocblock ?dup
+    \ On Amiga this would allocate MEMF_CHIP memory that was accessable by DMA.
+    IF da_wave_space allocate ?dup 0=
        IF da-wave-storage !
           da-wave-template da-wave-storage @ da_wave_space cmove
-       ELSE true warning" DA.INIT - No space for waveforms!"
+       ELSE ." error = " . cr
+           true warning" DA.INIT - No space for waveforms!"
        THEN
     THEN
     DA_NUM_CHANNELS 0 DO
@@ -307,7 +327,7 @@ $ DFF09C constant INTREQ
 : DA.TERM   ( -- , Terminate Digital Audio )
     da.kill
     da-wave-storage @ ?dup  ( free storage if allocated )
-    IF  freeblock
+    IF  free warning" DA.TERM - Freeing wavetable memory failed."
         da-wave-storage off
     THEN
 ;
