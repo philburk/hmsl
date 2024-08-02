@@ -37,8 +37,9 @@ Unless you need to add a JUCE file, or update the JUCE version, you can probably
 
 * Open the folder "native/juce"
 * Double click on JuceHMSL.jucer
+* Add files if needed by opening File Explorer and right clicking on Source.
 * At the top of the ProJucer page, set "Selected exporter" to "XCode (macOS)"
-* Click on the white and blue circulat icon to the right of that menu to "Save and Open IDE".
+* Click on the white and blue circular icon to the right of that menu to "Save and Open IDE".
 
 ### Compiling the JUCE port
 * Launch the XCode project at "HMSL/native/juce/Builds/MacOSX/JuceHMSL.xcodeproj".
