@@ -8,6 +8,8 @@
   ==============================================================================
 */
 
+#include <stdlib.h>
+
 #include "spmidi/include/midi.h"
 #include "spmidi/include/spmidi.h"
 #include "spmidi/include/spmidi_util.h"
@@ -24,16 +26,14 @@
 // This could be handy testing the audio interface.
 #define PLAY_WHITE_NOISE   0
 
-void LocalSynth::audioDeviceIOCallback(const float **inputChannelData,
-                                            int           numInputChannels,
-                                            float **      outputChannelData,
-                                            int           numOutputChannels,
-                                            int           numSamples) {
-    int framesLeft = numSamples;
+void LocalSynth::renderMIDI(float **      outputChannelData,
+                            int           numOutputChannels,
+                            int           numFrames) {
+    int framesLeft = numFrames;
     int commonChannels = std::min(numOutputChannels, SAMPLES_PER_FRAME);
     int frameCursor = 0;
 
-    /* The audio buffer is probably bigger than the synthesizer buffer so we
+    /* The audio buffer is probably bigger than the MIDI synthesizer buffer so we
      * may have to call the synthesizer several times to fill it.
      */
     while( framesLeft )
@@ -64,6 +64,25 @@ void LocalSynth::audioDeviceIOCallback(const float **inputChannelData,
         /* Calculate how many frames are remaining. */
         framesLeft -= framesGenerated;
     }
+}
+
+void LocalSynth::audioDeviceIOCallback(const float ** /*inputChannelData */,
+                                       int           /* numInputChannels*/,
+                                       float **      outputChannelData,
+                                       int           numOutputChannels,
+                                       int           numFrames) {
+    renderMIDI(outputChannelData, numOutputChannels, numFrames);
+                                           
+   if (numOutputChannels >= 2) {
+       // Get the two mono arrays.
+       float *outputLeft = outputChannelData[0];
+       float *outputRight = outputChannelData[1];
+       // Mix the Amiga sound on top of the MIDI sound.
+       for (int i = 0; i < numFrames; i++) {
+           outputLeft[i] += mAmigaLocalSound.renderLeft();
+           outputRight[i] += mAmigaLocalSound.renderRight();
+       }
+   }
 }
 
 // ============== Clock Time ===================================

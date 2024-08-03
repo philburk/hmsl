@@ -70,6 +70,10 @@ public:
         return reinterpret_cast<cell_t>(&mPort);
     }
 
+    void hostChipWrite(cell_t value, cell_t amigaAddress) {
+        mLocalMidiPort.hostChipWrite(value, amigaAddress);
+    }
+    
 private:
 
     MidiNativePort *getCurrentPort() {
@@ -100,4 +104,5 @@ private:
     cell_t       mPort = 0;         // used to switch between internal and external MIDI
     LocalSynth   mLocalMidiPort;    // Built-in internal synthesizer
     ExternalMidi mExternalMidiPort; // Appears as "HMSL" MIDI input to other apps.
+
 };
