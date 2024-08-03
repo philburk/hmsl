@@ -251,6 +251,81 @@ namespace BinaryData
     extern const char*   utils_fth;
     const int            utils_fthSize = 3504;
 
+    extern const char*   _8svx_j;
+    const int            _8svx_jSize = 1007;
+
+    extern const char*   ajf_abort_fth;
+    const int            ajf_abort_fthSize = 766;
+
+    extern const char*   ajf_base_fth;
+    const int            ajf_base_fthSize = 3123;
+
+    extern const char*   ajf_events_fth;
+    const int            ajf_events_fthSize = 5114;
+
+    extern const char*   ajf_graph_fth;
+    const int            ajf_graph_fthSize = 2350;
+
+    extern const char*   ajf_includes_fth;
+    const int            ajf_includes_fthSize = 669;
+
+    extern const char*   ajf_menu_fth;
+    const int            ajf_menu_fthSize = 3768;
+
+    extern const char*   ajf_midi_fth;
+    const int            ajf_midi_fthSize = 15257;
+
+    extern const char*   ajf_midi_exec_fth;
+    const int            ajf_midi_exec_fthSize = 4356;
+
+    extern const char*   ajf_mm_fth;
+    const int            ajf_mm_fthSize = 1163;
+
+    extern const char*   ajf_new_includes_fth;
+    const int            ajf_new_includes_fthSize = 249;
+
+    extern const char*   ajf_rtc_fth;
+    const int            ajf_rtc_fthSize = 11501;
+
+    extern const char*   ajf_startup_fth;
+    const int            ajf_startup_fthSize = 416;
+
+    extern const char*   ajf_top_fth;
+    const int            ajf_top_fthSize = 1514;
+
+    extern const char*   amiga_instrument_fth;
+    const int            amiga_instrument_fthSize = 5181;
+
+    extern const char*   amiga_sound_fth;
+    const int            amiga_sound_fthSize = 9401;
+
+    extern const char*   envelopes_fth;
+    const int            envelopes_fthSize = 4141;
+
+    extern const char*   gauss_fth;
+    const int            gauss_fthSize = 3651;
+
+    extern const char*   load_hmsl_fth2;
+    const int            load_hmsl_fth2Size = 7234;
+
+    extern const char*   medplayer_fth;
+    const int            medplayer_fthSize = 62;
+
+    extern const char*   multi_wait_fth;
+    const int            multi_wait_fthSize = 1888;
+
+    extern const char*   patches_fth;
+    const int            patches_fthSize = 281;
+
+    extern const char*   spawn_task_fth;
+    const int            spawn_task_fthSize = 3590;
+
+    extern const char*   timer_driven_fth;
+    const int            timer_driven_fthSize = 3370;
+
+    extern const char*   waveforms_fth;
+    const int            waveforms_fthSize = 15471;
+
     extern const char*   clone_fth;
     const int            clone_fthSize = 12929;
 
@@ -414,7 +489,7 @@ namespace BinaryData
     const int            wordslik_fthSize = 1344;
 
     // Number of elements in the namedResourceList and originalFileNames arrays.
-    const int namedResourceListSize = 135;
+    const int namedResourceListSize = 160;
 
     // Points to the start of a list of resource names.
     extern const char* namedResourceList[];

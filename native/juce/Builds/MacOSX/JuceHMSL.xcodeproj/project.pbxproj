@@ -80,7 +80,9 @@
 		0831190FD309BCCD013885CF /* Terminal.cpp */ /* Terminal.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Terminal.cpp; path = ../../Source/Terminal.cpp; sourceTree = SOURCE_ROOT; };
 		0831CB16DDF715CE84A01598 /* time.fth */ /* time.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = time.fth; path = ../../../../hmsl/fth/time.fth; sourceTree = SOURCE_ROOT; };
 		0997DE11BB2239512BC14F84 /* juce_cryptography */ /* juce_cryptography */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_cryptography; path = "~/JUCE/modules/juce_cryptography"; sourceTree = "<absolute>"; };
+		099B591FDFDBF92A6E0D49D8 /* ajf_new_includes.fth */ /* ajf_new_includes.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = ajf_new_includes.fth; path = ../../../../hmsl/amiga/hostdep/ajf_new_includes.fth; sourceTree = SOURCE_ROOT; };
 		09C9041372B640C188B339ED /* Foundation.framework */ /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		0BB9E096AA07B02E53195BB7 /* ajf_startup.fth */ /* ajf_startup.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = ajf_startup.fth; path = ../../../../hmsl/amiga/hostdep/ajf_startup.fth; sourceTree = SOURCE_ROOT; };
 		0F5584100EF9E6DC2A19FF27 /* ob_main.fth */ /* ob_main.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = ob_main.fth; path = ../../../../hmsl/fth/ob_main.fth; sourceTree = SOURCE_ROOT; };
 		0FFBCCDAF179371D71F2DC44 /* AudioEngine.h */ /* AudioEngine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AudioEngine.h; path = ../../Source/AudioEngine.h; sourceTree = SOURCE_ROOT; };
 		120E57EA76C16F2E140F81E8 /* locals.fth */ /* locals.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = locals.fth; path = ../../../../pforth/fth/locals.fth; sourceTree = SOURCE_ROOT; };
@@ -90,6 +92,7 @@
 		141110D22205F26A03BEDC74 /* smart_if.fth */ /* smart_if.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = smart_if.fth; path = ../../../../pforth/fth/smart_if.fth; sourceTree = SOURCE_ROOT; };
 		145C4DC5A266EC9883586394 /* pf_mem.c */ /* pf_mem.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = pf_mem.c; path = ../../../../pforth/csrc/pf_mem.c; sourceTree = SOURCE_ROOT; };
 		164F93FA8A2D42878BF2EE1E /* dbl_list.fth */ /* dbl_list.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = dbl_list.fth; path = ../../../../hmsl/fth/dbl_list.fth; sourceTree = SOURCE_ROOT; };
+		170D526CC0B9557F33B031F3 /* ajf_abort.fth */ /* ajf_abort.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = ajf_abort.fth; path = ../../../../hmsl/amiga/hostdep/ajf_abort.fth; sourceTree = SOURCE_ROOT; };
 		17A75AA855D181B624EE93C5 /* load_file.fth */ /* load_file.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = load_file.fth; path = ../../../../pforth/fth/utils/load_file.fth; sourceTree = SOURCE_ROOT; };
 		198638942B0EAFDC19828582 /* interpreters.fth */ /* interpreters.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = interpreters.fth; path = ../../../../hmsl/fth/interpreters.fth; sourceTree = SOURCE_ROOT; };
 		1A387EA62DE0E657A29037E5 /* midi_text.fth */ /* midi_text.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = midi_text.fth; path = ../../../../hmsl/fth/midi_text.fth; sourceTree = SOURCE_ROOT; };
@@ -102,6 +105,7 @@
 		21AFDB091970A24A1FA7B501 /* obmethod.fth */ /* obmethod.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = obmethod.fth; path = ../../../../hmsl/fth/obmethod.fth; sourceTree = SOURCE_ROOT; };
 		21EB47A8ED21242A608ECD15 /* action_utils.fth */ /* action_utils.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = action_utils.fth; path = ../../../../hmsl/fth/action_utils.fth; sourceTree = SOURCE_ROOT; };
 		225479E715F7C0732E52EAE7 /* IOKit.framework */ /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
+		22D99A79A42B8C423CECB89C /* ajf_includes.fth */ /* ajf_includes.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = ajf_includes.fth; path = ../../../../hmsl/amiga/hostdep/ajf_includes.fth; sourceTree = SOURCE_ROOT; };
 		22D9C30848842202A45A3AAA /* midi_globals.fth */ /* midi_globals.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = midi_globals.fth; path = ../../../../hmsl/fth/midi_globals.fth; sourceTree = SOURCE_ROOT; };
 		2503D7B89AE4B06B28D23432 /* include_juce_data_structures.mm */ /* include_juce_data_structures.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_data_structures.mm; path = ../../JuceLibraryCode/include_juce_data_structures.mm; sourceTree = SOURCE_ROOT; };
 		25AA0D256ADA060CFCAE760E /* bench.fth */ /* bench.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = bench.fth; path = ../../../../pforth/fth/bench.fth; sourceTree = SOURCE_ROOT; };
@@ -125,7 +129,9 @@
 		325BE0CEF6CF814E2BA355DA /* test_actions.fth */ /* test_actions.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = test_actions.fth; path = ../../../../hmsl/fth/test_actions.fth; sourceTree = SOURCE_ROOT; };
 		327A2D45AC8CA6A48F12A3C2 /* clone.fth */ /* clone.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = clone.fth; path = ../../../../pforth/fth/utils/clone.fth; sourceTree = SOURCE_ROOT; };
 		328DC5C0856C2D6E52C3D3CA /* collection.fth */ /* collection.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = collection.fth; path = ../../../../hmsl/fth/collection.fth; sourceTree = SOURCE_ROOT; };
+		33EDD2884C5C91359F14D7AC /* waveforms.fth */ /* waveforms.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = waveforms.fth; path = ../../../../hmsl/amiga/hostdep/waveforms.fth; sourceTree = SOURCE_ROOT; };
 		34E69FF7BA7133AF4754D5F1 /* siev.fth */ /* siev.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = siev.fth; path = ../../../../pforth/fth/siev.fth; sourceTree = SOURCE_ROOT; };
+		34FE85F844B631C03FBBDCED /* patches.fth */ /* patches.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = patches.fth; path = ../../../../hmsl/amiga/hostdep/patches.fth; sourceTree = SOURCE_ROOT; };
 		358E67DB2469C6CB4EE1A19F /* action_top.fth */ /* action_top.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = action_top.fth; path = ../../../../hmsl/fth/action_top.fth; sourceTree = SOURCE_ROOT; };
 		360F9C2F04FC37C59E3E78D4 /* ctrl_xy.fth */ /* ctrl_xy.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = ctrl_xy.fth; path = ../../../../hmsl/fth/ctrl_xy.fth; sourceTree = SOURCE_ROOT; };
 		36DB06DA87C1B166DDE287E3 /* ExternalMidi.h */ /* ExternalMidi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ExternalMidi.h; path = ../../Source/ExternalMidi.h; sourceTree = SOURCE_ROOT; };
@@ -134,6 +140,7 @@
 		39B5CC71A5256DC9CE525426 /* pfcompfp.h */ /* pfcompfp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = pfcompfp.h; path = ../../../../pforth/csrc/pfcompfp.h; sourceTree = SOURCE_ROOT; };
 		3B6B95459BAB2B43E04BFEF0 /* shape_editor.fth */ /* shape_editor.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = shape_editor.fth; path = ../../../../hmsl/fth/shape_editor.fth; sourceTree = SOURCE_ROOT; };
 		3BC3DA4D523A02F542582247 /* tester.fth */ /* tester.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = tester.fth; path = ../../../../pforth/fth/tester.fth; sourceTree = SOURCE_ROOT; };
+		3E40677306B5322ABE0137B6 /* ajf_mm.fth */ /* ajf_mm.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = ajf_mm.fth; path = ../../../../hmsl/amiga/hostdep/ajf_mm.fth; sourceTree = SOURCE_ROOT; };
 		3EDA48E24B4E7F7B28FD1C19 /* elmnts.fth */ /* elmnts.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = elmnts.fth; path = ../../../../hmsl/fth/elmnts.fth; sourceTree = SOURCE_ROOT; };
 		40BB346BD0837B65CC1995C3 /* AppConfig.h */ /* AppConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppConfig.h; path = ../../JuceLibraryCode/AppConfig.h; sourceTree = SOURCE_ROOT; };
 		41FAC74FFCB0849AC2BE9CC7 /* MidiBase.cpp */ /* MidiBase.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = MidiBase.cpp; path = ../../Source/MidiBase.cpp; sourceTree = SOURCE_ROOT; };
@@ -150,12 +157,14 @@
 		4F908084B4D252C10EA239CB /* CoreAudio.framework */ /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		50498062F7456179E2584BD5 /* include_juce_audio_basics.mm */ /* include_juce_audio_basics.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_audio_basics.mm; path = ../../JuceLibraryCode/include_juce_audio_basics.mm; sourceTree = SOURCE_ROOT; };
 		5227C10F3B6D2109B12CED71 /* forget.fth */ /* forget.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = forget.fth; path = ../../../../pforth/fth/forget.fth; sourceTree = SOURCE_ROOT; };
+		54201599E2FF828E6C68E35F /* gauss.fth */ /* gauss.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = gauss.fth; path = ../../../../hmsl/amiga/hostdep/gauss.fth; sourceTree = SOURCE_ROOT; };
 		5443F109A67D09447545C508 /* pf_float.h */ /* pf_float.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = pf_float.h; path = ../../../../pforth/csrc/pf_float.h; sourceTree = SOURCE_ROOT; };
 		556E84AE251DF5EAFE5FAE2B /* TerminalComponent.cpp */ /* TerminalComponent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = TerminalComponent.cpp; path = ../../Source/TerminalComponent.cpp; sourceTree = SOURCE_ROOT; };
 		563E54AA0BB8F826D87194F6 /* startup.fth */ /* startup.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = startup.fth; path = ../../../../hmsl/fth/startup.fth; sourceTree = SOURCE_ROOT; };
 		5653753CB3568F9386B03F94 /* stock_morphs.fth */ /* stock_morphs.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = stock_morphs.fth; path = ../../../../hmsl/fth/stock_morphs.fth; sourceTree = SOURCE_ROOT; };
 		56F2888366D41CBF4219868F /* t_required_helper2.fth */ /* t_required_helper2.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = t_required_helper2.fth; path = ../../../../pforth/fth/t_required_helper2.fth; sourceTree = SOURCE_ROOT; };
 		5803D81746FE5E7C581A344D /* filefind.fth */ /* filefind.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = filefind.fth; path = ../../../../pforth/fth/filefind.fth; sourceTree = SOURCE_ROOT; };
+		588C3303FAFB0ABB7133F114 /* ajf_top.fth */ /* ajf_top.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = ajf_top.fth; path = ../../../../hmsl/amiga/hostdep/ajf_top.fth; sourceTree = SOURCE_ROOT; };
 		59E57E875D44FFC758053744 /* popup_text.fth */ /* popup_text.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = popup_text.fth; path = ../../../../hmsl/fth/popup_text.fth; sourceTree = SOURCE_ROOT; };
 		5A24B14D535E98585549D979 /* service_tasks.fth */ /* service_tasks.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = service_tasks.fth; path = ../../../../hmsl/fth/service_tasks.fth; sourceTree = SOURCE_ROOT; };
 		5A7A3F7BEBA12657A5188F76 /* make_hmsl.fth */ /* make_hmsl.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = make_hmsl.fth; path = ../../../../hmsl/fth/make_hmsl.fth; sourceTree = SOURCE_ROOT; };
@@ -168,10 +177,12 @@
 		5DC7A0CF11A28337CF45AB4A /* misc2.fth */ /* misc2.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = misc2.fth; path = ../../../../pforth/fth/misc2.fth; sourceTree = SOURCE_ROOT; };
 		5E4255CAFE413D221A6F2499 /* juce_audio_basics */ /* juce_audio_basics */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_audio_basics; path = "~/JUCE/modules/juce_audio_basics"; sourceTree = "<absolute>"; };
 		5E80A2A2E1787BFDE6EDF0C3 /* stubs.fth */ /* stubs.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = stubs.fth; path = ../../../../hmsl/fth/stubs.fth; sourceTree = SOURCE_ROOT; };
+		5E82AE83A7A23845404BF090 /* multi_wait.fth */ /* multi_wait.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = multi_wait.fth; path = ../../../../hmsl/amiga/hostdep/multi_wait.fth; sourceTree = SOURCE_ROOT; };
 		5F23D86AC3D4343F219C476D /* CoreMIDI.framework */ /* CoreMIDI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMIDI.framework; path = System/Library/Frameworks/CoreMIDI.framework; sourceTree = SDKROOT; };
 		5FF30BE29B6D36F95D887D3A /* float_port.fth */ /* float_port.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = float_port.fth; path = ../../../../hmsl/fth/float_port.fth; sourceTree = SOURCE_ROOT; };
 		608477D475A5C1F272FCC24E /* LocalSynth.h */ /* LocalSynth.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LocalSynth.h; path = ../../Source/LocalSynth.h; sourceTree = SOURCE_ROOT; };
 		62661D1B1E272FC2D608F711 /* pf_text.h */ /* pf_text.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = pf_text.h; path = ../../../../pforth/csrc/pf_text.h; sourceTree = SOURCE_ROOT; };
+		629E634F367EA8415139B585 /* ajf_rtc.fth */ /* ajf_rtc.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = ajf_rtc.fth; path = ../../../../hmsl/amiga/hostdep/ajf_rtc.fth; sourceTree = SOURCE_ROOT; };
 		62D42C7FE76E0BFA9F48A487 /* pf_io.c */ /* pf_io.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = pf_io.c; path = ../../../../pforth/csrc/pf_io.c; sourceTree = SOURCE_ROOT; };
 		62E41511371235DAE24E6B19 /* pf_save.c */ /* pf_save.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = pf_save.c; path = ../../../../pforth/csrc/pf_save.c; sourceTree = SOURCE_ROOT; };
 		635FD059ACA0C52F48218EDD /* pfcompil.c */ /* pfcompil.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = pfcompil.c; path = ../../../../pforth/csrc/pfcompil.c; sourceTree = SOURCE_ROOT; };
@@ -180,6 +191,7 @@
 		64A6F029E1C893C3E30A7FBC /* action_screen.fth */ /* action_screen.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = action_screen.fth; path = ../../../../hmsl/fth/action_screen.fth; sourceTree = SOURCE_ROOT; };
 		64BCFD18FCEA8D4C5B60D9BA /* juce_opengl */ /* juce_opengl */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_opengl; path = "~/JUCE/modules/juce_opengl"; sourceTree = "<absolute>"; };
 		64ED94688450EA4C4709445B /* math.fth */ /* math.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = math.fth; path = ../../../../pforth/fth/math.fth; sourceTree = SOURCE_ROOT; };
+		657C82AEE7E9A7480D84C26A /* ajf_graph.fth */ /* ajf_graph.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = ajf_graph.fth; path = ../../../../hmsl/amiga/hostdep/ajf_graph.fth; sourceTree = SOURCE_ROOT; };
 		6759769D25A7550D6CEEFABA /* actobj.fth */ /* actobj.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = actobj.fth; path = ../../../../hmsl/fth/actobj.fth; sourceTree = SOURCE_ROOT; };
 		69FFDFC48A787AB7CE89E1BD /* t_nolf.fth */ /* t_nolf.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = t_nolf.fth; path = ../../../../pforth/fth/t_nolf.fth; sourceTree = SOURCE_ROOT; };
 		6A19C18C2094B1B47725BA58 /* allocator.fth */ /* allocator.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = allocator.fth; path = ../../../../hmsl/fth/allocator.fth; sourceTree = SOURCE_ROOT; };
@@ -211,13 +223,17 @@
 		851B1741E0D42C6987BC1517 /* p4thbase.fth */ /* p4thbase.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = p4thbase.fth; path = ../../../../hmsl/fth/p4thbase.fth; sourceTree = SOURCE_ROOT; };
 		8546EA63CDC8D16D02BC4401 /* circular.fth */ /* circular.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = circular.fth; path = ../../../../hmsl/fth/circular.fth; sourceTree = SOURCE_ROOT; };
 		85D1AFC284F2DA05AB2ADA98 /* juce_data_structures */ /* juce_data_structures */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_data_structures; path = "~/JUCE/modules/juce_data_structures"; sourceTree = "<absolute>"; };
+		876E6D4E0BBC175D06CF4D31 /* 8svx.j */ /* 8svx.j */ = {isa = PBXFileReference; lastKnownFileType = file.j; name = 8svx.j; path = ../../../../hmsl/amiga/hostdep/8svx.j; sourceTree = SOURCE_ROOT; };
 		8897E1E236C423F2344BF311 /* t_alloc.fth */ /* t_alloc.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = t_alloc.fth; path = ../../../../pforth/fth/t_alloc.fth; sourceTree = SOURCE_ROOT; };
+		88A4CF3FE583D943C838FC64 /* amiga_sound.fth */ /* amiga_sound.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = amiga_sound.fth; path = ../../../../hmsl/amiga/hostdep/amiga_sound.fth; sourceTree = SOURCE_ROOT; };
 		88CB42F7338359672DCCD63D /* structure.fth */ /* structure.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = structure.fth; path = ../../../../hmsl/fth/structure.fth; sourceTree = SOURCE_ROOT; };
 		88FB7E86173700FF6767232E /* wordslik.fth */ /* wordslik.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = wordslik.fth; path = ../../../../pforth/fth/wordslik.fth; sourceTree = SOURCE_ROOT; };
+		894B605DE6C7ED7F93FC56D7 /* ajf_midi_exec.fth */ /* ajf_midi_exec.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = ajf_midi_exec.fth; path = ../../../../hmsl/amiga/hostdep/ajf_midi_exec.fth; sourceTree = SOURCE_ROOT; };
 		89F3795B3494E6054D26BEDB /* ob_bind.fth */ /* ob_bind.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = ob_bind.fth; path = ../../../../hmsl/fth/ob_bind.fth; sourceTree = SOURCE_ROOT; };
 		89F602E36BA644C641D08357 /* include_juce_audio_devices.mm */ /* include_juce_audio_devices.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_audio_devices.mm; path = ../../JuceLibraryCode/include_juce_audio_devices.mm; sourceTree = SOURCE_ROOT; };
 		8A6C5F3D3CD877CC956B69C4 /* trace.fth */ /* trace.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = trace.fth; path = ../../../../pforth/fth/trace.fth; sourceTree = SOURCE_ROOT; };
 		8AE82D0F092489B740E48AB1 /* scg.fth */ /* scg.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = scg.fth; path = ../../../../hmsl/fth/scg.fth; sourceTree = SOURCE_ROOT; };
+		8C25FEEDEB8DD4E57215458A /* amiga_instrument.fth */ /* amiga_instrument.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = amiga_instrument.fth; path = ../../../../hmsl/amiga/hostdep/amiga_instrument.fth; sourceTree = SOURCE_ROOT; };
 		8D343DFD202F44F344C144D2 /* Main.cpp */ /* Main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Main.cpp; path = ../../Source/Main.cpp; sourceTree = SOURCE_ROOT; };
 		8E6B452AE425E388DA499ACD /* midi_stubs.fth */ /* midi_stubs.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = midi_stubs.fth; path = ../../../../hmsl/fth/midi_stubs.fth; sourceTree = SOURCE_ROOT; };
 		8EA86F4DB5320799B9641013 /* include_juce_core.mm */ /* include_juce_core.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_core.mm; path = ../../JuceLibraryCode/include_juce_core.mm; sourceTree = SOURCE_ROOT; };
@@ -228,6 +244,7 @@
 		933B4928168DA6458F924187 /* AudioToolbox.framework */ /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		936C9685E3480831029CF98B /* midi_instrument.fth */ /* midi_instrument.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = midi_instrument.fth; path = ../../../../hmsl/fth/midi_instrument.fth; sourceTree = SOURCE_ROOT; };
 		950EACC220E975371BB286AF /* loadp4th.fth */ /* loadp4th.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = loadp4th.fth; path = ../../../../pforth/fth/loadp4th.fth; sourceTree = SOURCE_ROOT; };
+		974DA2F43E7F8CDD9ABEE592 /* spawn_task.fth */ /* spawn_task.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = spawn_task.fth; path = ../../../../hmsl/amiga/hostdep/spawn_task.fth; sourceTree = SOURCE_ROOT; };
 		989369D8EC1BAD23543B02E9 /* juce_graphics */ /* juce_graphics */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_graphics; path = "~/JUCE/modules/juce_graphics"; sourceTree = "<absolute>"; };
 		997612FDF13B9C86618B84D5 /* Terminal.h */ /* Terminal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Terminal.h; path = ../../Source/Terminal.h; sourceTree = SOURCE_ROOT; };
 		9A5D117C9F92DA6889EE6283 /* midi_parser.fth */ /* midi_parser.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = midi_parser.fth; path = ../../../../hmsl/fth/midi_parser.fth; sourceTree = SOURCE_ROOT; };
@@ -251,6 +268,7 @@
 		AD747B57E89C274222C7AC89 /* pfdicdat_arm.h */ /* pfdicdat_arm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = pfdicdat_arm.h; path = ../../../../pforth/csrc/pfdicdat_arm.h; sourceTree = SOURCE_ROOT; };
 		AEA3D417582489C55F501148 /* pf_host.h */ /* pf_host.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = pf_host.h; path = ../../../../pforth/csrc/pf_host.h; sourceTree = SOURCE_ROOT; };
 		B14B62FE78E357E3E46137FC /* require.fth */ /* require.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = require.fth; path = ../../../../pforth/fth/require.fth; sourceTree = SOURCE_ROOT; };
+		B3C061979709F37D873E8261 /* load_hmsl.fth */ /* load_hmsl.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = load_hmsl.fth; path = ../../../../hmsl/amiga/hostdep/load_hmsl.fth; sourceTree = SOURCE_ROOT; };
 		B481D2C82F51FA7D52948587 /* test_events.fth */ /* test_events.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = test_events.fth; path = ../../../../hmsl/fth/test_events.fth; sourceTree = SOURCE_ROOT; };
 		B6629BCD3C8C01C1CE1BF4A0 /* ob_stack.fth */ /* ob_stack.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = ob_stack.fth; path = ../../../../hmsl/fth/ob_stack.fth; sourceTree = SOURCE_ROOT; };
 		B66A1F435298DD9BBE4F781F /* morph.fth */ /* morph.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = morph.fth; path = ../../../../hmsl/fth/morph.fth; sourceTree = SOURCE_ROOT; };
@@ -258,6 +276,7 @@
 		B767383880E95DF33907E143 /* exmember.fth */ /* exmember.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = exmember.fth; path = ../../../../hmsl/fth/exmember.fth; sourceTree = SOURCE_ROOT; };
 		B7779A6DB279C92E49040A5B /* include_juce_cryptography.mm */ /* include_juce_cryptography.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_cryptography.mm; path = ../../JuceLibraryCode/include_juce_cryptography.mm; sourceTree = SOURCE_ROOT; };
 		B9ED26F04833E2493D816448 /* misc_tools.fth */ /* misc_tools.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = misc_tools.fth; path = ../../../../hmsl/fth/misc_tools.fth; sourceTree = SOURCE_ROOT; };
+		BC0ECFE7D8051DD7222B7545 /* ajf_events.fth */ /* ajf_events.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = ajf_events.fth; path = ../../../../hmsl/amiga/hostdep/ajf_events.fth; sourceTree = SOURCE_ROOT; };
 		BF65DC9B08A5B13E4CE79830 /* BinaryData.h */ /* BinaryData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BinaryData.h; path = ../../JuceLibraryCode/BinaryData.h; sourceTree = SOURCE_ROOT; };
 		C040A1662806DDD83E3F203A /* AudioEngine.cpp */ /* AudioEngine.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = AudioEngine.cpp; path = ../../Source/AudioEngine.cpp; sourceTree = SOURCE_ROOT; };
 		C0AD57D0CE3DBA2CE42528C3 /* packed_midi.fth */ /* packed_midi.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = packed_midi.fth; path = ../../../../hmsl/fth/packed_midi.fth; sourceTree = SOURCE_ROOT; };
@@ -274,14 +293,19 @@
 		CCE305D745E6078E74AEC466 /* test_graphics.fth */ /* test_graphics.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = test_graphics.fth; path = ../../../../hmsl/fth/test_graphics.fth; sourceTree = SOURCE_ROOT; };
 		CE7EE0D07DB78DF62251F77D /* pf_words.h */ /* pf_words.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = pf_words.h; path = ../../../../pforth/csrc/pf_words.h; sourceTree = SOURCE_ROOT; };
 		CED2D0B40CAAA15B29BC943A /* t_load_pairs.fth */ /* t_load_pairs.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = t_load_pairs.fth; path = ../../../../pforth/fth/t_load_pairs.fth; sourceTree = SOURCE_ROOT; };
+		CEF59C25290C3636C0E72038 /* ajf_base.fth */ /* ajf_base.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = ajf_base.fth; path = ../../../../hmsl/amiga/hostdep/ajf_base.fth; sourceTree = SOURCE_ROOT; };
 		D03DD35F58C1C36114C5E74D /* include_juce_gui_basics.mm */ /* include_juce_gui_basics.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_gui_basics.mm; path = ../../JuceLibraryCode/include_juce_gui_basics.mm; sourceTree = SOURCE_ROOT; };
 		D12B04A7F9542783F968BC4B /* host_midi.cpp */ /* host_midi.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = host_midi.cpp; path = ../../Source/host_midi.cpp; sourceTree = SOURCE_ROOT; };
 		D216894B7339985AD1C30D48 /* pf_words.c */ /* pf_words.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = pf_words.c; path = ../../../../pforth/csrc/pf_words.c; sourceTree = SOURCE_ROOT; };
 		D22BC800C798548303CFA9F0 /* Carbon.framework */ /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
 		D28FB9901CC5D6855C591FC2 /* bevel.fth */ /* bevel.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = bevel.fth; path = ../../../../hmsl/fth/bevel.fth; sourceTree = SOURCE_ROOT; };
+		D4170025972A495B2AB91BCA /* timer_driven.fth */ /* timer_driven.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = timer_driven.fth; path = ../../../../hmsl/amiga/hostdep/timer_driven.fth; sourceTree = SOURCE_ROOT; };
 		D44FE684B020E836801D4CCB /* hmsl_host.h */ /* hmsl_host.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = hmsl_host.h; path = ../../Source/hmsl_host.h; sourceTree = SOURCE_ROOT; };
 		D4A22E6E4595722C3DE72369 /* build_menus.fth */ /* build_menus.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = build_menus.fth; path = ../../../../hmsl/fth/build_menus.fth; sourceTree = SOURCE_ROOT; };
+		D51CEF4F27E88D301ED6C931 /* ajf_menu.fth */ /* ajf_menu.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = ajf_menu.fth; path = ../../../../hmsl/amiga/hostdep/ajf_menu.fth; sourceTree = SOURCE_ROOT; };
+		D5A7022D896651CD7788DEA9 /* medplayer.fth */ /* medplayer.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = medplayer.fth; path = ../../../../hmsl/amiga/hostdep/medplayer.fth; sourceTree = SOURCE_ROOT; };
 		D5E154C61E442B2E450210F0 /* OpenGL.framework */ /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		D5F8942EEFA0ABBFB9BB38C8 /* ajf_midi.fth */ /* ajf_midi.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = ajf_midi.fth; path = ../../../../hmsl/amiga/hostdep/ajf_midi.fth; sourceTree = SOURCE_ROOT; };
 		D5F8C8A2FD87ABA363405268 /* stacks.fth */ /* stacks.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = stacks.fth; path = ../../../../hmsl/fth/stacks.fth; sourceTree = SOURCE_ROOT; };
 		D616BAD04E21876BFD77AFAC /* termio.fth */ /* termio.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = termio.fth; path = ../../../../pforth/fth/termio.fth; sourceTree = SOURCE_ROOT; };
 		D858E0ADEE601FD0115CCFEE /* pf_guts.h */ /* pf_guts.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = pf_guts.h; path = ../../../../pforth/csrc/pf_guts.h; sourceTree = SOURCE_ROOT; };
@@ -308,6 +332,7 @@
 		F6589894C9FDD7DC2BECE724 /* event_list.fth */ /* event_list.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = event_list.fth; path = ../../../../hmsl/fth/event_list.fth; sourceTree = SOURCE_ROOT; };
 		FB00695C7F1108A5A2746DC5 /* juce_gui_basics */ /* juce_gui_basics */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_gui_basics; path = "~/JUCE/modules/juce_gui_basics"; sourceTree = "<absolute>"; };
 		FC9161AFCB51C28ACBE4EAFB /* cond_comp.fth */ /* cond_comp.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = cond_comp.fth; path = ../../../../hmsl/fth/cond_comp.fth; sourceTree = SOURCE_ROOT; };
+		FCB159CD8230A77EC884DE54 /* envelopes.fth */ /* envelopes.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = envelopes.fth; path = ../../../../hmsl/amiga/hostdep/envelopes.fth; sourceTree = SOURCE_ROOT; };
 		FF74A9603B3551C321A61F6F /* juce_audio_formats */ /* juce_audio_formats */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_audio_formats; path = "~/JUCE/modules/juce_audio_formats"; sourceTree = "<absolute>"; };
 		FFEE774A9A37F00506A3C363 /* translators.fth */ /* translators.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = translators.fth; path = ../../../../hmsl/fth/translators.fth; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -436,6 +461,7 @@
 			isa = PBXGroup;
 			children = (
 				EEDDB6CBF3669F87A54E51E3,
+				C27B95349BCA801E5DE5AC39,
 			);
 			name = hmsl;
 			sourceTree = "<group>";
@@ -510,6 +536,38 @@
 				64BCFD18FCEA8D4C5B60D9BA,
 			);
 			name = "JUCE Modules";
+			sourceTree = "<group>";
+		};
+		C27B95349BCA801E5DE5AC39 /* hostdep */ = {
+			isa = PBXGroup;
+			children = (
+				876E6D4E0BBC175D06CF4D31,
+				170D526CC0B9557F33B031F3,
+				CEF59C25290C3636C0E72038,
+				BC0ECFE7D8051DD7222B7545,
+				657C82AEE7E9A7480D84C26A,
+				22D99A79A42B8C423CECB89C,
+				D51CEF4F27E88D301ED6C931,
+				D5F8942EEFA0ABBFB9BB38C8,
+				894B605DE6C7ED7F93FC56D7,
+				3E40677306B5322ABE0137B6,
+				099B591FDFDBF92A6E0D49D8,
+				629E634F367EA8415139B585,
+				0BB9E096AA07B02E53195BB7,
+				588C3303FAFB0ABB7133F114,
+				8C25FEEDEB8DD4E57215458A,
+				88A4CF3FE583D943C838FC64,
+				FCB159CD8230A77EC884DE54,
+				54201599E2FF828E6C68E35F,
+				B3C061979709F37D873E8261,
+				D5A7022D896651CD7788DEA9,
+				5E82AE83A7A23845404BF090,
+				34FE85F844B631C03FBBDCED,
+				974DA2F43E7F8CDD9ABEE592,
+				D4170025972A495B2AB91BCA,
+				33EDD2884C5C91359F14D7AC,
+			);
+			name = hostdep;
 			sourceTree = "<group>";
 		};
 		CF2F9108C20BB7103AD109BB /* Products */ = {
