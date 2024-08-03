@@ -91,3 +91,6 @@ cell_t hostMIDI_Port(void) {
     return sMidiBase->getMidiPortAddress();
 }
 
+void hostChipWrite(cell_t value, cell_t amigaAddress) {
+    sMidiBase->hostChipWrite(value, amigaAddress);
+}

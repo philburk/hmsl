@@ -76,6 +76,7 @@ void * CustomFunctionTable[] =
     (void *) hostClock_AdvanceTime,
     (void *) hostClock_QueryRate,
     (void *) hostClock_SetRate,
+    (void *) hostChipWrite,
 };
 
 /****************************************************************
@@ -121,6 +122,7 @@ Err CompileCustomFunctions( void )
     CreateGlueToC( "HOSTADVANCETIME()", i++, C_RETURNS_VOID, 1 );
     CreateGlueToC( "HOSTQUERYCLOCKRATE()", i++, C_RETURNS_VALUE, 0 );
     CreateGlueToC( "HOSTSETCLOCKRATE()", i++, C_RETURNS_VOID, 1 );
+    CreateGlueToC( "HOSTWRITECHIP()", i++, C_RETURNS_VOID, 2 );
 
     TOUCH(i);
 

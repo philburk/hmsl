@@ -208,6 +208,12 @@
       </GROUP>
     </GROUP>
     <GROUP id="{D4447538-6ED0-FC8B-8612-F845BF3B88BD}" name="Source">
+      <FILE id="U5x5it" name="AmigaLocalSound.cpp" compile="1" resource="0"
+            file="Source/AmigaLocalSound.cpp"/>
+      <FILE id="AsCunO" name="AmigaLocalSound.h" compile="0" resource="0"
+            file="Source/AmigaLocalSound.h"/>
+      <FILE id="Ncya49" name="AudioEngine.cpp" compile="1" resource="0" file="Source/AudioEngine.cpp"/>
+      <FILE id="IhVPSG" name="AudioEngine.h" compile="0" resource="0" file="Source/AudioEngine.h"/>
       <FILE id="RfwC9Q" name="MidiNativePort.cpp" compile="1" resource="0"
             file="Source/MidiNativePort.cpp"/>
       <FILE id="Nr4cXy" name="MidiNativePort.h" compile="0" resource="0"
