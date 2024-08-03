@@ -104,6 +104,38 @@
         <FILE id="YXbKsZ" name="translators.fth" compile="0" resource="1" file="../../hmsl/fth/translators.fth"/>
         <FILE id="jn0fIi" name="utils.fth" compile="0" resource="1" file="../../hmsl/fth/utils.fth"/>
       </GROUP>
+      <GROUP id="{803090CF-BB31-BA37-8468-FCA4FA1BB2A5}" name="hostdep">
+        <FILE id="z0FZ92" name="8svx.j" compile="0" resource="1" file="../../hmsl/amiga/hostdep/8svx.j"/>
+        <FILE id="ZJ3G7e" name="ajf_abort.fth" compile="0" resource="1" file="../../hmsl/amiga/hostdep/ajf_abort.fth"/>
+        <FILE id="Kdzzd1" name="ajf_base.fth" compile="0" resource="1" file="../../hmsl/amiga/hostdep/ajf_base.fth"/>
+        <FILE id="fmaFCZ" name="ajf_events.fth" compile="0" resource="1" file="../../hmsl/amiga/hostdep/ajf_events.fth"/>
+        <FILE id="G7wh0A" name="ajf_graph.fth" compile="0" resource="1" file="../../hmsl/amiga/hostdep/ajf_graph.fth"/>
+        <FILE id="DCVBTH" name="ajf_includes.fth" compile="0" resource="1"
+              file="../../hmsl/amiga/hostdep/ajf_includes.fth"/>
+        <FILE id="gAIazs" name="ajf_menu.fth" compile="0" resource="1" file="../../hmsl/amiga/hostdep/ajf_menu.fth"/>
+        <FILE id="uxp0f5" name="ajf_midi.fth" compile="0" resource="1" file="../../hmsl/amiga/hostdep/ajf_midi.fth"/>
+        <FILE id="xrrIwi" name="ajf_midi_exec.fth" compile="0" resource="1"
+              file="../../hmsl/amiga/hostdep/ajf_midi_exec.fth"/>
+        <FILE id="WGjLT9" name="ajf_mm.fth" compile="0" resource="1" file="../../hmsl/amiga/hostdep/ajf_mm.fth"/>
+        <FILE id="Xb8LCV" name="ajf_new_includes.fth" compile="0" resource="1"
+              file="../../hmsl/amiga/hostdep/ajf_new_includes.fth"/>
+        <FILE id="oe0nrE" name="ajf_rtc.fth" compile="0" resource="1" file="../../hmsl/amiga/hostdep/ajf_rtc.fth"/>
+        <FILE id="p7Y6Lp" name="ajf_startup.fth" compile="0" resource="1" file="../../hmsl/amiga/hostdep/ajf_startup.fth"/>
+        <FILE id="Nzi8cl" name="ajf_top.fth" compile="0" resource="1" file="../../hmsl/amiga/hostdep/ajf_top.fth"/>
+        <FILE id="GueOVM" name="amiga_instrument.fth" compile="0" resource="1"
+              file="../../hmsl/amiga/hostdep/amiga_instrument.fth"/>
+        <FILE id="ZW0VsB" name="amiga_sound.fth" compile="0" resource="1" file="../../hmsl/amiga/hostdep/amiga_sound.fth"/>
+        <FILE id="so2hm3" name="envelopes.fth" compile="0" resource="1" file="../../hmsl/amiga/hostdep/envelopes.fth"/>
+        <FILE id="ZzhcWk" name="gauss.fth" compile="0" resource="1" file="../../hmsl/amiga/hostdep/gauss.fth"/>
+        <FILE id="BpXJHF" name="load_hmsl.fth" compile="0" resource="1" file="../../hmsl/amiga/hostdep/load_hmsl.fth"/>
+        <FILE id="e1DuF8" name="medplayer.fth" compile="0" resource="1" file="../../hmsl/amiga/hostdep/medplayer.fth"/>
+        <FILE id="TZYAvS" name="multi_wait.fth" compile="0" resource="1" file="../../hmsl/amiga/hostdep/multi_wait.fth"/>
+        <FILE id="ICLMK4" name="patches.fth" compile="0" resource="1" file="../../hmsl/amiga/hostdep/patches.fth"/>
+        <FILE id="zFxAW3" name="spawn_task.fth" compile="0" resource="1" file="../../hmsl/amiga/hostdep/spawn_task.fth"/>
+        <FILE id="vNuT3a" name="timer_driven.fth" compile="0" resource="1"
+              file="../../hmsl/amiga/hostdep/timer_driven.fth"/>
+        <FILE id="wxyzZG" name="waveforms.fth" compile="0" resource="1" file="../../hmsl/amiga/hostdep/waveforms.fth"/>
+      </GROUP>
     </GROUP>
     <GROUP id="{8A01FEA8-D9CE-7B32-B721-F7CCE4975AA1}" name="pforth">
       <GROUP id="{94F40744-8DBC-EF43-806D-531BDB7B3AAB}" name="csrc">
