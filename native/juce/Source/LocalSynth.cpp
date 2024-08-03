@@ -79,8 +79,10 @@ void LocalSynth::audioDeviceIOCallback(const float ** /*inputChannelData */,
        float *outputRight = outputChannelData[1];
        // Mix the Amiga sound on top of the MIDI sound.
        for (int i = 0; i < numFrames; i++) {
-           outputLeft[i] += mAmigaLocalSound.renderLeft();
-           outputRight[i] += mAmigaLocalSound.renderRight();
+           float tempLeft, tempRight;
+           mAmigaLocalSound.renderAudio(&tempLeft, &tempRight);
+           outputLeft[i] += tempLeft;
+           outputRight[i] += tempRight;
        }
    }
 }

@@ -6,7 +6,7 @@
 \
 ANEW TASK-LOAD_HMSL
 
-false constant HOST=AMIGA
+true constant HOST=AMIGA
 true constant HOST=MAC
 
 : '  ( <name> -- cfa , warn me if used the wrong way )
@@ -194,11 +194,14 @@ include? task-bend_score   tools/bend_score.fth
 assign hmsl .
 assign hp   hmsl:pieces
 assign ht   hmsl:tools
+assign ha   hmsl:amiga:hostdep
 assign hsc  hmsl:screens
+
+\ Load Amiga local sound emulation
+include? task-amiga_sound   ha:amiga_sound.fth
 
 mreset-warn on
 cr ." HMSL compilation finished." cr
 map
 
 ANEW SESSION
-
