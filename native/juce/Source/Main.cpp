@@ -10,7 +10,6 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "GraphicsWindow.h"
-#include "LocalSynth.h"
 #include "Terminal.h"
 #include "ForthThread.h"
 

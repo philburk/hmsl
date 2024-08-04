@@ -15,12 +15,20 @@
 MRESET PUT.HOLDAT:
 ANEW TASK-ENVELOPES
 
+\ This was used to store the memory type on Amiga JForth, like MEMF_CHIP
+variable MM-TYPE
+
+ \ FIXME - this is not the same value. But it doesn't really matter.
+1 constant MEMF_CHIP
+
 decimal
 \ Declare Methods
 METHOD PUT.HOLDAT:
 METHOD GET.HOLDAT:
 METHOD PUT.MSEC:
 METHOD GET.MSEC:
+METHOD GET.PERIOD:
+METHOD PUT.PERIOD:
 
 \ AMIGA CONSTANT for ticks per millisecond.
 3579 constant DA_TICKS/MS
@@ -142,7 +150,6 @@ OB.ENVELOPE ENV-BANG
 if-testing @ .IF
 \ Test envelopes
 : TE.INIT
-    env.init
 \ Set up channels 2 & 3
     3 da.channel!
     da_complex da.wave!

@@ -81,8 +81,8 @@ void hostSetTextSize( cell_t size );
 // int getMainScreenRefreshRate( void );
 
 // Events
-void hostGetMouse( ucell_ptr_t xPtr, ucell_ptr_t yPtr);
-cell_t hostGetEvent( cell_t timeout );
+void hostGetMouse(ucell_ptr_t xPtr, ucell_ptr_t yPtr);
+cell_t hostGetEvent(cell_t timeout);
 
 // MIDI
 void hostClock_Init(void);
@@ -100,6 +100,9 @@ cell_t hostMIDI_Write(ucell_ptr_t buffer, cell_t count, cell_t vtime);
 cell_t hostMIDI_Recv(void);
 cell_t hostMIDI_Port(void);
 void hostSleep( cell_t msec );
+
+// Amiga chip emulation
+void hostChipWrite(cell_t value, cell_t amigaAddress);
 
 #ifdef __cplusplus
 }

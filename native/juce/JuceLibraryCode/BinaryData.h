@@ -81,7 +81,7 @@ namespace BinaryData
     const int            exmember_fthSize = 4774;
 
     extern const char*   float_port_fth;
-    const int            float_port_fthSize = 1079;
+    const int            float_port_fthSize = 1188;
 
     extern const char*   global_data_fth;
     const int            global_data_fthSize = 333;
@@ -108,7 +108,7 @@ namespace BinaryData
     const int            job_fthSize = 5116;
 
     extern const char*   load_hmsl_fth;
-    const int            load_hmsl_fthSize = 5675;
+    const int            load_hmsl_fthSize = 5865;
 
     extern const char*   load_ode_fth;
     const int            load_ode_fthSize = 1286;
@@ -123,7 +123,7 @@ namespace BinaryData
     const int            midi_fthSize = 14014;
 
     extern const char*   midi_globals_fth;
-    const int            midi_globals_fthSize = 3761;
+    const int            midi_globals_fthSize = 3911;
 
     extern const char*   midi_instrument_fth;
     const int            midi_instrument_fthSize = 3375;
@@ -251,6 +251,81 @@ namespace BinaryData
     extern const char*   utils_fth;
     const int            utils_fthSize = 3504;
 
+    extern const char*   _8svx_j;
+    const int            _8svx_jSize = 1007;
+
+    extern const char*   ajf_abort_fth;
+    const int            ajf_abort_fthSize = 766;
+
+    extern const char*   ajf_base_fth;
+    const int            ajf_base_fthSize = 3123;
+
+    extern const char*   ajf_events_fth;
+    const int            ajf_events_fthSize = 5114;
+
+    extern const char*   ajf_graph_fth;
+    const int            ajf_graph_fthSize = 2350;
+
+    extern const char*   ajf_includes_fth;
+    const int            ajf_includes_fthSize = 669;
+
+    extern const char*   ajf_menu_fth;
+    const int            ajf_menu_fthSize = 3768;
+
+    extern const char*   ajf_midi_fth;
+    const int            ajf_midi_fthSize = 15257;
+
+    extern const char*   ajf_midi_exec_fth;
+    const int            ajf_midi_exec_fthSize = 4356;
+
+    extern const char*   ajf_mm_fth;
+    const int            ajf_mm_fthSize = 1163;
+
+    extern const char*   ajf_new_includes_fth;
+    const int            ajf_new_includes_fthSize = 249;
+
+    extern const char*   ajf_rtc_fth;
+    const int            ajf_rtc_fthSize = 11501;
+
+    extern const char*   ajf_startup_fth;
+    const int            ajf_startup_fthSize = 416;
+
+    extern const char*   ajf_top_fth;
+    const int            ajf_top_fthSize = 1514;
+
+    extern const char*   amiga_instrument_fth;
+    const int            amiga_instrument_fthSize = 5181;
+
+    extern const char*   amiga_sound_fth;
+    const int            amiga_sound_fthSize = 9401;
+
+    extern const char*   envelopes_fth;
+    const int            envelopes_fthSize = 4141;
+
+    extern const char*   gauss_fth;
+    const int            gauss_fthSize = 3651;
+
+    extern const char*   load_hmsl_fth2;
+    const int            load_hmsl_fth2Size = 7234;
+
+    extern const char*   medplayer_fth;
+    const int            medplayer_fthSize = 62;
+
+    extern const char*   multi_wait_fth;
+    const int            multi_wait_fthSize = 1888;
+
+    extern const char*   patches_fth;
+    const int            patches_fthSize = 281;
+
+    extern const char*   spawn_task_fth;
+    const int            spawn_task_fthSize = 3590;
+
+    extern const char*   timer_driven_fth;
+    const int            timer_driven_fthSize = 3370;
+
+    extern const char*   waveforms_fth;
+    const int            waveforms_fthSize = 15471;
+
     extern const char*   clone_fth;
     const int            clone_fthSize = 12929;
 
@@ -264,16 +339,16 @@ namespace BinaryData
     const int            make_all256_fthSize = 1050;
 
     extern const char*   ansilocs_fth;
-    const int            ansilocs_fthSize = 5337;
+    const int            ansilocs_fthSize = 5288;
 
     extern const char*   bench_fth;
     const int            bench_fthSize = 4444;
 
     extern const char*   c_struct_fth;
-    const int            c_struct_fthSize = 7012;
+    const int            c_struct_fthSize = 7153;
 
     extern const char*   case_fth;
-    const int            case_fthSize = 2016;
+    const int            case_fthSize = 2157;
 
     extern const char*   condcomp_fth;
     const int            condcomp_fthSize = 1413;
@@ -282,52 +357,52 @@ namespace BinaryData
     const int            coretest_fthSize = 25851;
 
     extern const char*   file_fth;
-    const int            file_fthSize = 4707;
+    const int            file_fthSize = 4848;
 
     extern const char*   filefind_fth;
     const int            filefind_fthSize = 2902;
 
     extern const char*   floats_fth;
-    const int            floats_fthSize = 12389;
+    const int            floats_fthSize = 12530;
 
     extern const char*   forget_fth;
-    const int            forget_fthSize = 2748;
+    const int            forget_fthSize = 2889;
 
     extern const char*   history_fth;
-    const int            history_fthSize = 11407;
+    const int            history_fthSize = 11417;
 
     extern const char*   loadhist_fth;
     const int            loadhist_fthSize = 221;
 
     extern const char*   loadp4th_fth;
-    const int            loadp4th_fthSize = 1535;
+    const int            loadp4th_fthSize = 1705;
 
     extern const char*   locals_fth;
-    const int            locals_fthSize = 2229;
+    const int            locals_fthSize = 2370;
 
     extern const char*   math_fth;
-    const int            math_fthSize = 2167;
+    const int            math_fthSize = 2308;
 
     extern const char*   member_fth;
-    const int            member_fthSize = 4970;
+    const int            member_fthSize = 5111;
 
     extern const char*   misc1_fth;
-    const int            misc1_fthSize = 3729;
+    const int            misc1_fthSize = 3870;
 
     extern const char*   misc2_fth;
-    const int            misc2_fthSize = 6263;
+    const int            misc2_fthSize = 6404;
 
     extern const char*   numberio_fth;
-    const int            numberio_fthSize = 5689;
+    const int            numberio_fthSize = 5830;
 
     extern const char*   private_fth;
-    const int            private_fthSize = 1144;
+    const int            private_fthSize = 1286;
 
     extern const char*   require_fth;
-    const int            require_fthSize = 1168;
+    const int            require_fthSize = 1309;
 
     extern const char*   saveinput_fth;
-    const int            saveinput_fthSize = 2277;
+    const int            saveinput_fthSize = 2418;
 
     extern const char*   savedicd_fth;
     const int            savedicd_fthSize = 4038;
@@ -339,13 +414,13 @@ namespace BinaryData
     const int            siev_fthSize = 731;
 
     extern const char*   smart_if_fth;
-    const int            smart_if_fthSize = 1915;
+    const int            smart_if_fthSize = 2056;
 
     extern const char*   strings_fth;
     const int            strings_fthSize = 1950;
 
     extern const char*   system_fth;
-    const int            system_fthSize = 19751;
+    const int            system_fthSize = 20112;
 
     extern const char*   t_alloc_fth;
     const int            t_alloc_fthSize = 2647;
@@ -381,7 +456,7 @@ namespace BinaryData
     const int            t_load_undef_fthSize = 95;
 
     extern const char*   t_locals_fth;
-    const int            t_locals_fthSize = 989;
+    const int            t_locals_fthSize = 1135;
 
     extern const char*   t_nolf_fth;
     const int            t_nolf_fthSize = 120;
@@ -393,7 +468,7 @@ namespace BinaryData
     const int            t_required_helper2_fthSize = 31;
 
     extern const char*   t_strings_fth;
-    const int            t_strings_fthSize = 3389;
+    const int            t_strings_fthSize = 4803;
 
     extern const char*   t_tools_fth;
     const int            t_tools_fthSize = 1890;
@@ -411,10 +486,10 @@ namespace BinaryData
     const int            tut_fthSize = 1343;
 
     extern const char*   wordslik_fth;
-    const int            wordslik_fthSize = 1203;
+    const int            wordslik_fthSize = 1344;
 
     // Number of elements in the namedResourceList and originalFileNames arrays.
-    const int namedResourceListSize = 135;
+    const int namedResourceListSize = 160;
 
     // Points to the start of a list of resource names.
     extern const char* namedResourceList[];
