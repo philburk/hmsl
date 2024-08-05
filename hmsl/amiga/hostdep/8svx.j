@@ -7,6 +7,25 @@
 
 ANEW TASK-8SVX.J
 
+: ODD@ ( address -- value , fetch 4 bytes in BigEndian order from )
+    0
+    4 0 DO
+        8 lshift
+        over c@ +
+        swap 1+ swap
+    LOOP
+    nip
+;
+
+: ODD! ( value address --  , store 4 bytes in BigEndian order from )
+    4 0 DO
+        2dup c!
+        1+ swap
+        8 rshift swap
+    LOOP
+    2drop
+;
+
 \ This stuff will probably go into a 'ju:' file. ------
 : $>CODE ( $string -- 'cccc' , make 4byte value of 4 chars )
     count drop odd@
