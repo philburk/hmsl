@@ -114,14 +114,18 @@ cell_t LocalSynth::init() {
 
     // Start the synth.
     mAudioDeviceManager.addAudioCallback(this);
+    mInitialized = true;
     return result;
 }
 
 // Called by HMSL to terminate the MIDI connection
 void LocalSynth::term() {
-    mAudioDeviceManager.removeAudioCallback(this);
-    mAudioDeviceManager.closeAudioDevice();
-    JukeBox_Terminate();
+    if (mInitialized) {
+        mAudioDeviceManager.removeAudioCallback(this);
+        mAudioDeviceManager.closeAudioDevice();
+        JukeBox_Terminate();
+        mInitialized = false;
+    }
 }
 
 // Called when HMSL wants to schedule a MIDI packet
