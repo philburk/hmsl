@@ -373,6 +373,7 @@ decimal
 
 ;CLASS
 
+0 [IF] \ comment out Amiga machine code
 \ Special coded REVERSE for speed.
 : REVERSE.BYTES  ( addr1 addr2 -- , reverse intervening bytes)
    [ hex
@@ -390,8 +391,23 @@ decimal
      2E1E  w, \  MOVE.L  (DSP)+,TOS
    decimal ]        
 ;
+[ELSE]
+: REVERSE.BYTES  { addr1 addr2 -- , reverse intervening bytes }
+    BEGIN
+        addr2 addr1 >
+    WHILE
+        addr1 c@
+        addr2 c@
+        addr1 c!
+        addr2 c!
+        addr1 1+ -> addr1
+        addr2 1- -> addr2
+    REPEAT
+;
+[THEN]
 
-\ Low level word for finding MIN and MAX of a set of bytes.
+\ Low level word for finding MIN and MAX of a set of signed bytes.
+0 [IF] \ comment out Amiga machine code
 : MIN.MAX.BYTES ( min max addr count -- min max )
    [ hex
      2F03  w,    \  MOVE.L  D3,-(RP)               
@@ -417,7 +433,18 @@ decimal
      261F  w,    \  MOVE.L  (RP)+,D3               
   decimal ]
 ;
-
+[ELSE]
+: MIN.MAX.BYTES { pmin pmax addr pcount | pshift -- min max }
+    cell 1- 8 * -> pshift   \ amount to shift for sign extension
+    pcount 0 DO
+        addr i + c@
+        pshift lshift   pshift arshift    \ sign extend the byte
+        dup pmin min -> pmin
+        pmax max -> pmax
+    LOOP
+    pmin pmax
+;
+[THEN]
 
 \ Audio sample class.
 METHOD TEST.PART:

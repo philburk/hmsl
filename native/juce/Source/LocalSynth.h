@@ -54,6 +54,7 @@ public:
     }
 
 private:
+    bool               mInitialized = false;
     AudioDeviceManager mAudioDeviceManager;
     int32_t            mSampleRate = 44100;
     int                mFramesPerTick = 0;

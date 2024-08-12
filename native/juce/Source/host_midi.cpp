@@ -18,17 +18,20 @@
 #include "ExternalMidi.h"
 #include "LocalSynth.h"
 
-static std::unique_ptr<MidiBase> sMidiBase;
+static std::unique_ptr<MidiBase> sMidiBase{nullptr};
 
 // ============== Clock Time ===================================
 void hostClock_Init() {
+    hostClock_Term();
     sMidiBase = std::make_unique<MidiBase>();
     sMidiBase->init();
 }
 
 void hostClock_Term() {
-    sMidiBase->term();
-    sMidiBase.reset();
+    if (sMidiBase) {
+        sMidiBase->term();
+        sMidiBase.reset();
+    }
 }
 
 cell_t hostClock_QueryTime() {
