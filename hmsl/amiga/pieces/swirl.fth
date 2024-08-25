@@ -57,6 +57,8 @@ OB.OBJLIST SW-SAMPLES
 ;
 
 : SW.SAMPLES.TERM
+    da.kill
+    20 msec  \ wait for the DMA to stop before we deallocate the sample data.
     freeall: sw-samples
     free: sw-samples
 ;
@@ -236,14 +238,15 @@ V: SW-CHANNEL
 ;
 
 : SW.GRID.FUNC ( value part# -- )
+    ." sw.grid.func #" dup . cr
     nip
     CASE
         0 OF 2 scg.clear.view ENDOF
         1 OF sw_angle_inc sw-delta-angle ! \ forward
 		 ENDOF
-        2 OF sw_angle_inc negate sw-delta-angle ! \ reverse
+        2 OF 0 sw-delta-angle ! \  stop rotating
 		ENDOF
-        3 OF 0 sw-delta-angle ! \  stop rotating
+        3 OF sw_angle_inc negate sw-delta-angle ! \ reverse
 		ENDOF
     ENDCASE
 ;
@@ -264,7 +267,6 @@ V: SW-CHANNEL
     2 3 new: sw-screen
     sw-grid 1000 80 add: sw-screen
     " Swirl" put.title: sw-screen
-    sw-screen default-screen !
 ;
 
 : SW.CONTROL.TERM ( -- )
@@ -321,7 +323,10 @@ V: SW-CHANNEL
 ;
 
 : SWIRL.PLAY ( -- )
+    default-screen @
+    sw-screen default-screen !
     sw-player hmsl.play
+    default-screen !
 ;
 
 : SWIRL ( -- )

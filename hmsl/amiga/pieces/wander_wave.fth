@@ -1,4 +1,4 @@
-\ Perform timbre modulation by preforming a random walk
+\ Perform timbre modulation by performing a random walk
 \ for each byte of a waveform.
 \
 \ Demonstrates the use of dynamically instantiated objects.
@@ -6,7 +6,7 @@
 \ Author: Phil Burk
 \ Copyright 1986 -  Phil Burk, Larry Polansky, David Rosenboom.
 
-include? ob.random.walk h:random_walk
+include? ob.random.walk hf:random_walk.fth
 
 ANEW TASK-WANDER_WAVE
 
@@ -21,7 +21,7 @@ OB.RANDOM.WALK WW-PITCH  ( declare single walker for pitch )
 \
 \ Dynamically instantiate a RANDOM.WALK object for each waveform.
     ww_#bytes new: ww-holder
-    ww_#bytes 0 
+    ww_#bytes 0
     DO  instantiate ob.random.walk
         dup add: ww-holder
 	127 over put.max: []   ( set range )
@@ -56,6 +56,7 @@ OB.RANDOM.WALK WW-PITCH  ( declare single walker for pitch )
         LOOP
 \ Modify pitch
         walk: ww-pitch da.period!
+        5 msec
         ?terminal
     UNTIL
 ;
