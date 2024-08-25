@@ -26,6 +26,27 @@ include? msec ju:msec
 
 ANEW TASK-AMIGA_SOUND
 
+\ Amiga memory flags
+$ 01 constant MEMF_PUBLIC
+$ 02 constant MEMF_CHIP
+$ 04 constant MEMF_FAST
+$ 10000 constant MEMF_CLEAR
+
+\ PForth memory is all the same so ignore the MEMF mode.
+: ALLOCBLOCK { mode size -- address | false }
+    size allocate   \ -- addr ior
+    IF  drop false
+    ELSE  \ -- addr
+        mode memf_clear AND
+        IF dup size erase    \ clear memory
+        THEN
+    THEN
+;
+
+: FREEBLOCK ( address -- )
+    free drop
+;
+
 : >ABS ( pforth-address -- absolute-address )
     \ JForth used to use relative addresses on the stack.
     \ But pForth uses real addresses so this can be a NOOP.
@@ -116,7 +137,7 @@ defer DA.CHIP!   ( value24 offset8 -- , store at 8 bit offset )
     dup da-max-channel @ >
     IF  ." Error - Highest DA channel is "
         da-max-channel @ dup . cr
-        2 = 
+        2 =
         IF ." Channel 3 being used by timer!" cr
         THEN
         drop 2
@@ -141,7 +162,7 @@ defer DA.CHIP!   ( value24 offset8 -- , store at 8 bit offset )
 
 : DA.ADDRESS!  ( addr -- , address of first byte )
     dup >abs AUDXLCH_OFFSET da.off+ da.chip!
-    da-channel @ da-addresses !    
+    da-channel @ da-addresses !
 ;
 
 : DA.ADDRESS@  ( -- addr , address of first byte )
@@ -149,7 +170,7 @@ defer DA.CHIP!   ( value24 offset8 -- , store at 8 bit offset )
 ;
 
 : DA.ENVELOPE! ( addr #words -- , set envelope registers )
-    da.#words!  da.address!    
+    da.#words!  da.address!
 ;
 
 : DA.SAMPLE! ( addr #bytes -- , Set Sample to Use )
@@ -253,13 +274,13 @@ variable DA-CATCH-MSEC    0 da-catch-msec !
 ;
 
 : DA.KILL  ( -- , stop all Amiga Audio )
-    DA_NUM_CHANNELS 0 DO 
+    DA_NUM_CHANNELS 0 DO
         i da.channel! da.stop
     LOOP
 ;
 
 : DA.QUIET  ( -- , silence all Amiga Audio )
-    DA_NUM_CHANNELS 0 DO 
+    DA_NUM_CHANNELS 0 DO
         i da.channel!
         0 da.loudness!
     LOOP
@@ -336,7 +357,7 @@ if.forgotten da.term
 
 : DA.TESTCH  ( period channel -- , test )
     da.channel!  da.period!
-    da.start 
+    da.start
     ." key for next note" CR
     key drop
 ;
