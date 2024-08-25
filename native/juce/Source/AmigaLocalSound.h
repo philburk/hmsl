@@ -48,6 +48,8 @@ public:
         return volume * (1.0f / (64 * 128));
     }
 
+    void updateAddress();
+
     void setNextAddress(const int8_t *address) {
         mNextData = address;
     }
@@ -57,6 +59,10 @@ public:
     }
 
     void setEnabled(bool enabled) {
+        if (enabled && !mEnabled) {
+            mCursor = 0.0f;
+            updateAddress();
+        }
         mEnabled = enabled;
     }
 

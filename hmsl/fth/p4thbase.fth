@@ -333,7 +333,12 @@ variable time-current
 : 4- 4 - ;
 : 4* 2 lshift ;
 
-: ?QUIT ( -- false ) false ;
+: ?QUIT ( -- flag, ask for a key, return true if q hit )
+    ." Hit any key to continue, 'q' to quit:"
+    key cr
+    ascii q =
+;
+
 : ?STOP ( -- false ) false ;
 
 : ? ( addr - , print contents of variable )

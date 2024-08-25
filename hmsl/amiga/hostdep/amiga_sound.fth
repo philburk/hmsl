@@ -117,18 +117,18 @@ defer DA.CHIPW!  ( value16 offset16 -- , store into chip )
 defer DA.CHIP!   ( value24 offset8 -- , store at 8 bit offset )
 
 : (DA.CHIPW!)  ( value16 offset16 -- , store into chip )
-    2dup amiga_chip_base + hostwritechip()
-    ." FAKE  " swap .
+    2dup swap ." 0x" .hex
     ." 0x" .hex
     ." (DA.CHIPW!)" cr
+    amiga_chip_base + hostwritechip()
 ;
 'c (da.chipw!) is da.chipw!
 
 : (DA.CHIP!)   ( value24 offset8 -- , store at 8 bit offset )
-    2dup amiga_chip_base + hostwritechip()
-    ." FAKE  " swap .
+    2dup swap ." 0x" .hex
     ." 0x" .hex
     ." (DA.CHIP!)" cr
+    amiga_chip_base + hostwritechip()
 ;
 
 'c (da.chip!) is da.chip!

@@ -264,6 +264,7 @@ V: SW-CHANNEL
     2 3 new: sw-screen
     sw-grid 1000 80 add: sw-screen
     " Swirl" put.title: sw-screen
+    sw-screen default-screen !
 ;
 
 : SW.CONTROL.TERM ( -- )

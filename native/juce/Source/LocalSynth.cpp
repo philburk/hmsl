@@ -140,11 +140,11 @@ cell_t LocalSynth::write(ucell_ptr_t data, cell_t count, double nativeTicks) {
     if( count > 0 )
     {
         int timeOut = 20;
-        // Cannot playt it in the past.
+        // Cannot play it in the past.
         const cell_t playTimeNativeTicks = (cell_t)std::max(nativeTicks, getNativeTime());
         while( (JukeBox_SendMIDI( (int)playTimeNativeTicks, (int)count, byteData ) < 0) && (timeOut-- > 0) )
         {
-            hostSleep(50);
+            hostSleep(50); // Wait for room in the buffer.
         }
     }
     return 0;
