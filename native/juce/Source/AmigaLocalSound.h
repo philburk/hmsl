@@ -11,6 +11,8 @@
 #include <algorithm>
 #include <atomic>
 
+#include "AtomicQueue.h"
+
 #pragma once
 
 /**
@@ -81,6 +83,12 @@ private:
     const int8_t mSine[8] = { 0, 80, 127, 80, 0, -80, -128, -80};
 };
 
+typedef struct ChipWriteEvent {
+    int64_t value;
+    int32_t amigaAddress;
+    int32_t stub; // is this needed?
+} ChipWriteEvent;
+
 /**
  * Emulate the Amiga Local Sound system for 4 channels.
  * Model the interaction between channels.
@@ -97,9 +105,14 @@ public:
     void writeRegister(int32_t amigaAddress, int64_t value);
 
 private:
+    // Thse run on the audio thread.
+    void processChipEvents();
+    void writeRegisterInternal(int32_t amigaAddress, int64_t value);
+
     static constexpr int kNumChannels = 4;
-    AmigaSoundChannel channels[kNumChannels];
-    
+    AmigaSoundChannel    mChannels[kNumChannels];
+    AtomicQueue<ChipWriteEvent> mFifo;
+
     uint32_t mDmaControl = 0; // Register with flags for controlling DMA.
     uint32_t mAdkControl = 0; // Register with flags for controlling Audio Channel modulation.
     bool mEnabled = false; // Is entire DMA system enabled?
