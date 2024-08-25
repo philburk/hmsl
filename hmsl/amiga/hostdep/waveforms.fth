@@ -488,7 +488,12 @@ METHOD DECIMATE:
 :M START:  ( -- )
       da.period@ 1 da.period!  ( complete waveform )
       da.stop
-      dup -2 ashift 0 DO LOOP ( delay to catch value %M )
+
+      \ This old code will not wait long enough.
+      \ We probably need to wait at least one chip sample period.
+      \ dup -2 ashift 0 DO LOOP ( delay to catch value %M )
+      1 msec
+
       da.period!
       use: self
       da.start

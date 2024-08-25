@@ -12,6 +12,11 @@
 
 #include "AmigaLocalSound.h"
 
+void AmigaSoundChannel::updateAddress() {
+    mData = mNextData; // FIXME use mutex for atomic update
+    mNumWords = mNextNumWords;
+}
+
 float AmigaSoundChannel::renderAudio(int32_t period, int32_t volume) {
     float output = 0.0f;
     if (!mEnabled) {
@@ -20,8 +25,7 @@ float AmigaSoundChannel::renderAudio(int32_t period, int32_t volume) {
         if (mCursor >= (mNumWords * 2)) {
             mCursor -= (mNumWords * 2);
             // Update DMA address when we finish playing one segment.
-            mData = mNextData; // FIXME use mutex for atomic update
-            mNumWords = mNextNumWords;
+            updateAddress();
         }
         int8_t sample = mData[(int)mCursor];
         mCursor += convertPeriodToPhaseIncrement(period);
@@ -133,7 +137,7 @@ void AmigaLocalSound::writeRegister(int32_t amigaAddress, int64_t value) {
                 if ((value & FLAG_SET_CLR) != 0) {
                     mDmaControl |= value; // set bits
                 } else {
-                    mDmaControl = (mDmaControl & ~value); // clear bits
+                    mDmaControl = mDmaControl & ~value; // clear bits
                 }
                 // interpret current bits
                 mEnabled = ((mDmaControl & FLAG_DMA_DMAEN) != 0);
@@ -146,7 +150,7 @@ void AmigaLocalSound::writeRegister(int32_t amigaAddress, int64_t value) {
                 if ((value & FLAG_SET_CLR) != 0) {
                     mAdkControl |= value; // set bits
                 } else {
-                    mAdkControl = (mAdkControl & ~value); // clear bits
+                    mAdkControl = mAdkControl & ~value; // clear bits
                 }
                 break;
             default:
