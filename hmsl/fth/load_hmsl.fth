@@ -144,11 +144,6 @@ include? task-player fth/player.fth
 include? task-interpreters fth/interpreters.fth
 [THEN]
 
-\ Some predefined morphs.
-if-load-morphs @ [IF]
-include? task-stock_morphs fth/stock_morphs.fth
-[THEN]
-
 if-load-graphics @ [IF]
 include? task-build_menus fth/build_menus.fth
 [THEN]
@@ -160,11 +155,41 @@ include? task-packed_midi fth/packed_midi.fth
 
 include? task-top fth/top.fth
 
+include? assign            tools/assigns.fth
+include? file_port         tools/file_port.fth
+
+\ Set common HMSL named folder assignments.
+assign hmsl .
+assign hp   hmsl:pieces
+assign ht   hmsl:tools
+assign ha   hmsl:amiga/hostdep
+assign hsc  hmsl:screens
+assign hf   hmsl:fth
+assign ju   hmsl:amiga/util
+assign hs   hmsl:amiga/samples
+assign hap  hmsl:amiga/pieces
+
+\ Load Amiga local sound emulation
+assign.on
+include? task-amiga_sound        ha:amiga_sound.fth
+include? task-tunings            hf:tunings.fth
+include? task-ratios             hf:ratios.fth
+include? task-envelopes          ha:envelopes.fth
+include? task-8svx.j             ha:8svx.j
+include? task-waveforms          ha:waveforms.fth
+include? task-amiga_instrument   ha:amiga_instrument.fth
+include? task-bsort              ju:bsort.fth
+assign.off
+
+\ Some predefined morphs.
+if-load-morphs @ [IF]
+include? task-stock_morphs fth/stock_morphs.fth
+[THEN]
+
 \ include? task-set_vectors fth/set_vectors.fth
 include? task-hmsl_version fth/hmsl_version.fth
 include? task-hmsl_top fth/hmsl_top.fth
 include? task-startup fth/startup.fth
-
 
 \ Editors in screen are loaded on top of the regular HMSL
 if-load-graphics @   if-load-shape-ed @ AND [IF]
@@ -182,23 +207,11 @@ if-load-graphics @ if-load-actions @ AND [IF]
 [THEN]
 
 \ load some tools
-include? assign            tools/assigns.fth
-include? file_port         tools/file_port.fth
 include? task-midifile     tools/midifile.fth
 include? task-markov_chain tools/markov_chain.fth
 include? task-score_entry  tools/score_entry.fth
 include? task-bend_tuning  tools/bend_tuning.fth
 include? task-bend_score   tools/bend_score.fth
-
-\ Set common HMSL named folder assignments.
-assign hmsl .
-assign hp   hmsl:pieces
-assign ht   hmsl:tools
-assign ha   hmsl:amiga:hostdep
-assign hsc  hmsl:screens
-
-\ Load Amiga local sound emulation
-include? task-amiga_sound   ha:amiga_sound.fth
 
 mreset-warn on
 cr ." HMSL compilation finished." cr

@@ -12,8 +12,9 @@ variable FILE-IF-NEW
 ;
 
 : $FOPEN ( $filename -- refnum | 0 , open a file )
-    .S cr
-    dup ." open file " count type cr
+    dup ." open file " count type
+    map.filename    \ apply ASSIGN
+    dup ."  => " count type cr
     count
     file-if-new @ IF
         r/w create-file
@@ -75,4 +76,25 @@ VARIABLE FIO-CHAR-BUFFER
     THEN
 ;
 
-." TODO define remaining FILE words: FSEEK " cr
+-1 constant offset_beginning
+0 constant offset_current
+1 constant offset_end
+
+: FSEEK { fileid offset mode | pos0 pos1 ior -- prev-position | -1 }
+    fileid file-position -> ior
+    d>s -> pos0
+    ior IF
+        ." file-position returned " ior . cr
+    ELSE
+        mode CASE
+        offset_beginning OF offset -> pos1 ENDOF
+        offset_current OF offset pos0 + -> pos1 ENDOF
+        offset_end OF fileid file-size abort" Bad file-size"
+                d>s offset - -> pos1
+            ENDOF
+        ENDCASE
+        pos1 s>d fileid reposition-file -> ior
+    THEN
+    pos0 ior
+;
+

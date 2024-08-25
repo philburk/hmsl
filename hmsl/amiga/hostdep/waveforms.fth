@@ -54,7 +54,6 @@ decimal
     IV.LONG IV-WA-PERIOD  ( current period )
     IV.LONG IV-WA-OCTAVE  ( current octave )
 \ These Instance Variables are the same as a Voice8Header structure.
-\ Do not insert any more variables in between them!
     IV.LONG  iv-OneShotHiSamples
     IV.LONG  iv-RepeatHiSamples
     IV.LONG  iv-SamplesPerHiCycle
@@ -98,21 +97,38 @@ decimal
     THEN
 ;
 
-: WA.READ.WORD ( -- word , read word from file )
-    wa-bucket 2 wa.read
-    wa-bucket w@
+: WA.BIG@ { address numBytes -- value , fetch N bytes in BigEndian order }
+    0
+    numBytes 0 DO
+        8 lshift
+        address c@ +
+        1 +-> address
+    LOOP
 ;
 
-: WA.READ.LONG ( -- long , read longword from file )
+: WA.READ.WORD ( -- word , read Big Endian word from file )
+    wa-bucket 2 wa.read
+    wa-bucket 2 wa.big@
+;
+
+: WA.READ.LONG ( -- long , read 32-bit Big Endian word from file )
     wa-bucket 4 wa.read
-    wa-bucket @
+    wa-bucket 4 wa.big@
 ;
 
 : MS.READ.CHUNK  ( -- size , read a chunk )
     wa.read.long dup ." CODE = " code>$ count type cr
     wa.read.long  even-up  >r
     CASE
-        'VHDR' OF iv&> iv-oneshothisamples r@ wa.read
+        'VHDR' OF pad r@ wa.read
+                   pad
+                   dup 4 wa.big@ iv=> iv-OneShotHiSamples 4 +
+                   dup 4 wa.big@ iv=> iv-RepeatHiSamples 4 +
+                   dup 4 wa.big@ iv=> iv-SamplesPerHiCycle 4 +
+                   dup 2 wa.big@ iv=> iv-SamplesPerSec 2 +
+                   dup c@ iv=> iv-ctOctave 1 +
+                   dup c@ iv=> iv-sCompression 1 +
+                   dup 4 wa.big@ iv=> iv-volume drop
                ENDOF
         'NAME' OF pad r@ wa.read pad r@ type cr
                ENDOF

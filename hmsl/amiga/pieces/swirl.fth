@@ -6,8 +6,8 @@
 \ Performed 11/13/87 at Mills College
 \ MOD: 12/4/87 Changed OB.TEST.SAMPLE to OB.SAMPLE
 
-include? bsort ju:bsort
-include? ob.2d.transform ht:2d_transform
+include? bsort ju:bsort.fth
+include? ob.2d.transform ht:2d_transform.fth
 
 ANEW TASK-SWIRL
 
@@ -39,12 +39,12 @@ OB.SAMPLE SW-SAMPLE-6
 OB.OBJLIST SW-SAMPLES
 
 : SW.SAMPLES.INIT
-    " hs:mcsingle" dup $. load: sw-sample-1
-    " hs:bowl"     dup $. load: sw-sample-2
-    " hs:analog1"  dup $. load: sw-sample-3
-    " hs:uhh"      dup $. load: sw-sample-4
-    " hs:mando5th" dup $. load: sw-sample-5
-    " hs:peking"   dup $. load: sw-sample-6
+    " hs:mcsingle.8svx" dup $. load: sw-sample-1
+    " hs:bowl.8svx"     dup $. load: sw-sample-2
+    " hs:analog1.8svx"  dup $. load: sw-sample-3
+    " hs:uhh.8svx"      dup $. load: sw-sample-4
+    " hs:mando5th.8svx" dup $. load: sw-sample-5
+    " hs:peking.8svx"   dup $. load: sw-sample-6
 \
     stuff{
       sw-sample-1
@@ -90,7 +90,7 @@ OB.OBJLIST SW-SAMPLES
 \
     sw_rotated_range 2/ sw_range 2/ -
     dup sw_range + 124 + swap 124 + swap
-    ." Pitch limits = " 2dup . . cr 
+    ." Pitch limits = " 2dup . . cr
     1 put.dim.limits: source-shape
     0 64 2 put.dim.limits: source-shape
     0 5 3 put.dim.limits: source-shape
@@ -202,7 +202,7 @@ V: SW-COLOR
     sw.abs->dur
     490 20 gr.move sw-angle @  hex gr.number decimal
     "   " gr.text
-;   
+;
 
 : SW.SET.CENTER ( -- )
     calc.stats: source-shape
@@ -241,9 +241,9 @@ V: SW-CHANNEL
         0 OF 2 scg.clear.view ENDOF
         1 OF sw_angle_inc sw-delta-angle ! \ forward
 		 ENDOF
-        2 OF sw_angle_inc negate sw-delta-angle ! \ reverse 
+        2 OF sw_angle_inc negate sw-delta-angle ! \ reverse
 		ENDOF
-        3 OF 0 sw-delta-angle ! \  stop rotating 
+        3 OF 0 sw-delta-angle ! \  stop rotating
 		ENDOF
     ENDCASE
 ;

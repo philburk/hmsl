@@ -26,7 +26,7 @@
 \ Copyright 1987 Phil Burk
 \ All Rights Reserved
 
-include? task-sine_table ht:sine_table
+include? task-sine_table ht:sine_table.fth
 
 decimal
 
@@ -66,7 +66,7 @@ METHOD CALC.ROTATE.POINT:
 
 :M ARRAY.MULTIPLY: { dim1 dim2 elmnts -- , multiply matrix }
     elmnts many: [] 0
-    DO ( -- dim1 dim2 elmnts )    
+    DO ( -- dim1 dim2 elmnts )
         i dim1 elmnts ed.at: []
         i dim2 elmnts ed.at: []  ( -- x y )
         point.multiply: self

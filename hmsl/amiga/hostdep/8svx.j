@@ -7,7 +7,7 @@
 
 ANEW TASK-8SVX.J
 
-: ODD@ ( address -- value , fetch 4 bytes in BigEndian order from )
+: ODD@ ( address -- value , fetch 4 bytes in BigEndian order )
     0
     4 0 DO
         8 lshift
@@ -17,7 +17,7 @@ ANEW TASK-8SVX.J
     nip
 ;
 
-: ODD! ( value address --  , store 4 bytes in BigEndian order from )
+: ODD! ( value address --  , store 4 bytes in BigEndian order )
     4 0 DO
         2dup c!
         1+ swap
