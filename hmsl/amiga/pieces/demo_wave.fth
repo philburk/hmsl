@@ -64,6 +64,7 @@ OB.WAVEFORM WAVE-DRAW
 ;
 
 : DRAW.TERM  ( -- )
+    da.kill 20 msec
     free: wave-draw
     free: shape-1
     free: player-1

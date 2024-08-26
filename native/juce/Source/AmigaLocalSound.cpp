@@ -43,8 +43,9 @@ int32_t AmigaSoundChannel::renderModulation(int32_t period) {
     if (!mEnabled) {
         mCursor = 0;
     } else {
-        if (mCursor >= (mNumWords * 2)) {
-            mCursor -= (mNumWords * 2);
+        // Envelopes and pitch contours are 16-bit
+        if (mCursor >= mNumWords) {
+            mCursor -= mNumWords;
             // Update DMA address when we finish playing one segment.
             updateAddress();
         }

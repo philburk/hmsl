@@ -40,11 +40,11 @@ OB.RANDOM.WALK WW-PITCH  ( declare single walker for pitch )
 ;
 
 : WW.TERM ( -- )
+    da.kill 20 msec
     many: ww-holder 0
     DO i get: ww-holder deinstantiate
     LOOP
     clear: ww-holder
-    da.stop
 ;
 
 : WW.PLAY ( -- )
