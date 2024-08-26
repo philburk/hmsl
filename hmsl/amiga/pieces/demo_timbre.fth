@@ -25,7 +25,7 @@ OB.WAVEFORM WAVE-TIMBRE
     wave-timbre put.waveform: ins-amiga-1  ( repeating waveform )
 \ Use one channel to amplitude modulate the other for envelope.
     env-bang put.envelope: ins-amiga-1
-\    tuning-equal put.tuning: ins-amiga-1
+    tuning-equal put.tuning: ins-amiga-1
 \
 \ Set ON interpreter, use default INTERP.LAST.OFF for off.
     'c timbre.rnote.on  put.on.function:  ins-amiga-1
@@ -66,6 +66,7 @@ OB.WAVEFORM WAVE-TIMBRE
 ;
 
 : TIMBRE.TERM  ( -- )
+    da.kill 20 msec
     free: wave-timbre
     free: shape-1
     free: player-1

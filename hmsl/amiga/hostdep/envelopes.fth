@@ -16,10 +16,7 @@ MRESET PUT.HOLDAT:
 ANEW TASK-ENVELOPES
 
 \ This was used to store the memory type on Amiga JForth, like MEMF_CHIP
-variable MM-TYPE
-
- \ FIXME - this is not the same value. But it doesn't really matter.
-1 constant MEMF_CHIP
+\ FIXME variable MM-TYPE
 
 decimal
 \ Declare Methods
