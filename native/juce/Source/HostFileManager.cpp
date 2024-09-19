@@ -10,6 +10,7 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "HostFileManager.h"
+#include "pforth.h"
 
 #ifndef PF_DEFAULT_DICTIONARY
 #define PF_DEFAULT_DICTIONARY "pforth.dic"
@@ -20,20 +21,25 @@ std::unique_ptr<HostFileManager> HostFileManager::mInstance;
 #define DIR_HMSL_TOP         "HMSL"
 #define DIR_HMSL_SUB         "hmsl"
 #define DIR_HMSL_PFORTH_FTH  "pforth/fth"
+#define DIR_HMSL_IN_MUSIC    "~/Music/HMSL"
 
 HostFileManager::HostFileManager() {
-    // Look for the top HMSL folder.
     File appFile = File::getSpecialLocation(File::SpecialLocationType::currentApplicationFile);
+    // Look for the top HMSL folder.
     mAppDir = appFile.getParentDirectory();
+#if 1
     mHMSLDir = mAppDir;
     while (mHMSLDir.getFileName().compare(DIR_HMSL_TOP)) {
         File parentDir = mHMSLDir.getParentDirectory();
-        if (parentDir == mHMSLDir) { // at root!
-            mHMSLDir = mAppDir; // so just use the directory the app is in.
+        if (parentDir == mHMSLDir) { // at root! Not in an HMSL subfolder
+            mHMSLDir = File(DIR_HMSL_IN_MUSIC);
             break;
         }
         mHMSLDir = parentDir;
     }
+#else
+    mHMSLDir = File(DIR_HMSL_IN_MUSIC);
+#endif
     setCurrentDirectory(mHMSLDir);
 }
 
@@ -64,5 +70,19 @@ const char *HostFileManager::getDictionaryFileName() {
 FILE *HostFileManager::openFile( const char *fileName, const char *mode ) {
     File file = mCurrentDirectory->getChildFile(StringRef(fileName));
     const char *name = file.getFullPathName().toRawUTF8();
+
+    pfMessage("openFile: ");
+    pfMessage(fileName);
+    pfMessage("\n");
+    pfMessage("mAppDir = ");
+    pfMessage(mAppDir.getFullPathName().toRawUTF8());
+    pfMessage("\n");
+    pfMessage("mHMSLDir = ");
+    pfMessage(mHMSLDir.getFullPathName().toRawUTF8());
+    pfMessage("\n");
+    pfMessage("full name = ");
+    pfMessage(name);
+    pfMessage("\n");
+
     return fopen(name, mode);
 }
