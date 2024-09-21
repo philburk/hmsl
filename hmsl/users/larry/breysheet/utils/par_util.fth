@@ -3,7 +3,6 @@
 
 ANEW TASK-PAR_util
 
-
 $ BFE101 constant PAR-DATA-ADDR
 $ BFE301 constant PAR-DIR-ADDR
 

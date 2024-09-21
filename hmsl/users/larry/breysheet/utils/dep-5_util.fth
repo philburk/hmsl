@@ -63,7 +63,7 @@ v: d-hf-damp ( or gate time )
 \ words for storing variables
 
 : D.CLIPTO ( parameter-value -- 0-127 )
-	0 255  clipto
+    0 255  clipto
 ;
 
 \ the dep-5 uses some kind of division of 8 bits for
@@ -74,11 +74,11 @@ ob.array algorithm-array
 
 : BUILD.ALGORITHM-ARRAY
 \ not sure of exact numbers between 4-6... but these seem to work
-	11 new: algorithm-array
-	254 227 200 172 143 115 81 59 31 3 0
-	11 0 DO
-		i to: algorithm-array
-	LOOP
+    11 new: algorithm-array
+    254 227 200 172 143 115 81 59 31 3 0
+    11 0 DO
+        i to: algorithm-array
+    LOOP
 ;
 
 \ the following words "condition" values stored in variables. it is
@@ -101,8 +101,8 @@ ob.array algorithm-array
 : D-DEPTH!  d.clipto d-depth !  ( values ? ) ;
 \ wants numbers between 0 and 11
 : D-ALGORITHM! 1 11 clipto 1-
-	at: algorithm-array
-	 d-algorithm ! ;
+    at: algorithm-array
+     d-algorithm ! ;
 : D-PREDELAY! d.clipto d-predelay ! ;
 : D-DELAY-TIME! d-predelay! ;
 : D-REV-TIME! d.clipto d-rev-time ! ;
@@ -112,22 +112,22 @@ ob.array algorithm-array
 : D-GATE! d-hf-damp! ;
 
 : DEP-5.SEND ( --- )
-	sysex d.id d.apr d.channel
-	d.format d.level d.group
-	d-rev-type @ midi.xmit ( reverb type )
-	d-output @ midi.xmit ( output level )
-	d-q @ midi.xmit ( parametric q )
-	d-mid-freq @ midi.xmit ( parametric frequency )
-	d-lo-boost @ lo/hi.mask
-	d-mid-boost @ lo/hi.mask
-	d-hi-boost @ lo/hi.mask
-	d-feedback @ lo/hi.mask
-	d-rate @ lo/hi.mask
-	d-depth @ lo/hi.mask
-	d-algorithm @ lo/hi.mask
-	d-predelay @ lo/hi.mask
-	d-rev-time @ lo/hi.mask
-	d-hf-damp @ lo/hi.mask
+    sysex d.id d.apr d.channel
+    d.format d.level d.group
+    d-rev-type @ midi.xmit ( reverb type )
+    d-output @ midi.xmit ( output level )
+    d-q @ midi.xmit ( parametric q )
+    d-mid-freq @ midi.xmit ( parametric frequency )
+    d-lo-boost @ lo/hi.mask
+    d-mid-boost @ lo/hi.mask
+    d-hi-boost @ lo/hi.mask
+    d-feedback @ lo/hi.mask
+    d-rate @ lo/hi.mask
+    d-depth @ lo/hi.mask
+    d-algorithm @ lo/hi.mask
+    d-predelay @ lo/hi.mask
+    d-rev-time @ lo/hi.mask
+    d-hf-damp @ lo/hi.mask
 endsysex midi.flush
 ;
 
