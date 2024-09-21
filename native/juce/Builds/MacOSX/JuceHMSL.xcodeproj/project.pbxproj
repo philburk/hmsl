@@ -150,6 +150,7 @@
 		46BD6830054765A34A28F4D9 /* pfcompil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = pfcompil.h; path = ../../../../pforth/csrc/pfcompil.h; sourceTree = SOURCE_ROOT; };
 		49E36500DFDE9E0839C491C4 /* ctrl_fader.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = ctrl_fader.fth; path = ../../../../hmsl/fth/ctrl_fader.fth; sourceTree = SOURCE_ROOT; };
 		4A1FF2112C96628600A87796 /* JuceHMSL - App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "JuceHMSL - App.entitlements"; sourceTree = "<group>"; };
+		4ACFEF592C9F7A1A00282858 /* libme2000.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libme2000.a; path = ../../../osx/libs/libme2000.a; sourceTree = "<group>"; };
 		4BA5F503ACEFC863DA8E5599 /* morph_lists.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = morph_lists.fth; path = ../../../../hmsl/fth/morph_lists.fth; sourceTree = SOURCE_ROOT; };
 		4C060ED318839EDBFA0D1D0E /* test_ode.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = test_ode.fth; path = ../../../../hmsl/fth/test_ode.fth; sourceTree = SOURCE_ROOT; };
 		4D3E1717FD58D50CD54278AC /* AmigaLocalSound.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = AmigaLocalSound.cpp; path = ../../Source/AmigaLocalSound.cpp; sourceTree = SOURCE_ROOT; };
@@ -265,7 +266,6 @@
 		A763F943E2C1D88514100505 /* pforth.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = pforth.h; path = ../../../../pforth/csrc/pforth.h; sourceTree = SOURCE_ROOT; };
 		A9DB36912E3618059C1D7E8C /* t_tools.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = t_tools.fth; path = ../../../../pforth/fth/t_tools.fth; sourceTree = SOURCE_ROOT; };
 		ABA5B4575D6E35839DAB22CD /* deck.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = deck.fth; path = ../../../../hmsl/fth/deck.fth; sourceTree = SOURCE_ROOT; };
-		AD747B57E89C274222C7AC89 /* pfdicdat_arm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = pfdicdat_arm.h; path = ../../../../pforth/csrc/pfdicdat_arm.h; sourceTree = SOURCE_ROOT; };
 		AEA3D417582489C55F501148 /* pf_host.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = pf_host.h; path = ../../../../pforth/csrc/pf_host.h; sourceTree = SOURCE_ROOT; };
 		B14B62FE78E357E3E46137FC /* require.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = require.fth; path = ../../../../pforth/fth/require.fth; sourceTree = SOURCE_ROOT; };
 		B3C061979709F37D873E8261 /* load_hmsl.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = load_hmsl.fth; path = ../../../../hmsl/amiga/hostdep/load_hmsl.fth; sourceTree = SOURCE_ROOT; };
@@ -362,6 +362,7 @@
 		0CEF92CFB5450C9D8A6730FA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4ACFEF592C9F7A1A00282858 /* libme2000.a */,
 				E82E07442AB2C22195EA67FC /* Accelerate.framework */,
 				933B4928168DA6458F924187 /* AudioToolbox.framework */,
 				D22BC800C798548303CFA9F0 /* Carbon.framework */,
@@ -432,7 +433,6 @@
 				39B5CC71A5256DC9CE525426 /* pfcompfp.h */,
 				635FD059ACA0C52F48218EDD /* pfcompil.c */,
 				46BD6830054765A34A28F4D9 /* pfcompil.h */,
-				AD747B57E89C274222C7AC89 /* pfdicdat_arm.h */,
 				B6B439A5DB51B6314251782E /* pfinnrfp.h */,
 				A763F943E2C1D88514100505 /* pforth.h */,
 			);
@@ -933,7 +933,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/../../JuceLibraryCode",
 					"$(HOME)/JUCE/modules",
-					/Users/phil/Music/HMSL/native/common,
+					"$SRCROOT)/../../../../native/common",
 					"$(SRCROOT)/../../../../pforth/csrc",
 					"$(SRCROOT)/../../Source",
 					"$(inherited)",
@@ -943,10 +943,10 @@
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"/Users/phil/Music/HMSL/native/osx/libs\"",
+					"\"$(SRCROOT)/../../../osx/libs\"",
 				);
 				LLVM_LTO = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				MTL_HEADER_SEARCH_PATHS = "$(SRCROOT)/../../JuceLibraryCode $(HOME)/JUCE/modules /Users/phil/Work/hmsl/HMSL/native/common $(SRCROOT)/../../../../pforth/csrc $(SRCROOT)/../../Source";
 				OTHER_LDFLAGS = "-lme2000";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Mobileer.JuceHMSL;
@@ -1047,7 +1047,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/../../JuceLibraryCode",
 					"$(HOME)/JUCE/modules",
-					/Users/phil/Music/HMSL/native/common,
+					"$SRCROOT)/../../../../native/common",
 					"$(SRCROOT)/../../../../pforth/csrc",
 					"$(SRCROOT)/../../Source",
 					"$(inherited)",
@@ -1057,9 +1057,9 @@
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"/Users/phil/Music/HMSL/native/osx/libs\"",
+					"\"$(SRCROOT)/../../../osx/libs\"",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				MTL_HEADER_SEARCH_PATHS = "$(SRCROOT)/../../JuceLibraryCode $(HOME)/JUCE/modules /Users/phil/Work/hmsl/HMSL/native/common $(SRCROOT)/../../../../pforth/csrc $(SRCROOT)/../../Source";
 				OTHER_LDFLAGS = "-lme2000";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Mobileer.JuceHMSL;
