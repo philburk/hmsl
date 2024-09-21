@@ -13,45 +13,44 @@ anew task-fb_util
 v: f-note#
 v: f-fraction
 
-hex
-
 \ constants -- Instrument definition block
 0 k: f_#notes 	1 k: f_mchannel
 4 k: f_vbank	5 k: f_v#	6 k: f_detune
 7 k: f_oct	8 k: f_output	9 k: f_pan
-a k: f_lenable	d k: f_m/p
+$ 0a k: f_lenable	$ 0d k: f_m/p
 
 \ constants --  Parameters
-10 k: f_lspeed	11 k: f_amd	12 k: f_pmd
-13 k: f_f-wave	14 k: f_lldenable	
-15 k: f_lsync	16 k: f_ams	17 k: f_pms
-
-decimal
+$ 10 k: f_lspeed    $ 11 k: f_amd	12 k: f_pmd
+$ 13 k: f_f-wave    $ 14 k: f_lldenable
+$ 15 k: f_lsync     $ 16 k: f_ams	17 k: f_pms
 
 \ System Exclusive Event
 
 \ primitives  -- these next routines all read variables
 
 : F.ID
-	$ 43 midi.xmit 
+	$ 43 midi.xmit
 ;
 
-: F.SUBSTATUS 
-	$ 75 midi.xmit $ 70 midi.xmit 
+: F.SUBSTATUS
+	$ 75 midi.xmit $ 70 midi.xmit
 ;
 
-: F.START.EVENTS 
-	sysex f.id f.substatus midi.flush false midi-if-opt ! 
+: F.START.EVENTS
+	sysex f.id f.substatus midi.flush
+	\ TODO This was disabled 2024-09-21.
+	\ MIDI-IF-OPT is not implemented so it probably does not need to be disabled.
+	\ false midi-if-opt !
 ;
 
-: F.STOP.EVENTS 
+: F.STOP.EVENTS
 	endsysex midi.flush
 ;
 
 \ the following routines work fine, 7/20/87
 : F.NOTEON ( note fraction  velocity --- )
     f.start.events
-    3 xdup  
+    3 xdup
     drop f-fraction ! f-note# ! \ store for f.lastoff
     $ 10 midi.cvm+3D
     f.stop.events
@@ -69,16 +68,16 @@ decimal
 	f.stop.events
 ;
 
-\ the next routine is still in testing 
+\ the next routine is still in testing
 : F.PARAMETER ( par# value -- )
 	$ 70 midi.cvm+2d
 ;
 
 \ following also untested right now
 : F.KILL  ( turns off hanging events )
-	128 0 DO 
-		128 0 DO j i  f.noteoff 5 msec 
-		LOOP 
+	128 0 DO
+		128 0 DO j i  f.noteoff 5 msec
+		LOOP
 	loop
 ;
 

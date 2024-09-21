@@ -2,7 +2,7 @@
 \ hmsl based
 
 \ author: lp  6/87
-\ these are general utilities, not quite general enough to be 
+\ these are general utilities, not quite general enough to be
 \ included in hmsl
 
 anew task-global_util
@@ -10,19 +10,19 @@ anew task-global_util
 \ ================== some midi stuff ======================
 
 \  start and end midi system exclusive messages
-hex
-: SYSEX f0 midi.xmit ;
-: ENDSYSEX f7 midi.xmit ;
-decimal
+
+: SYSEX $ f0 midi.xmit ;
+: ENDSYSEX $ f7 midi.xmit ;
+
 
 \ utility for midi sysex codes that need successive nibbles
-hex
+
 : LO/HI.MASK  ( byte-data -- , sends it out to midi device in two nibbles )
-		( first lo, then hi )	
-	dup 0000000f and midi.xmit
-	000000f0 and -4 ashift midi.xmit
+		( first lo, then hi )
+	dup $ 0000000f and midi.xmit
+	$ 000000f0 and -4 ashift midi.xmit
 ;
-decimal
+
 
 \ ================== amiga local sound stuff ================
 
@@ -38,7 +38,7 @@ v: local-hi-freq 1750 local-hi-freq !
 		BEGIN
 			dup local-lo-freq @ <
 		WHILE
-			2* 
+			2*
 		REPEAT
 ;
 
@@ -47,11 +47,11 @@ v: local-hi-freq 1750 local-hi-freq !
 		BEGIN
 			dup local-hi-freq @ >
 		WHILE
-			2/ 
+			2/
 		REPEAT
 ;
 
-: LOCAL.FREQ.SCALE \ freq -- octave-of-freq within range 
+: LOCAL.FREQ.SCALE \ freq -- octave-of-freq within range
 	da.scale.down
 	da.scale.up
 ;
@@ -61,7 +61,7 @@ v: local-hi-freq 1750 local-hi-freq !
 
 : SCALED.DA.FREQ! \  freq -- , vectored da.freq! to scale in range
 	local.freq.scale da.freq!
-;	
+;
 
 : LOCAL.OFF ( -- , turns off all four amiga voices )
 	4 0 DO
@@ -80,18 +80,18 @@ v: local-hi-freq 1750 local-hi-freq !
 \ ================= general forth stuff ===============
 
 : NEG/POS (  -- , randomly returns 1 or -1 )
-	2 choose 0= 
+	2 choose 0=
 		IF -1
 		ELSE 1
 		THEN
 ;
 
 : *OR/ ( -- , randomly multiply or divide )
-	2 choose 0= 
+	2 choose 0=
 		IF *
 		ELSE /
 		THEN
 ;
 
 
-	
+

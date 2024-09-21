@@ -3,9 +3,9 @@
 
 ANEW TASK-PAR_util
 
-hex
-BFE101 constant PAR-DATA-ADDR
-BFE301 constant PAR-DIR-ADDR
+
+$ BFE101 constant PAR-DATA-ADDR
+$ BFE301 constant PAR-DIR-ADDR
 
 : PAR.SET.I/O  ( byte -- , set data direction registers )
 \ bit = 0-input , 1-output
@@ -21,11 +21,11 @@ BFE301 constant PAR-DIR-ADDR
 ;
 
 : PAR.OUTPUT.MODE
-    FF par.set.i/o
+    $ FF par.set.i/o
 ;
 
 : PAR.INPUT.MODE
-    00 par.set.i/o
+    $ 00 par.set.i/o
 ;
 
 : PAR.TEST  ( byte1 byte2 -- , alternate byte values )
@@ -38,7 +38,7 @@ BFE301 constant PAR-DIR-ADDR
 ;
 
 VARIABLE PAR-DELAY
-10 par-delay !
+$ 10 par-delay !
 
 : PAR.WATCH  ( -- , monitor changes on parallel port )
     par.input.mode
@@ -53,5 +53,3 @@ VARIABLE PAR-DELAY
     UNTIL drop
 ;
 
-    
-decimal

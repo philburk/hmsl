@@ -17,22 +17,20 @@ anew task-dep-5_util
 \ =================================================
 
 \ utilities
-hex
-: D.ID 41 midi.xmit ;
-: D.APR 35 midi.xmit ; ( all parameters )
+: D.ID $ 41 midi.xmit ;
+: D.APR $ 35 midi.xmit ; ( all parameters )
 : D.CHANNEL midi-channel @ 1- midi.xmit ;
-: D.FORMAT 52 midi.xmit ;
-: D.LEVEL 20 midi.xmit ;
-: D.GROUP 01 midi.xmit ;
-decimal
+: D.FORMAT $ 52 midi.xmit ;
+: D.LEVEL $ 20 midi.xmit ;
+: D.GROUP $ 01 midi.xmit ;
 
 \ ==================================================
 \ variables for dep-5 parameters
 
-v: d-rev-type 
-v: d-output  
-v: d-q  
-v: d-mid-freq 
+v: d-rev-type
+v: d-output
+v: d-q
+v: d-mid-freq
 v: d-lo-boost
 v: d-mid-boost
 v: d-hi-boost
@@ -46,7 +44,7 @@ v: d-hf-damp ( or gate time )
 
 \ delay time, feedback of delay, and gate time are
 \ "aliased" as they are in the parameter knobs of the dep-5
-\ (see below). 
+\ (see below).
 
 
 \ reverb types
@@ -54,7 +52,7 @@ v: d-hf-damp ( or gate time )
 0 k: s1  1 k: s2   2 k: p1  3 k: p2
 \ halls
 4 k: h14 5 k: h20  6 k: h27  7 k: h36
-8 k: h48 9 k: h61  10 k: h76 
+8 k: h48 9 k: h61  10 k: h76
 \ rooms
 11 k: r0.3 12 k: r1.4 13 k: r3.1 14 k: r8.2 15 k: r14
 16 k: r20 17 k: r27 18 k: r36 19 k: r48
@@ -65,7 +63,7 @@ v: d-hf-damp ( or gate time )
 \ words for storing variables
 
 : D.CLIPTO ( parameter-value -- 0-127 )
-	0 255  clipto 
+	0 255  clipto
 ;
 
 \ the dep-5 uses some kind of division of 8 bits for
@@ -77,7 +75,7 @@ ob.array algorithm-array
 : BUILD.ALGORITHM-ARRAY
 \ not sure of exact numbers between 4-6... but these seem to work
 	11 new: algorithm-array
-	254 227 200 172 143 115 81 59 31 3 0 
+	254 227 200 172 143 115 81 59 31 3 0
 	11 0 DO
 		i to: algorithm-array
 	LOOP
@@ -103,7 +101,7 @@ ob.array algorithm-array
 : D-DEPTH!  d.clipto d-depth !  ( values ? ) ;
 \ wants numbers between 0 and 11
 : D-ALGORITHM! 1 11 clipto 1-
-	at: algorithm-array 
+	at: algorithm-array
 	 d-algorithm ! ;
 : D-PREDELAY! d.clipto d-predelay ! ;
 : D-DELAY-TIME! d-predelay! ;
@@ -136,6 +134,6 @@ endsysex midi.flush
 
 : dep-5.init
 build.algorithm-array
-;		
+;
 
 
