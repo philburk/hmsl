@@ -27,7 +27,6 @@ HostFileManager::HostFileManager() {
     File appFile = File::getSpecialLocation(File::SpecialLocationType::currentApplicationFile);
     // Look for the top HMSL folder.
     mAppDir = appFile.getParentDirectory();
-#if 1
     mHMSLDir = mAppDir;
     while (mHMSLDir.getFileName().compare(DIR_HMSL_TOP)) {
         File parentDir = mHMSLDir.getParentDirectory();
@@ -37,9 +36,6 @@ HostFileManager::HostFileManager() {
         }
         mHMSLDir = parentDir;
     }
-#else
-    mHMSLDir = File(DIR_HMSL_IN_MUSIC);
-#endif
     setCurrentDirectory(mHMSLDir);
 }
 
@@ -71,18 +67,21 @@ FILE *HostFileManager::openFile( const char *fileName, const char *mode ) {
     File file = mCurrentDirectory->getChildFile(StringRef(fileName));
     const char *name = file.getFullPathName().toRawUTF8();
 
-    pfMessage("openFile: ");
-    pfMessage(fileName);
-    pfMessage("\n");
-    pfMessage("mAppDir = ");
-    pfMessage(mAppDir.getFullPathName().toRawUTF8());
-    pfMessage("\n");
-    pfMessage("mHMSLDir = ");
-    pfMessage(mHMSLDir.getFullPathName().toRawUTF8());
-    pfMessage("\n");
-    pfMessage("full name = ");
-    pfMessage(name);
-    pfMessage("\n");
+//    pfMessage("openFile: ");
+//    pfMessage(fileName);
+//    pfMessage("\n");
+//    pfMessage("mAppDir = ");
+//    pfMessage(mAppDir.getFullPathName().toRawUTF8());
+//    pfMessage("\n");
+//    pfMessage("mHMSLDir = ");
+//    pfMessage(mHMSLDir.getFullPathName().toRawUTF8());
+//    pfMessage("\n");
 
-    return fopen(name, mode);
+    FILE *filePtr  = fopen(name, mode);
+    if (filePtr == NULL) {
+        pfMessage("ERROR - failed to open ");
+        pfMessage(name);
+        pfMessage("\n");
+    }
+    return filePtr;
 }
