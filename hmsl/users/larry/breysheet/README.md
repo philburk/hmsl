@@ -33,7 +33,7 @@ This piece requires:
 Compile the code.
 
     include users/assigns.fth
-    include hulp:b_load.ftht
+    include brs:b_load.ftht
 
 Run the master code.
 
