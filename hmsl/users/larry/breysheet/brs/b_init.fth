@@ -19,27 +19,27 @@ anew task-b_init
     time@ rand-seed !
     patch.action.probs
     " Decr-#" 'c var.down.response se.set.custom
-	1 midi.channel! \ set for fbo1
-	8 adc-debounce !
+    1 midi.channel! \ set for fbo1
+    8 adc-debounce !
         0 last-adc-value !  ( PLB )
-	dep-5.init
-	init.pitch
-	init.wst
-	build.b_dep-algorithm
-	build.b.acts
-	0 da.channel! use: wst-0 from.l.array scaled.da.freq! da.start
-	1 da.channel! use: wst-1 from.l.array scaled.da.freq! da.start
-	2 da.channel! use: wst-2 from.l.array scaled.da.freq! da.start
-	3 da.channel! use: wst-3 from.l.array scaled.da.freq! da.start
+    dep-5.init
+    init.pitch
+    init.wst
+    build.b_dep-algorithm
+    build.b.acts
+    0 da.channel! use: wst-0 from.l.array scaled.da.freq! da.start
+    1 da.channel! use: wst-1 from.l.array scaled.da.freq! da.start
+    2 da.channel! use: wst-2 from.l.array scaled.da.freq! da.start
+    3 da.channel! use: wst-3 from.l.array scaled.da.freq! da.start
 ;
 
 
 : B.TERM
-	free.pitch.arrays
-	clear: action-table
-	free.wst
-	free: algorithm-array
-	free: b_dep-algorithm
+    free.pitch.arrays
+    clear: action-table
+    free.wst
+    free: algorithm-array
+    free: b_dep-algorithm
     da.kill
     se.reset.custom
 ;
