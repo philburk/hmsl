@@ -15,6 +15,7 @@
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "AtomicQueue.h"
 
+
 /**
  * Model for a console terminal.
  * Contains buffer of previous lines.
@@ -52,10 +53,11 @@ public:
         return (int32_t)mStoredLines.size();
     }
 
+    void sendCharacter(char c); // to application
+
 private:
     void displayCharacter(char c);
     void sendEscapeBracket();
-    void sendCharacter(char c); // to application
     // return true if handled
     bool handleEscapeSequence(char c);
 

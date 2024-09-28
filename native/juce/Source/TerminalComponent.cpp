@@ -11,8 +11,69 @@
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "TerminalComponent.h"
 
+// TODO Move MenuComponent to its own file.
+//#include "MenuComponent.h"
+
+MenuComponent::MenuComponent(TerminalComponent *terminalComponent)
+: mTerminalComponent(terminalComponent) {
+    // `this` already implements the `MenuBarModel` so this is going to return a
+    // `MenuBarComponent` with the Model already setup.
+    //menuBarComponent.reset(new juce::MenuBarComponent(this));
+    menuBarComponent = std::make_unique<juce::MenuBarComponent>(this);
+    // getting the new component to show up.
+    addAndMakeVisible(menuBarComponent.get());
+    setMacMainMenu(this);
+    resized(); // this is NEEDED for the first time rendering.
+}
+
+MenuComponent::~MenuComponent() {
+    setMacMainMenu(nullptr); // avoid jassert
+}
+
+void MenuComponent::paint(juce::Graphics& g) {
+    g.fillAll(juce::Colours::beige);
+
+    g.setFont (juce::Font (20.0f));
+    g.setColour (juce::Colours::black);
+}
+
+void MenuComponent::resized() {
+    //setting the size of our normal component.
+    setSize(getParentWidth(), 20);
+    // setting the size of the menuComponent inside this component.
+    menuBarComponent.get()->setSize(getParentWidth(), 20);
+}
+
+juce::StringArray MenuComponent::getMenuBarNames() {
+    return {"Edit", "Screens"};
+}
+
+juce::PopupMenu MenuComponent::getMenuForIndex(int topLevelMenuIndex, const juce::String& menuName) {
+    juce::PopupMenu menu;
+
+    if (menuName == "Edit") {
+        menu.addItem(MENU_ID_PASTE, "Paste");
+    } else if (menuName == "Screens") {
+        menu.addItem(MENU_ID_SHAPE_EDITOR, "Shape Editor");
+    }
+
+    return menu;
+}
+
+void MenuComponent::menuItemSelected(int menuItemID, int topLevelMenuIndex) {
+    switch (menuItemID) {
+        case MENU_ID_PASTE:
+            mTerminalComponent->onPaste();
+            break;
+        default:
+            break;
+    }
+}
+
+
 TerminalComponent::TerminalComponent(TerminalModel &model)
     : mTerminalModel(model)
+    , menuComponent(this)
     , mCursorColour(0xffC08020) {
     setSize(400, 100);
 
@@ -27,6 +88,13 @@ TerminalComponent::~TerminalComponent() {
 bool TerminalComponent::keyPressed (const KeyPress &key,
                                 Component *originatingComponent) {
     return mTerminalModel.onKeyPressed(key);
+}
+
+void TerminalComponent::onPaste() {
+    String pasted = SystemClipboard::getTextFromClipboard();
+    for (int i = 0; i < pasted.length(); ++i) {
+        mTerminalModel.sendCharacter(pasted[i]);
+    }
 }
 
 void TerminalComponent::paint (Graphics& g)
