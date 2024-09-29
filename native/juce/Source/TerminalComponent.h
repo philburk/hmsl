@@ -22,7 +22,8 @@ class TerminalComponent; // Forward reference
 // We do not need to implement the `MenuBarComponent`,
 // it is added as a class member.
 class MenuComponent :   public juce::Component,
-                        public juce::MenuBarModel
+                        public juce::MenuBarModel,
+                        public juce::ApplicationCommandTarget
 {
 public:
     //========================================
@@ -36,9 +37,18 @@ public:
     juce::PopupMenu getMenuForIndex(int topLevelMenuIndex, const juce::String& menuName) override;
     void menuItemSelected(int menuItemID, int topLevelMenuIndex) override;
 
+    // ========= ApplicationCommandTarget ===========
+    ApplicationCommandTarget * getNextCommandTarget() override {
+        return nullptr;
+    }
+    void getAllCommands(Array<CommandID> &commands) override;
+    void getCommandInfo(CommandID commandID, ApplicationCommandInfo &result) override;
+    bool perform (const InvocationInfo& info) override;
 private:
     std::unique_ptr<juce::MenuBarComponent> menuBarComponent;
     TerminalComponent *mTerminalComponent;
+
+    ApplicationCommandManager commandManager;
 
     enum {
         MENU_ID_PASTE = 1,
@@ -90,7 +100,7 @@ private:
     int                    kLineSpacing = static_cast<int>(kFontSize + 2);
 
     TerminalModel         &mTerminalModel;
-    MenuComponent          menuComponent;
+    MenuComponent          mMenuComponent;
 
     int32_t                mWidestLine = kWidthMin;
     Colour                 mCursorColour;

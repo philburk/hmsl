@@ -14,25 +14,37 @@
 // TODO Move MenuComponent to its own file.
 //#include "MenuComponent.h"
 
+// Menu code based on JUCE demo at
+// https://github.com/juce-framework/JUCE/blob/master/examples/GUI/MenusDemo.h
+
 MenuComponent::MenuComponent(TerminalComponent *terminalComponent)
 : mTerminalComponent(terminalComponent) {
-    // `this` already implements the `MenuBarModel` so this is going to return a
-    // `MenuBarComponent` with the Model already setup.
-    //menuBarComponent.reset(new juce::MenuBarComponent(this));
     menuBarComponent = std::make_unique<juce::MenuBarComponent>(this);
-    // getting the new component to show up.
     addAndMakeVisible(menuBarComponent.get());
+
+    // Use ApplicationCommandManager to add COMMAND-V for Paste
+    setApplicationCommandManagerToWatch(&commandManager);
+    commandManager.registerAllCommandsForTarget(this);
+    commandManager.setFirstCommandTarget(this);
+    addKeyListener(commandManager.getKeyMappings());
+    setWantsKeyboardFocus(true);
+
+#if JUCE_MAC
     setMacMainMenu(this);
-    resized(); // this is NEEDED for the first time rendering.
+#else
+    setMenuBar (this, 20);
+#endif
 }
 
 MenuComponent::~MenuComponent() {
+#if JUCE_MAC
     setMacMainMenu(nullptr); // avoid jassert
+#endif
+    commandManager.setFirstCommandTarget (nullptr);
 }
 
 void MenuComponent::paint(juce::Graphics& g) {
     g.fillAll(juce::Colours::beige);
-
     g.setFont (juce::Font (20.0f));
     g.setColour (juce::Colours::black);
 }
@@ -45,35 +57,55 @@ void MenuComponent::resized() {
 }
 
 juce::StringArray MenuComponent::getMenuBarNames() {
-    return {"Edit", "Screens"};
+    return {"Edit"}; // TODO add "Screens"
 }
 
 juce::PopupMenu MenuComponent::getMenuForIndex(int topLevelMenuIndex, const juce::String& menuName) {
     juce::PopupMenu menu;
 
     if (menuName == "Edit") {
-        menu.addItem(MENU_ID_PASTE, "Paste");
-    } else if (menuName == "Screens") {
-        menu.addItem(MENU_ID_SHAPE_EDITOR, "Shape Editor");
+        menu.addCommandItem(&commandManager, MENU_ID_PASTE);
     }
 
     return menu;
 }
 
-void MenuComponent::menuItemSelected(int menuItemID, int topLevelMenuIndex) {
-    switch (menuItemID) {
+void MenuComponent::menuItemSelected(int menuItemID, int topLevelMenuIndex) {}
+
+void MenuComponent::getAllCommands(Array<CommandID> &c) {
+    Array<CommandID> commands { MENU_ID_PASTE };
+    c.addArray (commands);
+}
+
+void MenuComponent::getCommandInfo(CommandID commandID, ApplicationCommandInfo &result) {
+
+    switch (commandID)
+    {
         case MENU_ID_PASTE:
-            mTerminalComponent->onPaste();
+            result.setInfo ("Paste", "Paste CopyBuffer into the Terminal", "Edit", 0);
+            result.setActive(true);
+            result.addDefaultKeypress ('v', ModifierKeys::commandModifier);
             break;
         default:
             break;
     }
 }
 
+bool MenuComponent::perform (const InvocationInfo& info) {
+    switch (info.commandID)
+    {
+        case MENU_ID_PASTE:
+            mTerminalComponent->onPaste();
+            break;
+        default:
+            return false;
+    }
+    return true;
+}
 
 TerminalComponent::TerminalComponent(TerminalModel &model)
     : mTerminalModel(model)
-    , menuComponent(this)
+    , mMenuComponent(this)
     , mCursorColour(0xffC08020) {
     setSize(400, 100);
 
@@ -87,6 +119,10 @@ TerminalComponent::~TerminalComponent() {
 
 bool TerminalComponent::keyPressed (const KeyPress &key,
                                 Component *originatingComponent) {
+    // Let these keys fall through to the menus.
+    if (key.getModifiers().isCommandDown()) {
+        return false;
+    }
     return mTerminalModel.onKeyPressed(key);
 }
 
