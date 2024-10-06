@@ -111,23 +111,23 @@ variable DA-MAX-CHANNEL
 variable DA-OFFSET   ( Offset to channel registers )
 
 \ Chip Register Access Words
-\ These are used by the Event Buffering System
+\ These are used by the Event Buffering System  (NOT NOW in 2024)
 \ The parameters need to be packed into a 32 bit cell.
 defer DA.CHIPW!  ( value16 offset16 -- , store into chip )
 defer DA.CHIP!   ( value24 offset8 -- , store at 8 bit offset )
 
 : (DA.CHIPW!)  ( value16 offset16 -- , store into chip )
-    2dup swap ." 0x" .hex
-    ." 0x" .hex
-    ." (DA.CHIPW!)" cr
+\    2dup swap ." 0x" .hex
+\    ." 0x" .hex
+\    ." (DA.CHIPW!)" cr
     amiga_chip_base + hostwritechip()
 ;
 'c (da.chipw!) is da.chipw!
 
 : (DA.CHIP!)   ( value24 offset8 -- , store at 8 bit offset )
-    2dup swap ." 0x" .hex
-    ." 0x" .hex
-    ." (DA.CHIP!)" cr
+\    2dup swap ." 0x" .hex
+\    ." 0x" .hex
+\    ." (DA.CHIP!)" cr
     amiga_chip_base + hostwritechip()
 ;
 

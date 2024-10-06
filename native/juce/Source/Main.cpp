@@ -1,7 +1,8 @@
 /*
   ==============================================================================
 
-    This file was auto-generated!
+    This file was originally auto-generated.
+    But it has a lot of edits. So I assume it will not get overwritten.
 
     It contains the basic startup code for a JUCE application.
 
@@ -13,7 +14,7 @@
 #include "Terminal.h"
 #include "ForthThread.h"
 
-#define HMSL_VERSION "v0.5.6"
+#define HMSL_VERSION "v0.6.0"
 
 //==============================================================================
 class ProtoHMSLApplication  : public JUCEApplication
