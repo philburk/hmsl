@@ -53,10 +53,14 @@ public:
     void updateAddress();
 
     void setNextAddress(const int8_t *address) {
-        mNextData = address;
+        // Hold the address until we get the count.
+        mPendingNextData = address;
     }
 
     void setNextNumWords(int32_t numWords) {
+        // Update the address and count at the same time so we don't accidentally
+        // read unallocated memory.
+        mNextData = mPendingNextData;
         mNextNumWords = numWords;
     }
 
@@ -75,6 +79,7 @@ private:
     const int8_t *mData = mSine;
     int32_t mNumWords = 0;
     const int8_t *mNextData = mSine;
+    const int8_t *mPendingNextData = mSine;
     int32_t mNextNumWords = sizeof(mSine) / 2;
     bool mEnabled = false;
     bool mModulatePeriod = false; // modulate period of the next higher channel

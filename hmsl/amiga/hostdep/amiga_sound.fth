@@ -151,30 +151,40 @@ defer DA.CHIP!   ( value24 offset8 -- , store at 8 bit offset )
     da-offset @ +
 ;
 
-: DA.#WORDS!   ( #words -- , set word length of sample )
-    dup AUDXLEN_OFFSET da.off+ da.chipw!
-    da-channel @ da-lengths !
-;
 
 : DA.#WORDS@   ( -- #words , length of sample )
     da-channel @ da-lengths @
 ;
 
-: DA.ADDRESS!  ( addr -- , address of first byte )
-    dup >abs AUDXLCH_OFFSET da.off+ da.chip!
+
+: DA.ADDRESS.#WORDS! ( addr #words -- , write in proper order to avoid crashes )
+    swap
+    dup >abs AUDXLCH_OFFSET da.off+ da.chip!  \ store address first so it is pending
     da-channel @ da-addresses !
+    dup AUDXLEN_OFFSET da.off+ da.chipw! \ store length, which will update address in emulator
+    da-channel @ da-lengths !
 ;
 
 : DA.ADDRESS@  ( -- addr , address of first byte )
     da-channel @ da-addresses @
 ;
 
+: DA.#WORDS!   ( #words -- , set word length of sample )
+    ." DA.#WORDS! is unsafe, use DA.ADDRESS.#WORDS!" cr
+    da.address@ swap da.address.#words!
+;
+
+: DA.ADDRESS!  ( addr -- , address of first byte )
+    ." DA.ADDRESS! is unsafe, use DA.ADDRESS.#WORDS!" cr
+    da.#words@ da.address.#words!
+;
+
 : DA.ENVELOPE! ( addr #words -- , set envelope registers )
-    da.#words!  da.address!
+    da.address.#words!
 ;
 
 : DA.SAMPLE! ( addr #bytes -- , Set Sample to Use )
-    2/ da.envelope!
+    2/ da.address.#words!
 ;
 
 : DA.SAMPLE@ ( -- addr #bytes , Fetch Sample in Use )

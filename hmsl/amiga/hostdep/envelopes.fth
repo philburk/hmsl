@@ -16,7 +16,7 @@ MRESET PUT.HOLDAT:
 ANEW TASK-ENVELOPES
 
 \ This was used to store the memory type on Amiga JForth, like MEMF_CHIP
-\ FIXME variable MM-TYPE
+variable MM-TYPE   \ FIXME
 
 decimal
 \ Declare Methods
@@ -84,7 +84,6 @@ VARIABLE ENV-DELAY-FACTOR
 :M GET.HOLDAT:  ( -- holdat , sustain point )
     iv-env-holdat 
 ;M
-
 
 :M STOP:    ( -- , stop the current envelope )
     1 da.period! da.stop
