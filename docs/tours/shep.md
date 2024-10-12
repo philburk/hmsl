@@ -2,8 +2,8 @@
 
 # Shape Editor
 
-HMSL "Shapes" are a multi-dimensional array that can musical data.
-This can include melodies made of notes. But shapes can also be much more abstract.
+HMSL "Shapes" are a multi-dimensional array that can contain musical data.
+The data can be melodies made of notes. But shapes can also be much more abstract.
 
 HMSL is mostly a programming language. But it also has a screen for editing shapes. Enter:
 
@@ -26,18 +26,18 @@ shape-1 as a melody.
 ## Change Timing
 
 Look for a funky up/down widget labelled "Dim". This let's you change which dimension is being edited.
-You are currently editing dimension "1", which is being intrepreted as pitch.
+You are currently editing dimension "1", which is being interpreted as pitch.
 
 * Click on the down arrow to go to dimension zero (0).
 * Draw on the shape and listen to the effect on the melody.
 
-In this case, dimension is being interpreted as note duration in ticks.
+In this case, dimension zero is being interpreted as note durations in ticks.
 
 ## Manipulating the Shape
 
-* Change "Dim" back to one (1).
+* Change "Dim" back to one (1) so we can edit pitches.
 * Click on "Select" in the "Set Mode" control grid.
-* Drag across the middle of the shape to select the some notes.
+* Drag across the middle of the shape to select some notes.
 * In the Control Grid at the bottom left, click on "Reverse". Notice that the selected region is reversed.
 * Click on "Scramble" to randomly reorder those notes.
 
