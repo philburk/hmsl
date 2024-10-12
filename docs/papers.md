@@ -4,7 +4,7 @@
 
 ## Articles
 
-* [Larry Polansky on HMSL and Computer Music](docs/chroma_interview_polansky.pdf), interview by Alistair Riddell in Melbourne, 1989-02-08
+* [Larry Polansky on HMSL and Computer Music](chroma_interview_polansky.pdf), interview by Alistair Riddell in Melbourne, 1989-02-08
 
 ## Papers
 
