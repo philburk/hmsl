@@ -4,7 +4,7 @@
 * [Downloading and Installing HMSL](install.md)
 * Tours
   * [Quick Tour of Forth and HMSL](quicktour.md)
-  * Shapes and Shape Editing
+  * [Shape Editor](tours/shep.md)
   * Hierarchical Scheduling
   * Score Entry
   * MIDI Output
