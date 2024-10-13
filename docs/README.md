@@ -1,10 +1,9 @@
 # HMSL Docs
 
 * [Downloading and Installing HMSL](install.md)
-* [Quick Tour of Forth and HMSL](quicktour.md)
-* [More Guided Tours](tours/)
+* [Guided Tours of Forth and HMSL](tours/)
 * [Original HMSL User Manuals in PDF format](http://www.softsynth.com/hmsl/docs/)
-* [Pieces](/hmsl/pieces) - listen to some recorded HMSL pieces
+* [Pieces](/hmsl/pieces) - explore some original HMSL pieces
 * [Forth Tutorial](http://www.softsynth.com/pforth/pf_tut.php)
 * [Papers and other writings](papers.md)
 * [How to Build HMSL from Source](build.md)
