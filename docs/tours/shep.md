@@ -50,3 +50,5 @@ In this case, dimension zero is being interpreted as note durations in ticks.
 * Click higher up.
 
 When you are done exploring, click the window close box to get back to the HMSL terminal.
+
+If you want to learn more about Shapes and the Shape Editor then here are the [docs](https://www.softsynth.com/hmsl/docs/original/hman/05-Shapes.pdf).
