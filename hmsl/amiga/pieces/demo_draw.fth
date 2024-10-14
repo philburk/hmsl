@@ -25,11 +25,11 @@ OB.TUNING.RATIOS RATIOS-32-64
 \
 \ Load chosen Sample
     CASE
-        0 OF    " hs:analog2" load: sample-draw
+        0 OF    " hs:analog2.8svx" load: sample-draw
           ENDOF
-        1 OF    " hs:mandocello" load: sample-draw 
+        1 OF    " hs:mandocello.8svx" load: sample-draw
           ENDOF
-        2 OF    " hs:peking" load: sample-draw
+        2 OF    " hs:peking.8svx" load: sample-draw
           ENDOF
 \ Report any illegal choices.
         " DD.INIT.INST" " Illegal sample# , use 0 1 or 2."
@@ -76,6 +76,7 @@ OB.TUNING.RATIOS RATIOS-32-64
 ;
 
 : DD.TERM   ( -- , Clean up )
+    da.kill
     free: sample-draw
     free: shape-1
     free: ratios-32-64
