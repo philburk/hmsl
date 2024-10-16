@@ -12,5 +12,8 @@ First, download a [precompiled release](https://github.com/philburk/hmsl/release
 1. Click the Open button to open the app.
 1. (The next time you will only have to double-click JuceHMSL.app.)
 1. Hit 'y' key to initialize HMSL.
+1. Wait a few seconds then hit the ENTER key.
+
+HMSL will now be ready for use.
 
 Next, enjoy some [guided tours of HMSL](tours/).
