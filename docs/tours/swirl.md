@@ -26,4 +26,4 @@ Turn the volume up carefully. You will hear various notes being played on variou
 Click on "Forward". You will notice the melody slowly start rotating.
 Press "Clear" to see the melody at its current angle.
 
-
+See [source code for Swirl](https://github.com/philburk/hmsl/blob/master/hmsl/amiga/pieces/swirl.fth).
