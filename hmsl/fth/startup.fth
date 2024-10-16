@@ -9,7 +9,8 @@ ANEW TASK-STARTUP
 : HMSL.INIT.ASK  ( -- , Ask if user wants to HMSL.INIT )
     hmsl.copyright
     ." Do you want to initialize HMSL? (probably Yes)" Y/N cr
-    IF hmsl.init
+    IF ." Wait a few seconds then hit the ENTER key." cr
+        hmsl.init
     ELSE ob.init
     THEN
 ;

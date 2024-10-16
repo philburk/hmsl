@@ -23,5 +23,8 @@ include fth/load_hmsl.fth
 
 ." Block AUTO.INIT that is called by SAVE-FORTH" cr
 1 2 3 4 5 6
+\ Make the memory areas bigger.
+700000 headers-size !
+1500000 code-size !
 c" pforth.dic" save-forth
 6 0 DO drop LOOP

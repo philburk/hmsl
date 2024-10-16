@@ -14,7 +14,7 @@
 #include "Terminal.h"
 #include "ForthThread.h"
 
-#define HMSL_VERSION "v0.6.0"
+#define HMSL_VERSION "v0.6.1"
 
 //==============================================================================
 class ProtoHMSLApplication  : public JUCEApplication

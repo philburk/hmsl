@@ -69,7 +69,7 @@ DoubleList OBJ-DYN-LIST  \ list of dynamically alloced objs
 
 : ODH.INIT obj-dyn-list dll.newlist ;
 
-: OB.INIT  ." OB.INIT" cr ob.init odh.init ;
+: OB.INIT  ob.init odh.init ;
 : AUTO.INIT  auto.init ob.init ;
 
 ( declare methods for object, define OBJECT class )
