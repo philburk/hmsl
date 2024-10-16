@@ -1,0 +1,11 @@
+wlm revision long
+lp
+
+12/26/95
+
+NEEDED TO BE DONE
+¥ put in jitter for global changes
+¥ put in grouping for turning things on
+¥ put in staccato for wlm objects
+
+
