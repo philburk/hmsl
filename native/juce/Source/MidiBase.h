@@ -10,6 +10,8 @@
 
 #pragma once
 
+#include <algorithm>
+
 #import "hmsl_host.h"
 
 #include "ExternalMidi.h"
@@ -53,7 +55,7 @@ public:
 
     void setRate( cell_t rate ) {
         cell_t currentTicks = queryTime();
-        mHmslTicksPerSecond = rate;
+        mHmslTicksPerSecond = std::max((cell_t)1, rate);
         setTime(currentTicks);
     }
 
