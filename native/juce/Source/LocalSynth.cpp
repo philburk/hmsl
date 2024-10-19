@@ -10,12 +10,23 @@
 
 #include <stdlib.h>
 
+
+#ifndef HMSL_DISABLE_ME2000
 #include "spmidi/include/midi.h"
 #include "spmidi/include/spmidi.h"
 #include "spmidi/include/spmidi_util.h"
 #include "spmidi/include/spmidi_print.h"
 #include "spmidi/include/spmidi_play.h"
 #include "spmidi/include/spmidi_jukebox.h"
+#else
+// Stubs to use when disabling the ME2000
+int JukeBox_Initialize(int sampleRate) { return 0; }
+int JukeBox_Terminate() { return 0; }
+int JukeBox_SynthesizeAudioTick( void *buffer, int framesToSynthesize, int channels ) { return 0; }
+int JukeBox_SendMIDI(int ticks, int count, uint8_t *byteData ) { return 0; }
+int JukeBox_GetTime() { return 0; }
+int JukeBox_GetFramesPerTick() { return 64; }
+#endif
 
 #include "LocalSynth.h"
 

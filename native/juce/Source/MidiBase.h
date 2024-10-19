@@ -79,7 +79,7 @@ public:
 private:
 
     MidiNativePort *getCurrentPort() {
-        return (mPort == 0)
+        return (mPort == kMidiPortInternal)
                 ? (MidiNativePort *)&mLocalMidiPort
                 : (MidiNativePort *)&mExternalMidiPort;
     }
@@ -103,8 +103,11 @@ private:
     cell_t mHmslTicksPerSecond = kDefaultTicksPerSecond;
     cell_t mHmslTickOffset = 0;
 
-    cell_t       mPort = 0;         // used to switch between internal and external MIDI
-    LocalSynth   mLocalMidiPort;    // Built-in internal synthesizer
+    static constexpr int kMidiPortInternal = 0;
+    static constexpr int kMidiPortExternal = 0;
+
+    cell_t       mPort = kMidiPortInternal; // used to select internal or external MIDI
+    LocalSynth   mLocalMidiPort;    // Built-in internal synthesizer using the ME2000
     ExternalMidi mExternalMidiPort; // Appears as "HMSL" MIDI input to other apps.
 
 };
