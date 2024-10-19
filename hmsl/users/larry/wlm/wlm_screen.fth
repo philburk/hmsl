@@ -1890,6 +1890,7 @@ ANEW TASK-WLM_SCREEN
 ;
 
 : TERM.WLM-SCREEN
+    se-screen default-screen !
     freeall: wlm-screen
     free: wlm-screen
 ;

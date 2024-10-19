@@ -91,6 +91,8 @@ anew task-wlm_user_init
     THEN
 ;
 
+." Enter DO.WLM to start the piece. Then click PLAY" cr
+
 \ this is for the turnkeyed version: don't use in the compiled version
 wlm-turnkey @
 .if
