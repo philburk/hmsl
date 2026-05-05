@@ -29,6 +29,8 @@ Description of folders:
     native/Win32 - port of HMSL to pForth for Windows by Robert Marsanyi and Phil Burk
     native/juce - port of HMSL to pForth using JUCE by Phil Burk
 
+Also, there is an archive of original code and pieces at: https://github.com/philburk/hmsl-archive
+
 ## Credits
 
 The current version of HMSL is built on top of pForth, a ‘C’ based Forth.
