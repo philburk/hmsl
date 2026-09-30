@@ -12,25 +12,18 @@ JUCE is required to build HMSL. Install JUCE from [here](https://shop.juce.com/)
 
 ## Building on OSX
 
-The folder containing HMSL needs to be called "HMSL" so that the proper working directory can be
-found by the HostFileManager in HMSL.
-
 The XCode project was exported using the ProJucer tool.
 
 New C/C++ files should only be added using the ProJucer.
 
 ### Checking out the code
 
-HMSL runs in a Sandbox that only allows it to access files in the ~/Music folder.
+You can clone HMSL into any folder.
 
-    cd ~/Music
-    mkdir hmsl_repo  # if needed
-    cd hmsl_repo
     git clone https://github.com/philburk/hmsl.git HMSL
-    cd HMSL/pforth
-    git submodule init
-    git submodule update
-    
+    cd HMSL
+    git submodule update --init
+
 ### Exporting from ProJucer
 
 Unless you need to add a JUCE file, or update the JUCE version, you can probably skip to "Compiling the JUCE port" below.
@@ -66,25 +59,28 @@ You can still build and debug from XCode.
 Pass "--build-dictionary" as a launch argument in the scheme to compile the dictionary.
 
 ### Packaging a Release for Mac OS
-1. Checkout the master repositories of HMSL and pForth.
-2. Update the version number in native/juce/Source/Main.cpp
-3. Update master repository.
-4. Build the app as described above.
-5. Open the folder ~/Work/hmslWork/HMSL_Release/HMSL/hmsl.
-6. Replace the JuceHMSL.app file in that folder with "~/Music/hmsl_repo/HMSL/native/juce/Builds/MacOSX/build/Debug/JuceHMSL.app".
-7. Replace the pforth.dic file with "~/Music/hmsl_repo/HMSL/hmsl/pforth.dic".
-8. Replace the "pieces" folder with "~/Music/hmsl_repo/HMSL/hmsl/pieces".
-8. Replace the "tools" folder with "~/Music/hmsl_repo/HMSL/hmsl/tools".
-8. Replace the "amiga" folder with "~/Music/hmsl_repo/HMSL/hmsl/amiga".
-9. Make a zip file from HMSL_Release/HMSL.
-10. Rename it "HMSL_{version}.zip" using underscores, eg. "HMSL_0_5_5.zip"
+
+You will need a "Developer ID Application" certificate in your keychain
+and notarization credentials stored with:
+
+    xcrun notarytool store-credentials NOTARY_PROFILE --apple-id {email} --team-id {team}
+
+1. Update the version number in native/juce/Source/Main.cpp
+2. From the top HMSL folder, enter:
+
+        ./scripts/release.sh
+
+This builds the app and dictionary, puts the dictionary and the HMSL source folders
+inside HMSL.app, signs it, makes "build/HMSL_{version}.dmg", then notarizes and staples the DMG.
+
+To make a signed DMG quickly without notarizing, enter:
+
+    ./scripts/release.sh --skip-notarize
 
 ### Test the Release
-1. Drag the ZIP file to a folder on Google Drive.
-1. Download the ZIP file to ~/Downloads.
-1. Uncompress the ZIP file and drag the resulting "HMSL" folder into ~/Music.
-1. Hold down the Ctrl key and right click on the JuceHMSL.app icon.
-2. Click the Open button. (If you are an expert in Apple certificates, please open an Issue and offer to help me fix this.)
+1. Upload the DMG file to a folder on Google Drive, then download it to ~/Downloads.
+1. Open the DMG and drag HMSL.app to Applications. It should launch without any security warnings.
+1. Choose a work folder when asked.
 1. HMSL should ask you to initialize by entering: y
 2. Wait 5 seconds for HMSL to initialize.
 1. Enter: SHEP

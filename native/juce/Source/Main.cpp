@@ -13,6 +13,7 @@
 #include "GraphicsWindow.h"
 #include "Terminal.h"
 #include "ForthThread.h"
+#include "HostFileManager.h"
 
 #define HMSL_VERSION "v0.6.1"
 
@@ -30,17 +31,100 @@ public:
     //==============================================================================
     void initialise (const String& commandLine) override
     {
-        // This method is where you should put your application's initialisation code..
+        // Launch with "--build-dictionary" to compile pForth and HMSL then quit.
+        mBuildDictionary = commandLine.contains("--build-dictionary");
+
+        HostFileManager *hostFileManager = HostFileManager::getInstance();
+        if (!hostFileManager->isInstalled()) {
+            startHMSL(); // running in the HMSL repository
+            return;
+        }
+
+        PropertiesFile::Options options;
+        options.applicationName = "HMSL";
+        options.folderName = "HMSL";
+        options.filenameSuffix = "settings";
+        options.osxLibrarySubFolder = "Application Support";
+        mSettings.setStorageParameters(options);
+
+        // Hold down the Option key while launching to choose a different work folder.
+        File workFolder(mSettings.getUserSettings()->getValue(kWorkFolderKey));
+        bool isOptionDown = ModifierKeys::getCurrentModifiersRealtime().isAltDown();
+        if (workFolder.isDirectory() && !isOptionDown) {
+            useWorkFolder(workFolder);
+        } else {
+            askForWorkFolder();
+        }
+    }
+
+    // Create the terminal window and start Forth.
+    void startHMSL()
+    {
         mTerminalWindow.reset (new TerminalWindow (getApplicationName()));
 
-        // Launch with "--build-dictionary" to compile pForth and HMSL then quit.
-        bool buildDictionary = commandLine.contains("--build-dictionary");
-        mForthThread.reset(new ForthThread(buildDictionary));
+        mForthThread.reset(new ForthThread(mBuildDictionary));
         mForthThread->startThread();
+    }
+
+    void askForWorkFolder()
+    {
+        File defaultFolder = File::getSpecialLocation(File::userDocumentsDirectory)
+                .getChildFile("HMSL");
+        auto options = MessageBoxOptions()
+                .withIconType(MessageBoxIconType::QuestionIcon)
+                .withTitle("Choose HMSL Work Folder")
+                .withMessage("HMSL keeps your pieces, tools and other Forth files in a work folder.\n\n"
+                             "Use " + defaultFolder.getFullPathName() + " ?\n\n"
+                             "Hold down the Option key when launching HMSL to change the folder.")
+                .withButton("Use Documents/HMSL")
+                .withButton("Choose Folder...")
+                .withButton("Quit");
+        NativeMessageBox::showAsync(options, [this, defaultFolder](int buttonIndex) {
+            if (buttonIndex == 0) {
+                useWorkFolder(defaultFolder);
+            } else if (buttonIndex == 1) {
+                browseForWorkFolder(defaultFolder);
+            } else {
+                quit();
+            }
+        });
+    }
+
+    void browseForWorkFolder(const File &defaultFolder)
+    {
+        mFileChooser.reset(new FileChooser("Choose HMSL Work Folder",
+                                           defaultFolder.getParentDirectory()));
+        int flags = FileBrowserComponent::openMode
+                | FileBrowserComponent::canSelectDirectories;
+        mFileChooser->launchAsync(flags, [this](const FileChooser &chooser) {
+            File folder = chooser.getResult();
+            if (folder == File()) {
+                askForWorkFolder(); // cancelled
+            } else {
+                useWorkFolder(folder);
+            }
+        });
+    }
+
+    void useWorkFolder(const File &folder)
+    {
+        if (!HostFileManager::getInstance()->setWorkFolder(folder)) {
+            auto options = MessageBoxOptions()
+                    .withIconType(MessageBoxIconType::WarningIcon)
+                    .withTitle("HMSL")
+                    .withMessage("Could not use " + folder.getFullPathName())
+                    .withButton("OK");
+            NativeMessageBox::showAsync(options, [this](int) { askForWorkFolder(); });
+            return;
+        }
+        mSettings.getUserSettings()->setValue(kWorkFolderKey, folder.getFullPathName());
+        mSettings.saveIfNeeded();
+        startHMSL();
     }
 
     void shutdown() override
     {
+        if (mForthThread == nullptr) return; // quit before HMSL started
         // TODO needed?
         mTerminalWindow->requestClose();
         mForthThread->signalThreadShouldExit();
@@ -50,8 +134,10 @@ public:
     //==============================================================================
     void systemRequestedQuit() override
     {
-        mTerminalWindow->requestClose();
-        mForthThread->waitForThreadToExit(500);
+        if (mForthThread != nullptr) {
+            mTerminalWindow->requestClose();
+            mForthThread->waitForThreadToExit(500);
+        }
         // This is called when the app is being asked to quit: you can ignore this
         // request and let the app carry on running, or call quit() to allow the app to close.
         quit();
@@ -121,8 +207,13 @@ public:
     };
 
 private:
+    static constexpr const char *kWorkFolderKey = "workFolder";
+
     std::unique_ptr<TerminalWindow> mTerminalWindow;
     std::unique_ptr<ForthThread>    mForthThread;
+    std::unique_ptr<FileChooser>    mFileChooser;
+    ApplicationProperties           mSettings;
+    bool                            mBuildDictionary = false;
 };
 
 //==============================================================================

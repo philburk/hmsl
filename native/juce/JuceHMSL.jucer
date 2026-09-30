@@ -293,7 +293,8 @@
     </GROUP>
   </MAINGROUP>
   <EXPORTFORMATS>
-    <XCODE_MAC targetFolder="Builds/MacOSX" extraDefs="&#10;" externalLibraries="me2000">
+    <XCODE_MAC targetFolder="Builds/MacOSX" extraDefs="&#10;" externalLibraries="me2000"
+               hardenedRuntime="1" customPList="&lt;plist&gt;&lt;dict&gt;&lt;key&gt;NSDocumentsFolderUsageDescription&lt;/key&gt;&lt;string&gt;HMSL keeps your pieces and tools in a work folder, which may be in Documents.&lt;/string&gt;&lt;/dict&gt;&lt;/plist&gt;">
       <CONFIGURATIONS>
         <CONFIGURATION isDebug="1" name="Debug" libraryPath="../../../osx/libs"
                        headerPath="../../../../native/common"/>

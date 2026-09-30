@@ -15,21 +15,18 @@ BUILD_DIR="$HMSL_DIR/build"
 PROJECT="$HMSL_DIR/native/juce/Builds/MacOSX/JuceHMSL.xcodeproj"
 APP="$BUILD_DIR/JuceHMSL.app"
 
-# HostFileManager finds its files by looking for a parent folder named "HMSL".
-if [ "$(basename "$HMSL_DIR")" != "HMSL" ]; then
-    echo "ERROR - the repository folder must be named HMSL, not $(basename "$HMSL_DIR")"
-    exit 1
-fi
-
 echo "=== Update pForth submodule"
 git -C "$HMSL_DIR" submodule update --init
 
 echo "=== Build JuceHMSL.app ($CONFIG)"
+rm -rf "$APP" # remove leftovers such as an old sanitizer library
 xcodebuild -quiet \
     -project "$PROJECT" \
     -scheme "JuceHMSL - App" \
     -configuration "$CONFIG" \
     -derivedDataPath "$BUILD_DIR/DerivedData" \
+    -enableAddressSanitizer NO \
+    ENABLE_ADDRESS_SANITIZER=NO \
     CONFIGURATION_BUILD_DIR="$BUILD_DIR" \
     CODE_SIGN_IDENTITY=- \
     CODE_SIGN_STYLE=Manual \

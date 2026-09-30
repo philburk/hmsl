@@ -23,6 +23,8 @@
     <string>1.0.0</string>
     <key>NSHumanReadableCopyright</key>
     <string>(C) 2019 Mobileer Inc</string>
+    <key>NSDocumentsFolderUsageDescription</key>
+    <string>HMSL keeps your pieces and tools in a work folder, which may be in Documents.</string>
     <key>NSHighResolutionCapable</key>
     <true/>
   </dict>

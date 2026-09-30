@@ -34,11 +34,15 @@ void ForthThread::run() {
 
 int ForthThread::buildDictionary() {
     HostFileManager *hostFileManager = HostFileManager::getInstance();
+    if (hostFileManager->isInstalled()) {
+        printf("ERROR - can only build the dictionary in the HMSL repository\n");
+        return 4;
+    }
     File pforthDir = hostFileManager->getPForthDirectory();
     File hmslDir = hostFileManager->getHmslDirectory();
     const char *dicName = hostFileManager->getDictionaryFileName();
-    File baseDic = pforthDir.getChildFile(dicName);
-    File hmslDic = hmslDir.getChildFile(dicName);
+    File baseDic = pforthDir.getChildFile("pforth.dic"); // saved by system.fth
+    File hmslDic(dicName); // saved by make_hmsl.fth
 
     // Phase 1: build the base pForth dictionary from source.
     baseDic.deleteFile();

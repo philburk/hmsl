@@ -18,25 +18,52 @@
 
 std::unique_ptr<HostFileManager> HostFileManager::mInstance;
 
-#define DIR_HMSL_TOP         "HMSL"
 #define DIR_HMSL_SUB         "hmsl"
 #define DIR_HMSL_PFORTH_FTH  "pforth/fth"
-#define DIR_HMSL_IN_MUSIC    "~/Music/HMSL"
+#define DIR_BUNDLED_HMSL     "Contents/Resources/hmsl"
+#define REPO_MARKER_FILE     "hmsl/fth/make_hmsl.fth"
 
 HostFileManager::HostFileManager() {
     File appFile = File::getSpecialLocation(File::SpecialLocationType::currentApplicationFile);
-    // Look for the top HMSL folder.
-    mAppDir = appFile.getParentDirectory();
-    mHMSLDir = mAppDir;
-    while (mHMSLDir.getFileName().compare(DIR_HMSL_TOP)) {
-        File parentDir = mHMSLDir.getParentDirectory();
-        if (parentDir == mHMSLDir) { // at root! Not in an HMSL subfolder
-            mHMSLDir = File(DIR_HMSL_IN_MUSIC);
-            break;
+    File bundledDictionary = appFile.getChildFile("Contents/Resources/" PF_DEFAULT_DICTIONARY);
+    if (bundledDictionary.existsAsFile()) {
+        // Installed app. The work folder is set later by setWorkFolder().
+        mInstalled = true;
+        mBundledHmslDir = appFile.getChildFile(DIR_BUNDLED_HMSL);
+        mDictionaryPath = bundledDictionary.getFullPathName().toStdString();
+    } else {
+        // Built in the repository. Look for the top of the repository.
+        mRepoDir = appFile.getParentDirectory();
+        while (!mRepoDir.getChildFile(REPO_MARKER_FILE).existsAsFile()) {
+            File parentDir = mRepoDir.getParentDirectory();
+            if (parentDir == mRepoDir) { // at root! Not in an HMSL repository
+                break;
+            }
+            mRepoDir = parentDir;
         }
-        mHMSLDir = parentDir;
+        mHmslDir = mRepoDir.getChildFile(DIR_HMSL_SUB);
+        mDictionaryPath = mHmslDir.getChildFile(PF_DEFAULT_DICTIONARY).getFullPathName().toStdString();
     }
-    setCurrentDirectory(mHMSLDir);
+    setCurrentDirectory(mHmslDir);
+}
+
+bool HostFileManager::setWorkFolder(const File &folder) {
+    if (!folder.createDirectory()) {
+        return false;
+    }
+    // Copy files that the user does not already have. Never overwrite their files.
+    for (const DirectoryEntry &entry : RangedDirectoryIterator(mBundledHmslDir, true, "*",
+                                                              File::findFiles)) {
+        File source = entry.getFile();
+        File destination = folder.getChildFile(source.getRelativePathFrom(mBundledHmslDir));
+        if (!destination.exists()) {
+            destination.getParentDirectory().createDirectory();
+            source.copyFileTo(destination);
+        }
+    }
+    mHmslDir = folder;
+    setCurrentDirectory(mHmslDir);
+    return true;
 }
 
 void HostFileManager::setCurrentDirectory(const File &dir) {
@@ -48,11 +75,11 @@ File HostFileManager::getCurrentDirectory() {
 }
 
 File HostFileManager::getPForthDirectory() {
-    return mHMSLDir.getChildFile(StringRef(DIR_HMSL_PFORTH_FTH));
+    return mRepoDir.getChildFile(StringRef(DIR_HMSL_PFORTH_FTH));
 }
 
 File HostFileManager::getHmslDirectory() {
-    return mHMSLDir.getChildFile(StringRef("hmsl"));
+    return mHmslDir;
 }
 
 const char *HostFileManager::getSystemFileName() {
@@ -60,7 +87,7 @@ const char *HostFileManager::getSystemFileName() {
 }
 
 const char *HostFileManager::getDictionaryFileName() {
-    return PF_DEFAULT_DICTIONARY;
+    return mDictionaryPath.c_str();
 }
 
 FILE *HostFileManager::openFile( const char *fileName, const char *mode ) {
@@ -69,12 +96,6 @@ FILE *HostFileManager::openFile( const char *fileName, const char *mode ) {
 
 //    pfMessage("openFile: ");
 //    pfMessage(fileName);
-//    pfMessage("\n");
-//    pfMessage("mAppDir = ");
-//    pfMessage(mAppDir.getFullPathName().toRawUTF8());
-//    pfMessage("\n");
-//    pfMessage("mHMSLDir = ");
-//    pfMessage(mHMSLDir.getFullPathName().toRawUTF8());
 //    pfMessage("\n");
 
     FILE *filePtr  = fopen(name, mode);

@@ -11,8 +11,19 @@
 #pragma once
 
 #include <memory>
+#include <string>
 #include "stdio.h"
 
+/**
+ * Finds the HMSL files.
+ *
+ * An installed app has the dictionary and a copy of the HMSL source in its
+ * Resources folder. The source is copied to a work folder chosen by the user,
+ * eg. ~/Documents/HMSL, which becomes the current directory for Forth.
+ *
+ * An app built in the HMSL repository has no bundled dictionary. It uses
+ * the "hmsl" folder in the repository as its work folder.
+ */
 class HostFileManager {
 public:
     static HostFileManager *getInstance() {
@@ -23,6 +34,19 @@ public:
     }
 
     HostFileManager();
+
+    /**
+     * @return true if the dictionary and HMSL source are bundled inside the app
+     */
+    bool isInstalled() const { return mInstalled; }
+
+    /**
+     * Set the folder that contains the user's copy of the HMSL source.
+     * Copy any missing files from the app bundle into it.
+     * Only used by an installed app.
+     * @return true if the folder can be used
+     */
+    bool setWorkFolder(const File &folder);
 
     /**
      * Set default directory for relative file paths.
@@ -50,7 +74,7 @@ public:
     const char *getSystemFileName();
 
     /**
-     * @return current dictionary file, typically "{path}/pforth.dic".
+     * @return full path of the HMSL dictionary, typically "{path}/pforth.dic".
      */
     const char *getDictionaryFileName();
 
@@ -58,8 +82,11 @@ public:
 
 private:
     static std::unique_ptr<HostFileManager> mInstance;
-    
+
     std::unique_ptr<File>  mCurrentDirectory;
-    File                   mAppDir;
-    File                   mHMSLDir;
+    bool                   mInstalled = false;
+    File                   mRepoDir;       // top of HMSL repository, if not installed
+    File                   mBundledHmslDir; // HMSL source inside the app, if installed
+    File                   mHmslDir;       // work folder
+    std::string            mDictionaryPath;
 };
