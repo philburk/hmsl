@@ -33,7 +33,9 @@ public:
         // This method is where you should put your application's initialisation code..
         mTerminalWindow.reset (new TerminalWindow (getApplicationName()));
 
-        mForthThread.reset(new ForthThread());
+        // Launch with "--build-dictionary" to compile pForth and HMSL then quit.
+        bool buildDictionary = commandLine.contains("--build-dictionary");
+        mForthThread.reset(new ForthThread(buildDictionary));
         mForthThread->startThread();
     }
 

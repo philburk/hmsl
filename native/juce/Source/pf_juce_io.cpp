@@ -20,8 +20,14 @@
 #include "pf_juce_io.h"
 #include "Terminal.h"
 
+bool gEchoTerminalToStdout = false;
+
 int  sdTerminalOut(char c)
 {
+    if (gEchoTerminalToStdout) {
+        putchar(c);
+        if (c == '\n') fflush(stdout);
+    }
     while (Terminal::getInstance()->isOutputFull()) {
         usleep(15 * 1000); // block until we have room to write
         // TODO While in here we may also handle event queues and abort signals.

@@ -20,3 +20,9 @@
 #include "pf_all.h"
 
 
+
+/**
+ * When true, terminal output is also written to stdout.
+ * Used when building the dictionary from a script.
+ */
+extern bool gEchoTerminalToStdout;

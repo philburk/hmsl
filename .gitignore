@@ -3,3 +3,4 @@ hmsl/hmsl.app/
 hmsl/pforth*.dic
 **/.DS_Store
 
+/build/

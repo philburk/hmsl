@@ -42,19 +42,28 @@ Unless you need to add a JUCE file, or update the JUCE version, you can probably
 * Click on the white and blue circular icon to the right of that menu to "Save and Open IDE".
 
 ### Compiling the JUCE port
-* Launch the XCode project at "HMSL/native/juce/Builds/MacOSX/JuceHMSL.xcodeproj".
-* In "JuceHMSL/Source/ForthThread.cpp", set PF_COMPILE_SYSTEM to 1
-* Run the application from XCode.
-* It will open a terminal window and compile the pForth dictionary.
-* Close the terminal window.
-* Move the dictionary file from "HMSL/pforth/fth/pforth.dic" to "HMSL/hmsl/pforth.dic".
-* In "HMSL/native/juce/Source/ForthThread.cpp", set PF_COMPILE_SYSTEM to 0
-* Run the application. It will open a terminal window.
-* Enter:   include fth/make_hmsl.fth
-* It will compile HMSL and save a new pforth.dic.
-* Enter:  BYE
-* Close the terminal window.
-* The next time you run the application, it will initialize HMSL.
+
+From the top HMSL folder, enter:
+
+    ./scripts/build.sh
+
+This will:
+
+* build "build/JuceHMSL.app" using XCode (signed ad hoc for local use),
+* compile the pForth dictionary from "pforth/fth/system.fth",
+* compile HMSL on top of that using "hmsl/fth/make_hmsl.fth",
+* save the result in "hmsl/pforth.dic".
+
+Then run HMSL with:
+
+    open build/JuceHMSL.app
+
+To rebuild just the dictionary after editing Forth code, enter:
+
+    build/JuceHMSL.app/Contents/MacOS/JuceHMSL --build-dictionary
+
+You can still build and debug from XCode.
+Pass "--build-dictionary" as a launch argument in the scheme to compile the dictionary.
 
 ### Packaging a Release for Mac OS
 1. Checkout the master repositories of HMSL and pForth.

@@ -15,10 +15,24 @@
 
 class ForthThread : public Thread {
 public:
-    ForthThread() : Thread("Forth") {}
+    /**
+     * @param buildDictionary if true then compile pForth and HMSL from source,
+     *        save "hmsl/pforth.dic", then quit the app.
+     */
+    ForthThread(bool buildDictionary = false)
+        : Thread("Forth")
+        , mBuildDictionary(buildDictionary) {}
     virtual ~ForthThread() = default;
-    
+
     void run() override;
 
 private:
+    /**
+     * Compile pForth from "pforth/fth/system.fth", then compile HMSL
+     * on top of that using "hmsl/fth/make_hmsl.fth".
+     * @return 0 on success
+     */
+    int buildDictionary();
+
+    bool mBuildDictionary;
 };
