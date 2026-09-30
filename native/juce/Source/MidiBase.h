@@ -104,7 +104,7 @@ private:
     cell_t mHmslTickOffset = 0;
 
     static constexpr int kMidiPortInternal = 0;
-    static constexpr int kMidiPortExternal = 0;
+    static constexpr int kMidiPortExternal = 1;
 
     cell_t       mPort = kMidiPortInternal; // used to select internal or external MIDI
     LocalSynth   mLocalMidiPort;    // Built-in internal synthesizer using the ME2000

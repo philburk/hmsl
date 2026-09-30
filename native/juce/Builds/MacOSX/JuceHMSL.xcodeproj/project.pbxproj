@@ -1099,7 +1099,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/../../JuceLibraryCode",
 					"$(HOME)/JUCE/modules",
-					"$SRCROOT)/../../../../native/common",
+					"$(SRCROOT)/../../../../native/common",
 					"$(SRCROOT)/../../../../pforth/csrc",
 					"$(SRCROOT)/../../Source",
 					"$(inherited)",
@@ -1113,7 +1113,7 @@
 				);
 				LLVM_LTO = YES;
 				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
-				MTL_HEADER_SEARCH_PATHS = "$(SRCROOT)/../../JuceLibraryCode $(HOME)/JUCE/modules /Users/phil/Work/hmsl/HMSL/native/common $(SRCROOT)/../../../../pforth/csrc $(SRCROOT)/../../Source";
+				MTL_HEADER_SEARCH_PATHS = "$(SRCROOT)/../../JuceLibraryCode $(HOME)/JUCE/modules $(SRCROOT)/../../../../native/common $(SRCROOT)/../../../../pforth/csrc $(SRCROOT)/../../Source";
 				OTHER_LDFLAGS = "-lme2000";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Mobileer.JuceHMSL;
 				PRODUCT_NAME = JuceHMSL;
@@ -1214,7 +1214,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/../../JuceLibraryCode",
 					"$(HOME)/JUCE/modules",
-					"$SRCROOT)/../../../../native/common",
+					"$(SRCROOT)/../../../../native/common",
 					"$(SRCROOT)/../../../../pforth/csrc",
 					"$(SRCROOT)/../../Source",
 					"$(inherited)",
@@ -1227,7 +1227,7 @@
 					"\"$(SRCROOT)/../../../osx/libs\"",
 				);
 				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
-				MTL_HEADER_SEARCH_PATHS = "$(SRCROOT)/../../JuceLibraryCode $(HOME)/JUCE/modules /Users/phil/Work/hmsl/HMSL/native/common $(SRCROOT)/../../../../pforth/csrc $(SRCROOT)/../../Source";
+				MTL_HEADER_SEARCH_PATHS = "$(SRCROOT)/../../JuceLibraryCode $(HOME)/JUCE/modules $(SRCROOT)/../../../../native/common $(SRCROOT)/../../../../pforth/csrc $(SRCROOT)/../../Source";
 				OTHER_LDFLAGS = "-lme2000";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Mobileer.JuceHMSL;
 				PRODUCT_NAME = JuceHMSL;

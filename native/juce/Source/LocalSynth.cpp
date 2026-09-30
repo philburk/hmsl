@@ -10,8 +10,6 @@
 
 #include <stdlib.h>
 
-#define HMSL_DISABLE_ME2000 1
-
 #ifndef HMSL_DISABLE_ME2000
 #include "spmidi/include/midi.h"
 #include "spmidi/include/spmidi.h"
