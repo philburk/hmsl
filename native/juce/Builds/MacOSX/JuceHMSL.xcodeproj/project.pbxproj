@@ -228,7 +228,7 @@
 		4A6B64762CBB4827007157B4 /* tweak_shape.fth */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = tweak_shape.fth; sourceTree = "<group>"; };
 		4A6B64772CBB4827007157B4 /* var.ping.pong.fth */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = var.ping.pong.fth; sourceTree = "<group>"; };
 		4A6B64782CBB4827007157B4 /* xforms.fth */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = xforms.fth; sourceTree = "<group>"; };
-		4ACFEF592C9F7A1A00282858 /* libme2000.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libme2000.a; path = ../../../osx/libs/libme2000.a; sourceTree = "<group>"; };
+		4AFA9E1C2CC4881000587A81 /* libme2000.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libme2000.a; path = ../../../osx/libs/libme2000.a; sourceTree = "<group>"; };
 		4BA5F503ACEFC863DA8E5599 /* morph_lists.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = morph_lists.fth; path = ../../../../hmsl/fth/morph_lists.fth; sourceTree = SOURCE_ROOT; };
 		4C060ED318839EDBFA0D1D0E /* test_ode.fth */ = {isa = PBXFileReference; lastKnownFileType = file.fth; name = test_ode.fth; path = ../../../../hmsl/fth/test_ode.fth; sourceTree = SOURCE_ROOT; };
 		4D3E1717FD58D50CD54278AC /* AmigaLocalSound.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = AmigaLocalSound.cpp; path = ../../Source/AmigaLocalSound.cpp; sourceTree = SOURCE_ROOT; };
@@ -440,7 +440,7 @@
 		0CEF92CFB5450C9D8A6730FA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				4ACFEF592C9F7A1A00282858 /* libme2000.a */,
+				4AFA9E1C2CC4881000587A81 /* libme2000.a */,
 				E82E07442AB2C22195EA67FC /* Accelerate.framework */,
 				933B4928168DA6458F924187 /* AudioToolbox.framework */,
 				D22BC800C798548303CFA9F0 /* Carbon.framework */,
@@ -1072,6 +1072,7 @@
 				CONFIGURATION_BUILD_DIR = "$(PROJECT_DIR)/build/$(CONFIGURATION)";
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 9D2MR4L34E;
+				ENABLE_HARDENED_RUNTIME = YES;
 				EXCLUDED_ARCHS = "";
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_OPTIMIZATION_LEVEL = 3;
@@ -1186,6 +1187,7 @@
 				CONFIGURATION_BUILD_DIR = "$(PROJECT_DIR)/build/$(CONFIGURATION)";
 				COPY_PHASE_STRIP = NO;
 				DEVELOPMENT_TEAM = 9D2MR4L34E;
+				ENABLE_HARDENED_RUNTIME = YES;
 				EXCLUDED_ARCHS = "";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
