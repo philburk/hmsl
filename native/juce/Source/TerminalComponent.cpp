@@ -138,8 +138,6 @@ void TerminalComponent::paint (Graphics& g)
     mRepaintRequested = false;
     mNumPaints++;
 
-    mTerminalModel.processOutputQueue();
-
     g.fillAll (getLookAndFeel().findColour (ResizableWindow::backgroundColourId));   // clear the background
     g.setFont({Font::getDefaultMonospacedFontName(), kFontSize, Font::plain});
 

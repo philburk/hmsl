@@ -10,6 +10,7 @@
 
 #pragma once
 
+#include <atomic>
 #include <list>
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "TerminalModel.h"
@@ -59,6 +60,8 @@ public:
 
 private:
 
+    void requestUpdate();
+    void update();
     void adjustScrollBar();
     void showBottom();
 
@@ -68,6 +71,7 @@ private:
 
     int32_t             mNumLinesVisible = 0;
     int32_t             mNumLinesStored = 0;
+    std::atomic<bool>   mUpdateRequested{false};
 
     static Terminal    *sTerminal; // singleton
 

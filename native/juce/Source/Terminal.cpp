@@ -34,8 +34,7 @@ void Terminal::adjustScrollBar() {
     int32_t numLinesStored = mTerminalModel.getNumLinesStored();
     if (numLinesStored != mNumLinesStored) {
         mNumLinesStored = numLinesStored;
-        // TODO Why do we need to +2 to avoid having the current line hidden?
-        double newMaximum = numLinesStored + 2.0; // +1 for current line, which is not stored
+        double newMaximum = numLinesStored + 1.0; // +1 for current line, which is not stored
         mScrollBar.setRangeLimits(0.0, newMaximum);
         double newStart = newMaximum - mTerminalComponent.getNumLinesVisible();
         mScrollBar.setCurrentRange(newStart,
@@ -44,22 +43,30 @@ void Terminal::adjustScrollBar() {
     }
 }
 
+// Called on the Forth thread.
 int Terminal::putCharacter(char c) {
     int result = mTerminalModel.putCharacter(c);
-    // The characters are put in a queue and read later.
-    // So there is a race condition that can cause lines to be written below
-    // the bottom of the terminal.
-    // We check c == EOL to detect line advance.
-    int32_t numLinesStored = mTerminalModel.getNumLinesStored();
-    if (c == '\n' || numLinesStored != mNumLinesStored) {
-        juce::MessageManager::callAsync([this]() {
-            this->adjustScrollBar();
-            this->mTerminalComponent.requestRepaint();
-        });
-    } else {
-        this->mTerminalComponent.requestRepaint();
-    }
+    requestUpdate();
     return result;
+}
+
+// Called on the Forth thread. Schedule one update() on the UI thread.
+void Terminal::requestUpdate() {
+    if (!mUpdateRequested.exchange(true)) {
+        juce::MessageManager::callAsync([this]() {
+            this->update();
+        });
+    }
+}
+
+// Called on UI thread.
+// Move the queued output into the stored lines, then scroll, then repaint.
+// Doing these in order ensures that the last line is not hidden below the bottom.
+void Terminal::update() {
+    mUpdateRequested = false; // clear first so that new output requests another update
+    mTerminalModel.processOutputQueue();
+    adjustScrollBar();
+    mTerminalComponent.repaint();
 }
 
 bool Terminal::isCharacterAvailable() {
