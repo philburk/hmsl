@@ -37,6 +37,7 @@
 \ MOD: PLB 6/24/91 Fix dimension selection in PUT.OBJECT:  c/MAX/MIN/
 \ 00001 PLB 10/1/91 Make additions to SHAPE-HOLDER immediately accesible
 \ 00002 PLB 4/27/92 Move Shape Holder validation to H:MORPH_LISTS
+\ 00003 10/1/26 Check for stale index in SE.TEXT.FUNC to prevent crash
 
 ANEW TASK-SHAPE_EDITOR
 
@@ -1075,7 +1076,12 @@ OB.COUNTER SE-SHSELCG
 : SE.TEXT.FUNC ( index -- addr count , get name of shape )
     ml.validate ( 00002 )
     many: shape-holder 1- 0 put.max: se-shselcg \ 00001
-    get: shape-holder get.name: [] count
+\ The index may be stale if shapes were removed from SHAPE-HOLDER,
+\ eg. by another piece calling CLEAR: SHAPE-HOLDER. 00003
+    dup many: shape-holder <
+    IF  get: shape-holder get.name: [] count
+    ELSE drop pad 0
+    THEN
 ;
 
 : BUILD.SE-SHSELCG
