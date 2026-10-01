@@ -73,6 +73,10 @@ and notarization credentials stored with:
 This builds the app and dictionary, puts the dictionary and the HMSL source folders
 inside HMSL.app, signs it, makes "build/HMSL_{version}.dmg", then notarizes and staples the DMG.
 
+The DMG window layout is in "scripts/dmg_settings.py" and the background is drawn by
+"scripts/make_dmg_background.swift". The first release on a new machine installs
+uv, Python 3.12 and dmgbuild into the "build" folder, so it needs internet access.
+
 To make a signed DMG quickly without notarizing, enter:
 
     ./scripts/release.sh --skip-notarize

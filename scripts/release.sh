@@ -63,9 +63,20 @@ codesign --force --options runtime --timestamp \
 codesign --verify --strict --deep --verbose=2 "$APP"
 
 echo "=== Create $(basename "$DMG")"
-ln -s /Applications "$STAGE_DIR/Applications"
-hdiutil create -quiet -volname "HMSL $VERSION" -srcfolder "$STAGE_DIR" \
-    -fs HFS+ -format UDZO "$DMG"
+# dmgbuild lays out the DMG window. Version 1.6.7 or later is needed to show
+# the background on macOS 26.2+, and it needs Python 3.10+, which macOS does
+# not include. So use uv to install Python 3.12 and dmgbuild in build/.
+UV_VENV="$BUILD_DIR/venv"
+DMG_VENV="$BUILD_DIR/dmgvenv"
+if [ ! -x "$DMG_VENV/bin/python" ] || ! "$DMG_VENV/bin/python" -c "import dmgbuild" 2>/dev/null; then
+    if [ ! -x "$UV_VENV/bin/uv" ]; then
+        python3 -m venv "$UV_VENV"
+        "$UV_VENV/bin/pip" install --quiet uv
+    fi
+    "$UV_VENV/bin/uv" venv --quiet --python 3.12 "$DMG_VENV"
+    "$UV_VENV/bin/uv" pip install --quiet --python "$DMG_VENV/bin/python" "dmgbuild>=1.6.7"
+fi
+"$DMG_VENV/bin/python" "$HMSL_DIR/scripts/make_dmg.py" "$APP" "$HMSL_DIR" "HMSL $VERSION" "$DMG"
 codesign --force --timestamp --sign "$SIGN_IDENTITY" "$DMG"
 
 if [ $NOTARIZE == 0 ]; then
