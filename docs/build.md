@@ -99,5 +99,5 @@ To make a signed DMG quickly without notarizing, enter:
 
 ## Make a Release on GitHub
 1. Look at the PRs and Commits since the last Release and prepare Release Notes.
-1. Under Releases, create a new release and drag the new ZIP file to attach it.
+1. Under Releases, create a new release and drag the new DMG file to attach it.
 
