@@ -12,7 +12,10 @@ ANEW TASK-MIDI_GLOBALS
 0 CONSTANT MIDI_PORT_INTERNAL  \ use built-in ME2000 synth
 1 CONSTANT MIDI_PORT_EXTERNAL  \ use external port for Logic Pro, etc.
 
-2 constant MIDI_NUM_PORTS
+\ Number of MIDI input ports for the MIDI parser.
+\ MIDI input always comes from external devices, whatever MIDI-PORT is set to.
+\ MIDI-PORT only selects the output. So the parser only needs one port.
+1 constant MIDI_NUM_PORTS
 
 variable MIDI-ERROR
 variable MIDI-WARNINGS   ( true to enable warnings )
@@ -128,6 +131,9 @@ variable MIDI-XMIT-COUNT
     ." Use HOST MIDI." cr
     ['] host.midi.write is midi.write
     ['] host.midi.recv  is midi.recv
+\ The host does not timestamp MIDI input, and bytes are read soon after
+\ they arrive, so use the current time.
+    ['] rtc.time@       is midi.rtc.time@
     ['] hostMIDI_Init() is midi.ser.init
     ['] hostMIDI_Term() is midi.ser.term
 ;

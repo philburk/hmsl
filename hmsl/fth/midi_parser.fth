@@ -34,6 +34,7 @@
 \ MOD: PLB 10/22/91 Add MIDI.PARSE.CURRENT, check for stack errors
 \ 00001 PLB 2/16/92 Remove annoying message from MP.EAT.SYSEX
 \ 00002 PLB 10/5/2015 Fix endian issue in MP-#BYTES
+\ 00003 10/1/26 Fix MP.&CFA for 64-bit cells
 
 decimal
 
@@ -146,7 +147,7 @@ CREATE MP-STATE-BASE sizeof() mp.state midi_num_ports * allot
     THEN
 ;
 : MP.&CFA  ( index -- addr )
-    3 lshift mp-vectors +
+    2* cells mp-vectors + \ 00003 was 3 LSHIFT, which assumed 4 byte cells
     midi-port @ cells +
 ;
 [THEN]
@@ -445,7 +446,7 @@ variable MIDI-PARSER ( used as a control for higher level code )
 
 \ Test -----------------------------------------
 1 [IF]
-: MP.ON.RESP ( note velocity -- ) DUP
+: MP.ON.RESP ( note velocity -- )
     ." Port = " midi-port ? ." , ON " swap . . cr
 ;
 
