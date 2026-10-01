@@ -15,6 +15,7 @@
 #include "ForthThread.h"
 #include "HostFileManager.h"
 #include "hmsl_version.h"
+#include "pf_juce_io.h"
 
 //==============================================================================
 class ProtoHMSLApplication  : public JUCEApplication
@@ -32,6 +33,16 @@ public:
     {
         // Launch with "--build-dictionary" to compile pForth and HMSL then quit.
         mBuildDictionary = commandLine.contains("--build-dictionary");
+
+        // For testing, launch with --type 'text' to type text into Forth, eg.
+        //     JuceHMSL --type 'y\rinclude hp:bounce.fth\rbounce\r'
+        // "\r" is replaced by RETURN. Forth output is also copied to stdout.
+        StringArray args = StringArray::fromTokens(commandLine, true);
+        int typeIndex = args.indexOf("--type");
+        if (typeIndex >= 0 && typeIndex + 1 < args.size()) {
+            mTypedText = args[typeIndex + 1].unquoted().replace("\\r", "\r");
+            gEchoTerminalToStdout = true;
+        }
 
         HostFileManager *hostFileManager = HostFileManager::getInstance();
         if (!hostFileManager->isInstalled()) {
@@ -60,6 +71,9 @@ public:
     void startHMSL()
     {
         mTerminalWindow.reset (new TerminalWindow (getApplicationName()));
+        if (mTypedText.isNotEmpty()) {
+            Terminal::getInstance()->typeText(mTypedText);
+        }
 
         mForthThread.reset(new ForthThread(mBuildDictionary));
         mForthThread->startThread();
@@ -213,6 +227,7 @@ private:
     std::unique_ptr<FileChooser>    mFileChooser;
     ApplicationProperties           mSettings;
     bool                            mBuildDictionary = false;
+    String                          mTypedText; // see --type
 };
 
 //==============================================================================

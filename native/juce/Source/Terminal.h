@@ -47,6 +47,15 @@ public:
         mTerminalModel.requestClose();
     }
 
+    /**
+     * Send text to Forth as if it was typed on the keyboard.
+     */
+    void typeText(const String &text) {
+        for (int i = 0; i < text.length(); i++) {
+            mTerminalModel.sendCharacter((char) text[i]);
+        }
+    }
+
     void scrollBarMoved (ScrollBar* scrollBarThatHasMoved,
                          double newRangeStart) override;
 
