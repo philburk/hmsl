@@ -32,6 +32,12 @@
 
 #import "pf_all.h"
 #import "hmsl_host.h"
+#import "hmsl_version.h"
+
+/* Version encoded as major*10000 + minor*100 + patch, eg. 50100 for V5.1.0 */
+static cell_t hostGetVersion(void) {
+    return HMSL_VERSION_NUMBER;
+}
 
 /****************************************************************
  ** Step 1: Glue routine interface defined in header files hmsl_*
@@ -77,6 +83,7 @@ void * CustomFunctionTable[] =
     (void *) hostClock_QueryRate,
     (void *) hostClock_SetRate,
     (void *) hostChipWrite,
+    (void *) hostGetVersion,
 };
 
 /****************************************************************
@@ -123,6 +130,7 @@ Err CompileCustomFunctions( void )
     CreateGlueToC( "HOSTQUERYCLOCKRATE()", i++, C_RETURNS_VALUE, 0 );
     CreateGlueToC( "HOSTSETCLOCKRATE()", i++, C_RETURNS_VOID, 1 );
     CreateGlueToC( "HOSTWRITECHIP()", i++, C_RETURNS_VOID, 2 );
+    CreateGlueToC( "HOSTVERSION()", i++, C_RETURNS_VALUE, 0 );
 
     TOUCH(i);
 

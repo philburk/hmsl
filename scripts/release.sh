@@ -26,8 +26,12 @@ APP="$STAGE_DIR/HMSL.app"
 RESOURCES="$APP/Contents/Resources"
 ENTITLEMENTS="$HMSL_DIR/native/juce/Builds/MacOSX/JuceHMSL - App.entitlements"
 
-# Version comes from "#define HMSL_VERSION "v0.6.1"" in Main.cpp.
-VERSION=$(sed -n 's/^#define HMSL_VERSION "v\(.*\)"/\1/p' "$HMSL_DIR/native/juce/Source/Main.cpp")
+# Version comes from native/juce/Source/hmsl_version.h
+VERSION_HEADER="$HMSL_DIR/native/juce/Source/hmsl_version.h"
+version_part() {
+    sed -n "s/^#define HMSL_VERSION_$1 \([0-9]*\)$/\1/p" "$VERSION_HEADER"
+}
+VERSION="$(version_part MAJOR).$(version_part MINOR).$(version_part PATCH)"
 DMG="$BUILD_DIR/HMSL_${VERSION//./_}.dmg"
 
 # Folders from "hmsl/" that are copied to the user's work folder.
@@ -44,11 +48,11 @@ mkdir -p "$RESOURCES/hmsl"
 for folder in $HMSL_FOLDERS; do
     rsync -a --exclude .DS_Store "$HMSL_DIR/hmsl/$folder" "$RESOURCES/hmsl/"
 done
-PLIST="$APP/Contents/Info.plist"
-/usr/libexec/PlistBuddy -c "Set :CFBundleName HMSL" "$PLIST"
-/usr/libexec/PlistBuddy -c "Set :CFBundleDisplayName HMSL" "$PLIST"
-/usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString $VERSION" "$PLIST"
-/usr/libexec/PlistBuddy -c "Set :CFBundleVersion $VERSION" "$PLIST"
+PLIST_VERSION=$(/usr/libexec/PlistBuddy -c "Print :CFBundleShortVersionString" "$APP/Contents/Info.plist")
+if [ "$PLIST_VERSION" != "$VERSION" ]; then
+    echo "ERROR - Info.plist version $PLIST_VERSION does not match $VERSION"
+    exit 1
+fi
 xattr -cr "$APP"
 
 echo "=== Sign HMSL.app"

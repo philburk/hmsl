@@ -65,7 +65,7 @@ and notarization credentials stored with:
 
     xcrun notarytool store-credentials NOTARY_PROFILE --apple-id {email} --team-id {team}
 
-1. Update the version number in native/juce/Source/Main.cpp
+1. Update the version number in native/juce/Source/hmsl_version.h. It is the only place the version is set.
 2. From the top HMSL folder, enter:
 
         ./scripts/release.sh

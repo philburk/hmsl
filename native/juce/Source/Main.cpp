@@ -14,8 +14,7 @@
 #include "Terminal.h"
 #include "ForthThread.h"
 #include "HostFileManager.h"
-
-#define HMSL_VERSION "v0.6.1"
+#include "hmsl_version.h"
 
 //==============================================================================
 class ProtoHMSLApplication  : public JUCEApplication
@@ -24,8 +23,8 @@ public:
     //==============================================================================
     ProtoHMSLApplication() {}
 
-    const String getApplicationName() override       { return ProjectInfo::projectName; }
-    const String getApplicationVersion() override    { return ProjectInfo::versionString; }
+    const String getApplicationName() override       { return "HMSL"; }
+    const String getApplicationVersion() override    { return HMSL_VERSION_STRING; }
     bool moreThanOneInstanceAllowed() override       { return true; }
 
     //==============================================================================
@@ -158,7 +157,7 @@ public:
     class TerminalWindow    : public DocumentWindow
     {
     public:
-        TerminalWindow (String name)  : DocumentWindow (name + (" " HMSL_VERSION),
+        TerminalWindow (String name)  : DocumentWindow (name + (" V" HMSL_VERSION_STRING),
                                                     Desktop::getInstance().getDefaultLookAndFeel()
                                                     .findColour (ResizableWindow::backgroundColourId),
                                                     DocumentWindow::allButtons)

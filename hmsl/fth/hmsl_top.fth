@@ -65,8 +65,8 @@ CREATE HMSL-GRAPHICS if-load-graphics @ ,  ( allow graphics )
 " Copyright 1986,87,88,89,90 - Phil Burk, Larry Polansky, David Rosenboom"
 ;
 
-: VERSION. ( N -- , print int as d.dd )
-    s->d <# # # ascii . hold #S #>  type
+: VERSION. ( N -- , print version number as d.d.d )
+    version$ type
 ;
 
 : HMSL_TITLE

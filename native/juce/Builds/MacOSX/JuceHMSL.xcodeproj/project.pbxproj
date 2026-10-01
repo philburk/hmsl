@@ -1031,7 +1031,8 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "Info-App.plist";
-				INFOPLIST_PREPROCESS = NO;
+				INFOPLIST_PREFIX_HEADER = "$(SRCROOT)/../../Source/hmsl_version.h";
+				INFOPLIST_PREPROCESS = YES;
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1146,7 +1147,8 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "Info-App.plist";
-				INFOPLIST_PREPROCESS = NO;
+				INFOPLIST_PREFIX_HEADER = "$(SRCROOT)/../../Source/hmsl_version.h";
+				INFOPLIST_PREPROCESS = YES;
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
