@@ -24,6 +24,14 @@ std::unique_ptr<HostFileManager> HostFileManager::mInstance;
 #define REPO_MARKER_FILE     "hmsl/fth/make_hmsl.fth"
 
 HostFileManager::HostFileManager() {
+    // Settings are saved in "~/Library/Application Support/HMSL/HMSL.settings" on Mac.
+    PropertiesFile::Options options;
+    options.applicationName = "HMSL";
+    options.folderName = "HMSL";
+    options.filenameSuffix = "settings";
+    options.osxLibrarySubFolder = "Application Support";
+    mSettings.setStorageParameters(options);
+
     File appFile = File::getSpecialLocation(File::SpecialLocationType::currentApplicationFile);
     File bundledDictionary = appFile.getChildFile("Contents/Resources/" PF_DEFAULT_DICTIONARY);
     if (bundledDictionary.existsAsFile()) {
@@ -45,6 +53,10 @@ HostFileManager::HostFileManager() {
         mDictionaryPath = mHmslDir.getChildFile(PF_DEFAULT_DICTIONARY).getFullPathName().toStdString();
     }
     setCurrentDirectory(mHmslDir);
+}
+
+PropertiesFile *HostFileManager::getSettings() {
+    return mSettings.getUserSettings();
 }
 
 bool HostFileManager::setWorkFolder(const File &folder) {

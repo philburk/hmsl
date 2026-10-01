@@ -69,7 +69,7 @@ cell_t hostMIDI_Init() {
 
 // Called by HMSL to terminate the MIDI connection
 void hostMIDI_Term() {
-    sMidiBase->term();
+    // MIDI is terminated in hostClock_Term()
 }
 
 // Called when HMSL wants to schedule a MIDI packet
@@ -86,7 +86,33 @@ cell_t hostMIDI_Write(ucell_ptr_t data, cell_t count, cell_t ticks) {
 
 // @return positive MIDI byte or negative number
 cell_t hostMIDI_Recv(void) {
-    return -1; // TODO MIDI input
+    return sMidiBase ? sMidiBase->recv() : -1;
+}
+
+// ============== MIDI Input Selection ===================================
+cell_t hostMIDI_NumInputs(void) {
+    return sMidiBase ? sMidiBase->getExternalMidi().getNumInputs() : 0;
+}
+
+cell_t hostMIDI_InputName(cell_t index, ucell_ptr_t buffer, cell_t maxChars) {
+    if (!sMidiBase || maxChars <= 0) return 0;
+    String name = sMidiBase->getExternalMidi().getInputName((int) index);
+    const char *utf8 = name.toRawUTF8();
+    cell_t count = std::min((cell_t) strlen(utf8), maxChars);
+    memcpy((void *) buffer, utf8, (size_t) count);
+    return count;
+}
+
+cell_t hostMIDI_InputEnabled(cell_t index) {
+    return (sMidiBase && sMidiBase->getExternalMidi().isInputEnabled((int) index)) ? -1 : 0;
+}
+
+cell_t hostMIDI_InputCount(cell_t index) {
+    return sMidiBase ? sMidiBase->getExternalMidi().getInputMessageCount((int) index) : 0;
+}
+
+void hostMIDI_EnableInput(cell_t index, cell_t flag) {
+    if (sMidiBase) sMidiBase->getExternalMidi().setInputEnabled((int) index, flag != 0);
 }
 
 // @return address of MIDI-PORT variable

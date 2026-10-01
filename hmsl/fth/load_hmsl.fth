@@ -89,6 +89,7 @@ if-load-midi @ [IF]
   include? task-time fth/time.fth
   include? task-midi fth/midi.fth
   include? task-midi_parser fth/midi_parser.fth
+  include? task-midi_inputs fth/midi_inputs.fth
   include? task-midi_text fth/midi_text.fth
 [ELSE]
   include? task-midi_stubs fth/midi_stubs.fth

@@ -72,6 +72,16 @@ public:
         return reinterpret_cast<cell_t>(&mPort);
     }
 
+    // @return next MIDI input byte or -1. Input always uses the external port.
+    cell_t recv() {
+        return mExternalMidiPort.recv();
+    }
+
+    // MIDI input selection. Input always uses the external port.
+    ExternalMidi &getExternalMidi() {
+        return mExternalMidiPort;
+    }
+
     void hostChipWrite(cell_t value, cell_t amigaAddress) {
         mLocalMidiPort.hostChipWrite(value, amigaAddress);
     }

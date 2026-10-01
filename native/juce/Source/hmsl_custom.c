@@ -84,6 +84,11 @@ void * CustomFunctionTable[] =
     (void *) hostClock_SetRate,
     (void *) hostChipWrite,
     (void *) hostGetVersion,
+    (void *) hostMIDI_NumInputs,
+    (void *) hostMIDI_InputName,
+    (void *) hostMIDI_InputEnabled,
+    (void *) hostMIDI_InputCount,
+    (void *) hostMIDI_EnableInput,
 };
 
 /****************************************************************
@@ -131,6 +136,11 @@ Err CompileCustomFunctions( void )
     CreateGlueToC( "HOSTSETCLOCKRATE()", i++, C_RETURNS_VOID, 1 );
     CreateGlueToC( "HOSTWRITECHIP()", i++, C_RETURNS_VOID, 2 );
     CreateGlueToC( "HOSTVERSION()", i++, C_RETURNS_VALUE, 0 );
+    CreateGlueToC( "HOSTMIDI_NUMINPUTS()", i++, C_RETURNS_VALUE, 0 );
+    CreateGlueToC( "HOSTMIDI_INPUTNAME()", i++, C_RETURNS_VALUE, 3 );
+    CreateGlueToC( "HOSTMIDI_INPUTENABLED()", i++, C_RETURNS_VALUE, 1 );
+    CreateGlueToC( "HOSTMIDI_INPUTCOUNT()", i++, C_RETURNS_VALUE, 1 );
+    CreateGlueToC( "HOSTMIDI_ENABLEINPUT()", i++, C_RETURNS_VOID, 2 );
 
     TOUCH(i);
 

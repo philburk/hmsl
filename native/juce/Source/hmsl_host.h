@@ -99,6 +99,16 @@ cell_t hostMIDI_Write(ucell_ptr_t buffer, cell_t count, cell_t vtime);
 // @return positive MIDI byte or negative number
 cell_t hostMIDI_Recv(void);
 cell_t hostMIDI_Port(void);
+
+// MIDI input selection. Inputs are numbered from 0.
+cell_t hostMIDI_NumInputs(void);
+// Copy name of input into a buffer. @return number of characters copied
+cell_t hostMIDI_InputName(cell_t index, ucell_ptr_t buffer, cell_t maxChars);
+// @return -1 if the input is on, else 0
+cell_t hostMIDI_InputEnabled(cell_t index);
+// @return number of messages received from the input
+cell_t hostMIDI_InputCount(cell_t index);
+void hostMIDI_EnableInput(cell_t index, cell_t flag);
 void hostSleep( cell_t msec );
 
 // Amiga chip emulation

@@ -80,6 +80,12 @@ public:
 
     FILE *openFile( const char *fileName, const char *mode );
 
+    /**
+     * Settings that are saved between launches, eg. the work folder
+     * and which MIDI inputs are on. Shared so that values are not overwritten.
+     */
+    PropertiesFile *getSettings();
+
 private:
     static std::unique_ptr<HostFileManager> mInstance;
 
@@ -89,4 +95,5 @@ private:
     File                   mBundledHmslDir; // HMSL source inside the app, if installed
     File                   mHmslDir;       // work folder
     std::string            mDictionaryPath;
+    ApplicationProperties  mSettings;
 };

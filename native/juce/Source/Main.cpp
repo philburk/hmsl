@@ -37,10 +37,11 @@ public:
         // For testing, launch with --type 'text' to type text into Forth, eg.
         //     JuceHMSL --type 'y\rinclude hp:bounce.fth\rbounce\r'
         // "\r" is replaced by RETURN. Forth output is also copied to stdout.
-        StringArray args = StringArray::fromTokens(commandLine, true);
+        // Use the original arguments so that quotes in the text are kept.
+        StringArray args = getCommandLineParameterArray();
         int typeIndex = args.indexOf("--type");
         if (typeIndex >= 0 && typeIndex + 1 < args.size()) {
-            mTypedText = args[typeIndex + 1].unquoted().replace("\\r", "\r");
+            mTypedText = args[typeIndex + 1].replace("\\r", "\r");
             gEchoTerminalToStdout = true;
         }
 
@@ -50,15 +51,8 @@ public:
             return;
         }
 
-        PropertiesFile::Options options;
-        options.applicationName = "HMSL";
-        options.folderName = "HMSL";
-        options.filenameSuffix = "settings";
-        options.osxLibrarySubFolder = "Application Support";
-        mSettings.setStorageParameters(options);
-
         // Hold down the Option key while launching to choose a different work folder.
-        File workFolder(mSettings.getUserSettings()->getValue(kWorkFolderKey));
+        File workFolder(hostFileManager->getSettings()->getValue(kWorkFolderKey));
         bool isOptionDown = ModifierKeys::getCurrentModifiersRealtime().isAltDown();
         if (workFolder.isDirectory() && !isOptionDown) {
             useWorkFolder(workFolder);
@@ -130,8 +124,9 @@ public:
             NativeMessageBox::showAsync(options, [this](int) { askForWorkFolder(); });
             return;
         }
-        mSettings.getUserSettings()->setValue(kWorkFolderKey, folder.getFullPathName());
-        mSettings.saveIfNeeded();
+        PropertiesFile *settings = HostFileManager::getInstance()->getSettings();
+        settings->setValue(kWorkFolderKey, folder.getFullPathName());
+        settings->saveIfNeeded();
         startHMSL();
     }
 
@@ -225,7 +220,6 @@ private:
     std::unique_ptr<TerminalWindow> mTerminalWindow;
     std::unique_ptr<ForthThread>    mForthThread;
     std::unique_ptr<FileChooser>    mFileChooser;
-    ApplicationProperties           mSettings;
     bool                            mBuildDictionary = false;
     String                          mTypedText; // see --type
 };
