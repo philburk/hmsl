@@ -1,22 +1,24 @@
-<?xml version="1.0"?>
-<svg width="600" height="600" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
- <!-- Created with Einked - http://einked.com/ -->
- <g>
-  <title>Layer 1</title>
-  <circle id="svg_1" r="91.468246" cy="193.333334" cx="113.333334" stroke-width="11" stroke="#202040" fill="#f4f4f4"/>
-  <text stroke="#202080" transform="matrix(6.913777410854699,0,0,5.9024069288911,-2864.8748668913754,-1688.9442425985574) " xml:space="preserve" text-anchor="middle" font-family="Sans-serif" font-size="24" id="svg_3" y="327.572523" x="430.905225" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="0" fill="#202040">H</text>
-  <circle stroke="#202040" id="svg_4" r="15.277772" cy="30.952382" cx="387.142835" stroke-width="11" fill="#202040"/>
-  <line stroke="#202040" id="svg_5" y2="112.380955" x2="155.238092" y1="36.190473" x1="375.238067" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="11" fill="none"/>
-  <line stroke="#202040" id="svg_9" y2="107.619008" x2="357.619049" y1="39.999985" x1="383.333312" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="11" fill="none"/>
-  <circle id="svg_7" r="91.468246" cy="198.095235" cx="326.666666" stroke-width="11" stroke="#202040" fill="#f4f4f4"/>
-  <text id="svg_8" stroke="#202080" transform="matrix(6.913777410854699,0,0,5.9024069288911,-2864.8748668913754,-1688.9442425985574) " xml:space="preserve" text-anchor="middle" font-family="Sans-serif" font-size="24" y="328.379296" x="461.761487" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="0" fill="#202040">M</text>
-  <circle id="svg_10" r="91.468246" cy="429.904752" cx="271.38096" stroke-width="11" stroke="#202040" fill="#f4f4f4"/>
-  <text id="svg_11" stroke="#202080" transform="matrix(7.388053055841818,0,0,6.287725671549383,-3084.522498804533,-1827.1360683907633) " xml:space="preserve" text-anchor="middle" font-family="Sans-serif" font-size="24" y="367.523672" x="453.960019" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="0" fill="#202040">S</text>
-  <circle id="svg_12" r="91.468246" cy="429.904741" cx="486.619055" stroke-width="11" stroke="#202040" fill="#f4f4f4"/>
-  <text id="svg_13" stroke="#202080" transform="matrix(7.758158945759283,0,0,6.217668166098072,-3270.1414506701717,-1796.017159525494) " xml:space="preserve" text-anchor="middle" font-family="Sans-serif" font-size="24" y="366.573967" x="484.488447" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="0" fill="#202040">L</text>
-  <line id="svg_15" y2="362.523793" x2="336.28576" y1="176.666672" x1="522.381002" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="11" fill="none" stroke="#202040"/>
-  <line id="svg_16" y2="336.95236" x2="503.238099" y1="183.333333" x1="533.333281" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="11" fill="none" stroke="#202040"/>
-  <circle id="svg_14" stroke="#202040" r="15.277772" cy="165.71428" cx="536.190481" stroke-width="11" fill="#202040"/>
-  <line stroke="#202040" id="svg_17" y2="151.904741" x2="523.809501" y1="39.523806" x1="399.047601" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="11" fill="none"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- HMSL logo. Letters are Helvetica outlines centered in the circles,
+     so the logo looks the same in every program. -->
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="6.37 -25.09 587.22 587.22">
+ <g stroke="#202040" stroke-width="11.0">
+  <line x1="375.24" y1="36.19" x2="155.24" y2="112.38"/>
+  <line x1="383.33" y1="40.00" x2="357.62" y2="107.62"/>
+  <line x1="522.38" y1="176.67" x2="336.29" y2="362.52"/>
+  <line x1="533.33" y1="183.33" x2="503.24" y2="336.95"/>
+  <line x1="399.05" y1="39.52" x2="523.81" y2="151.90"/>
+  <circle cx="387.14" cy="30.95" r="15.28" fill="#202040"/>
+  <circle cx="536.19" cy="165.71" r="15.28" fill="#202040"/>
+  <circle cx="113.33" cy="193.33" r="91.47" fill="#f4f4f4"/>
+  <circle cx="326.67" cy="198.10" r="91.47" fill="#f4f4f4"/>
+  <circle cx="271.38" cy="429.90" r="91.47" fill="#f4f4f4"/>
+  <circle cx="486.62" cy="429.90" r="91.47" fill="#f4f4f4"/>
+ </g>
+ <g fill="#202040">
+  <path id="letter_H" d="M69.49 143.12L84.61 143.12L84.61 184.62L142.06 184.62L142.06 143.12L157.17 143.12L157.17 243.54L142.06 243.54L142.06 196.58L84.61 196.58L84.61 243.54L69.49 243.54Z"/>
+  <path id="letter_M" d="M273.73 147.89L295.16 147.89L326.89 232.79L358.40 147.89L379.60 147.89L379.60 248.31L365.39 248.31L365.39 189.04Q365.39 185.96 365.54 178.85Q365.69 171.74 365.69 163.61L334.19 248.31L319.37 248.31L287.64 163.61L287.64 166.68Q287.64 170.38 287.83 177.93Q288.02 185.48 288.02 189.04L288.02 248.31L273.73 248.31Z"/>
+  <path id="letter_S" d="M241.42 447.51Q241.94 456.05 245.85 461.38Q253.30 471.36 272.10 471.36Q280.52 471.36 287.44 469.18Q300.82 464.94 300.82 454.00Q300.82 445.80 295.18 442.31Q289.47 438.89 277.29 436.36L262.32 433.29Q247.66 430.28 241.57 426.66Q231.04 420.37 231.04 407.86Q231.04 394.32 241.34 385.64Q251.64 376.96 270.52 376.96Q287.89 376.96 300.03 384.58Q312.18 392.20 312.18 408.95L298.12 408.95Q296.99 400.89 293.30 396.58Q286.46 388.72 270.07 388.72Q256.83 388.72 251.04 393.78Q245.25 398.84 245.25 405.53Q245.25 412.92 252.02 416.34Q256.46 418.52 272.10 421.80L287.59 425.02Q298.79 427.34 304.88 431.37Q315.41 438.42 315.41 451.81Q315.41 468.49 302.06 475.67Q288.72 482.85 271.04 482.85Q250.44 482.85 238.79 473.28Q227.13 463.78 227.36 447.51Z"/>
+  <path id="letter_L" d="M451.16 379.69L466.13 379.69L466.13 468.15L522.07 468.15L522.07 480.11L451.16 480.11Z"/>
  </g>
 </svg>
