@@ -9,7 +9,7 @@
 */
 
 #include "ExternalMidi.h"
-#include <assert.h>
+#include "pforth.h"
 
 
 static std::unique_ptr<MidiOutput> sMidiOutput;
@@ -36,8 +36,12 @@ cell_t ExternalMidi::init() {
     MessageManager *messageManager = MessageManager::getInstance();
     messageManager->callFunctionOnMessageThread(createNewMidiOutput,
                                                 (void *) kMidiName);
-    // This will crash if another instance of HMSL is running.
-    assert(sMidiOutput != nullptr);
+    if (sMidiOutput == nullptr) {
+        // This happens if another instance of HMSL already owns the MIDI port.
+        pfMessage("WARNING - could not create the HMSL external MIDI port.\n");
+        pfMessage("Is another copy of HMSL running? External MIDI is disabled.\n");
+        return -1;
+    }
     sMidiOutput->startBackgroundThread();
     return 0;
 }
@@ -57,6 +61,7 @@ void ExternalMidi::term() {
 // Returns error code (0 for no error)
 cell_t ExternalMidi::write(ucell_ptr_t data, cell_t count, double nativeTicks) {
     // Use the timestamp to schedule the MIDI events in the future.
+    if (sMidiOutput == nullptr) return -1; // see init()
     MidiBuffer midiBuffer(MidiMessage((const void *)data, (int)count));
     const double scheduledMillis = nativeTicks;
     const double nowMillis = Time::getMillisecondCounterHiRes();
