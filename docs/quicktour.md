@@ -26,16 +26,19 @@ HMSL include a text based score entry system. Try typing the code below. OR use 
 
 To play notes with different durations using a Forth DO LOOP enter:
 
-    playnow 4 0 do  1/4 c4  1/8 a g  1/4 e loop
+    playnow 4 0 do  1/4 c4 a  1/8 g e loop
 
 HMSL includes [several](https://github.com/philburk/hmsl/tree/master/hmsl/pieces) old algorithmic compositions. Most of them are designed to work with a General MIDI Synthesizer.
-[XFORMS](https://github.com/philburk/hmsl/blob/master/hmsl/pieces/xforms.fth) is a piece that copies a theme and then ornaments it. 
+XFORMS, written in 1989, is a piece that copies a theme and then ornaments it. 
 To compile and run it, enter:
 
-    include pieces/xforms.fth
+    include hp:xforms.fth
     xforms
 
-Click up arrow in "Select Shape" widget to see "sh-devel". You can watch the theme be copied and modified.
+Click up arrow in "Select Shape" widget to see "sh-devel". You can watch the theme being copied and modified.
+
+Back in the 1980's, if you wanted to make computer music you had to write software.
+Here is the [source code for xforms.fth](https://github.com/philburk/hmsl/blob/master/hmsl/pieces/xforms.fth).
 
 Click [here for more guided tours](tours/).
 

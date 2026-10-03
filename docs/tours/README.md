@@ -7,7 +7,7 @@
 * [Introduction to Forth](forth.md)
 * [Splorp](splorp.md), interactive instrument using Jobs
 * [Swirl](swirl.md), rotate a melody in pitch-time space, Amiga sound emulation
-* Hierarchical Scheduling
+* [Hierarchical Scheduling](morph.md)
 * Score Entry
 * MIDI Output
 
