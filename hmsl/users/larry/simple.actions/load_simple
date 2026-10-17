@@ -1,0 +1,16 @@
+\ simple concert load sequence
+\ this is the load sequence for SIMPLE ACTIONS
+\ first version (Mills concert, headlands concert, kpfa live show
+
+\ this version only uses the amiga local sound...
+
+include? task-simple_defs simple_defs
+include? task-simple_utilitiess simple_utilities
+include? task-simple_acts simple_acts
+include? task-simple_beeps simple_beeps
+include? task-simple_gliss simple_gliss
+include? task-simple_waves simple_waves
+include? task-simple_chords simple_chords
+include? task-simple_assign simple_assign
+
+sact.init
