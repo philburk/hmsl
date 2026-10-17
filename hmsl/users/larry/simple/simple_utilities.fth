@@ -68,42 +68,6 @@ v: 8bit-wave 256 allot
    sact-35 put.util
 ;
 
-: delete.util delete.action: action-table ;
-
 : sact.term
-   sact-1 delete.util 
-   sact-2 delete.util 
-   sact-3 delete.util
-   sact-4 delete.util
-   sact-5 delete.util
-   sact-6 delete.util
-   sact-7 delete.util
-   sact-8 delete.util
-   sact-9 delete.util
-   sact-10 delete.util
-   sact-11 delete.util
-   sact-12 delete.util
-   sact-13 delete.util
-   sact-14 delete.util
-   sact-15 delete.util
-   sact-16 delete.util
-   sact-17 delete.util
-   sact-18 delete.util
-   sact-19 delete.util
-   sact-20 delete.util
-   sact-21 delete.util
-   sact-22 delete.util
-   sact-23 delete.util
-   sact-24 delete.util
-   sact-25 delete.util
-   sact-26 delete.util
-   sact-27 delete.util
-   sact-28 delete.util
-   sact-29 delete.util
-   sact-30 delete.util
-   sact-31 delete.util
-   sact-32 delete.util
-   sact-33 delete.util
-   sact-34 delete.util
-   sact-35 delete.util
+   clear: action-table
 ;
