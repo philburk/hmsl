@@ -21,3 +21,5 @@ Press "Record," then move some faders.
 Now press "Stop," then "Play." It will play back the motion of the faders.
 
 See the [source code for Splorp](https://github.com/philburk/hmsl/blob/master/hmsl/pieces/splorp.fth).
+
+[Next >> SWIRL](swirl.md)
