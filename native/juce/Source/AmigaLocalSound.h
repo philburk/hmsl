@@ -23,16 +23,24 @@ public:
     float renderAudio(int32_t period, int32_t volume);
     int32_t renderModulation(int32_t period);
 
+    static int32_t clampVolume(int32_t volume) {
+        return std::min(64, std::max(0, volume));
+    }
+
     void setVolume(int32_t volume) {
-        mVolume = std::min(64, std::max(0, volume));
+        mVolume = clampVolume(volume);
     }
 
     int32_t getVolume() const {
         return mVolume;
     }
 
+    static int32_t clampPeriod(int32_t period) {
+        return std::min(65535, std::max(124, period));
+    }
+
     void setPeriod(int32_t period) {
-        mPeriod = std::min(65535, std::max(124, period));
+        mPeriod = clampPeriod(period);
     }
 
     int32_t getPeriod() const {
@@ -41,13 +49,13 @@ public:
 
     float convertPeriodToPhaseIncrement(int32_t period) {
         const float ticksPerSecond = 3579545.0; // Based on Amiga clock
-        float samplesPerSecond = ticksPerSecond / period;
+        float samplesPerSecond = ticksPerSecond / clampPeriod(period);
         const float framesPerSecond = 44100.0f; // Audio sample rate
         return samplesPerSecond / framesPerSecond;
     }
 
     float convertVolumeToScaler(int32_t volume) {
-        return volume * (1.0f / (64 * 128));
+        return clampVolume(volume) * (1.0f / (64 * 128));
     }
 
     void updateAddress();
@@ -61,7 +69,7 @@ public:
         // Update the address and count at the same time so we don't accidentally
         // read unallocated memory.
         mNextData = mPendingNextData;
-        mNextNumWords = numWords;
+        mNextNumWords = std::max(1, numWords);
     }
 
     void setEnabled(bool enabled) {
@@ -77,7 +85,7 @@ private:
     int32_t mVolume = 64;
     float mCursor = 0.0f;
     const int8_t *mData = mSine;
-    int32_t mNumWords = 0;
+    int32_t mNumWords = sizeof(mSine) / 2;
     const int8_t *mNextData = mSine;
     const int8_t *mPendingNextData = mSine;
     int32_t mNextNumWords = sizeof(mSine) / 2;

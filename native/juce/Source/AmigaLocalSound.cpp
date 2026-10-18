@@ -29,6 +29,9 @@ float AmigaSoundChannel::renderAudio(int32_t period, int32_t volume) {
             mCursor -= (mNumWords * 2);
             // Update DMA address when we finish playing one segment.
             updateAddress();
+            if (mCursor >= (mNumWords * 2)) {
+                mCursor = 0;
+            }
         }
 
         int8_t sample = mData[(int)mCursor];
@@ -48,6 +51,9 @@ int32_t AmigaSoundChannel::renderModulation(int32_t period) {
             mCursor -= mNumWords;
             // Update DMA address when we finish playing one segment.
             updateAddress();
+            if (mCursor >= mNumWords) {
+                mCursor = 0;
+            }
         }
         output = ((uint16_t *)mData)[(int)mCursor];
         mCursor += convertPeriodToPhaseIncrement(period);
@@ -101,7 +107,7 @@ void AmigaLocalSound::renderAudio(float *outputLeft, float *outputRight) {
         if (!(modulateVolume || modulatePeriod)) {
             outputs[i] = soundChannel->renderAudio(nextPeriod, nextVolume);
         }
-        if (i < kNumChannels) { // Don't use modulation from channel 3.
+        if (i < (kNumChannels - 1)) { // Don't use modulation from channel 3.
             nextVolume = (modulateVolume)
                     ? soundChannel->renderModulation(nextPeriod)
                     : mChannels[i+1].getVolume();
