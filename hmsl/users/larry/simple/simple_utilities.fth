@@ -79,6 +79,7 @@ v: 8bit-wave 256 allot
 
 : sact.term
    clear: action-table
+   da.kill
 ;
 
 if.forgotten sact.term
@@ -89,4 +90,3 @@ if.forgotten sact.term
     sact.term
 ;
 
-." To play Simple Action, enter:  SACT" cr
