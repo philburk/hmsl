@@ -16,3 +16,6 @@ Launch HMSL then enter:
 2. Click on sact-1 through sact-4 to turn on or off the sound.
 3. Click on other "sact-*" buttons.
 4. Explore. Don't worry if it is confusing. It was meant to be.
+
+Close the window when done.
+

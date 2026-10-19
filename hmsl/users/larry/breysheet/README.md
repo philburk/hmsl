@@ -12,7 +12,7 @@ B'rey'sheet is for solo voice and live interactive computer. It is one of the Ca
 a set of pieces based on computer-aided melodic transformations of the traditional Hebrew
 tropes and melodies used for singing the Torah.
 
-More details at a recording at https://artifactrecordings.bandcamp.com/track/breysheet-in-the-beginning-cantillation-study-1
+More details and a recording at https://artifactrecordings.bandcamp.com/track/breysheet-in-the-beginning-cantillation-study-1
 
 Technical notes: B'rey'sheet was first realized and premiered on the prototype of HMSL (VI.0)
 in 1984 at the Center for Contemporary Music at Mills College.

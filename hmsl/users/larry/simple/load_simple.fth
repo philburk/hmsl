@@ -13,4 +13,5 @@ include? task-simple_waves husa:simple_waves.fth
 include? task-simple_chords husa:simple_chords.fth
 include? task-simple_assign husa:simple_assign.fth
 
-sact.init
+cr ." To play Simple Actions, enter:  SACT" cr
+cr
