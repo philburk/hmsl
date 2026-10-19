@@ -169,6 +169,7 @@ assign hf   hmsl:fth
 assign ju   hmsl:amiga/util
 assign hs   hmsl:amiga/samples
 assign hap  hmsl:amiga/pieces
+assign my   hmsl:mystuff
 
 \ Load Amiga local sound emulation
 assign.on
