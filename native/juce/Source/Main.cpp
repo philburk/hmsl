@@ -115,7 +115,8 @@ public:
 
     void useWorkFolder(const File &folder)
     {
-        if (!HostFileManager::getInstance()->setWorkFolder(folder)) {
+        HostFileManager *hostFileManager = HostFileManager::getInstance();
+        if (!hostFileManager->setWorkFolder(folder)) {
             auto options = MessageBoxOptions()
                     .withIconType(MessageBoxIconType::WarningIcon)
                     .withTitle("HMSL")
@@ -124,10 +125,46 @@ public:
             NativeMessageBox::showAsync(options, [this](int) { askForWorkFolder(); });
             return;
         }
-        PropertiesFile *settings = HostFileManager::getInstance()->getSettings();
+        PropertiesFile *settings = hostFileManager->getSettings();
         settings->setValue(kWorkFolderKey, folder.getFullPathName());
         settings->saveIfNeeded();
-        startHMSL();
+
+        const auto &conflicts = hostFileManager->getPendingConflicts();
+        if (!conflicts.empty()) {
+            askToResolveConflicts(conflicts);
+        } else {
+            startHMSL();
+        }
+    }
+
+    void askToResolveConflicts(const std::vector<HostFileManager::FileConflict> &conflicts)
+    {
+        String fileList;
+        const size_t maxFilesToShow = 10;
+        for (size_t i = 0; i < std::min(conflicts.size(), maxFilesToShow); ++i) {
+            fileList += "  " + conflicts[i].relativePath + "\n";
+        }
+        if (conflicts.size() > maxFilesToShow) {
+            fileList += "  ...and " + String(conflicts.size() - maxFilesToShow) + " more\n";
+        }
+
+        auto options = MessageBoxOptions()
+                .withIconType(MessageBoxIconType::WarningIcon)
+                .withTitle("Modified HMSL Files")
+                .withMessage("The following files in your work folder differ from this "
+                             "version of HMSL:\n\n"
+                             + fileList +
+                             "\nUpdate them to the new HMSL versions (your files will be "
+                             "backed up as .bak), or keep your existing files?\n\n"
+                             "Tip: Save your own pieces in the \"mystuff\" folder so they are "
+                             "never affected by HMSL updates.")
+                .withButton("Update (Backup Mine)")
+                .withButton("Keep My Files");
+        NativeMessageBox::showAsync(options, [this](int buttonIndex) {
+            bool overwrite = (buttonIndex == 0);
+            HostFileManager::getInstance()->resolveConflicts(overwrite);
+            startHMSL();
+        });
     }
 
     void shutdown() override
