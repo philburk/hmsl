@@ -68,6 +68,25 @@ v: 8bit-wave 256 allot
    sact-35 put.util
 ;
 
+: SACT.PLAY ( -- )
+    midi.clear midi.parser.on
+    default-screen @
+    action-screen default-screen !
+    HMSL  ( no preposted morphs )
+    default-screen !
+    midi.parser.off
+;
+
 : sact.term
    clear: action-table
 ;
+
+if.forgotten sact.term
+
+: SACT
+    sact.init
+    sact.play
+    sact.term
+;
+
+." To play Simple Action, enter:  SACT" cr
