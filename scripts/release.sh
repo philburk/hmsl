@@ -35,7 +35,7 @@ VERSION="$(version_part MAJOR).$(version_part MINOR).$(version_part PATCH)"
 DMG="$BUILD_DIR/HMSL_${VERSION//./_}.dmg"
 
 # Folders from "hmsl/" that are copied to the user's work folder.
-HMSL_FOLDERS="pieces tools amiga screens fth users"
+HMSL_FOLDERS="pieces tools amiga screens fth users mystuff"
 
 "$HMSL_DIR/scripts/build.sh" Release
 

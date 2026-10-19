@@ -10,8 +10,10 @@
 
 #pragma once
 
+#include <map>
 #include <memory>
 #include <string>
+#include <vector>
 #include "stdio.h"
 
 /**
@@ -26,6 +28,13 @@
  */
 class HostFileManager {
 public:
+    struct FileConflict {
+        File source;
+        File destination;
+        String relativePath;
+        String sourceHash;
+    };
+
     static HostFileManager *getInstance() {
         if (mInstance == nullptr) {
             mInstance.reset(new HostFileManager());
@@ -42,11 +51,27 @@ public:
 
     /**
      * Set the folder that contains the user's copy of the HMSL source.
-     * Copy any missing files from the app bundle into it.
+     * Copy any missing or unmodified updated files from the app bundle into it,
+     * and record any user-modified conflicts in getPendingConflicts().
      * Only used by an installed app.
      * @return true if the folder can be used
      */
     bool setWorkFolder(const File &folder);
+
+    /**
+     * @return files in the work folder that differ from the app bundle and
+     *         appear to have been modified by the user.
+     */
+    const std::vector<FileConflict> &getPendingConflicts() const {
+        return mPendingConflicts;
+    }
+
+    /**
+     * Resolve conflicts found by setWorkFolder().
+     * @param overwriteWithBackup if true, backs up each destination file to .bak
+     *                            and overwrites it with the bundled version.
+     */
+    void resolveConflicts(bool overwriteWithBackup);
 
     /**
      * Set default directory for relative file paths.
@@ -87,13 +112,18 @@ public:
     PropertiesFile *getSettings();
 
 private:
+    bool loadManifest(const File &folder);
+    void saveManifest(const File &folder) const;
+
     static std::unique_ptr<HostFileManager> mInstance;
 
-    std::unique_ptr<File>  mCurrentDirectory;
-    bool                   mInstalled = false;
-    File                   mRepoDir;       // top of HMSL repository, if not installed
-    File                   mBundledHmslDir; // HMSL source inside the app, if installed
-    File                   mHmslDir;       // work folder
-    std::string            mDictionaryPath;
-    ApplicationProperties  mSettings;
+    std::unique_ptr<File>     mCurrentDirectory;
+    bool                      mInstalled = false;
+    File                      mRepoDir;        // top of HMSL repository, if not installed
+    File                      mBundledHmslDir; // HMSL source inside the app, if installed
+    File                      mHmslDir;        // work folder
+    std::string               mDictionaryPath;
+    ApplicationProperties     mSettings;
+    std::map<String, String>  mManifest;       // relativePath -> SHA256 hex of installed file
+    std::vector<FileConflict> mPendingConflicts;
 };
