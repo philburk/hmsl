@@ -89,18 +89,23 @@ cell_t hostMIDI_Recv(void) {
     return sMidiBase ? sMidiBase->recv() : -1;
 }
 
+// Copy a device name into a Forth buffer. @return number of characters copied
+static cell_t copyName(const String &name, ucell_ptr_t buffer, cell_t maxChars) {
+    if (maxChars <= 0) return 0;
+    const char *utf8 = name.toRawUTF8();
+    cell_t count = std::min((cell_t) strlen(utf8), maxChars);
+    memcpy((void *) buffer, utf8, (size_t) count);
+    return count;
+}
+
 // ============== MIDI Input Selection ===================================
 cell_t hostMIDI_NumInputs(void) {
     return sMidiBase ? sMidiBase->getExternalMidi().getNumInputs() : 0;
 }
 
 cell_t hostMIDI_InputName(cell_t index, ucell_ptr_t buffer, cell_t maxChars) {
-    if (!sMidiBase || maxChars <= 0) return 0;
-    String name = sMidiBase->getExternalMidi().getInputName((int) index);
-    const char *utf8 = name.toRawUTF8();
-    cell_t count = std::min((cell_t) strlen(utf8), maxChars);
-    memcpy((void *) buffer, utf8, (size_t) count);
-    return count;
+    if (!sMidiBase) return 0;
+    return copyName(sMidiBase->getExternalMidi().getInputName((int) index), buffer, maxChars);
 }
 
 cell_t hostMIDI_InputEnabled(cell_t index) {
@@ -113,6 +118,28 @@ cell_t hostMIDI_InputCount(cell_t index) {
 
 void hostMIDI_EnableInput(cell_t index, cell_t flag) {
     if (sMidiBase) sMidiBase->getExternalMidi().setInputEnabled((int) index, flag != 0);
+}
+
+// ============== MIDI Output Selection ===================================
+cell_t hostMIDI_NumOutputs(void) {
+    return sMidiBase ? sMidiBase->getExternalMidi().getNumOutputs() : 0;
+}
+
+cell_t hostMIDI_OutputName(cell_t index, ucell_ptr_t buffer, cell_t maxChars) {
+    if (!sMidiBase) return 0;
+    return copyName(sMidiBase->getExternalMidi().getOutputName((int) index), buffer, maxChars);
+}
+
+cell_t hostMIDI_OutputEnabled(cell_t index) {
+    return (sMidiBase && sMidiBase->getExternalMidi().isOutputEnabled((int) index)) ? -1 : 0;
+}
+
+cell_t hostMIDI_OutputCount(cell_t index) {
+    return sMidiBase ? sMidiBase->getExternalMidi().getOutputMessageCount((int) index) : 0;
+}
+
+void hostMIDI_EnableOutput(cell_t index, cell_t flag) {
+    if (sMidiBase) sMidiBase->getExternalMidi().setOutputEnabled((int) index, flag != 0);
 }
 
 // @return address of MIDI-PORT variable

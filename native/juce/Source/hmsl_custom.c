@@ -89,6 +89,11 @@ void * CustomFunctionTable[] =
     (void *) hostMIDI_InputEnabled,
     (void *) hostMIDI_InputCount,
     (void *) hostMIDI_EnableInput,
+    (void *) hostMIDI_NumOutputs,
+    (void *) hostMIDI_OutputName,
+    (void *) hostMIDI_OutputEnabled,
+    (void *) hostMIDI_OutputCount,
+    (void *) hostMIDI_EnableOutput,
 };
 
 /****************************************************************
@@ -141,6 +146,11 @@ Err CompileCustomFunctions( void )
     CreateGlueToC( "HOSTMIDI_INPUTENABLED()", i++, C_RETURNS_VALUE, 1 );
     CreateGlueToC( "HOSTMIDI_INPUTCOUNT()", i++, C_RETURNS_VALUE, 1 );
     CreateGlueToC( "HOSTMIDI_ENABLEINPUT()", i++, C_RETURNS_VOID, 2 );
+    CreateGlueToC( "HOSTMIDI_NUMOUTPUTS()", i++, C_RETURNS_VALUE, 0 );
+    CreateGlueToC( "HOSTMIDI_OUTPUTNAME()", i++, C_RETURNS_VALUE, 3 );
+    CreateGlueToC( "HOSTMIDI_OUTPUTENABLED()", i++, C_RETURNS_VALUE, 1 );
+    CreateGlueToC( "HOSTMIDI_OUTPUTCOUNT()", i++, C_RETURNS_VALUE, 1 );
+    CreateGlueToC( "HOSTMIDI_ENABLEOUTPUT()", i++, C_RETURNS_VOID, 2 );
 
     TOUCH(i);
 

@@ -19,7 +19,7 @@
 
 /**
  * Provide an external port that can drive DAWs like Logic Pro
- * or physical MIDI ports.
+ * or physical MIDI ports. Use MIDI.OUTPUTS in Forth to choose the outputs.
  * To target individual channels in Logic:
  *   goto File>Project Settings>Recording and check 'Auto Demix by Channel...'
  */
@@ -54,6 +54,16 @@ public:
     /** Turn an input on or off, and remember the choice by name. */
     void setInputEnabled(int index, bool enabled);
 
+    // MIDI output selection. Outputs are numbered from 0 in the order listed.
+    // Output 0 is the virtual "HMSL" port that other apps can listen to.
+    // write() sends to every output that is on.
+    int getNumOutputs() const { return (int) mOutputPorts.size(); }
+    String getOutputName(int index) const;
+    bool isOutputEnabled(int index) const;
+    int getOutputMessageCount(int index) const;
+    /** Turn an output on or off, and remember the choice by name. */
+    void setOutputEnabled(int index, bool enabled);
+
 private:
     struct InputPort {
         MidiDeviceInfo             info;
@@ -64,12 +74,27 @@ private:
         std::atomic<int>           numMessages{0};
     };
 
+    struct OutputPort {
+        MidiDeviceInfo              info;
+        bool                        isHmslOutput = false; // our own virtual output
+        bool                        enabled = false;
+        std::unique_ptr<MidiOutput> output;               // open if enabled
+        std::atomic<int>            numMessages{0};
+    };
+
     void openInputs();
     void closeInputs();
     bool openInput(InputPort &port);
     void closeInput(InputPort &port);
     bool isEnabledByDefault(int deviceIndex, const MidiDeviceInfo &info) const;
-    void saveInputSetting(const String &name, bool enabled);
+
+    void openOutputs();
+    void closeOutputs();
+    bool openOutput(OutputPort &port);
+    void closeOutput(OutputPort &port);
+
+    // Remember a choice made by the user, by device name.
+    void saveChoice(const char *onKey, const char *offKey, const String &name, bool enabled);
 
     // Called on a MIDI thread for each message received.
     void handleIncomingMidiMessage(MidiInput *source, const MidiMessage &message) override;
@@ -77,8 +102,12 @@ private:
     static constexpr int kInputQueueSize = 4096; // must be a power of 2
     static constexpr const char *kInputsOnKey = "midiInputsOn";   // names the user turned on
     static constexpr const char *kInputsOffKey = "midiInputsOff"; // names the user turned off
+    static constexpr const char *kOutputsOnKey = "midiOutputsOn";
+    static constexpr const char *kOutputsOffKey = "midiOutputsOff";
 
     std::vector<std::unique_ptr<InputPort>> mInputPorts;
+    std::vector<std::unique_ptr<OutputPort>> mOutputPorts; // used on the Forth thread
+    bool                                     mHmslOutputFailed = false;
     std::mutex                              mInputWriteLock; // inputs may call back at the same time
     AtomicQueue<uint8_t>                    mInputQueue{kInputQueueSize};
     std::atomic<int>                        mNumBytesDropped{0};

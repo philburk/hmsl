@@ -109,6 +109,17 @@ cell_t hostMIDI_InputEnabled(cell_t index);
 // @return number of messages received from the input
 cell_t hostMIDI_InputCount(cell_t index);
 void hostMIDI_EnableInput(cell_t index, cell_t flag);
+
+// MIDI output selection. Outputs are numbered from 0.
+// Output 0 is the virtual "HMSL" port.
+cell_t hostMIDI_NumOutputs(void);
+// Copy name of output into a buffer. @return number of characters copied
+cell_t hostMIDI_OutputName(cell_t index, ucell_ptr_t buffer, cell_t maxChars);
+// @return -1 if the output is on, else 0
+cell_t hostMIDI_OutputEnabled(cell_t index);
+// @return number of messages sent to the output
+cell_t hostMIDI_OutputCount(cell_t index);
+void hostMIDI_EnableOutput(cell_t index, cell_t flag);
 void hostSleep( cell_t msec );
 
 // Amiga chip emulation
