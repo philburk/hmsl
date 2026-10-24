@@ -341,17 +341,85 @@ cell_t ExternalMidi::recv() {
 // Returns error code (0 for no error)
 cell_t ExternalMidi::write(ucell_ptr_t data, cell_t count, double nativeTicks) {
     // Use the timestamp to schedule the MIDI events in the future.
-    MidiBuffer midiBuffer(MidiMessage((const void *)data, (int)count));
     const double scheduledMillis = nativeTicks;
     const double nowMillis = Time::getMillisecondCounterHiRes();
     const double playTimeMillis = std::max(scheduledMillis, nowMillis);
-    // Send to every output that is on.
-    bool sent = false;
+    const uint8_t *bytes = reinterpret_cast<const uint8_t *>(data);
+    for (cell_t i = 0; i < count; i++) {
+        parseOutputByte(bytes[i], playTimeMillis);
+    }
+    return 0;
+}
+
+// @return number of bytes in a message that starts with this status byte,
+//         or 0 for SysEx, which ends with F7
+int ExternalMidi::getMessageLength(uint8_t status) {
+    if (status < 0xF0) {
+        const uint8_t command = status & 0xF0;
+        return (command == 0xC0 || command == 0xD0) ? 2 : 3; // program, pressure
+    }
+    switch (status) {
+        case 0xF0: return 0; // SysEx
+        case 0xF1: return 2; // MTC quarter frame
+        case 0xF2: return 3; // song position
+        case 0xF3: return 2; // song select
+        default:   return 1;
+    }
+}
+
+// Assemble bytes into complete messages, like a MIDI device does.
+void ExternalMidi::parseOutputByte(uint8_t byte, double playTimeMillis) {
+    if (byte >= 0xF8) {
+        // Real time messages can be sent at any time, even inside SysEx.
+        sendToOutputs(&byte, 1, playTimeMillis);
+        return;
+    }
+    if (mInSysEx) {
+        if (byte < 0x80) {
+            mOutputMessage.push_back(byte);
+            return;
+        }
+        // F7 ends the SysEx. Any other status byte also ends it, so add the F7.
+        mOutputMessage.push_back(0xF7);
+        sendToOutputs(mOutputMessage.data(), (int) mOutputMessage.size(), playTimeMillis);
+        mOutputMessage.clear();
+        mInSysEx = false;
+        if (byte == 0xF7) return;
+    }
+    if (byte >= 0x80) {
+        mOutputMessage.clear();
+        if (byte == 0xF7) return; // stray end of SysEx
+        mOutputMessage.push_back(byte);
+        mOutputExpected = getMessageLength(byte);
+        if (byte < 0xF0) {
+            mRunningStatus = byte;
+        } else {
+            mRunningStatus = 0; // system messages cancel running status
+        }
+        if (byte == 0xF0) {
+            mInSysEx = true;
+            return;
+        }
+    } else {
+        if (mOutputMessage.empty()) {
+            if (mRunningStatus == 0) return; // data byte without status, ignore it
+            mOutputMessage.push_back(mRunningStatus);
+            mOutputExpected = getMessageLength(mRunningStatus);
+        }
+        mOutputMessage.push_back(byte);
+    }
+    if ((int) mOutputMessage.size() >= mOutputExpected) {
+        sendToOutputs(mOutputMessage.data(), (int) mOutputMessage.size(), playTimeMillis);
+        mOutputMessage.clear();
+    }
+}
+
+// Send one complete message to every output that is on.
+void ExternalMidi::sendToOutputs(const uint8_t *data, int count, double playTimeMillis) {
+    MidiBuffer midiBuffer(MidiMessage(data, count));
     for (auto &port : mOutputPorts) {
         if (port->output == nullptr) continue;
         port->output->sendBlockOfMessages(midiBuffer, playTimeMillis, 44100 /* sample rate */);
         port->numMessages++;
-        sent = true;
     }
-    return sent ? 0 : -1;
 }

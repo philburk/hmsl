@@ -96,6 +96,12 @@ private:
     // Remember a choice made by the user, by device name.
     void saveChoice(const char *onKey, const char *offKey, const String &name, bool enabled);
 
+    // HMSL may write part of a message, eg. a long SysEx in 64 byte pieces,
+    // or several messages at once. Assemble complete messages before sending.
+    void parseOutputByte(uint8_t byte, double playTimeMillis);
+    void sendToOutputs(const uint8_t *data, int count, double playTimeMillis);
+    static int getMessageLength(uint8_t status);
+
     // Called on a MIDI thread for each message received.
     void handleIncomingMidiMessage(MidiInput *source, const MidiMessage &message) override;
 
@@ -108,6 +114,12 @@ private:
     std::vector<std::unique_ptr<InputPort>> mInputPorts;
     std::vector<std::unique_ptr<OutputPort>> mOutputPorts; // used on the Forth thread
     bool                                     mHmslOutputFailed = false;
+
+    // Output parser state, used on the Forth thread.
+    std::vector<uint8_t>                     mOutputMessage;    // message being assembled
+    int                                      mOutputExpected = 0; // length when complete, 0 for SysEx
+    bool                                     mInSysEx = false;
+    uint8_t                                  mRunningStatus = 0;
     std::mutex                              mInputWriteLock; // inputs may call back at the same time
     AtomicQueue<uint8_t>                    mInputQueue{kInputQueueSize};
     std::atomic<int>                        mNumBytesDropped{0};

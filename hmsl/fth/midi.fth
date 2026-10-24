@@ -35,6 +35,7 @@
 \ MOD: PLB 8/8/91 Moved Running Status Optimization to lowest level
 \               so that it will work with event buffering.
 \               Make MIDI.LASTOFF use 0 OFF to allow optimization.
+\ MOD: 10/24/26 Add MIDI.SYSEX
 
 include? msec ju:msec
 include? choose ju:random
@@ -241,6 +242,15 @@ CREATE MIDI-LAST-BENDS 24 ALLOT  ( word wide )
 
 : MIDI.END.SYSEX ( -- , stop SYSEX )
     F7 midi.xmit
+    midi.flush
+;
+
+: MIDI.SYSEX ( addr count -- , send a complete SysEx message from memory )
+\ The message must start with F0 and end with F7.
+\ Long messages are sent in pieces and put back together by the host.
+    midi.flush
+    0 ?DO  dup i + c@ midi.xmit
+    LOOP drop
     midi.flush
 ;
 
