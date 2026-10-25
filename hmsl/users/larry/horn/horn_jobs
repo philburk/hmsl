@@ -1,0 +1,352 @@
+\ JOBS for HORN piece
+\ Composer: LP
+\ 2/17/90
+\ update 4/22/90
+anew task-horn_jobs
+
+\ tests, models, etc.
+ob.player H-TEST-PLAYER \ just used for testing purposes
+ob.job H-TEST-JOB       \ same
+ob.midi.instrument fb-instrument \ standard instrument for sending FB
+
+\ this next value is the "average" section-length, the "measure"
+v: measure-# \ where in piece
+1 measure-# ! \ starts with measure 1
+v: measure-time 
+600 measure-time ! \ standard time for measure between 10-15
+
+\ this next value is used only for note durations
+\ the smaller the number, the slower the pitches
+v: horn-tempo \ number by which all "seconds" values are divided...
+5 horn-tempo !
+
+\ test interpreter for instruments
+: FB.INTERPRET { el# shape inst -- }
+	el#  shape  get: []
+	drop ( drop cents values )
+	60 fb.start.events fb.fract.on
+	drop
+	fb.stop.events
+;
+
+: INIT.FB-INSTRUMENT
+	'c fb.interpret put.on.function: fb-instrument
+	0 put.offset: fb-instrument
+;
+
+: H-TEST-DUR-FUNCTION { el# shape -- duration }
+	shape  el# 
+	el#  0 shape  ed.at: [] ( -- harm# )
+	17 12 * swap ( -- 17*60 # )
+	/
+;
+
+: INIT.H-TEST-PLAYER
+	1 new: h-test-player
+	1-shape add: h-test-player
+	fb-instrument put.instrument: h-test-player
+	'c h-test-dur-function put.dur.function: h-test-player
+	10 put.repeat: h-test-player
+;
+
+
+\ Jobs, shapes, instruments, etc. for piece
+ob.job arp-changer \ this job changes the content of the "master" arpeggio
+ob.job vel-changer
+
+ob.objlist horn-jobs
+
+: MAKE.HORN-JOBS
+	16 new: horn-jobs
+	16 0 DO
+		instantiate ob.job
+		dup ( -- job job )
+		add: horn-jobs ( -- job )
+		dup
+		\ each job has a variable start time
+		100 choose swap put.start.delay: []
+		\ data is used for MIDI channel
+		i 1+ swap put.data: []
+	LOOP
+;
+
+: CLEANUP.HORN-JOBS
+	freeall: horn-jobs
+	many: horn-jobs 0 DO
+		i at: horn-jobs deinstantiate
+	LOOP
+	free: horn-jobs
+;
+
+
+( this job moves the piece thru )
+( it changes the measure number at the appropriate time... )
+: HORN-TIMER.FUNCTION { job-address --- }
+	measure-# @ 1- 17 / 
+	CASE
+           0 OF measure-time @ dup 
+		measure-# @ 36 swap - 13 */ swap wchoose ENDOF \ buildup
+	   1 OF measure-time @ dup 
+		17 measure-# @ 17 mod - 3 / 13 + 13 */ swap wchoose ENDOF 
+	   2 OF measure-time @ dup 11 13 */  wchoose ENDOF
+	   3 OF measure-time @ dup 16 13 */ swap  wchoose ENDOF \ 1 series
+	   4 OF measure-time @ dup 
+		measure-# @ 17 mod 15 + 13 */ swap wchoose ENDOF \ get longer
+	ENDCASE
+	\ update velocity job
+	dup 10 / vel-changer put.duration: [] \ for fades...
+		0 put.data: vel-changer \ set counter
+	dup 60 / 
+	tab tab tab ." MEASURE'S TIME IS: " .   
+	( diagnostic ) cr
+	job-address put.duration: [] \ set new duration for job
+	measure-# @ dup  85 > 
+		IF
+			drop 85
+		THEN
+	1+ measure-# !
+	\ now print out some things for performers
+	 tab tab tab
+	." MEASURE # = " measure-# @ 1- . tab bell cr  cr cr cr
+;
+
+
+
+: DO.FIRST.ARP
+	measure-# @ 1+ 
+	set.many: arp-shape
+;
+
+
+\ =============================================================
+\ 	REPLACEMENT
+\ =============================================================
+\ Precedence field meanings: 0 no change; -1 to be changed now;
+\ -2 to be changed previously; +1 to be changed now; +2 to be changed prev.
+\ For each new measure past 17, -1->-2, 1->2, -2->0, and 
+\ a new -1 and a new +1 are inserted
+
+: SET.PRECEDENCES  
+	( remove value with -2; change  -1 to -2; )
+	( change +1 to +2; change +2 to 0 )
+	0 many: arp-shape 1- -DO
+		i 4 ed.at: arp-shape
+		CASE
+			0 OF noop ENDOF ( if 0, no change )
+			-2 OF i remove: arp-shape  ENDOF
+			-1 OF -2 i 4 ed.to: arp-shape  ENDOF
+			1 OF 2 i 4 ed.to: arp-shape ENDOF
+			2 OF 0 i 4 ed.to: arp-shape  ENDOF
+		ENDCASE
+	1 -LOOP
+;
+
+: FIND.CLOSEST.REPLACEMENT { | series harm# fb fract cents index diff --- }
+	measure-# @
+	17 / ( -- N, which series are we in: 1= 5, 2=3, 3=1 )
+	CASE
+		1 OF 5-shape -> series  ENDOF
+		2 OF 3-shape -> series  ENDOF
+		3 OF 1-shape -> series  ENDOF
+	ENDCASE
+	( insert new pitch from current series: +1 )
+	16 ( put this on stack, so can move from end of replacing shape )
+	measure-# @ 1- 
+	17 mod ( -- # in series ) 
+	- -> index
+	index series  get: [] ( -- harm# fb fract cnts )
+	-> cents -> fract -> fb -> harm# ( -- )
+	series get.data: [] ( -- series# )
+	fb ( -- series# fb )
+	fract ( -- series# fb fract )
+	0 ( -- series# fb fract vel )
+	1 ( -- series# fb fract vel precedence, this latter is new, so 1 )
+	harm# cents ( -- series# fb fract vel prec harm# cents )
+	add: arp-shape
+\ now seek out one to be replaced: closest cents value, with different
+\ series#, with precedence = 0 
+	0 -> index
+	ho_max_int -> diff
+	many: arp-shape 0 DO
+		i 4 ed.at: arp-shape 0 =  ( precedence = 0 ????? )
+		i 0 ed.at: arp-shape series get.data: [] = not 
+			( check to see if from a different series )
+		AND
+		IF
+			cents  
+			i 6 ed.at: arp-shape
+			- abs ( -- abs-value of difference )
+			dup diff < 
+			IF -> diff i -> index
+			ELSE drop
+			THEN
+		THEN
+	LOOP
+\	index 0< 
+\		abort" couldn't find near index in closest.replace... "
+	-1 index 4 ed.to: arp-shape
+\	cr index ." index to be replaced is: " . cr 
+\	print: arp-shape
+	( identify new one to be deleted, make it -1 )
+	( search for closest number, mod 12 : city block??? )
+;
+
+
+: DO.NORMAL.ARP
+	SET.PRECEDENCES
+	FIND.CLOSEST.REPLACEMENT
+;
+
+: DO.LAST.ARP
+	measure-# @ ( if it's the beginning of the end, reorder shape )
+	68 = IF 
+		16 0 DO
+			1 i 0 ed.to: arp-shape ( series is now always 1 )
+			i 1 ed.at: 1-harm-shape ( -- fb )
+			i 2 ed.at: 1-harm-shape ( -- fb fract )
+			i 2 ed.to: arp-shape
+			i 1 ed.to: arp-shape
+			i 0 ed.at: 1-harm-shape
+			i 5 ed.to: arp-shape ( put in harm# )
+		LOOP
+	cr tab ." Series on 1 ARP-SHAPE reconfigured " cr
+	THEN
+	85 measure-# @ - set.many: arp-shape
+;
+
+\ this one changes nature of arp-shape
+: ARP-CHANGER.FUNCTION { job-address --- }
+	measure-# @ 17 / ( -- 0,1,2,3,4 )
+	CASE 0 OF DO.FIRST.ARP ENDOF
+	     1 OF DO.NORMAL.ARP ENDOF
+	     2 OF DO.NORMAL.ARP ENDOF
+	     3 OF DO.NORMAL.ARP ENDOF
+	     4 OF DO.LAST.ARP ENDOF	     
+	ENDCASE 
+;
+
+: INIT.ARP-CHANGER
+	2 new: ARP-CHANGER
+	'c horn-timer.function add: arp-changer
+	'c arp-changer.function add: arp-changer
+;
+
+\ job-function for playing arpeggios ..
+
+: GET.ARP.INDEX { job --- temp-index }
+	 many: arp-shape choose ( -- el )
+;
+
+\ this is an oversimplified fade in and fade out
+\ which is not nearly as good as the first one i had,
+\ lost in the computer crash... this is a simple one
+\ that has the more or less desired affect...	
+: GET.VELOCITY { index -- velocity }
+		index 4 ed.at: arp-shape
+		CASE
+\ subtract the harmonic number from the total...
+			0 OF 110 60 wchoose 
+				index 5 ed.at: arp-shape -
+			ENDOF
+			1 OF 
+				\ 30 choose 0 =
+				\ IF 100 65 wchoose
+				\ ELSE 
+				70 20  wchoose ENDOF
+				\ THEN
+			2 OF 90 50 wchoose ENDOF
+			-1 OF  90 50 wchoose ENDOF
+			-2 OF 70 20 wchoose ENDOF
+		ENDCASE
+;
+
+: HORN-JOB.FUNCTION { job-address | temp-index last-index --- }
+	job-address get.arp.index
+	-> temp-index
+	\ first: a random chance that no note will be played... 
+	\ including a simple algorithm that makes it a little
+	\ more likely in the middle
+	\ by changing these values, the 'activity' in different
+	\ sections of the piece can be finetuned...
+	measure-# @ 17 / 
+	CASE 
+		0 OF 0 ENDOF
+		1 OF 5 ENDOF
+		2 OF 8 ENDOF
+		3 OF 3 ENDOF
+		4 OF 0 ENDOF
+	ENDCASE
+	 15 + choose 7 > IF
+		temp-index 1 ed.at: arp-shape ( --  fb )
+		temp-index  2 ed.at: arp-shape ( -- fb fract )
+		( need to get harmonic number here .... )
+		( and put duration )
+	ELSE \ if no note to be played
+		0 0 \ pass some dummy indices...
+	THEN
+\ set midi-channel
+	job-address get.data: [] midi.channel!
+	temp-index get.velocity 
+fb.start.events fb.fract.on
+\  this next section determines the duration of the note, based on
+\  the harmonic series number, which series, and the overall tempo...
+	temp-index 5 ed.at: arp-shape ( -- harm# )
+	17 swap - \  get inverse of harmonic series
+	60 * ( -- #-of-seconds ) 
+	horn-tempo @  
+\ this next little routine subtracts a bit from the tempo
+\ to make the piece a bit slower in the first and last 17 measures.. 
+	measure-# @ 17 < measure-# @ 68 >
+	or
+	IF
+		4 choose -
+	THEN
+\ now divide the duration by the overall tempo...
+	/ ( -- seconds/tempo )
+	temp-index 0 ed.at: arp-shape 
+	/  ( -- [seconds/tempo]/series# )
+\ the following tries to weed out a few clicks
+\ by prohibiting really short durations in the first and last
+\ few measures...
+	dup 25 < ( -- dur flag )
+	measure-# @ 7 < ( -- dur flag flag )
+	measure-# @ 77 > or  ( -- dur flag flag )
+	and ( -- dur flag )
+	IF 25 drop  THEN
+\ now put the duration in the job, which is for that note...
+	job-address put.duration: []
+	temp-index -> last-index
+	fb.stop.events
+;
+
+ : STUFF.HORN-JOBS
+	16 0 DO
+		1 i at: horn-jobs ( -- job address )
+		new: []
+		'c horn-job.function i at: horn-jobs  add: []
+	LOOP
+ ;
+
+\ ===========================================
+\ general initiation...				
+: INIT.HORN.JOBS ( -- )
+	init.fb-instrument	
+	init.h-test-player
+	init.arp-changer
+	make.horn-jobs
+	stuff.horn-jobs
+;
+
+INIT.HORN.JOBS
+
+: TERM.HORN.JOBS
+	free: h-test-player
+	free: fb-instrument
+	free: arp-changer
+	cleanup.horn-jobs
+;
+
+
+if.forgotten term.horn.jobs
+
+\ last line eof

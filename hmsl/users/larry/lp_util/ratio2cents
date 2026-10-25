@@ -1,0 +1,42 @@
+\ Calculate the relative cents value for a given ratio.
+\
+\ Author: Phil Burk
+\ Copyright 1986 -  Phil Burk, Larry Polansky, David Rosenboom.
+\ All Rights Reserved
+\
+\ This file is designed to work with JForth
+\ It would need to be modified for use on the Macintosh.
+
+include? f* ju:float.ffp
+
+FPINIT   ( initialize for later call to FLOG )
+
+ANEW TASK-RATIO2CENTS
+
+decimal
+: RATIO->CENTS  ( numerator denominator -- cents )
+\ Equation:  cents = int(ln(float(nm)/float(dn)) /
+\                        ln(2.0) * 1200.00 + 0.5)
+    float swap float swap f/
+    flog [ 2 float flog ] literal f/
+    1200.0  f*
+    0.5 f+
+    fix
+;
+
+: RATIO.TABLE  ( max_numerator -- , print table of ratios and cents )
+\ Print horizontal axis legend.
+    cr 2 spaces
+    dup dup 8 - 1 max
+    DO i 8 .r  ( print numerators )
+    LOOP cr
+    ( -- max )
+    dup 1
+    DO  i 2 .r  ( print denominators )
+        dup dup 8 - 1 max
+        DO
+            i j ratio->cents 8 .r  ( print cents )
+        LOOP cr
+    LOOP
+    drop
+;

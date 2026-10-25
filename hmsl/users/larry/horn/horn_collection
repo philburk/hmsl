@@ -1,0 +1,32 @@
+\ HORN
+\  author/composer: Larry Polansky
+\ collection for playing whole piece...
+anew task-horn_collection
+
+ob.collection HORN-COLL
+
+v: #-horn-channels
+16 #-horn-channels !
+
+: INIT.HORN-COLL
+	20 new: horn-coll
+	#-horn-channels @ 0 DO
+		i at: horn-jobs
+		add: horn-coll
+	LOOP
+	vel-changer add: horn-coll
+	arp-changer add: horn-coll
+;
+init.horn-coll
+
+: RESTART.HORN
+	0  measure-# !
+\	0 last-index !
+	fill.arp-shape
+;
+
+: TERM.HORN-COLL
+	free: horn-coll
+;
+
+if.forgotten term.horn-coll
