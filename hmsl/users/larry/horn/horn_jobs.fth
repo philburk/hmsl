@@ -126,10 +126,16 @@ ob.objlist horn-jobs
 \ For each new measure past 17, -1->-2, 1->2, -2->0, and 
 \ a new -1 and a new +1 are inserted
 
-: SET.PRECEDENCES  
+\ Count down so that REMOVE: does not change the index of elements not yet visited.
+\ JForth used  -DO ... 1 -LOOP  to count down. In ANS Forth, use DO ... -1 +LOOP,
+\ which also includes the limit, 0. ANS DO always runs at least once, so skip
+\ the loop when the shape is empty.
+: SET.PRECEDENCES
 	( remove value with -2; change  -1 to -2; )
 	( change +1 to +2; change +2 to 0 )
-	0 many: arp-shape 1- -DO
+	many: arp-shape 0>
+	IF
+	0 many: arp-shape 1- DO
 		i 4 ed.at: arp-shape
 		CASE
 			0 OF noop ENDOF ( if 0, no change )
@@ -138,7 +144,8 @@ ob.objlist horn-jobs
 			1 OF 2 i 4 ed.to: arp-shape ENDOF
 			2 OF 0 i 4 ed.to: arp-shape  ENDOF
 		ENDCASE
-	1 -LOOP
+	-1 +LOOP
+	THEN
 ;
 
 : FIND.CLOSEST.REPLACEMENT { | series harm# fb fract cents index diff --- }
@@ -258,6 +265,7 @@ ob.objlist horn-jobs
 			-1 OF  90 50 wchoose ENDOF
 			-2 OF 70 20 wchoose ENDOF
 		ENDCASE
+		\ index . ."  GET.VELOCITY -> " dup . cr
 ;
 
 : HORN-JOB.FUNCTION { job-address | temp-index last-index --- }
@@ -335,9 +343,8 @@ fb.start.events fb.fract.on
 	init.arp-changer
 	make.horn-jobs
 	stuff.horn-jobs
+	1 measure-# !
 ;
-
-INIT.HORN.JOBS
 
 : TERM.HORN.JOBS
 	free: h-test-player

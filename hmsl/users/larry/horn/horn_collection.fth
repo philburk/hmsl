@@ -17,7 +17,6 @@ v: #-horn-channels
 	vel-changer add: horn-coll
 	arp-changer add: horn-coll
 ;
-init.horn-coll
 
 : RESTART.HORN
 	0  measure-# !
@@ -29,4 +28,35 @@ init.horn-coll
 	free: horn-coll
 ;
 
+: HORN.INIT
+    midi_port_external midi-port !
+    init.horn  \ shapes
+    init.horn.jobs
+    init.horn-coll
+;
+
+: MIDI.ALL.CHANNELS.OFF ( -- )
+    midi-channel @
+	17 1 DO
+		i midi-channel !
+		midi.alloff
+	LOOP
+	midi-channel !
+;
+
+: HORN.TERM
+    term.horn-coll
+	term.horn.jobs
+	term.horn.shapes
+	midi.all.channels.off
+;
+
+: HORN  ( -- , play Horn piece )
+    horn.init
+	horn-coll hmsl.play
+	horn.term
+;
+
 if.forgotten term.horn-coll
+
+cr ." Enter:      HORN     to play the piece." cr

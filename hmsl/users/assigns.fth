@@ -2,6 +2,6 @@
 \ not distributed with HMSL.
 
 assign hulp hmsl:users/larry
-assign husa hulp:simple
-assign wlm  hulp:wlm
-include hulp:breysheet/assigns.fth
+include hulp:assigns.fth
+
+assign hupb hmsl:users/phil

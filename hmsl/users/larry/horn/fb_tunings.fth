@@ -59,6 +59,12 @@ ob.shape HARM-ORDER-SHAPE
 
 \ ===============================================================
 \ ================================================================
+
+\ Added in 2029-10-24 by Phil Burk. I could not find a definition.
+: FB.CENTS->NF ( cents -- note fraction )
+    100 /mod swap
+;
+
 \ SHAPES which contain tunings and FBO1 values for harmonic series'
 : RATIO->NF ( num den -- note fraction )
 	ratio->cents ( -- cents )
@@ -198,8 +204,6 @@ ob.shape HARM-ORDER-SHAPE
 	." (and then 58 0 is the F that Chris needs for tuning) "
 	cr cr
 ;
-
-INIT.HORN
 
 : TERM.HORN.SHAPES
 	free: 1-SHAPE ( harm# n f cents )
