@@ -149,6 +149,15 @@ CREATE MIDI-LAST-BENDS 24 ALLOT  ( word wide )
     7B 00 midi.control
 ;
 
+: MIDI.ALL.CHANNELS.OFF ( -- , send all-notes-off to every channel )
+    midi-channel @
+	17 1 DO
+        i midi-channel !
+        midi.alloff
+	LOOP
+    midi-channel !
+;
+
 : MIDI.LOCAL.ON ( -- , allow keyboard input )
     7A 7F midi.control
 ;

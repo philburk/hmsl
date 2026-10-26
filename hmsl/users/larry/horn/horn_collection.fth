@@ -35,15 +35,6 @@ v: #-horn-channels
     init.horn-coll
 ;
 
-: MIDI.ALL.CHANNELS.OFF ( -- )
-    midi-channel @
-	17 1 DO
-		i midi-channel !
-		midi.alloff
-	LOOP
-	midi-channel !
-;
-
 : HORN.TERM
     term.horn-coll
 	term.horn.jobs
