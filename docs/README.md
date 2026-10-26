@@ -7,4 +7,5 @@
 * [Forth Tutorial](http://www.softsynth.com/pforth/pf_tut.php)
 * [Papers and other writings](papers.md)
 * [How to Build HMSL from Source](build.md)
+* [HMSL App Architecture](architecture.md)
 * [Status of HMSL](status.md)

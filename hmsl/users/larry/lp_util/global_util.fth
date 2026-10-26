@@ -2,7 +2,7 @@
 \ hmsl based
 
 \ author: lp  6/87
-\ these are general utilities, not quite general enough to be 
+\ these are general utilities, not quite general enough to be
 \ included in hmsl
 
 anew task-global_util
@@ -13,19 +13,17 @@ anew task-global_util
 \ fbo1 libraries, and all others.
 
 \  start and end midi system exclusive messages
-hex
-: SYSEX f0 midi.xmit ;
-: ENDSYSEX f7 midi.xmit ;
-decimal
+: SYSEX $ f0 midi.xmit ;
+: ENDSYSEX $ f7 midi.xmit ;
 
 \ utility for midi sysex codes that need successive nibbles
-hex
+
 : LO/HI.MASK  ( byte-data -- , sends it out to midi device in two nibbles )
-		( first lo, then hi )	
-	dup 0000000f and midi.xmit
-	000000f0 and -4 ashift midi.xmit
+        ( first lo, then hi )
+    dup $ 0000000f and midi.xmit
+    $ 000000f0 and -4 ashift midi.xmit
 ;
-decimal
+
 
 \ ================== amiga local sound stuff ================
 
@@ -37,81 +35,79 @@ v: local-lo-freq 30 local-lo-freq !
 v: local-hi-freq 1750 local-hi-freq !
 
 : DA.SCALE.UP \ freq -- up to  right octave
-		dup 0= IF drop 1 THEN
-		BEGIN
-			dup local-lo-freq @ <
-		WHILE
-			2* 
-		REPEAT
+    dup 0= IF drop 1 THEN
+    BEGIN
+        dup local-lo-freq @ <
+    WHILE
+        2*
+    REPEAT
 ;
 
 : DA.SCALE.DOWN \ freq -- down to right octave
-		dup 0= IF drop 1 THEN
-		BEGIN
-			dup local-hi-freq @ >
-		WHILE
-			2/ 
-		REPEAT
+    dup 0= IF drop 1 THEN
+    BEGIN
+        dup local-hi-freq @ >
+    WHILE
+        2/
+    REPEAT
 ;
 
-: LOCAL.FREQ.SCALE \ freq -- octave-of-freq within range 
-	da.scale.down
-	da.scale.up
+: LOCAL.FREQ.SCALE \ freq -- octave-of-freq within range
+    da.scale.down
+    da.scale.up
 ;
 
 \ this is the routine to use -- use it wherever you would use
 \ da.freq!, but make sure the variables are set properly
 
 : SCALED.DA.FREQ! \  freq -- , vectored da.freq! to scale in range
-	local.freq.scale da.freq!
-;	
+    local.freq.scale da.freq!
+;
 
 : LOCAL.OFF ( -- , turns off all four amiga voices )
-	4 0 DO
-		i da.channel!
-		da.stop
-	LOOP
+    4 0 DO
+        i da.channel!
+        da.stop
+    LOOP
 ;
 
 : LOCAL.ON ( -- , turns on all four amiga voices )
-	4 0 DO
-		i da.channel!
-		da.start
-	LOOP
+    4 0 DO
+        i da.channel!
+        da.start
+    LOOP
 ;
 
 \ ================= general forth stuff ===============
 
 : NEG/POS (  -- , randomly returns 1 or -1 )
-	2 choose 0= 
-		IF -1
-		ELSE 1
-		THEN
+    2 choose 0=
+    IF -1
+    ELSE 1
+    THEN
 ;
 
 : *OR/ ( -- , randomly multiply or divide )
-	2 choose 0= 
-		IF *
-		ELSE /
-		THEN
+    2 choose 0=
+    IF *
+    ELSE /
+    THEN
 ;
 
 
 \ number inputting utility taken from phil's forth manual
 
 : INPUT$ ( -- $addr )
-	pad 1+
-	128 expect
-	span @ pad c!
-	pad
+    pad 1+
+    128 expect
+    span @ pad c!
+    pad
 ;
 
 : INPUT# ( -- n true | false )
-	input$
-	number?
-	IF drop true
-	ELSE false
-	THEN
+    input$
+    number?
+    IF drop true
+    ELSE false
+    THEN
 ;
-
-	

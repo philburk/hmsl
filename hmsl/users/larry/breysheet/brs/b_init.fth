@@ -44,8 +44,18 @@ anew task-b_init
     se.reset.custom
 ;
 
+
+: PLAY.ACTION.TABLE ( -- )
+    midi.clear midi.parser.on
+    default-screen @
+    action-screen default-screen !
+    HMSL  ( no preposted morphs )
+    default-screen !
+    midi.parser.off
+;
+
 : BREYSHEET  ( -- )
-    b.init hmsl b.term
+    b.init play.action.table b.term
 ;
 
 : B.SLAVE  ( -- )
@@ -57,3 +67,7 @@ anew task-b_init
 ;
 
 if.forgotten b.term
+
+cr
+." To play the piece as master, enter:    B.MASTER" cr
+." Or enter:    B.SLAVE" cr
