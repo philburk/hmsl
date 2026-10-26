@@ -7,6 +7,7 @@
 \ Copyright 1990 Phil Burk
 \ All Rights Reserved
 
+include? track{  ht:tracks.fth
 include? seq.init screens/sequencer.fth
 
 ANEW TASK-DEMO_SEQ

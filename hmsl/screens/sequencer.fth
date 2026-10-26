@@ -11,18 +11,19 @@
 \       Use DIALOG.GET.FILE and PUT
 \ MOD: PLB Moved $ROM to system.
 
-false .IF  \ things to do!
+false [IF]  \ things to do!
     Display notes recorded as they come in periodically
     Fast Forward and reverse, etc. in Players,
         handle repeats
     Resolve to measure
     Copy track to track
     Maybe use separate screen for track editing
-.THEN
+[THEN]
 
-host=amiga .IF
+false [IF]
+\ host=amiga .IF
 include? get.file hh:arpFileRequest.f
-.THEN
+[THEN]
 
 include? shapei{ tools/score_entry.fth
 include? capture{ tools/midifile.fth
@@ -396,7 +397,7 @@ TEXTROM METRO-LABELS ," Channel" ," Note" ," TimeSig" ," TimeSig"
     draw: seq-record
 ;
 
-0 .IF   \ this was for the old Macintosh
+0 [IF]   \ this was for the old Macintosh
 : SEQ.SAVE ( -- , save all tracks with data )
     mf.set.fileinfo \ 00001
     " hmsl.data" 50 50 " Save as..."
@@ -417,7 +418,7 @@ TEXTROM METRO-LABELS ," Channel" ," Note" ," TimeSig" ," TimeSig"
     ELSE " Could not open: " $seq.MSG gr.text
     THEN
 ;
-.ELSE
+[ELSE]
 
 : seq.SAVE ( -- , save all tracks with data )
     0 \ FIXME put.file
@@ -432,7 +433,7 @@ TEXTROM METRO-LABELS ," Channel" ," Note" ," TimeSig" ," TimeSig"
        draw: seq-play
     THEN
 ;
-.THEN
+[THEN]
 
 : seq.MENU.func  ( value part -- )
     nip

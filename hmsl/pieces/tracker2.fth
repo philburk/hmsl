@@ -9,27 +9,52 @@
 \ All Rights Reserved
 \
 \ MOD: PLB 6/4/87 Use MIDI.PARSER.ON
+\ MOD: PLB 4/10/89 Add duration tracking.
 
-ANEW TASK-TRACKER1
+ANEW TASK-TRACKER2
 
 VARIABLE MT-SHAPE-MAX
 VARIABLE MT-NOTE-DUR
 VARIABLE MT-NEXT-INDEX
+VARIABLE MT-LAST-TIME
 
 16 mt-shape-max !
 8 mt-note-dur !
 
+: SUM.DURS ( -- total )
+    0 many: shape-1 0
+    DO i 0 ed.at: shape-1 +
+    LOOP
+    mt-next-index @ 0 ed.at: shape-1 -  ( don't use current cuz it will get overwritten )
+;
+
+: CALC.FILLER.DURATION ( -- dur , duration that will keep on beat, fill to measure )
+    mt-note-dur @ 4*
+    sum.durs mt-note-dur @   mod -
+;
+
 \ This word gets called when a note on is recieved.
 : MT.NOTE.ON ( note velocity -- , bounce note )
+    2 midi.channel!
+    2dup midi.noteon
+    1 midi.channel!
     ?dup  ( velocity > 0 means real ON )
-    IF  many: shape-1 max.elements: shape-1  >=
-        IF  ( Put in next position in shape. )
-            mt-note-dur @ -rot
-            mt-next-index @ 1+ dup mt-next-index !
-            max.elements: shape-1 mod
-            put: shape-1
+    IF  ( -- n v )
+        many: shape-1 max.elements: shape-1  >=
+        IF
+\ Update duration of previous note.
+            time@ dup mt-last-time @ -  24 min
+            swap mt-last-time !
+            mt-next-index @ 0
+            ed.to: shape-1
+\
+\ Put in next position in shape.
+            mt-next-index @ 1+ many: shape-1 mod 0 max mt-next-index !
+            calc.filler.duration -rot  ( -- dur n v )
+            mt-next-index @  put: shape-1
         ELSE
             mt-note-dur @ -rot add: shape-1
+            time@ mt-last-time !
         THEN
     ELSE drop
     THEN
@@ -49,6 +74,7 @@ VARIABLE MT-NEXT-INDEX
 
 : MT.INIT  ( -- , Initialize Piece )
     mt.build.player
+    0 mt-next-index !
 \
 \ Set parser vector so that whenever a NOTE ON is recieved
 \ the word MT.NOTE.ON will be called.  This will occur
@@ -75,9 +101,9 @@ VARIABLE MT-NEXT-INDEX
     mp.reset       ( reset midi parser vectors )
 ;
 
-: TRACKER ( -- )
+: TRACKER2 ( -- )
     mt.init  mt.play  mt.term
 ;
 
-cr ." Enter:   TRACKER  to play this piece." cr
+cr ." Enter:   TRACKER2  to play this piece." cr
 ." Play notes on MIDI keyboard." cr

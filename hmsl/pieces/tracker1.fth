@@ -9,31 +9,29 @@
 \ All Rights Reserved
 \
 \ MOD: PLB 6/4/87 Use MIDI.PARSER.ON
-\ MOD: PLB 4/10/89 Add duration tracking.
 
-ANEW TASK-TEMPO_TRACKER
+ANEW TASK-TRACKER1
 
 VARIABLE MT-SHAPE-MAX
 VARIABLE MT-NOTE-DUR
 VARIABLE MT-NEXT-INDEX
-VARIABLE MT-LAST-TIME
 
 16 mt-shape-max !
-16 mt-note-dur !
-
+8 mt-note-dur !
 
 \ This word gets called when a note on is recieved.
 : MT.NOTE.ON ( note velocity -- , bounce note )
-    ( -- n v )
-    many: shape-1 max.elements: shape-1  >=
-    IF
-\
-\ Put in next position in shape.
-        mt-next-index @ 1+ many: shape-1 mod 0 max mt-next-index !
-        mt-note-dur -rot  ( -- dur n v )
-        mt-next-index @  put: shape-1
-    ELSE
-        mt-note-dur @ -rot add: shape-1
+    ?dup  ( velocity > 0 means real ON )
+    IF  many: shape-1 max.elements: shape-1  >=
+        IF  ( Put in next position in shape. )
+            mt-note-dur @ -rot
+            mt-next-index @ 1+ dup mt-next-index !
+            max.elements: shape-1 mod
+            put: shape-1
+        ELSE
+            mt-note-dur @ -rot add: shape-1
+        THEN
+    ELSE drop
     THEN
 ;
 
@@ -41,7 +39,7 @@ VARIABLE MT-LAST-TIME
     mt-shape-max @ 3 new: shape-1
     mt-note-dur @ 0 0 add: shape-1 ( start with a rest )
 \
-    stuff{ shape-1 }stuff: player-1
+    0 shape-1 0stuff: player-1
     4000 put.repeat: player-1
 \
     0 put.gamut: ins-midi-1
@@ -51,7 +49,6 @@ VARIABLE MT-LAST-TIME
 
 : MT.INIT  ( -- , Initialize Piece )
     mt.build.player
-    0 mt-next-index !
 \
 \ Set parser vector so that whenever a NOTE ON is recieved
 \ the word MT.NOTE.ON will be called.  This will occur
@@ -78,9 +75,9 @@ VARIABLE MT-LAST-TIME
     mp.reset       ( reset midi parser vectors )
 ;
 
-: TRACKER ( -- )
+: TRACKER1 ( -- )
     mt.init  mt.play  mt.term
 ;
 
-cr ." Enter:   TRACKER  to play this piece." cr
+cr ." Enter:   TRACKER1  to play this piece." cr
 ." Play notes on MIDI keyboard." cr
