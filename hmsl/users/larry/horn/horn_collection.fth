@@ -29,7 +29,6 @@ v: #-horn-channels
 ;
 
 : HORN.INIT
-    midi_port_external midi-port !
     init.horn  \ shapes
     init.horn.jobs
     init.horn-coll
@@ -44,7 +43,10 @@ v: #-horn-channels
 
 : HORN  ( -- , play Horn piece )
     horn.init
+	midi-port @
+    midi_port_external midi-port !
 	horn-coll hmsl.play
+	midi-port !   \ restore original
 	horn.term
 ;
 
