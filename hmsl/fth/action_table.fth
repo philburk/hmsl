@@ -63,11 +63,6 @@ method CLEAR.PRIORITY:
 
 \ ================================================================
 
-\ there still seems to be one last little bug in the action-table
-\ moving around of actions. it only surfaces when one tries to move
-\ an action into the last place in a give priority column, it seems
-\ to dissapear. polansky promises to fix this....
-
 \ internal DO...LOOP that re-packs a column from which
 \ an ACTION has been deleted. Used in REMOVE:
 
