@@ -42,12 +42,14 @@ v: #-horn-channels
 ;
 
 : HORN  ( -- , play Horn piece )
-    horn.init
 	midi-port @
     midi_port_external midi-port !
+
+    horn.init
 	horn-coll hmsl.play
-	midi-port !   \ restore original
 	horn.term
+
+	midi-port !   \ restore original
 ;
 
 if.forgotten term.horn-coll
