@@ -114,7 +114,7 @@ method CLEAR.PRIORITY:
    dup    ( -- action action )
    get.priority:  []  dup  ( -- action pri pri )
    get.column.length  @    ( -- action pri length )
-   dup 15  =
+   dup 16  =
    IF  ( -- action pri length )
        cr bell ." no room in action-table for this priority "
        3drop

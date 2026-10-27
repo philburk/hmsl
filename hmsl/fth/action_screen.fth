@@ -28,41 +28,43 @@ ob.check.grid action-grid
 
 v: do.action-mode
 
-\ utility for clearing a cell on action-grid
-: CLEAR.ACTION-GRID.CELL  \ action-# action --- action-# action
-    0  2 pick
-    put.text: action-grid
+: ACTION.CHANGE.PRIORITY { action# action pri -- }
+    pri get.column.length @ 16 <  \ is there room?
+    IF
+        0 action# put.text: action-grid   \ clear text
+        action# remove: action-table
+        pri action put.priority: []
+        action put.action: action-table
+    THEN
 ;
 
 \ case statement for executing a hit on action-grid
 \ CASE value is passed from DO.ACTION
-: DO.ACTION.OF \ #, action-add ---
-do.action-mode @
-CASE
-   0 OF act.toggle: [] drop
-     ENDOF
-   1 OF clear.action-grid.cell
-        drop remove: action-table
-     ENDOF
-   2 OF clear.action-grid.cell
-        over remove: action-table
-        dup inc.priority: []
-        put.action:  action-table
-        drop
-     ENDOF
-   3 OF clear.action-grid.cell
-        over remove: action-table
-        dup dec.priority: []
-        put.action:  action-table
-        drop
-     ENDOF
-   4 OF drop  -4 ashift  \ need priority-#
+: DO.ACTION.OF { action# action | pri -- }
+    do.action-mode @
+    CASE
+    0 OF action act.toggle: []
+        ENDOF
+    1 OF 0 action# put.text: action-grid
+         action# remove: action-table
+        ENDOF
+    2 OF action get.priority: []  -> pri
+        pri highest >  \ low numbers are higher priority
+        IF action# action pri 1-  action.change.priority
+        THEN
+        ENDOF
+    3 OF action get.priority: []  -> pri
+        pri lowest <  \ high numbers are lower priority
+        IF action# action pri 1+  action.change.priority
+        THEN
+        ENDOF
+    4 OF action#  -4 ashift  \ need priority-#
         clear.priority: action-table
-     ENDOF
-   5 OF drop drop clear: action-table
-     ENDOF
-   " DO.ACTION.OF"   " Unsupported choice!" er_return er.report
-ENDCASE
+        ENDOF
+    5 OF clear: action-table
+        ENDOF
+    " DO.ACTION.OF"   " Unsupported choice!" er_return er.report
+    ENDCASE
 ;
 
 : ACTION-TABLE=>ACTION-GRID ( -- , fill control grid )
