@@ -42,15 +42,16 @@ CASE
    0 OF act.toggle: [] drop
      ENDOF
    1 OF clear.action-grid.cell
-	delete: action-table drop
+        drop remove: action-table
      ENDOF
-   2 OF clear.action-grid.cell dup
-	delete: action-table
+   2 OF clear.action-grid.cell
+        over remove: action-table
         dup inc.priority: []
         put.action:  action-table
         drop
      ENDOF
-   3 OF clear.action-grid.cell dup delete: action-table
+   3 OF clear.action-grid.cell
+        over remove: action-table
         dup dec.priority: []
         put.action:  action-table
         drop
