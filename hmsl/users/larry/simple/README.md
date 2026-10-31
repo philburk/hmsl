@@ -19,3 +19,4 @@ Launch HMSL then enter:
 
 Close the window when done.
 
+<img width="601" height="433" alt="action_table_sact" src="https://github.com/user-attachments/assets/bafd1157-9f7a-4330-b068-4fd40588380a" />
