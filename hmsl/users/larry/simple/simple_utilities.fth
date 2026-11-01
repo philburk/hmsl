@@ -31,6 +31,7 @@ v: 8bit-wave 256 allot
 : put.util put.action: action-table ;
 
 : sact.init
+   sar.init
    sact-1 put.util
    sact-2 put.util
    sact-3 put.util
@@ -80,6 +81,7 @@ v: 8bit-wave 256 allot
 : sact.term
    clear: action-table
    da.kill
+   sar.term
 ;
 
 if.forgotten sact.term
