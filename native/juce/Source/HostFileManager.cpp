@@ -186,10 +186,13 @@ FILE *HostFileManager::openFile( const char *fileName, const char *mode ) {
 //    pfMessage("\n");
 
     FILE *filePtr  = fopen(name, mode);
+#if 0
     if (filePtr == NULL) {
         pfMessage("ERROR - failed to open ");
         pfMessage(name);
         pfMessage("\n");
     }
+#endif
+
     return filePtr;
 }
