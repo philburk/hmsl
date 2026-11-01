@@ -5,7 +5,12 @@
 \ Performed with Larry Polansky and Phil Stone
 \ Copyright 1986
 
+include? task-gamma_morphs hupb:gamma_morphs.fth
+
 ANEW TASK-GAMMALONG1
+
+OB.AMIGA.INSTRUMENT INS-CAN-1
+OB.AMIGA.INSTRUMENT INS-CAN-2
 
 : GAMMA.BUILD.1   ( -- , Build up objects for first collection )
      28 2 new: shape-1-a
@@ -34,10 +39,10 @@ ANEW TASK-GAMMALONG1
      12  8 add: shape-1-a
      18 3 add: shape-1-a
 
-     shape-1-a put.object: player-1-a
-     player-1-a 'c oper.post.exec add: coll-1
+     shape-1-a add: player-1-a
+     player-1-a add: coll-1
      4 put.repeat: player-1-a
-     player-1-a ins.use.c1
+     ins-can-1 put.instrument: player-1-a
 ;
 : GAMMA.FREE.1
      free: shape-1-a
@@ -86,10 +91,12 @@ V: G2-OLD-NOTE    12 g2-old-note !
      16 6 1 add: shape-2-a
      16 2 -1 add: shape-2-a
 
-     shape-2-a put.object: player-2-a
-     player-2-a 'c oper.post.exec add: coll-2
+     shape-2-a add: player-2-a
+     player-2-a add: coll-2
 
      8 put.repeat: player-2-a
+\ PLB 2026 - I am not sure how to port this very old code to HMSL 4.2
+\ We may need to do this in the instrument.
      'c g2.note.on put.on.cfa: player-2-a
      'c g2.note.off put.off.cfa: player-2-a
      2 put.vel.dim: player-2-a   ( use second dimension as "velocity" )
@@ -126,11 +133,11 @@ V: G2-OLD-NOTE    12 g2-old-note !
  4 a3s3b  3 a3s3b  2 a3s3b  7 a3s3b  8 a3s3b 
  12 a3s3b  11 a3s3b  13 a3s3b  10 a3s3b  10 a3s3b 
 
-     shape-3-a put.object: player-3-a
-     shape-3-b put.object: player-3-b
+     shape-3-a add: player-3-a
+     shape-3-b add: player-3-b
      2 new: coll-3
-     player-3-a 'c oper.post.exec add: coll-3
-     player-3-b 'c oper.post.exec add: coll-3
+     player-3-a add: coll-3
+     player-3-b add: coll-3
 
      6 put.repeat: player-3-A
      6 put.repeat: player-3-B
@@ -150,9 +157,9 @@ V: G2-OLD-NOTE    12 g2-old-note !
      12 6 add: shape-4-a
      12 7 add: shape-4-a
      12 8 add: shape-4-a
-     shape-4-a put.object: player-4-a
+     shape-4-a add: player-4-a
      8 put.repeat: player-4-a
-     player-4-a 'c oper.post.exec add: coll-4
+     player-4-a add: coll-4
      player-4-a ins.use.c1
 ;
 : GAMMA.FREE.4
@@ -255,10 +262,10 @@ OB.SPACEY SPACE-3
     1500 put.repeat: space-3
 
     4 new: coll-5
-    space-0 'c oper.post.exec add: coll-5
-    space-1 'c oper.post.exec add: coll-5
-    space-2 'c oper.post.exec add: coll-5
-    space-3 'c oper.post.exec add: coll-5
+    space-0 add: coll-5
+    space-1 add: coll-5
+    space-2 add: coll-5
+    space-3 add: coll-5
 ;
 : GAMMA.FREE.5
 ;
